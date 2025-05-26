@@ -84,13 +84,102 @@
       background: #00FF99;
       color: #101820;
     }
+    /* Security Loader Styles */
+    .security-loader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 15, 20, 0.98);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loader-card {
+      background: #141e28;
+      border-radius: 20px;
+      border: 2px solid #00FF99;
+      box-shadow: 0 8px 40px #00ff9940;
+      padding: 2.5rem 2rem;
+      margin: 2rem;
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .loader-logo { margin-bottom: 1.2rem; }
+    .loader-text {
+      color: #00FF99;
+      font-family: 'Orbitron', monospace;
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+    }
+    .loader-progress {
+      width: 100%;
+      height: 8px;
+      background: #222c33;
+      border-radius: 4px;
+      margin-bottom: 0.7rem;
+      overflow: hidden;
+    }
+    .progress-bar {
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, #00FF99 60%, #00cc77 100%);
+      border-radius: 4px;
+      animation: loader-bar 1.5s infinite alternate;
+    }
+    @keyframes loader-bar {
+      0% { width: 30%; }
+      100% { width: 90%; }
+    }
+    .loader-status {
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .loader-info {
+      width: 100%;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    .loader-title {
+      color: #00FF99;
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .loader-role {
+      color: #e0e0e0;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+    .loader-badges {
+      margin-bottom: 0.5rem;
+    }
+    .loader-badge {
+      display: inline-block;
+      background: #101820;
+      color: #00FF99;
+      border: 1px solid #00FF99;
+      border-radius: 6px;
+      padding: 0.2em 0.7em;
+      margin: 0 0.2em;
+      font-size: 0.9em;
+    }
+    .loader-bio {
+      color: #b0ffdd;
+      font-size: 0.98rem;
+      margin-top: 0.5rem;
+    }
     /* Add more custom styles as needed */
   </style>
 </head>
 <body>
-  <!-- Security Loader -->
+  <!-- Security Loader (Single Card) -->
   <div class="security-loader" id="securityLoader">
-    <div class="loader-container">
+    <div class="loader-card">
       <div class="loader-logo">
         <svg viewBox="0 0 100 100" width="80" height="80">
           <circle cx="50" cy="50" r="40" fill="none" stroke="#00FF99" stroke-width="2" />
@@ -101,6 +190,15 @@
       <div class="loader-text">SECURING CONNECTION</div>
       <div class="loader-progress"><div class="progress-bar"></div></div>
       <div class="loader-status">Verifying identity...</div>
+      <div class="loader-info">
+        <h2 class="loader-title">Mohamed Abdelaziz</h2>
+        <div class="loader-role">Cybersecurity Engineer | AI Prompt Architect | UX-Focused Web Developer</div>
+        <div class="loader-badges">
+          <span class="loader-badge">July 10, 1999</span>
+          <span class="loader-badge">Egyptian American</span>
+        </div>
+        <div class="loader-bio">Tech-savvy Cybersecurity Engineer with a strong foundation in secure systems, Bitcoin and crypto technologies, and AI-powered solutions. Experienced in human-centered design, prompt engineering, and market analytics.</div>
+      </div>
     </div>
   </div>
 
