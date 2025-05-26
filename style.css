@@ -879,6 +879,87 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* === Smart Card CV Card Layout Fixes === */
+.wow-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+  margin: 10px 0 18px 0;
+}
+
+.skills-orbit {
+  margin-bottom: 18px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cv-sections-flex {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.experience-section, .education-section {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.cv-section {
+  background: rgba(0,255,153,0.04);
+  border-radius: 13px;
+  padding: 13px 10px 10px 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 8px #00ff9912 inset;
+}
+.cv-title-row {
+  margin-bottom: 7px;
+}
+.cv-list {
+  margin: 0;
+  padding: 0 0 0 19px;
+  list-style: none;
+}
+.cv-list li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+  color: #fff;
+  opacity: 0.95;
+  font-size: 1.05em;
+}
+
+@media (max-width: 800px) {
+  .cv-sections-flex {
+    flex-direction: column;
+    gap: 0;
+  }
+  .experience-section, .education-section {
+    margin-bottom: 10px;
+  }
+}
+
+/* Ensure card content doesn't overflow on small screens */
+@media (max-width: 600px) {
+  .wow-card {
+    padding: 25px 7px 20px 7px;
+    max-width: 99vw;
+  }
+  .cv-sections-flex {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .security-status-bar {
