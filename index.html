@@ -5,17 +5,14 @@
   <title>35D Smart Cyber CV – Mohamed Abdelaziz</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700&family=IBM+Plex+Sans:wght@600&display=swap" rel="stylesheet">
   <style>
-    body, html { background: #070d13; margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh;}
+    body, html { background: #070d13; margin: 0; padding: 0; overflow-x: hidden; width: 100vw; height: 100vh; padding-bottom: 50px; /* Add padding for footer */ }
     #wowWavesBg { position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
     .wow-card {
-      position: relative; z-index:3;
-      margin: 90px auto 0 auto;
+      position: relative; z-index:3; margin: 90px auto 0 auto;
       background: rgba(17, 30, 38, 0.93);
       border-radius: 30px;
-      max-width: 440px;
-      border: 2.2px solid #00FF99;
-      padding: 38px 35px 33px 35px;
-      box-shadow: 0 0 55px #00ff9950, 0 2px 28px #2228;
+      max-width: 440px; border: 2.2px solid #00FF99;
+      padding: 38px 35px 33px 35px; box-shadow: 0 0 55px #00ff9950, 0 2px 28px #2228;
       backdrop-filter: blur(13px) saturate(155%);
       font-family: 'Sora', 'IBM Plex Sans', sans-serif;
       color: #fff; text-align: center; transition: transform 0.22s cubic-bezier(.43,1.5,.36,1), box-shadow 0.33s;
@@ -34,18 +31,20 @@
     .skill-particle {
       position:absolute; left:50%; top:56%; transform:translate(-50%,-50%);
       border-radius: 50%; background: #fff;
-      color:#00FF99; font-weight: 700; font-size: 1.03em; box-shadow:0 0 18px #00FF99bb;
-      width: 42px; height:42px; display:flex;align-items:center;justify-content:center; gap:4px;
-      transition: background 0.25s, color 0.15s;
+      color:#00FF99; font-weight: 700; /* font-size: 1.03em; */ /* Adjusted for icon only */
+      box-shadow:0 0 18px #00FF99bb;
+      width: 46px; height:46px; display:flex;align-items:center;justify-content:center; gap:0;
+      transition: background 0.25s, color 0.15s, transform 0.2s;
       filter: drop-shadow(0 1px 10px #00FF9980);
       pointer-events:auto; cursor:pointer;
-      opacity:0.96; z-index:10; animation: particle-orbit 4.2s infinite linear;
+      opacity:0.97; z-index:10; /* animation: particle-orbit 4.2s infinite linear; */ /* Orbit animation handled by JS if dynamic */
       font-family:'IBM Plex Sans',sans-serif;
       border:2px solid #00FF99;
     }
-    @keyframes particle-orbit { to { filter: drop-shadow(0 2px 18px #00FF99cc);} }
-    .skill-particle:hover { background: #00FF99; color:#10161e; box-shadow:0 0 22px #00FF99cc; }
-    .skill-particle svg {margin-right:3px;}
+    /* @keyframes particle-orbit { to { filter: drop-shadow(0 2px 18px #00FF99cc);} } */ /* Orbit animation handled by JS if dynamic */
+    .skill-particle:hover { background: #00FF99; color:#181f2b; box-shadow:0 0 22px #00FF99cc; transform: scale(1.1); }
+    .skill-particle svg { width: 28px; height: 28px; display:block; } /* Adjusted for icon centering */
+
     .cv-section { text-align: right; margin-bottom: 17px; }
     .cv-title-row {display:flex;align-items:center;gap:8px;margin-bottom:7px;}
     .cv-title-row svg { flex-shrink:0;}
@@ -55,23 +54,55 @@
     .cv-list li svg {flex-shrink:0;}
     .cv-meta {color:#00b7ff;font-size:0.93em;opacity:0.76;margin-left:7px;}
     .social-icons { display:flex;justify-content:center;gap:17px;margin:18px 0 0 0;}
-    .social-icons a { display:inline-flex;align-items:center;justify-content:center;background:#181f2b;border:2px solid #00FF99;border-radius:50%;width:44px;height:44px;transition:box-shadow 0.23s,background 0.23s, border 0.2s;box-shadow:0 0 15px #00ff9948;filter: grayscale(0.07) brightness(1.2);}
-    .social-icons a:hover { background:#fff; border-color:#00FF99; box-shadow:0 0 33px #00FF99dd;}
-    .social-icons svg { width:25px;height:25px;display:block;}
-    .social-icons .linkedin:hover svg {color:#0077b5;}
-    .social-icons .instagram:hover svg {color:#E4405F;}
-    .social-icons .facebook:hover svg {color:#1877f3;}
-    .social-icons .email:hover svg {color:#00B7FF;}
-    .chatbot-btn {margin: 25px auto 0 auto;width: 54px; height: 54px;border-radius: 50%;border: 2.2px solid #00FF99;background: #181f2b;display: flex; align-items: center; justify-content: center;box-shadow: 0 0 16px #00FF995c;cursor: pointer;transition: transform 0.14s;}
+    .social-icons a { display:inline-flex;align-items:center;justify-content:center;background:#181f2b;border:2px solid #00FF99;border-radius:50%;width:44px;height:44px;transition:box-shadow 0.23s,background 0.23s, border 0.2s, transform 0.2s;box-shadow:0 0 15px #00ff9948;filter: grayscale(0.07) brightness(1.2);}
+    .social-icons a:hover { background:#fff; border-color:#00FF99; box-shadow:0 0 33px #00FF99dd; transform: scale(1.1);}
+    .social-icons svg { width:27px;height:27px;display:block;transition:color 0.19s;}
+    .social-icons .linkedin svg { color: #0077b5;} /* Initial color for LinkedIn */
+    .social-icons .instagram svg { color: #E4405F;} /* Initial color for Instagram */
+    .social-icons .facebook svg { color: #1877f3;} /* Initial color for Facebook */
+    .social-icons .email svg { color: #00B7FF;} /* Initial color for Email */
+    .social-icons a:hover svg { color: #00FF99; } /* Neon green on hover for icon itself */
+
+
+    .chatbot-btn {margin: 25px auto 0 auto;width: 54px; height: 54px;border-radius: 50%;border: 2.2px solid #00FF99;background: #181f2b;display: flex; align-items: center; justify-content: center;box-shadow: 0 0 16px #00FF995c;cursor: pointer;transition: transform 0.14s, background 0.2s, box-shadow 0.2s;}
     .chatbot-btn:hover {transform:scale(1.09);box-shadow:0 0 22px #00FF99bb;background:#00FF99;}
     .chatbot-btn svg { width: 31px; height: 31px; color: #00FF99;}
     .chatbot-btn:hover svg { color: #181f2b;}
+
+    /* Footer Styles */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 12px 0;
+      background-color: rgba(10, 15, 22, 0.9); 
+      color: #00FF99;
+      text-align: center;
+      font-size: 0.9em;
+      font-family: 'IBM Plex Sans', sans-serif;
+      z-index: 100; 
+      border-top: 1px solid #00FF9930;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     @media (max-width: 600px) {
-      .wow-card { padding: 10px 1vw 13px 1vw; max-width: 99vw; }
-      .profile-name { font-size: 1.1em; }
-      .profile-img { width: 53px; height: 53px; }
-      .chatbot-btn { width: 37px; height: 37px; }
-      .skills-orbit {width:98vw;}
+      .wow-card { padding: 25px 15px 20px 15px; max-width: 95vw; margin-top: 60px; }
+      .profile-name { font-size: 1.25em; }
+      .profile-img { width: 75px; height: 75px; }
+      .chatbot-btn { width: 48px; height: 48px; }
+      .skills-orbit {width:90vw; height:120px;}
+      .skill-particle { width: 42px; height: 42px;}
+      .skill-particle svg { width: 24px; height: 24px;}
+      .social-icons a {width: 40px; height: 40px;}
+      .social-icons svg {width: 22px; height: 22px;}
+      footer {
+        font-size: 0.8em;
+        padding: 10px 0;
+      }
     }
   </style>
 </head>
@@ -84,77 +115,371 @@
   <div class="profile-title">Cybersecurity Engineer | AI & Web3 Strategist</div>
   <!-- About -->
   <div class="about-box">
-    <svg width="25" height="25" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M12 6a2 2 0 100 4 2 2 0 000-4zm0 6c-1.1 0-2 .9-2 2v2h4v-2c0-1.1-.9-2-2-2z"/></svg>
+    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="8.5" cy="7" r="4"></circle>
+        <polyline points="17 11 19 13 23 9"></polyline>
+    </svg>
     <div>
       <b>نبذة:</b> سيبراني متعدد المهارات أدمج الأمان، الذكاء الاصطناعي، والتقنيات المالية.<br>
       أخلق حلولاً رقمية بجرأة وأقود مشاريع مستقبلية في عالم Web3 وAI.
     </div>
   </div>
-  <!-- Skills Orbit -->
-  <div class="skills-orbit" id="orbitSkills"></div>
+  <!-- Skills Orbit: Example Skills (to be made dynamic with JS) -->
+  <div class="skills-orbit" id="orbitSkills">
+    <div class="skill-particle" style="transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg);">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.001.493C5.42.493.046 4.06.001 9.555V10h4.47v4H3.001v4.472c0 4.13 4.06 7.477 8.995 7.477s9.005-3.347 9.005-7.477V14h-1.47v-4h1.47V9.555C23.956 4.06 18.582.493 12.001.493zm-3.06 3.06h6.12c1.684 0 3.06 1.376 3.06 3.06v.75H6.941v-.75c0-1.684 1.376-3.06 3.06-3.06zm0 10.387H6.941v-.75c0-1.684 1.376-3.06 3.06-3.06h6.12c1.684 0 3.06 1.376 3.06 3.06v.75h-6.12z"/></svg>
+    </div>
+    <div class="skill-particle" style="transform: translate(-50%, -50%) rotate(120deg) translateX(100px) rotate(-120deg);">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3.5 3.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3.5-3.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/><ellipse cx="12" cy="12" rx="4" ry="1.5" transform="rotate(-45 12 12)"/><ellipse cx="12" cy="12" rx="4" ry="1.5" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="4" ry="1.5"/></svg>
+    </div>
+    <div class="skill-particle" style="transform: translate(-50%, -50%) rotate(240deg) translateX(100px) rotate(-240deg);">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.58 4.411C17.35 4.191 17.06 4 16.75 4H7.25C6.94 4 6.65 4.191 6.42 4.411L2.28 8.581C2.1 8.771 2 9.02 2 9.28V14.71C2 14.971 2.1 15.221 2.28 15.411L6.42 19.58C6.65 19.81 6.94 20 7.25 20H16.75C17.06 20 17.35 19.81 17.58 19.58L21.72 15.41C21.9 15.221 22 14.971 22 14.71V9.28C22 9.021 21.9 8.771 21.72 8.581L17.58 4.411ZM12 17L6 12L12 7L18 12L12 17Z"/></svg>
+    </div>
+  </div>
   <!-- Experience -->
   <div class="cv-section">
     <div class="cv-title-row">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="16" rx="4" fill="#00FF99" opacity="0.18"/><path d="M7 8h10M7 12h7M6 17h12" stroke="#00FF99" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </svg>
       <span class="cv-title">الخبرات</span>
     </div>
     <ul class="cv-list">
-      <li><svg width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#232b39"/><path d="M8 12h8" stroke="#00FF99" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.3" fill="#00FF99" /></svg>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0-4.4-3.6-8-8-8s-8 3.6-8 8 3.6 8 8 8h12"/><path d="M20.3 15H22v2h-1.7c-.2-1-.5-1.8-.9-2.5"/><path d="M4 10a8 8 0 1 0 16 0H4z"/></svg>
         Intel, OpenAI, L’Oréal <span class="cv-meta">Security Intern 2024</span></li>
-      <li><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#181f2b" stroke="#00FF99" stroke-width="2"/><path d="M12 7v5l4 2" stroke="#00FF99" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.5" fill="#00FF99"/></svg>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         Bybit & Coinbase <span class="cv-meta">Crypto Trader 2019–الآن</span></li>
-      <li><svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="#00FF99" opacity="0.12"/><path d="M7 9h10v2H7V9zm0 4h7v2H7v-2z" fill="#00FF99"/></svg>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
         charity: water, The Global Career <span class="cv-meta">AI Project Lead</span></li>
-      <li><svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#232b39"/><path d="M5 16h14v2H5z"/><rect x="7" y="8" width="10" height="6" rx="3" fill="#00FF99" opacity="0.24"/></svg>
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
         Amadeus (Atlanta) <span class="cv-meta">Travel Agent</span></li>
     </ul>
   </div>
   <!-- Education -->
   <div class="cv-section">
     <div class="cv-title-row">
-      <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="8" fill="#00FF99" opacity="0.15"/><path d="M12 6l8 4-8 4-8-4z" fill="#232b39"/><rect x="6" y="14" width="12" height="2" rx="1" fill="#00FF99" opacity="0.20"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/> <path d="M6 12v5c0 5 6 5 6 0v-5"/>
+      </svg>
       <span class="cv-title">التعليم</span>
     </div>
     <ul class="cv-list">
-      <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#181f2b"/><path d="M7 10v4a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4" stroke="#00FF99" stroke-width="2"/><rect x="9" y="7" width="6" height="2" rx="1" fill="#00FF99" opacity="0.25"/></svg>
+      <li>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v15H6.5A2.5 2.5 0 0 1 4 14.5V4A2.5 2.5 0 0 1 6.5 2z"/></svg>
         Chattahoochee Tech <span class="cv-meta">2021</span></li>
-      <li><svg width="17" height="17" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#181f2b" stroke="#00FF99" stroke-width="2"/><path d="M9 15V9l6 6V9" stroke="#00FF99" stroke-width="2"/></svg>
+      <li>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         Kennesaw State <span class="cv-meta">Cybersecurity, 2026</span></li>
-      <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="#00FF99" opacity="0.15"/><path d="M8 12h8v2H8z" fill="#00FF99"/></svg>
+      <li>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         Cisco Cybersecurity <span class="cv-meta">Certified</span></li>
     </ul>
   </div>
   <!-- Certs / Awards -->
   <div class="cv-section">
     <div class="cv-title-row">
-      <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#00FF99" opacity="0.17"/><path d="M12 8l2 4h-4l2-4zm0 8a4 4 0 110-8 4 4 0 010 8z" fill="#232b39"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline>
+      </svg>
       <span class="cv-title">الشهادات</span>
     </div>
     <ul class="cv-list">
-      <li><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#181f2b" stroke="#00FF99" stroke-width="2"/><path d="M12 17l-5-3V7l5-3 5 3v7z" fill="#00FF99"/></svg>
+      <li>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
         BlackRock Talent Community <span class="cv-meta">2024</span></li>
-      <li><svg width="14" height="14" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#181f2b"/><path d="M7 15l5 3 5-3V9l-5-3-5 3v6z" fill="#00FF99"/></svg>
+      <li>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00FF99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.57 2.43A1.5 1.5 0 0 1 14.05 2h.05a1.5 1.5 0 0 1 1.48 1.53l-.81 4.86a.5.5 0 0 0 .49.58h2.34a1.5 1.5 0 0 1 1.48 1.53l-.81 4.86a.5.5 0 0 0 .49.58H21a1.5 1.5 0 0 1 1.48 1.53l-.81 4.86A1.5 1.5 0 0 1 20.19 22h-.05a1.5 1.5 0 0 1-1.48-1.53l.81-4.86a.5.5 0 0 0-.49-.58h-2.34a1.5 1.5 0 0 1-1.48-1.53l.81-4.86a.5.5 0 0 0-.49-.58H13a1.5 1.5 0 0 1-1.48-1.53l.81-4.86A1.5 1.5 0 0 1 12.57 2.43Z"/></svg>
         Honor Society Member <span class="cv-meta">2024</span></li>
     </ul>
   </div>
   <!-- Social -->
   <div class="social-icons">
     <a class="linkedin" href="https://linkedin.com/in/mohamed-abdelaziz-815797347" target="_blank" title="LinkedIn">
-      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff" /><path fill="#0077b5" d="M24 24h-3.554v-5.568c0-1.328-.023-3.038-1.852-3.038-1.855 0-2.139 1.448-2.139 2.944V24H13V13h3.414v1.507h.048c.475-.897 1.637-1.845 2.926-1.845 3.127 0 3.703 2.06 3.703 4.74V24zM8.667 11.333a2.001 2.001 0 1 1 0-4.002 2.001 2.001 0 0 1 0 4.002zm1.778 12.667H6.889V13h3.556v11z"/></svg>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
     </a>
     <a class="instagram" href="https://instagram.com/amrikyy" target="_blank" title="Instagram">
-      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff"/><radialGradient id="ig-gradient" cx="0.5" cy="0.5" r="0.7"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fdf497"/><stop offset="60%" stop-color="#fd5949"/><stop offset="90%" stop-color="#d6249f"/><stop offset="100%" stop-color="#285AEB"/></radialGradient><path fill="url(#ig-gradient)" d="M16 7.2c2.7 0 3 .01 4.1.06 1.1.05 1.7.23 2.1.39.5.2.9.44 1.3.88.44.44.68.8.88 1.3.16.4.34 1 .39 2.1.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.23 1.7-.39 2.1-.2.5-.44.9-.88 1.3-.44.44-.8.68-1.3.88-.4.16-1 .34-2.1.39-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.7-.23-2.1-.39-.5-.2-.9-.44-1.3-.88-.44-.44-.68-.8-.88-1.3-.16-.4-.34-1-.39-2.1C7.21 19 7.2 18.7 7.2 16s.01-3 .06-4.1c.05-1.1.23-1.7.39-2.1.2-.5.44-.9.88-1.3.44-.44.8-.68 1.3-.88.4-.16 1-.34 2.1-.39C13 7.21 13.3 7.2 16 7.2zm0-1.2C13.2 6 12.9 6.01 11.8 6.06c-1.2.05-2.1.23-2.8.49-.8.28-1.5.67-2.1 1.23-.56.56-.95 1.3-1.23 2.1-.26.7-.44 1.6-.49 2.8C6.01 12.9 6 13.2 6 16s.01 3.1.06 4.2c.05 1.2.23 2.1.49 2.8.28.8.67 1.5 1.23 2.1.56.56 1.3.95 2.1 1.23.7.26 1.6.44 2.8.49C12.9 25.99 13.2 26 16 26s3.1-.01 4.2-.06c1.2-.05 2.1-.23 2.8-.49.8-.28 1.5-.67 2.1-1.23.56-.56.95-1.3 1.23-2.1.26-.7.44-1.6.49-2.8.05-1.1.06-1.4.06-4.2s-.01-3.1-.06-4.2c-.05-1.2-.23-2.1-.49-2.8-.28-.8-.67-1.5-1.23-2.1-.56-.56-1.3-.95-2.1-1.23-.7-.26-1.6-.44-2.8-.49C18.1 6.01 17.8 6 16 6zm0 3.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.6a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><defs><radialGradient id="ig-gradient-cv" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fd5"/><stop offset=".1" stop-color="#fd5"/><stop offset=".5" stop-color="#ff543e"/><stop offset="1" stop-color="#c837ab"/></radialGradient></defs><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.305-1.459.717-2.126 1.384S.935 3.356.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.783.718 1.459 1.384 2.126.667.666 1.342 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.783-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.342 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.277.072-1.69.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.148-.558-2.913-.306-.784-.718-1.459-1.384-2.126C21.095.935 20.42.523 19.636.227c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.056 1.17-.251 1.805-.419 2.227-.215.562-.476.96-.895 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.056-1.816-.251-2.236-.419-.569-.215-.96-.476-1.379-.895-.42-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.266-.061-1.649-.061-4.859 0-3.211.016-3.586.061-4.859.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.9.42-.165 1.051-.359 2.225-.42.99-.045 1.25-.06 3.18-.06h.01zM12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" fill="url(#ig-gradient-cv)"/></svg>
     </a>
     <a class="facebook" href="https://facebook.com/share/17qHw2N9PG" target="_blank" title="Facebook">
-      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff"/><path fill="#1877f3" d="M21.5 16h-3v8h-4v-8h-2v-3h2v-2c0-2.2 1.3-3.5 3.5-3.5h3v3h-2c-.6 0-1 .4-1 1v1h3l-.5 3z"/></svg>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.407.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.1 1.894-4.785 4.66-4.785 1.322 0 2.468.099 2.799.141v3.24h-1.91c-1.5 0-1.792.715-1.792 1.763v2.312h3.584l-.465 3.621h-3.119V24h6.115c.73 0 1.323-.593 1.323-1.324V1.324C24 .593 23.407 0 22.676 0z"/></svg>
     </a>
     <a class="email" href="mailto:amrikyy@gmail.com" title="Email">
-      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff"/><path fill="#00B7FF" d="M8 10v12h16V10H8zm8 7.5l-8-6V10l8 6 8-6v1.5l-8 6z"/></svg>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M22 5.5H2a1 1 0 0 0-1 1V18a1 1 0 0 0 1 1h20a1 1 0 0 0 1-1V6.5a1 1 0 0 0-1-1zM20.5 7L12 13 3.5 7h17zM2 17.5V8l9.5 7L21 8v9.5H2z"/></svg>
     </a>
   </div>
-  <button class="chatbot-btn" title="Chat with MHA">
+  <button class="chatbot-btn" id="chatbotToggle" title="Chat with MHA"> <!-- Added id for JS -->
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><rect x="8" y="10" width="8" height="4" rx="2" fill="currentColor"/><circle cx="10" cy="12" r="1.5" fill="#090d13"/><circle cx="14" cy="12" r="1.5" fill="#090d13"/></svg>
   </button>
 </div>
+
+<!-- Chatbot Panel (Initially Hidden) -->
+<div class="chatbot-panel" id="chatbotPanel" style="display: none;">
+    <div class="chatbot-header">
+        <span class="chatbot-title">MHA-AI Assistant</span>
+        <button class="chatbot-close" id="chatbotClose">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message system"><div class="message-content"><span class="terminal-prompt">system:~$</span> Welcome! Ask me about Mohamed.</div></div>
+    </div>
+    <div class="chatbot-input-container">
+        <div class="chatbot-suggestions">
+            <button class="suggestion-btn" data-query="What are your skills?">Skills?</button>
+            <button class="suggestion-btn" data-query="Tell me about your projects.">Projects?</button>
+            <button class="suggestion-btn" data-query="How can I contact you?">Contact?</button>
+        </div>
+        <div class="chatbot-input-wrapper">
+            <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Message MHA-AI...">
+        </div>
+    </div>
+</div>
+
+
+<footer>
+  <p>&copy; 2025 Mohamed H. Abdelaziz. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script> <!-- Ensure script.js is linked -->
+<script>
+// Vanilla Tilt JS (minimal version or link to full)
+// For full functionality, include the Vanilla Tilt library: https://micku7zu.github.io/vanilla-tilt.js/
+var VanillaTilt = (function () {
+'use strict';
+class VanillaTilt {
+  constructor(element, settings = {}) {
+    if (!(element instanceof Node)) {
+      throw("Can't initialize VanillaTilt because " + element + " is not a Node.");
+    }
+    this.width = null; this.height = null; this.left = null; this.top = null; this.transitionTimeout = null; this.updateCall = null;
+    this.element = element;
+    this.settings = this.extendSettings(settings);
+    this.reverse = this.settings.reverse ? -1 : 1;
+    this.glare = this.settings.glare;
+    this.glarePrerender = this.settings["glare-prerender"];
+    if (this.glare) { this.prepareGlare(); }
+    this.addEventListeners();
+  }
+  static init(elements, settings) {
+    if (elements instanceof Node) { elements = [elements];}
+    if (elements instanceof NodeList) { elements = [].slice.call(elements); }
+    if (!(elements instanceof Array)) { return; }
+    elements.forEach((element) => {
+      if (!("vanillaTilt" in element)) { element.vanillaTilt = new VanillaTilt(element, settings); }
+    });
+  }
+  extendSettings(settings) {
+    let defaultSettings = {
+      reverse: false, max: 15, perspective: 1000, scale: 1, speed: 300, transition: true,
+      axis: null, reset: true, glare: false, "max-glare": 1, "glare-prerender": false,
+      "mouse-event-element": null,gyroscope: true, gyroscopeMinAngleX: -45, gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45, gyroscopeMaxAngleY: 45, gyroscopeSamples: 10
+    };
+    let newSettings = {};
+    for (var property in defaultSettings) {
+      if (property in settings) { newSettings[property] = settings[property];
+      } else if (this.element.hasAttribute("data-tilt-" + property)) {
+        let attribute = this.element.getAttribute("data-tilt-" + property);
+        try { newSettings[property] = JSON.parse(attribute); } catch (e) { newSettings[property] = attribute; }
+      } else { newSettings[property] = defaultSettings[property]; }
+    }
+    return newSettings;
+  }
+  addEventListeners() {
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
+    this.onDeviceOrientation = this.onDeviceOrientation.bind(this);
+    (this.settings["mouse-event-element"] || this.element).addEventListener("mouseenter", this.onMouseEnter);
+    (this.settings["mouse-event-element"] || this.element).addEventListener("mousemove", this.onMouseMove);
+    (this.settings["mouse-event-element"] || this.element).addEventListener("mouseleave", this.onMouseLeave);
+    if (this.glare) { window.addEventListener("resize", this.onWindowResize); }
+    if (this.settings.gyroscope) { window.addEventListener("deviceorientation", this.onDeviceOrientation); }
+  }
+  removeEventListeners() {
+    (this.settings["mouse-event-element"] || this.element).removeEventListener("mouseenter", this.onMouseEnter);
+    (this.settings["mouse-event-element"] || this.element).removeEventListener("mousemove", this.onMouseMove);
+    (this.settings["mouse-event-element"] || this.element).removeEventListener("mouseleave", this.onMouseLeave);
+    if (this.settings.gyroscope) { window.removeEventListener("deviceorientation", this.onDeviceOrientation); }
+    if (this.glare) { window.removeEventListener("resize", this.onWindowResize); }
+  }
+  destroy() {
+    this.removeEventListeners();
+    this.element.vanillaTilt = null;
+    delete this.element.vanillaTilt;
+    this.element.style.willChange = "";
+    this.element.style.transform = "";
+    this.element.style.transition = "";
+    if (this.glare) { this.glareElement.remove(); }
+  }
+  onDeviceOrientation(event) {
+    if (event.gamma === null || event.beta === null) { return; }
+    this.updateElementPosition();
+    if (this.settings.gyroscopeSamples > 0) {
+      this.lastgamma = this.lastgamma || 0; this.lastbeta = this.lastbeta || 0;
+      this.settings.gyroscopeSamples--;
+      this.lastgamma += event.gamma; this.lastbeta += event.beta;
+    }
+    const totalSamples = this.settings.gyroscopeSamples > 0 ? this.settings.gyroscopeSamples : 10; // Avoid division by zero if samples run out
+    const gamma = (this.lastgamma + event.gamma) / (totalSamples +1); // Use totalSamples + 1 for averaging current event
+    const beta = (this.lastbeta + event.beta) / (totalSamples + 1);
+
+    const angleX = Math.min(Math.max(beta, this.settings.gyroscopeMinAngleX), this.settings.gyroscopeMaxAngleX);
+    const angleY = Math.min(Math.max(gamma, this.settings.gyroscopeMinAngleY), this.settings.gyroscopeMaxAngleY);
+    const tiltX = (angleX / this.settings.gyroscopeMaxAngleX) * this.settings.max;
+    const tiltY = (angleY / this.settings.gyroscopeMaxAngleY) * this.settings.max;
+    this.transforms = { tiltX: this.reverse * tiltX, tiltY: this.reverse * tiltY,
+                        scaleX: this.settings.scale, scaleY: this.settings.scale };
+    this.update();
+    if (this.settings.gyroscopeSamples === 0) { // Reset for next orientation event if samples were used up
+        this.lastgamma = 0; this.lastbeta = 0; this.settings.gyroscopeSamples = 10; // Reset sample count
+    }
+  }
+  onMouseEnter() { this.updateElementPosition(); this.element.style.willChange = "transform"; this.setTransition(); }
+  onMouseMove(event) {
+    if (this.updateCall !== null) { cancelAnimationFrame(this.updateCall); }
+    this.event = event;
+    this.updateCall = requestAnimationFrame(() => this.update());
+  }
+  onMouseLeave() { this.setTransition(); if (this.settings.reset) { requestAnimationFrame(() => this.reset());} }
+  reset() {
+    this.event = { pageX: this.left + this.width / 2, pageY: this.top + this.height / 2 };
+    this.element.style.transform = "perspective(" + this.settings.perspective + "px) " + "rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+    if (this.glare) { this.glareElement.style.transform = "rotate(180deg) translate(-50%, -50%)"; this.glareElement.style.opacity = "0"; }
+  }
+  getValues() {
+    let x = (this.event.clientX - this.left) / this.width;
+    let y = (this.event.clientY - this.top) / this.height;
+    x = Math.min(Math.max(x, 0), 1); y = Math.min(Math.max(y, 0), 1);
+    let tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
+    let tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
+    return { tiltX: tiltX, tiltY: tiltY, percentageX: x * 100, percentageY: y * 100, angle: angle };
+  }
+  updateElementPosition() { let rect = this.element.getBoundingClientRect(); this.width = this.element.offsetWidth; this.height = this.element.offsetHeight; this.left = rect.left; this.top = rect.top; }
+  update() {
+    let values = this.getValues();
+    this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
+      "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
+      "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
+      "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
+    if (this.glare) {
+      this.glareElement.style.transform = `rotate(${values.angle}deg) translate(-50%, -50%)`;
+      this.glareElement.style.opacity = `${values.percentageY * this.settings["max-glare"] / 100}`;
+    }
+    this.element.dispatchEvent(new CustomEvent("tiltChange", { detail: values }));
+    this.updateCall = null;
+  }
+  prepareGlare() {
+    if (!this.glarePrerender) {
+      const jsTiltGlare = document.createElement("div");
+      jsTiltGlare.classList.add("js-tilt-glare");
+      const jsTiltGlareInner = document.createElement("div");
+      jsTiltGlareInner.classList.add("js-tilt-glare-inner");
+      jsTiltGlare.appendChild(jsTiltGlareInner);
+      this.element.appendChild(jsTiltGlare);
+    }
+    this.glareElementWrapper = this.element.querySelector(".js-tilt-glare");
+    this.glareElement = this.element.querySelector(".js-tilt-glare-inner");
+    if (this.glarePrerender) { return; }
+    Object.assign(this.glareElementWrapper.style, {
+      position: "absolute", top: "0", left: "0", width: "100%", height: "100%",
+      overflow: "hidden", "pointer-events": "none", "border-radius": "inherit"
+    });
+    Object.assign(this.glareElement.style, {
+      position: "absolute", top: "50%", left: "50%", "pointer-events": "none",
+      "background-image": `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
+      width: `${this.element.offsetWidth * 2}px`, height: `${this.element.offsetWidth * 2}px`,
+      transform: "rotate(180deg) translate(-50%, -50%)", "transform-origin": "0% 0%", opacity: "0"
+    });
+  }
+  updateGlareSize() {
+    if (this.glare) {
+      Object.assign(this.glareElement.style, {
+        width: `${this.element.offsetWidth * 2}`,
+        height: `${this.element.offsetWidth * 2}`,
+      });
+    }
+  }
+  setTransition() {
+    clearTimeout(this.transitionTimeout);
+    this.element.style.transition = this.settings.speed + "ms " + this.settings.easing;
+    if (this.glare) this.glareElement.style.transition = `opacity ${this.settings.speed}ms ${this.settings.easing}`;
+    this.transitionTimeout = setTimeout(() => {
+      this.element.style.transition = "";
+      if (this.glare) { this.glareElement.style.transition = ""; }
+    }, this.settings.speed);
+  }
+  onWindowResize() { this.updateGlareSize(); }
+}
+return VanillaTilt;
+}());
+
+// Initialize Tilt
+VanillaTilt.init(document.querySelectorAll(".wow-card"), {
+    max: 8, // Max tilt rotation (degrees)
+    perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
+    scale: 1.02, // 2 = 200%, 1.5 = 150%, etc..
+    speed: 400, // Speed of the enter/exit transition
+    glare: true, // If it should have a "glare" effect
+    "max-glare": 0.3 // From 0 - 1.
+});
+
+// Simple script for skills orbit (example positions)
+document.addEventListener('DOMContentLoaded', () => {
+    const orbit = document.getElementById('orbitSkills');
+    const particles = orbit.querySelectorAll('.skill-particle');
+    const radius = orbit.offsetWidth / 2.8; // Adjust radius as needed
+    const angleStep = (2 * Math.PI) / particles.length;
+
+    particles.forEach((particle, i) => {
+        const angle = i * angleStep;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        // We apply transform to the particle itself, not its parent for individual rotation
+        particle.style.position = 'absolute'; // Ensure particles are absolutely positioned for transform
+        particle.style.left = '50%'; // Center before translating
+        particle.style.top = '50%';  // Center before translating
+        particle.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle + Math.PI/2}rad)`; // Offset by PI/2 to have icons face outwards
+    });
+
+    // Add wave background
+    const canvas = document.getElementById('wowWavesBg');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    const waves = [
+        { y: height * 0.3, length: 0.01, amplitude: 25, speed: 0.015, color: 'rgba(0, 255, 153, 0.06)' },
+        { y: height * 0.5, length: 0.008, amplitude: 30, speed: 0.01, color: 'rgba(0, 255, 153, 0.04)' },
+        { y: height * 0.7, length: 0.012, amplitude: 20, speed: 0.02, color: 'rgba(0, 255, 153, 0.05)' }
+    ];
+    let time = 0;
+    function animateWaves() {
+        ctx.clearRect(0, 0, width, height);
+        waves.forEach(wave => {
+            ctx.beginPath();
+            ctx.moveTo(0, wave.y);
+            for (let x = 0; x < width; x++) {
+                ctx.lineTo(x, wave.y + Math.sin(x * wave.length + time * wave.speed) * wave.amplitude * Math.sin(time*0.05));
+            }
+            ctx.lineTo(width, height); ctx.lineTo(0, height); ctx.closePath();
+            ctx.fillStyle = wave.color; ctx.fill();
+        });
+        time += 0.02; // Slow down overall animation speed
+        requestAnimationFrame(animateWaves);
+    }
+    animateWaves();
+});
+</script>
 </body>
 </html>
