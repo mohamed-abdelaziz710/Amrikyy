@@ -257,33 +257,32 @@ function initChatbot() {
   }
   
   // Respond to user input
-  function respondToUser(message) {
-    const lowerMsg = message.toLowerCase();
-    let response = '';
-    
-    if (lowerMsg.includes('what do you do') || lowerMsg.includes('who are you')) {
-      response = "I'm Mohamed Abdelaziz, a Cybersecurity Engineer with expertise in AI Prompt Architecture and UX-Focused Web Development. I specialize in secure systems, Bitcoin technologies, and human-centered design.";
-    } 
-    else if (lowerMsg.includes('project') || lowerMsg.includes('work')) {
-      response = "I've worked on several projects including The Global Career Project, a charity:water responsive landing page, and a Crypto Analytics Dashboard. You can check them out in the Projects section.";
+  async function respondToUser(message) {
+    // Show loading/typing indicator
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'message system loading';
+    loadingDiv.innerHTML = '<div class="message-content"><span class="terminal-prompt">system:~$</span> <em>Typing...</em></div>';
+    chatbotMessages.appendChild(loadingDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+    try {
+      const response = await fetch('https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const data = await response.json();
+      // Remove loading indicator
+      chatbotMessages.removeChild(loadingDiv);
+      if (data && data.reply) {
+        addMessage('system', data.reply);
+      } else {
+        addMessage('system', 'Sorry, I did not understand the response from the server.');
+      }
+    } catch (error) {
+      chatbotMessages.removeChild(loadingDiv);
+      addMessage('system', 'Sorry, there was a problem connecting to the chatbot server.');
     }
-    else if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach')) {
-      response = "You can reach me at amrikyy@gmail.com or call +1 770 616 0211. I'm also available on LinkedIn and GitHub as mohamed-abdelaziz710.";
-    }
-    else if (lowerMsg.includes('skill') || lowerMsg.includes('know')) {
-      response = "My skills include cybersecurity (network security, threat analysis), programming (Python, Java), frontend development (React, Tailwind CSS), AI prompting, and crypto trading.";
-    }
-    else if (lowerMsg.includes('education') || lowerMsg.includes('study')) {
-      response = "I'm pursuing a BS in Cybersecurity Engineering at Kennesaw State University (expected 2026). I also have an Associate Degree in Computer Science from Chattahoochee Technical College.";
-    }
-    else if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
-      response = "Hello! Welcome to my digital space. How can I assist you today?";
-    }
-    else {
-      response = "I'm not sure I understand. Try asking about my projects, skills, education, or how to contact me.";
-    }
-    
-    addMessage('system', response);
   }
 }
 
