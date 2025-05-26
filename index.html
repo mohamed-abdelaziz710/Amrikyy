@@ -7,6 +7,67 @@
   <style>
     body, html { background: #070d13; margin: 0; padding: 0; overflow-x: hidden; width: 100vw; height: 100vh; padding-bottom: 50px; /* Add padding for footer */ }
     #wowWavesBg { position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
+
+    /* Loading Screen Styles */
+    #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #070d13; /* Match body background */
+      z-index: 9999; /* Ensure it's on top */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #00FF99;
+      font-family: 'Sora', 'IBM Plex Sans', sans-serif;
+      opacity: 1;
+      transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+      visibility: visible;
+    }
+
+    #loadingScreen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo { /* Placeholder for a 7D logo/animation */
+      width: 100px;
+      height: 100px;
+      border: 5px solid #00FF99;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1.5s linear infinite;
+      margin-bottom: 25px;
+      box-shadow: 0 0 25px #00FF9970;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-text {
+      font-size: 1.5em;
+      font-weight: 700;
+      text-shadow: 0 0 10px #00FF9988;
+      margin-bottom: 10px;
+    }
+
+    .loader-subtext {
+      font-size: 1em;
+      color: #00fff7;
+      text-shadow: 0 0 8px #00fff766;
+    }
+    /* End Loading Screen Styles */
+
     .wow-card {
       position: relative; z-index:3; margin: 90px auto 0 auto;
       background: rgba(17, 30, 38, 0.93);
@@ -107,6 +168,13 @@
   </style>
 </head>
 <body>
+<div id="loadingScreen">
+  <div class="loader-content">
+    <div class="loader-logo"></div>
+    <div class="loader-text">Initializing 35D Interface</div>
+    <div class="loader-subtext">Crafting Cyber Realities...</div>
+  </div>
+</div>
 <canvas id="wowWavesBg"></canvas>
 <div class="wow-card" id="wowCard">
   <div class="wow-glass"></div>
@@ -450,35 +518,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add wave background
     const canvas = document.getElementById('wowWavesBg');
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    });
-
-    const waves = [
-        { y: height * 0.3, length: 0.01, amplitude: 25, speed: 0.015, color: 'rgba(0, 255, 153, 0.06)' },
-        { y: height * 0.5, length: 0.008, amplitude: 30, speed: 0.01, color: 'rgba(0, 255, 153, 0.04)' },
-        { y: height * 0.7, length: 0.012, amplitude: 20, speed: 0.02, color: 'rgba(0, 255, 153, 0.05)' }
-    ];
-    let time = 0;
-    function animateWaves() {
-        ctx.clearRect(0, 0, width, height);
-        waves.forEach(wave => {
-            ctx.beginPath();
-            ctx.moveTo(0, wave.y);
-            for (let x = 0; x < width; x++) {
-                ctx.lineTo(x, wave.y + Math.sin(x * wave.length + time * wave.speed) * wave.amplitude * Math.sin(time*0.05));
-            }
-            ctx.lineTo(width, height); ctx.lineTo(0, height); ctx.closePath();
-            ctx.fillStyle = wave.color; ctx.fill();
-        });
-        time += 0.02; // Slow down overall animation speed
-        requestAnimationFrame(animateWaves);
+const ctx = canvas.getContext('2d');
+let w, h, t = 0;
+function resize() { w = window.innerWidth; h = window.innerHeight; canvas.width = w; canvas.height = h;}
+window.addEventListener('resize', resize); resize();
+function draw() {
+  ctx.clearRect(0,0,w,h);
+  for(let j=0;j<3;j++){
+    for(let i=0;i<180;i+=1){
+      const rad = ((i+j*60+t*0.8)%360)/180*Math.PI;
+      let x = w/2+Math.cos(rad)*(280+35*j+Math.sin(t/17+j)*18), y = h/2+Math.sin(rad)*(120+15*j);
+      ctx.beginPath();
+      ctx.arc(x, y, 2+j, 0, 2*Math.PI);
+      ctx.fillStyle = `rgba(0,255,153,${0.18-0.045*j})`;
+      ctx.shadowColor = "#00FF99";
+      ctx.shadowBlur = 7+j*5;
+      ctx.fill();
     }
-    animateWaves();
+  }
+  t+=.045;
+  requestAnimationFrame(draw);
+}
+draw();
+
+    // Loading Screen Logic
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        // Hide loader after a delay (e.g., 3 seconds)
+        // You can replace this with more sophisticated logic, e.g., window.onload
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 3000); // Adjust delay as needed
+    }
 });
 </script>
 </body>
