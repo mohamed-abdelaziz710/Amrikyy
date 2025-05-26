@@ -8,6 +8,84 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Example: Add your custom CSS here */
+    body {
+      background: #0a0f14;
+      color: #e0e0e0;
+      font-family: 'Inter', 'Space Mono', monospace, sans-serif;
+    }
+    .biometric-card {
+      background: rgba(20, 30, 40, 0.95);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px 0 #00ff9933;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #00FF99;
+    }
+    .section-title {
+      color: #00FF99;
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    .terminal-prompt {
+      color: #00FF99;
+      font-family: 'Space Mono', monospace;
+      margin-right: 0.5em;
+    }
+    .chatbot-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+    }
+    .chatbot-panel {
+      background: #101820;
+      border: 1px solid #00FF99;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px #00ff9955;
+      padding: 1rem;
+      width: 350px;
+      max-width: 90vw;
+      display: none;
+    }
+    .chatbot-container.active .chatbot-panel {
+      display: block;
+    }
+    .chatbot-toggle {
+      background: #00FF99;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      box-shadow: 0 2px 8px #00ff9955;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .chatbot-toggle:hover {
+      background: #00cc77;
+    }
+    .suggestion-btn {
+      background: #222c33;
+      color: #00FF99;
+      border: 1px solid #00FF99;
+      border-radius: 6px;
+      margin-right: 0.5em;
+      padding: 0.4em 1em;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      transition: background 0.2s, color 0.2s;
+    }
+    .suggestion-btn:hover {
+      background: #00FF99;
+      color: #101820;
+    }
+    /* Add more custom styles as needed */
+  </style>
 </head>
 <body>
   <!-- Security Loader -->
