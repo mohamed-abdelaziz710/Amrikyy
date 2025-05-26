@@ -887,344 +887,108 @@ h1, h2, h3, h4, h5, h6 {
 
 /* === Smart Card CV Card Layout Fixes === */
 .wow-card {
+  position: relative;
+  z-index: 3;
+  margin: 90px auto 0 auto;
+  background: linear-gradient(135deg, rgba(17,30,38,0.97) 80%, rgba(57,255,20,0.07) 100%);
+  border-radius: 30px;
+  max-width: 440px;
+  min-width: 0;
+  width: 95vw;
+  border: 2.2px solid var(--neon-green);
+  padding: 38px 35px 33px 35px;
+  box-shadow: 0 0 55px var(--neon-green-glow), 0 2px 28px #2228;
+  backdrop-filter: blur(13px) saturate(155%);
+  font-family: 'Sora', 'IBM Plex Sans', sans-serif;
+  color: #fff;
+  text-align: center;
+  transition: transform 0.22s cubic-bezier(.43,1.5,.36,1), box-shadow 0.33s;
+  will-change: transform;
+  perspective: 1400px;
+  overflow: visible;
+  animation: float-card 3s cubic-bezier(.22,.61,.36,1) infinite alternate;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.7em;
 }
 
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 17px;
-  margin: 10px 0 18px 0;
-}
-
-.skills-orbit {
-  margin-bottom: 18px;
-  margin-top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cv-sections-flex {
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 10px;
-}
-.experience-section, .education-section {
-  flex: 1 1 0;
-  min-width: 0;
-}
-.cv-section {
-  background: rgba(0,255,153,0.04);
-  border-radius: 13px;
-  padding: 13px 10px 10px 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 0 8px #00ff9912 inset;
-}
-.cv-title-row {
-  margin-bottom: 7px;
-}
-.cv-list {
-  margin: 0;
-  padding: 0 0 0 19px;
-  list-style: none;
-}
-.cv-list li {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 6px;
-  color: #fff;
-  opacity: 0.95;
-  font-size: 1.05em;
-}
-
-@media (max-width: 800px) {
-  .cv-sections-flex {
-    flex-direction: column;
-    gap: 0;
-  }
-  .experience-section, .education-section {
-    margin-bottom: 10px;
-  }
-}
-
-/* Ensure card content doesn't overflow on small screens */
 @media (max-width: 600px) {
   .wow-card {
-    padding: 25px 7px 20px 7px;
+    padding: 18px 4vw 18px 4vw;
     max-width: 99vw;
+    margin-top: 30px;
+    border-radius: 18px;
+    box-shadow: 0 0 18px var(--neon-green-glow), 0 2px 12px #2228;
   }
-  .cv-sections-flex {
-    flex-direction: column;
-    gap: 0;
+  .profile-img {
+    width: 62px;
+    height: 62px;
   }
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .security-status-bar {
-    padding: 7px 10px;
-    font-size: 0.9em;
-    gap: 15px;
+  .skills-orbit {
+    width: 92vw !important;
+    min-width: 0;
+    height: 110px;
   }
-  
-  .holo-nav {
-    right: 10px;
-    top: auto;
-    bottom: 20px;
+  .skill-particle {
+    width: 36px;
+    height: 36px;
   }
-  
-  .nav-container {
-    border-radius: 14px;
-    flex-direction: row;
+  .skill-particle svg {
+    width: 20px;
+    height: 20px;
   }
-  
-  .nav-item {
-    padding: 14px 18px;
-    font-size: 0.95em;
+  .cv-section {
+    padding: 8px 4px 7px 4px;
+    border-radius: 10px;
   }
-  
-  .nav-item .nav-highlight {
-    right: auto;
-    left: 50%;
-    bottom: 5px;
-    transform: translateX(-50%);
+  .cv-title-row {
+    gap: 4px;
   }
-  
-  .main-container {
-    margin-top: 90px;
-    padding: 0 15px 80px 15px; /* Added bottom padding for nav */
+  .cv-list li {
+    font-size: 0.98em;
+    gap: 4px;
   }
-  
-  .biometric-card {
-    padding: 25px 20px;
+  .social-icons a {
+    width: 34px;
+    height: 34px;
   }
-  
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .chatbot-panel {
-    width: 300px;
-    right: -10px;
-  }
-  
-  .timeline::before {
-    left: 10px;
-  }
-  
-  .timeline-item {
-    padding-left: 35px;
-  }
-  
-  .timeline-dot {
-    left: 4px;
-  }
-  
-  /* Touch-friendly adjustments */
-  .skill-chip, .project-card, .contact-item, .nav-item, .deploy-btn {
-    padding: 10px 15px; /* Larger touch targets */
-  }
-  
-  /* Improved scrolling for mobile */
-  .chatbot-messages, .skills-container {
-    -webkit-overflow-scrolling: touch;
+  .social-icons svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
-@media (max-width: 480px) {
-  .status-text {
-    display: none;
+@media (max-width: 400px) {
+  .wow-card {
+    padding: 10px 1vw 10px 1vw;
+    border-radius: 10px;
+    font-size: 0.97em;
   }
-  
-  .nav-text {
-    display: none;
+  .profile-img {
+    width: 48px;
+    height: 48px;
   }
-  
-  .nav-item {
-    padding: 12px;
+  .skills-orbit {
+    height: 80px;
   }
-  
-  .chatbot-panel {
-    width: 280px;
-    height: 400px;
-    bottom: 70px;
+  .skill-particle {
+    width: 28px;
+    height: 28px;
   }
-  
-  .chatbot-toggle {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .profile-name {
-    font-size: 1.3em;
-  }
-  
-  .profile-title {
-    font-size: 0.9em;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-  }
-  
-  /* Ensure animations are not too heavy on mobile */
-  .particle-layer .particle {
-    opacity: 0.15;
-  }
-  
-  /* Optimize touch interactions */
-  .suggestion-btn {
-    padding: 8px 12px;
-    margin-bottom: 5px;
+  .cv-section {
+    padding: 4px 2px 4px 2px;
+    border-radius: 7px;
   }
 }
 
-/* Neon Green Accent Utility */
-.neon {
-  color: var(--neon-green);
-  text-shadow: 0 0 8px var(--neon-green-glow), 0 0 18px var(--neon-green-glow);
+/* Make sure flex sections stack and fit on all screens */
+.cv-sections-flex {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.experience-section, .education-section {
+  min-width: 0;
 }
 
-/* Neon Button Example */
-.neon-btn {
-  background: var(--dark-bg);
-  color: var(--neon-green);
-  border: 2px solid var(--neon-green);
-  box-shadow: 0 0 12px var(--neon-green-glow);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-.neon-btn:hover {
-  background: var(--neon-green);
-  color: var(--dark-bg);
-  box-shadow: 0 0 24px var(--neon-green-glow);
-}
-
-/* Card and Section Neon Accents */
-.wow-card, .cv-section {
-  border-color: var(--neon-green);
-  box-shadow: 0 0 22px var(--neon-green-glow), 0 2px 28px #2228;
-}
-
-.cv-title, .profile-name, .profile-title, .cv-meta {
-  color: var(--neon-green);
-  text-shadow: 0 0 8px var(--neon-green-glow);
-}
-
-.cv-list li, .about-box, .cv-section {
-  color: var(--white);
-}
-
-.cv-meta {
-  color: var(--medium-gray);
-  opacity: 0.85;
-}
-
-.social-icons a {
-  border-color: var(--neon-green);
-  box-shadow: 0 0 15px var(--neon-green-glow);
-}
-.social-icons a:hover {
-  background: var(--neon-green);
-  color: var(--dark-bg);
-  box-shadow: 0 0 33px var(--neon-green-glow);
-}
-.social-icons a:hover svg {
-  color: var(--dark-bg);
-}
-
-.skill-particle {
-  background: var(--white);
-  color: var(--neon-green);
-  border: 2px solid var(--neon-green);
-  box-shadow: 0 0 18px var(--neon-green-glow);
-}
-.skill-particle:hover {
-  background: var(--neon-green);
-  color: var(--dark-bg);
-  box-shadow: 0 0 22px var(--neon-green-glow);
-}
-
-footer {
-  background: rgba(10, 15, 22, 0.9);
-  color: var(--neon-green);
-  border-top: 1px solid var(--neon-green-glow);
-  box-shadow: 0 0 12px var(--neon-green-glow);
-}
-
-/* Animation Classes */
-.fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.glitch-text {
-  position: relative;
-  animation: glitch 3s infinite;
-}
-
-@keyframes glitch {
-  0% {
-    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-  14% {
-    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-  15% {
-    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-  49% {
-    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-  50% {
-    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-  99% {
-    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-  100% {
-    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
-  }
-}
-
-/* Tilt Effect */
-[data-tilt] {
-  transform-style: preserve-3d;
-  transform: perspective(1000px);
-}
-
-[data-tilt] .section-title,
-[data-tilt] .profile-name,
-[data-tilt] .profile-title {
-  transform: translateZ(20px);
-}
-
-[data-tilt] .profile-image-container {
-  transform: translateZ(30px);
-}
+/* ...existing code... */
