@@ -1,191 +1,9 @@
-// Smart Card Website JavaScript
+// Smart Card Website JavaScript - Chatbot Functionality
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize Vanilla Tilt for 3D card effect
-  VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-    max: 5,
-    speed: 400,
-    glare: true,
-    "max-glare": 0.2,
-  });
-
-  // Security Loader
-  setTimeout(() => {
-    document.getElementById('securityLoader').style.opacity = '0';
-    setTimeout(() => {
-      document.getElementById('securityLoader').style.display = 'none';
-    }, 800);
-  }, 3800);
-
-  // Status Bar Clock
-  function updateClock() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    document.getElementById('statusTime').textContent = `${hours}:${minutes}:${seconds}`;
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
-
-  // Navigation
-  const navItems = document.querySelectorAll('.nav-item');
-  const sections = document.querySelectorAll('.section');
-
-  navItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetSection = this.getAttribute('data-section');
-      
-      // Update active nav item
-      navItems.forEach(navItem => navItem.classList.remove('active'));
-      this.classList.add('active');
-      
-      // Show target section
-      sections.forEach(section => {
-        section.classList.remove('active');
-        if (section.id === targetSection) {
-          section.classList.add('active');
-          section.classList.add('fade-in');
-          setTimeout(() => section.classList.remove('fade-in'), 500);
-        }
-      });
-    });
-  });
-
-  // Particles Effect
-  createParticles();
-  
-  // Data Streams Effect
-  createDataStreams();
-  
-  // Space Stars Effect
-  createSpaceStars();
-  
   // Chatbot Functionality
   initChatbot();
-  
-  // Add glitch effect to section titles
-  document.querySelectorAll('.section-title').forEach(title => {
-    title.classList.add('glitch-text');
-  });
-  
-  // Animate skill chips on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateSkillChips(entry.target);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  document.querySelectorAll('.skill-category').forEach(category => {
-    observer.observe(category);
-  });
-  
-  // Animate timeline items on scroll
-  const timelineObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-        timelineObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  document.querySelectorAll('.timeline-item, .education-item, .project-card, .contact-item').forEach(item => {
-    timelineObserver.observe(item);
-  });
 });
-
-// Create Particles
-function createParticles() {
-  const particleLayer = document.getElementById('particleLayer');
-  
-  for (let i = 0; i < 35; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.width = p.style.height = (Math.random() * 6 + 4) + 'px';
-    p.style.left = (Math.random() * 100) + 'vw';
-    p.style.top = (Math.random() * 100) + 'vh';
-    p.style.opacity = 0.1 + Math.random() * 0.23;
-    
-    // Create unique animation name
-    const animName = `floaty${i}`;
-    p.style.animation = `${animName} ${(12 + Math.random() * 10).toFixed(1)}s infinite alternate ease-in-out`;
-    
-    // Add keyframe style
-    const style = document.createElement('style');
-    const dx = (Math.random() * 80 - 40).toFixed(1);
-    const dy = (Math.random() * 60 - 30).toFixed(1);
-    style.innerHTML = `@keyframes ${animName} { to { transform: translate(${dx}px, ${dy}px); } }`;
-    document.head.appendChild(style);
-    
-    particleLayer.appendChild(p);
-  }
-}
-
-// Create Data Streams
-function createDataStreams() {
-  const dataStreams = document.getElementById('dataStreams');
-  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-  
-  for (let i = 0; i < 10; i++) {
-    const d = document.createElement('div');
-    d.className = 'data-stream';
-    
-    // Generate random characters
-    let streamText = '';
-    const length = Math.floor(Math.random() * 12 + 8);
-    for (let j = 0; j < length; j++) {
-      streamText += chars[Math.floor(Math.random() * chars.length)];
-    }
-    d.textContent = streamText;
-    
-    // Position and style
-    d.style.left = (Math.random() * 100) + 'vw';
-    d.style.fontSize = (Math.random() * 0.7 + 1.1) + 'em';
-    d.style.animationDuration = (Math.random() * 6 + 5) + 's';
-    d.style.animationDelay = (Math.random() * 2) + 's';
-    
-    dataStreams.appendChild(d);
-  }
-}
-
-// Create Space Stars
-function createSpaceStars() {
-  const spaceStars = document.getElementById('spaceStars');
-  
-  for (let i = 0; i < 150; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    
-    // Random size (smaller stars are more common)
-    const size = Math.random() * 2 + 1;
-    star.style.width = star.style.height = `${size}px`;
-    
-    // Random position
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 100}%`;
-    
-    // Brighter stars twinkle
-    if (size > 2) {
-      star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite alternate`;
-    }
-    
-    spaceStars.appendChild(star);
-  }
-  
-  // Add twinkle animation
-  const style = document.createElement('style');
-  style.innerHTML = `
-    @keyframes twinkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
-  `;
-  document.head.appendChild(style);
-}
 
 // Initialize Chatbot
 function initChatbot() {
@@ -195,11 +13,17 @@ function initChatbot() {
   const chatbotInput = document.getElementById('chatbotInput');
   const chatbotMessages = document.getElementById('chatbotMessages');
   const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+
+  if (!chatbotToggle || !chatbotPanel || !chatbotClose || !chatbotInput || !chatbotMessages) {
+    console.warn("Chatbot elements not found. Chatbot functionality may be limited.");
+    return;
+  }
   
   // Toggle chatbot panel
   chatbotToggle.addEventListener('click', () => {
-    chatbotPanel.style.display = chatbotPanel.style.display === 'flex' ? 'none' : 'flex';
-    if (chatbotPanel.style.display === 'flex') {
+    const isDisplayed = chatbotPanel.style.display === 'flex';
+    chatbotPanel.style.display = isDisplayed ? 'none' : 'flex';
+    if (!isDisplayed) {
       chatbotInput.focus();
     }
   });
@@ -217,9 +41,7 @@ function initChatbot() {
       chatbotInput.value = '';
       
       // Process user message and respond
-      setTimeout(() => {
-        respondToUser(userMessage);
-      }, 500);
+      respondToUser(userMessage); // Removed setTimeout for faster response initiation
     }
   });
   
@@ -227,11 +49,9 @@ function initChatbot() {
   suggestionBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const query = btn.getAttribute('data-query');
-      chatbotInput.value = query;
-      
-      // Simulate Enter key press
-      const event = new KeyboardEvent('keypress', { key: 'Enter' });
-      chatbotInput.dispatchEvent(event);
+      addMessage('user', query); // Add user message when suggestion is clicked
+      // Process suggestion query and respond
+      respondToUser(query);
     });
   });
   
@@ -243,11 +63,12 @@ function initChatbot() {
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
     
-    if (type === 'user') {
-      messageContent.innerHTML = `<span class="terminal-prompt">guest:~$</span> ${content}`;
-    } else {
-      messageContent.innerHTML = `<span class="terminal-prompt">system:~$</span> ${content}`;
-    }
+    const promptSpan = document.createElement('span');
+    promptSpan.className = 'terminal-prompt';
+    promptSpan.textContent = type === 'user' ? 'guest:~$ ' : 'system:~$ ';
+
+    messageContent.appendChild(promptSpan);
+    messageContent.append(content); // Append content directly, handles text nodes correctly
     
     messageDiv.appendChild(messageContent);
     chatbotMessages.appendChild(messageDiv);
@@ -260,7 +81,7 @@ function initChatbot() {
   async function respondToUser(message) {
     // Show loading/typing indicator
     const loadingDiv = document.createElement('div');
-    loadingDiv.className = 'message system loading';
+    loadingDiv.className = 'message system loading'; // Added 'loading' class for potential styling
     loadingDiv.innerHTML = '<div class="message-content"><span class="terminal-prompt">system:~$</span> <em>Typing...</em></div>';
     chatbotMessages.appendChild(loadingDiv);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
@@ -271,100 +92,27 @@ function initChatbot() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
       });
+      
+      chatbotMessages.removeChild(loadingDiv); // Remove loading indicator once response is received
+
+      if (!response.ok) {
+        // Handle HTTP errors like 404, 500 etc.
+        addMessage('system', `Error: Server responded with status ${response.status}`);
+        return;
+      }
+
       const data = await response.json();
-      // Remove loading indicator
-      chatbotMessages.removeChild(loadingDiv);
       if (data && data.reply) {
         addMessage('system', data.reply);
       } else {
         addMessage('system', 'Sorry, I did not understand the response from the server.');
       }
     } catch (error) {
-      chatbotMessages.removeChild(loadingDiv);
-      addMessage('system', 'Sorry, there was a problem connecting to the chatbot server.');
-    }
-  }
-}
-
-// Animate skill chips with staggered delay
-function animateSkillChips(category) {
-  const chips = category.querySelectorAll('.skill-chip');
-  
-  chips.forEach((chip, index) => {
-    setTimeout(() => {
-      chip.classList.add('fade-in');
-    }, index * 100);
-  });
-}
-
-// Add digital wave effect to canvas
-document.addEventListener('DOMContentLoaded', function() {
-  const canvas = document.createElement('canvas');
-  const digitalWaves = document.getElementById('digitalWaves');
-  digitalWaves.appendChild(canvas);
-  
-  const ctx = canvas.getContext('2d');
-  let width, height;
-  
-  function resizeCanvas() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    
-    // Update wave positions after resize
-    waves[0].y = height * 0.3;
-    waves[1].y = height * 0.4;
-    waves[2].y = height * 0.6;
-  }
-  
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  
-  // Wave parameters
-  const waves = [
-    { y: height * 0.3, length: 100, amplitude: 15, speed: 0.03, color: 'rgba(0, 255, 153, 0.05)' },
-    { y: height * 0.4, length: 80, amplitude: 20, speed: 0.02, color: 'rgba(0, 255, 153, 0.03)' },
-    { y: height * 0.6, length: 120, amplitude: 10, speed: 0.01, color: 'rgba(0, 255, 153, 0.04)' }
-  ];
-  
-  let time = 0;
-  
-  function animate() {
-    // Check if canvas is still in DOM before animating
-    if (!document.body.contains(canvas)) {
-      return;
-    }
-    
-    ctx.clearRect(0, 0, width, height);
-    
-    waves.forEach(wave => {
-      ctx.beginPath();
-      ctx.moveTo(0, wave.y);
-      
-      for (let x = 0; x < width; x++) {
-        const y = wave.y + Math.sin(x / wave.length + time * wave.speed) * wave.amplitude;
-        ctx.lineTo(x, y);
+      if (chatbotMessages.contains(loadingDiv)) { // Ensure loadingDiv is still a child before removing
+          chatbotMessages.removeChild(loadingDiv);
       }
-      
-      ctx.lineTo(width, height);
-      ctx.lineTo(0, height);
-      ctx.closePath();
-      
-      ctx.fillStyle = wave.color;
-      ctx.fill();
-    });
-    
-    time++;
-    requestAnimationFrame(animate);
+      console.error("Chatbot API Error:", error);
+      addMessage('system', 'Sorry, there was a problem connecting to the chatbot server. Please check the console for details.');
+    }
   }
-  
-  // Reduce animation complexity on mobile
-  if (window.innerWidth < 768) {
-    waves.forEach(wave => {
-      wave.amplitude *= 0.7; // Reduce wave height
-    });
-  }
-  
-  animate();
-});
+}
