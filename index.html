@@ -2,689 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohamed Abdelaziz | Cyber Security Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>35D Smart Cyber CV – Mohamed Abdelaziz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700&family=IBM+Plex+Sans:wght@600&display=swap" rel="stylesheet">
   <style>
-    /* Example: Add your custom CSS here */
-    body {
-      background: #0a0f14;
-      color: #e0e0e0;
-      font-family: 'Inter', 'Space Mono', monospace, sans-serif;
+    body, html { background: #070d13; margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh;}
+    #wowWavesBg { position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
+    .wow-card {
+      position: relative; z-index:3;
+      margin: 90px auto 0 auto;
+      background: rgba(17, 30, 38, 0.93);
+      border-radius: 30px;
+      max-width: 440px;
+      border: 2.2px solid #00FF99;
+      padding: 38px 35px 33px 35px;
+      box-shadow: 0 0 55px #00ff9950, 0 2px 28px #2228;
+      backdrop-filter: blur(13px) saturate(155%);
+      font-family: 'Sora', 'IBM Plex Sans', sans-serif;
+      color: #fff; text-align: center; transition: transform 0.22s cubic-bezier(.43,1.5,.36,1), box-shadow 0.33s;
+      will-change: transform; perspective: 1400px; overflow: visible;
+      animation: float-card 3s cubic-bezier(.22,.61,.36,1) infinite alternate;
     }
-    .biometric-card {
-      background: rgba(20, 30, 40, 0.95);
-      border-radius: 18px;
-      box-shadow: 0 4px 32px 0 #00ff9933;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid #00FF99;
+    @keyframes float-card { 0% { transform: translateY(0px) scale(1);} 100% { transform: translateY(-18px) scale(1.017);}}
+    .wow-glass { position: absolute; left: 0; top: 0; width:100%; height:100%; z-index:9; pointer-events:none; border-radius: 30px; background: linear-gradient(120deg, #fff3 17%, #00ff9930 68%, #fff2 90%); mix-blend-mode: lighten; filter: blur(9px) opacity(0.43); animation: glass-move 3s infinite alternate cubic-bezier(.57,.23,.61,.99);}
+    @keyframes glass-move { 0%{transform: translateY(-5px);} 100%{transform: translateY(13px);}}
+    .profile-img { width: 88px; height: 88px; border-radius: 50%; border:3px solid #00FF99; margin:0 auto 17px; box-shadow:0 0 31px #00ff9980; background: url('https://avatars.githubusercontent.com/u/71965619?v=4') center/cover;}
+    .profile-name { color: #00FF99; font-size: 1.45em; font-weight: 900; margin-bottom: 2px; letter-spacing:2.5px; text-shadow:0 0 14px #00FF9988;}
+    .profile-title { color: #00fff7; font-size: 1.06em; margin-bottom: 14px; font-weight: 700; text-shadow:0 0 12px #00fff766;}
+    .about-box { display: flex; align-items: flex-start; gap: 11px; margin-bottom: 18px; text-align: right; font-size: 1.08em; color: #fff; opacity:0.93; background:rgba(0,255,153,0.07); border-radius:13px; padding:10px 16px; border-right: 4px solid #00FF99; box-shadow: 0 0 10px #00ff9922 inset;}
+    .about-box svg { flex-shrink:0; margin-top:2px;}
+    .skills-orbit { position:relative; width:285px;height:130px;margin:0 auto 18px auto; pointer-events:none;}
+    .skill-particle {
+      position:absolute; left:50%; top:56%; transform:translate(-50%,-50%);
+      border-radius: 50%; background: #fff;
+      color:#00FF99; font-weight: 700; font-size: 1.03em; box-shadow:0 0 18px #00FF99bb;
+      width: 42px; height:42px; display:flex;align-items:center;justify-content:center; gap:4px;
+      transition: background 0.25s, color 0.15s;
+      filter: drop-shadow(0 1px 10px #00FF9980);
+      pointer-events:auto; cursor:pointer;
+      opacity:0.96; z-index:10; animation: particle-orbit 4.2s infinite linear;
+      font-family:'IBM Plex Sans',sans-serif;
+      border:2px solid #00FF99;
     }
-    .section-title {
-      color: #00FF99;
-      font-family: 'Orbitron', monospace;
-      letter-spacing: 1px;
-      margin-bottom: 1.5rem;
+    @keyframes particle-orbit { to { filter: drop-shadow(0 2px 18px #00FF99cc);} }
+    .skill-particle:hover { background: #00FF99; color:#10161e; box-shadow:0 0 22px #00FF99cc; }
+    .skill-particle svg {margin-right:3px;}
+    .cv-section { text-align: right; margin-bottom: 17px; }
+    .cv-title-row {display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+    .cv-title-row svg { flex-shrink:0;}
+    .cv-title {font-size:1.09em;color:#00FF99;font-weight:700;letter-spacing:1.4px;}
+    .cv-list {margin:0;padding:0 0 0 19px;list-style:none;}
+    .cv-list li { display:flex; align-items:center; gap:7px; margin-bottom:6px; color:#fff; opacity:0.95; font-size:1.05em;}
+    .cv-list li svg {flex-shrink:0;}
+    .cv-meta {color:#00b7ff;font-size:0.93em;opacity:0.76;margin-left:7px;}
+    .social-icons { display:flex;justify-content:center;gap:17px;margin:18px 0 0 0;}
+    .social-icons a { display:inline-flex;align-items:center;justify-content:center;background:#181f2b;border:2px solid #00FF99;border-radius:50%;width:44px;height:44px;transition:box-shadow 0.23s,background 0.23s, border 0.2s;box-shadow:0 0 15px #00ff9948;filter: grayscale(0.07) brightness(1.2);}
+    .social-icons a:hover { background:#fff; border-color:#00FF99; box-shadow:0 0 33px #00FF99dd;}
+    .social-icons svg { width:25px;height:25px;display:block;}
+    .social-icons .linkedin:hover svg {color:#0077b5;}
+    .social-icons .instagram:hover svg {color:#E4405F;}
+    .social-icons .facebook:hover svg {color:#1877f3;}
+    .social-icons .email:hover svg {color:#00B7FF;}
+    .chatbot-btn {margin: 25px auto 0 auto;width: 54px; height: 54px;border-radius: 50%;border: 2.2px solid #00FF99;background: #181f2b;display: flex; align-items: center; justify-content: center;box-shadow: 0 0 16px #00FF995c;cursor: pointer;transition: transform 0.14s;}
+    .chatbot-btn:hover {transform:scale(1.09);box-shadow:0 0 22px #00FF99bb;background:#00FF99;}
+    .chatbot-btn svg { width: 31px; height: 31px; color: #00FF99;}
+    .chatbot-btn:hover svg { color: #181f2b;}
+    @media (max-width: 600px) {
+      .wow-card { padding: 10px 1vw 13px 1vw; max-width: 99vw; }
+      .profile-name { font-size: 1.1em; }
+      .profile-img { width: 53px; height: 53px; }
+      .chatbot-btn { width: 37px; height: 37px; }
+      .skills-orbit {width:98vw;}
     }
-    .terminal-prompt {
-      color: #00FF99;
-      font-family: 'Space Mono', monospace;
-      margin-right: 0.5em;
-    }
-    .chatbot-container {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 1000;
-    }
-    .chatbot-panel {
-      background: #101820;
-      border: 1px solid #00FF99;
-      border-radius: 12px;
-      box-shadow: 0 2px 16px #00ff9955;
-      padding: 1rem;
-      width: 350px;
-      max-width: 90vw;
-      display: none;
-    }
-    .chatbot-container.active .chatbot-panel {
-      display: block;
-    }
-    .chatbot-toggle {
-      background: #00FF99;
-      border: none;
-      border-radius: 50%;
-      width: 56px;
-      height: 56px;
-      box-shadow: 0 2px 8px #00ff9955;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-    .chatbot-toggle:hover {
-      background: #00cc77;
-    }
-    .suggestion-btn {
-      background: #222c33;
-      color: #00FF99;
-      border: 1px solid #00FF99;
-      border-radius: 6px;
-      margin-right: 0.5em;
-      padding: 0.4em 1em;
-      cursor: pointer;
-      font-family: 'Space Mono', monospace;
-      transition: background 0.2s, color 0.2s;
-    }
-    .suggestion-btn:hover {
-      background: #00FF99;
-      color: #101820;
-    }
-    /* Security Loader Styles */
-    .security-loader {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10, 15, 20, 0.98);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .loader-card {
-      background: #141e28;
-      border-radius: 20px;
-      border: 2px solid #00FF99;
-      box-shadow: 0 8px 40px #00ff9940;
-      padding: 2.5rem 2rem;
-      margin: 2rem;
-      max-width: 400px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-sizing: border-box;
-    }
-    .loader-logo { margin-bottom: 1.2rem; }
-    .loader-text {
-      color: #00FF99;
-      font-family: 'Orbitron', monospace;
-      font-size: 1.2rem;
-      margin-bottom: 0.7rem;
-    }
-    .loader-progress {
-      width: 100%;
-      height: 8px;
-      background: #222c33;
-      border-radius: 4px;
-      margin-bottom: 0.7rem;
-      overflow: hidden;
-    }
-    .progress-bar {
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, #00FF99 60%, #00cc77 100%);
-      border-radius: 4px;
-      animation: loader-bar 1.5s infinite alternate;
-    }
-    @keyframes loader-bar {
-      0% { width: 30%; }
-      100% { width: 90%; }
-    }
-    .loader-status {
-      color: #e0e0e0;
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-    }
-    .loader-info {
-      width: 100%;
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-    .loader-title {
-      color: #00FF99;
-      font-family: 'Orbitron', monospace;
-      font-size: 1.3rem;
-      margin-bottom: 0.3rem;
-    }
-    .loader-role {
-      color: #e0e0e0;
-      font-size: 1.05rem;
-      margin-bottom: 0.5rem;
-    }
-    .loader-badges {
-      margin-bottom: 0.5rem;
-    }
-    .loader-badge {
-      display: inline-block;
-      background: #101820;
-      color: #00FF99;
-      border: 1px solid #00FF99;
-      border-radius: 6px;
-      padding: 0.2em 0.7em;
-      margin: 0 0.2em;
-      font-size: 0.9em;
-    }
-    .loader-bio {
-      color: #b0ffdd;
-      font-size: 0.98rem;
-      margin-top: 0.5rem;
-    }
-    /* Add more custom styles as needed */
   </style>
 </head>
 <body>
-  <!-- Security Loader (Single Card) -->
-  <div class="security-loader" id="securityLoader">
-    <div class="loader-card">
-      <div class="loader-logo">
-        <svg viewBox="0 0 100 100" width="80" height="80">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="#00FF99" stroke-width="2" />
-          <path d="M50 10 L50 90 M10 50 L90 50" stroke="#00FF99" stroke-width="2" />
-          <circle cx="50" cy="50" r="5" fill="#00FF99" />
-        </svg>
-      </div>
-      <div class="loader-text">SECURING CONNECTION</div>
-      <div class="loader-progress"><div class="progress-bar"></div></div>
-      <div class="loader-status">Verifying identity...</div>
-      <div class="loader-info">
-        <h2 class="loader-title">Mohamed Abdelaziz</h2>
-        <div class="loader-role">Cybersecurity Engineer | AI Prompt Architect | UX-Focused Web Developer</div>
-        <div class="loader-badges">
-          <span class="loader-badge">July 10, 1999</span>
-          <span class="loader-badge">Egyptian American</span>
-        </div>
-        <div class="loader-bio">Tech-savvy Cybersecurity Engineer with a strong foundation in secure systems, Bitcoin and crypto technologies, and AI-powered solutions. Experienced in human-centered design, prompt engineering, and market analytics.</div>
-      </div>
+<canvas id="wowWavesBg"></canvas>
+<div class="wow-card" id="wowCard">
+  <div class="wow-glass"></div>
+  <div class="profile-img"></div>
+  <div class="profile-name">Mohamed H. Abdelaziz</div>
+  <div class="profile-title">Cybersecurity Engineer | AI & Web3 Strategist</div>
+  <!-- About -->
+  <div class="about-box">
+    <svg width="25" height="25" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M12 6a2 2 0 100 4 2 2 0 000-4zm0 6c-1.1 0-2 .9-2 2v2h4v-2c0-1.1-.9-2-2-2z"/></svg>
+    <div>
+      <b>نبذة:</b> سيبراني متعدد المهارات أدمج الأمان، الذكاء الاصطناعي، والتقنيات المالية.<br>
+      أخلق حلولاً رقمية بجرأة وأقود مشاريع مستقبلية في عالم Web3 وAI.
     </div>
   </div>
-
-  <!-- Modern Glassmorphism Card Section -->
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700&family=IBM+Plex+Sans:wght@600&display=swap" rel="stylesheet">
-  <canvas id="wowWavesBg"></canvas>
-  <div class="wow-card" id="wowCard">
-    <div class="wow-glass"></div>
-    <div class="profile-img"></div>
-    <div class="profile-name">Mohamed H. Abdelaziz</div>
-    <div class="profile-title">Cybersecurity Engineer | AI & Web3 Strategist</div>
-    <!-- About -->
-    <div class="about-box">
-      <svg width="25" height="25" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M12 6a2 2 0 100 4 2 2 0 000-4zm0 6c-1.1 0-2 .9-2 2v2h4v-2c0-1.1-.9-2-2-2z"/></svg>
-      <div>
-        <b>نبذة:</b> سيبراني متعدد المهارات أدمج الأمان، الذكاء الاصطناعي، والتقنيات المالية.<br>
-        أخلق حلولاً رقمية بجرأة وأقود مشاريع مستقبلية في عالم Web3 وAI.
-      </div>
+  <!-- Skills Orbit -->
+  <div class="skills-orbit" id="orbitSkills"></div>
+  <!-- Experience -->
+  <div class="cv-section">
+    <div class="cv-title-row">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="16" rx="4" fill="#00FF99" opacity="0.18"/><path d="M7 8h10M7 12h7M6 17h12" stroke="#00FF99" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="cv-title">الخبرات</span>
     </div>
-    <!-- Skills Orbit -->
-    <div class="skills-orbit" id="orbitSkills"></div>
-    <!-- Experience -->
-    <div class="cv-section">
-      <div class="cv-title-row">
-        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#00FF99" d="M6 19V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14"/><rect x="2" y="19" width="20" height="3" rx="1" fill="#00FF99" opacity="0.18"/></svg>
-        <span class="cv-title">الخبرات</span>
-      </div>
-      <ul class="cv-list">
-        <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.20"/><path fill="#00FF99" d="M9 17V7h2v10H9zm4-10h2v10h-2V7z"/></svg>
-          Intel, OpenAI, L’Oréal <span class="cv-meta">Security Intern 2024</span></li>
-        <li><svg width="17" height="17" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.19"/><path fill="#00FF99" d="M15 8h-2V6h-2v2H9v2h2v2h2v-2h2V8z"/></svg>
-          Bybit & Coinbase <span class="cv-meta">Crypto Trader 2019–الآن</span></li>
-        <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.17"/><path fill="#00FF99" d="M7 9h10v2H7V9zm0 4h7v2H7v-2z"/></svg>
-          charity: water, The Global Career <span class="cv-meta">AI Project Lead</span></li>
-        <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.13"/><path fill="#00FF99" d="M5 16h14v2H5z"/><rect x="7" y="8" width="10" height="6" rx="3" fill="#00FF99" opacity="0.24"/></svg>
-          Amadeus (Atlanta) <span class="cv-meta">Travel Agent</span></li>
-      </div>
-    </div>
-    <!-- Education -->
-    <div class="cv-section">
-      <div class="cv-title-row">
-        <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M12 6l8 4-8 4-8-4z"/><rect x="6" y="14" width="12" height="2" rx="1" fill="#00FF99" opacity="0.20"/></svg>
-        <span class="cv-title">التعليم</span>
-      </div>
-      <ul class="cv-list">
-        <li><svg width="15" height="15" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.20"/><path fill="#00FF99" d="M7 10v4a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4"/><rect x="9" y="7" width="6" height="2" rx="1" fill="#00FF99" opacity="0.25"/></svg>
-          Chattahoochee Tech <span class="cv-meta">2021</span></li>
-        <li><svg width="15" height="15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M9 15V9l6 6V9"/></svg>
-          Kennesaw State <span class="cv-meta">Cybersecurity, 2026</span></li>
-        <li><svg width="15" height="15" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.12"/><path fill="#00FF99" d="M8 12h8v2H8z"/></svg>
-          Cisco Cybersecurity <span class="cv-meta">Certified</span></li>
-      </div>
-    </div>
-    <!-- Certs / Awards -->
-    <div class="cv-section">
-      <div class="cv-title-row">
-        <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M12 8l2 4h-4l2-4zm0 8a4 4 0 110-8 4 4 0 010 8z"/></svg>
-        <span class="cv-title">الشهادات</span>
-      </div>
-      <ul class="cv-list">
-        <li><svg width="13" height="13" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#00FF99" opacity="0.14"/><path fill="#00FF99" d="M12 17l-5-3V7l5-3 5 3v7z"/></svg>
-          BlackRock Talent Community <span class="cv-meta">2024</span></li>
-        <li><svg width="13" height="13" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#00FF99" opacity="0.15"/><path fill="#00FF99" d="M7 15l5 3 5-3V9l-5-3-5 3v6z"/></svg>
-          Honor Society Member <span class="cv-meta">2024</span></li>
-      </ul>
-    </div>
-    <!-- Social -->
-    <div class="social-icons">
-      <a href="https://linkedin.com/in/mohamed-abdelaziz-815797347" target="_blank" title="LinkedIn"><svg><use href="#linkedin-icon" /></svg></a>
-      <a href="https://instagram.com/amrikyy" target="_blank" title="Instagram"><svg><use href="#instagram-icon" /></svg></a>
-      <a href="https://facebook.com/share/17qHw2N9PG" target="_blank" title="Facebook"><svg><use href="#facebook-icon" /></svg></a>
-      <a href="mailto:amrikyy@gmail.com" title="Email"><svg><use href="#email-icon" /></svg></a>
-    </div>
-    <button class="chatbot-btn" title="Chat with MHA">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><rect x="8" y="10" width="8" height="4" rx="2" fill="currentColor"/><circle cx="10" cy="12" r="1.5" fill="#090d13"/><circle cx="14" cy="12" r="1.5" fill="#090d13"/></svg>
-    </button>
+    <ul class="cv-list">
+      <li><svg width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#232b39"/><path d="M8 12h8" stroke="#00FF99" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.3" fill="#00FF99" /></svg>
+        Intel, OpenAI, L’Oréal <span class="cv-meta">Security Intern 2024</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#181f2b" stroke="#00FF99" stroke-width="2"/><path d="M12 7v5l4 2" stroke="#00FF99" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.5" fill="#00FF99"/></svg>
+        Bybit & Coinbase <span class="cv-meta">Crypto Trader 2019–الآن</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="#00FF99" opacity="0.12"/><path d="M7 9h10v2H7V9zm0 4h7v2H7v-2z" fill="#00FF99"/></svg>
+        charity: water, The Global Career <span class="cv-meta">AI Project Lead</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#232b39"/><path d="M5 16h14v2H5z"/><rect x="7" y="8" width="10" height="6" rx="3" fill="#00FF99" opacity="0.24"/></svg>
+        Amadeus (Atlanta) <span class="cv-meta">Travel Agent</span></li>
+    </ul>
   </div>
-  <!-- SVG Sprite للأيقونات -->
-  <svg style="display:none">
-    <symbol id="linkedin-icon" viewBox="0 0 24 24"><path fill="#00FF99" d="M19 0h-14c-2.8 0-5 2.2-5 5v14c0 2.8 2.2 5 5 5h14c2.8 0 5-2.2 5-5v-14c0-2.8-2.2-5-5-5zm-11.8 19h-2.2v-8h2.2v8zm-1.1-9.3c-.7 0-1.1-.5-1.1-1.1s.5-1.1 1.1-1.1 1.1.5 1.1 1.1c0 .7-.5 1.1-1.1 1.1zm14.8 9.3h-2.2v-4.2c0-1-.4-1.7-1.4-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.6-.1.8v4.1h-2.2v-8h2.2v1.1c.3-.5 1-1.3 2.3-1.3 1.7 0 3 1.1 3 3.5v4.7z"/></symbol>
-    <symbol id="instagram-icon" viewBox="0 0 24 24"><path fill="#00FF99" d="M7.8,2.1C4.5,2.1,2.1,4.5,2.1,7.8v8.4c0,3.3,2.4,5.7,5.7,5.7h8.4c3.3,0,5.7-2.4,5.7-5.7V7.8c0-3.3-2.4-5.7-5.7-5.7H7.8zM12,5.5c1.8,0,2.7,0,3.7,0.1c0.8,0.1,1.3,0.2,1.6,0.4c0.4,0.2,0.7,0.5,0.9,0.9c0.2,0.3,0.3,0.8,0.4,1.6c0.1,1,0.1,1.9,0.1,3.7s0,2.7-0.1,3.7c-0.1,0.8-0.2,1.3-0.4,1.6c-0.2,0.4-0.5,0.7-0.9,0.9c-0.3,0.2-0.8,0.3-1.6,0.4c-1,0.1-1.9,0.1-3.7,0.1s-2.7,0-3.7-0.1c-0.8-0.1-1.3-0.2-1.6-0.4c-0.4-0.2-0.7-0.5-0.9-0.9c-0.2-0.3-0.3-0.8-0.4-1.6c-0.1-1-0.1-1.9-0.1-3.7s0-2.7,0.1-3.7c0.1-0.8,0.2-1.3,0.4-1.6c0.2-0.4,0.5-0.7,0.9-0.9c0.3-0.2,0.8-0.3,1.6-0.4C9.3,5.5,10.2,5.5,12,5.5z M12,7.8c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2S14.3,7.8,12,7.8z M12,10c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S10.9,10,12,10z"/></symbol>
-    <symbol id="facebook-icon" viewBox="0 0 24 24"><path fill="#00FF99" d="M21 2.1H3C1.3 2.1 0 3.4 0 5.1v13.8c0 1.7 1.3 3 3 3h7.3v-6h-2v-2.3h2V12c0-2 1.2-3.1 3-3.1c0.9 0 1.7 0.1 1.9 0.1v2.2H17c-1 0-1.1 0.5-1.1 1.1v1.7h2.2l-0.3 2.3H15.9V22H21c1.7 0 3-1.3 3-3V5.1C24 3.4 22.7 2.1 21 2.1z"/></symbol>
-    <symbol id="email-icon" viewBox="0 0 24 24"><path fill="#00FF99" d="M20,4H4C2.9,4,2.1,4.9,2.1,6v12c0,1.1,0.8,2,1.9,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,6l-8,5L4,6V6z M4,18V8l8,5l8-5v10H4z"/></symbol>
-  </svg>
-  <!-- Background Effects -->
-  <div class="background-container">
-    <div class="grid-matrix-layer"></div>
-    <div class="particle-layer" id="particleLayer"></div>
-    <div class="digital-waves-layer" id="digitalWaves"></div>
-    <div class="data-streams" id="dataStreams"></div>
-    <div class="space-stars" id="spaceStars"></div>
-  </div>
-
-  <!-- Status Bar -->
-  <div class="security-status-bar">
-    <div class="status-item"><span class="status-icon secure"></span><span class="status-text">Connection: Secure</span></div>
-    <div class="status-item"><span class="status-icon encryption"></span><span class="status-text">Encryption: Active</span></div>
-    <div class="status-item"><span class="status-icon access"></span><span class="status-text">Access Level: Public</span></div>
-    <div class="status-time" id="statusTime">00:00:00</div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="holo-nav">
-    <div class="nav-container">
-      <a href="#identity" class="nav-item active" data-section="identity">
-        <span class="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        </span>
-        <span class="nav-text">Identity</span>
-        <span class="nav-highlight"></span>
-      </a>
-      <a href="#skills" class="nav-item" data-section="skills">
-        <span class="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-        </span>
-        <span class="nav-text">Skills</span>
-        <span class="nav-highlight"></span>
-      </a>
-      <a href="#experience" class="nav-item" data-section="experience">
-        <span class="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-        </span>
-        <span class="nav-text">Experience</span>
-        <span class="nav-highlight"></span>
-      </a>
-      <a href="#projects" class="nav-item" data-section="projects">
-        <span class="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-        </span>
-        <span class="nav-text">Projects</span>
-        <span class="nav-highlight"></span>
-      </a>
-      <a href="#contact" class="nav-item" data-section="contact">
-        <span class="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </span>
-        <span class="nav-text">Contact</span>
-        <span class="nav-highlight"></span>
-      </a>
+  <!-- Education -->
+  <div class="cv-section">
+    <div class="cv-title-row">
+      <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="8" fill="#00FF99" opacity="0.15"/><path d="M12 6l8 4-8 4-8-4z" fill="#232b39"/><rect x="6" y="14" width="12" height="2" rx="1" fill="#00FF99" opacity="0.20"/></svg>
+      <span class="cv-title">التعليم</span>
     </div>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="main-container">
-    <!-- Identity Section -->
-    <section id="identity" class="section active">
-      <div class="biometric-card" data-tilt data-tilt-max="5">
-        <div class="card-header">
-          <div class="profile-image-container">
-            <div class="profile-image-border"></div>
-            <div class="profile-image"></div>
-            <div class="profile-scan-effect"></div>
-          </div>
-          <div class="profile-info">
-            <h1 class="profile-name">MOHAMED ABDELAZIZ <span class="profile-age">26</span></h1>
-            <div class="profile-title">Cybersecurity Engineer | AI Prompt Architect | UX-Focused Web Developer</div>
-            <div class="profile-badges">
-              <span class="profile-badge">July 10, 1999</span>
-              <span class="profile-badge">Egyptian American</span>
-            </div>
-            <div class="profile-bio">
-              <div class="bio-section"><div class="bio-label">Status:</div><div class="bio-value">Available for collaboration</div></div>
-              <div class="bio-section"><div class="bio-label">Location:</div><div class="bio-value">Egypt - United States</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="card-content">
-          <p class="bio-text">Tech-savvy Cybersecurity Engineer with a strong foundation in secure systems, Bitcoin and crypto technologies, and AI-powered solutions. Experienced in human-centered design, prompt engineering, and market analytics.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-      <div class="biometric-card" data-tilt data-tilt-max="5">
-        <h2 class="section-title">Technical Arsenal</h2>
-        <div class="skills-container">
-          <div class="skill-category">
-            <h3 class="category-title">Security & Infrastructure</h3>
-            <div class="skill-chips">
-              <div class="skill-chip">Network Security</div>
-              <div class="skill-chip">Threat Analysis</div>
-              <div class="skill-chip">Risk Assessment</div>
-              <div class="skill-chip">Incident Response</div>
-              <div class="skill-chip">Nmap</div>
-              <div class="skill-chip">Wireshark</div>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <h3 class="category-title">Languages & Tools</h3>
-            <div class="skill-chips">
-              <div class="skill-chip">Python</div>
-              <div class="skill-chip">Java</div>
-              <div class="skill-chip">HTML/CSS</div>
-              <div class="skill-chip">Git</div>
-              <div class="skill-chip">Firebase</div>
-              <div class="skill-chip">Replit</div>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <h3 class="category-title">Frontend & Design</h3>
-            <div class="skill-chips">
-              <div class="skill-chip">React</div>
-              <div class="skill-chip">Tailwind CSS</div>
-              <div class="skill-chip">Figma</div>
-              <div class="skill-chip">Canva</div>
-              <div class="skill-chip">Framer Motion</div>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <h3 class="category-title">AI & Prompting</h3>
-            <div class="skill-chips">
-              <div class="skill-chip">ChatGPT</div>
-              <div class="skill-chip">OpenAI API</div>
-              <div class="skill-chip">Prompt Engineering</div>
-            </div>
-          </div>
-          
-          <div class="skill-category">
-            <h3 class="category-title">Crypto & Finance</h3>
-            <div class="skill-chips">
-              <div class="skill-chip">Bitcoin</div>
-              <div class="skill-chip">Crypto Trading</div>
-              <div class="skill-chip">Derivatives</div>
-              <div class="skill-chip">Technical Analysis</div>
-              <div class="skill-chip">Risk Management</div>
-              <div class="skill-chip">Bybit</div>
-              <div class="skill-chip">Coinbase</div>
-              <div class="skill-chip">TradingView</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-      <div class="biometric-card" data-tilt data-tilt-max="5">
-        <h2 class="section-title">Mission Log</h2>
-        
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2023 - Present</div>
-            <div class="timeline-content">
-              <h3 class="timeline-title">OpenAI + Intel + L'Oréal</h3>
-              <div class="timeline-subtitle">Summer Internship Programs</div>
-              <div class="timeline-description">
-                <p>Research, development, and collaborative AI product experimentation. Explored secure deployment strategies for AI-driven tools and contributed to cross-functional teams blending UX, AI, and data protection.</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2022 - 2023</div>
-            <div class="timeline-content">
-              <h3 class="timeline-title">Alpha Travel, Atlanta, GA</h3>
-              <div class="timeline-subtitle">Amadeus System Specialist</div>
-              <div class="timeline-description">
-                <p>Managed international client bookings with a focus on data privacy and accuracy. Developed secure workflows for travel logistics and enhanced client trust through consistent communication.</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2019 - Present</div>
-            <div class="timeline-content">
-              <h3 class="timeline-title">Independent Crypto Trader</h3>
-              <div class="timeline-subtitle">Cryptocurrency, Derivatives & Futures Markets</div>
-              <div class="timeline-description">
-                <p>Trading Bitcoin and digital assets on Bybit and Coinbase. Utilizing TradingView for technical analysis and trend forecasting with a strong focus on risk control.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="education-section">
-          <h3 class="subsection-title">Education</h3>
-          <div class="education-items">
-            <div class="education-item">
-              <div class="education-year">2022 - 2026</div>
-              <div class="education-details">
-                <div class="education-degree">Bachelor of Science in Cybersecurity Engineering</div>
-                <div class="education-school">Kennesaw State University, GA, USA</div>
-              </div>
-            </div>
-            
-            <div class="education-item">
-              <div class="education-year">2019 - 2021</div>
-              <div class="education-details">
-                <div class="education-degree">Associate Degree in Computer Science</div>
-                <div class="education-school">Chattahoochee Technical College, GA, USA</div>
-              </div>
-            </div>
-            
-            <div class="education-item">
-              <div class="education-year">2017</div>
-              <div class="education-details">
-                <div class="education-degree">High School Diploma</div>
-                <div class="education-school">El Shaheen High School, Kuwait</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="biometric-card" data-tilt data-tilt-max="5">
-        <h2 class="section-title">Deployed Systems</h2>
-        
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-header">
-              <h3 class="project-title">The Global Career Project</h3>
-              <div class="project-tags">
-                <span class="project-tag">Career Development</span>
-                <span class="project-tag">Digital Transformation</span>
-              </div>
-            </div>
-            <div class="project-description">
-              <p>Participated in a career accelerator focused on digital transformation, branding, and global tech fluency.</p>
-            </div>
-            <div class="project-footer">
-              <button class="deploy-btn">
-                <span class="deploy-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
-                </span>
-                <span class="deploy-text">deploy --access</span>
-              </button>
-            </div>
-          </div>
-          
-          <div class="project-card">
-            <div class="project-header">
-              <h3 class="project-title">charity: water – Landing Page</h3>
-              <div class="project-tags">
-                <span class="project-tag">Responsive Design</span>
-                <span class="project-tag">UX/UI</span>
-              </div>
-            </div>
-            <div class="project-description">
-              <p>Designed and developed an accessible, mobile-first donation page emphasizing emotional storytelling and ethical impact.</p>
-            </div>
-            <div class="project-footer">
-              <button class="deploy-btn">
-                <span class="deploy-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
-                </span>
-                <span class="deploy-text">deploy --access</span>
-              </button>
-            </div>
-          </div>
-          
-          <div class="project-card">
-            <div class="project-header">
-              <h3 class="project-title">Crypto Analytics Dashboard</h3>
-              <div class="project-tags">
-                <span class="project-tag">Bitcoin</span>
-                <span class="project-tag">Data Visualization</span>
-              </div>
-            </div>
-            <div class="project-description">
-              <p>Custom analytics dashboard for cryptocurrency trading with real-time data visualization and risk management tools.</p>
-            </div>
-            <div class="project-footer">
-              <button class="deploy-btn">
-                <span class="deploy-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
-                </span>
-                <span class="deploy-text">deploy --access</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <div class="biometric-card" data-tilt data-tilt-max="5">
-        <h2 class="section-title">Establish Connection</h2>
-        
-        <div class="contact-grid">
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">amrikyy@gmail.com</div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            </div>
-            <div class="contact-label">Phone</div>
-            <div class="contact-value">+1 770 616 0211</div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></svg>
-            </div>
-            <div class="contact-label">GitHub</div>
-            <div class="contact-value">mohamed-abdelaziz710</div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </div>
-            <div class="contact-label">LinkedIn</div>
-            <div class="contact-value">Mohamed Abdelaziz</div>
-          </div>
-        </div>
-        
-        <div class="certifications-section">
-          <h3 class="subsection-title">Certifications & Memberships</h3>
-          <div class="certification-items">
-            <div class="certification-item">
-              <div class="certification-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-              <div class="certification-name">Cisco Cybersecurity Certification</div>
-            </div>
-            
-            <div class="certification-item">
-              <div class="certification-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-              <div class="certification-name">Member – BlackRock Talent Community</div>
-            </div>
-            
-            <div class="certification-item">
-              <div class="certification-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-              <div class="certification-name">Member – National Honor Society</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ul class="cv-list">
+      <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#181f2b"/><path d="M7 10v4a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4" stroke="#00FF99" stroke-width="2"/><rect x="9" y="7" width="6" height="2" rx="1" fill="#00FF99" opacity="0.25"/></svg>
+        Chattahoochee Tech <span class="cv-meta">2021</span></li>
+      <li><svg width="17" height="17" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#181f2b" stroke="#00FF99" stroke-width="2"/><path d="M9 15V9l6 6V9" stroke="#00FF99" stroke-width="2"/></svg>
+        Kennesaw State <span class="cv-meta">Cybersecurity, 2026</span></li>
+      <li><svg width="17" height="17" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="#00FF99" opacity="0.15"/><path d="M8 12h8v2H8z" fill="#00FF99"/></svg>
+        Cisco Cybersecurity <span class="cv-meta">Certified</span></li>
+    </ul>
   </div>
-
-  <!-- Chatbot -->
-  <div class="chatbot-container" id="chatbotContainer">
-    <button class="chatbot-toggle" id="chatbotToggle">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-    </button>
-    <div class="chatbot-panel" id="chatbotPanel">
-      <div class="chatbot-header">
-        <div class="chatbot-title">Terminal Access</div>
-        <button class="chatbot-close" id="chatbotClose">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-      <div class="chatbot-messages" id="chatbotMessages">
-        <div class="message system">
-          <div class="message-content">
-            <span class="terminal-prompt">system:~$</span> Welcome to Mohamed's terminal. How can I assist you?
-          </div>
-        </div>
-      </div>
-      <div class="chatbot-input-container">
-        <div class="chatbot-suggestions">
-          <button class="suggestion-btn" data-query="What do you do?">What do you do?</button>
-          <button class="suggestion-btn" data-query="Show me your projects">Show me your projects</button>
-          <button class="suggestion-btn" data-query="How to contact you?">How to contact you?</button>
-        </div>
-        <div class="chatbot-input-wrapper">
-          <span class="terminal-prompt">guest:~$</span>
-          <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
-        </div>
-      </div>
+  <!-- Certs / Awards -->
+  <div class="cv-section">
+    <div class="cv-title-row">
+      <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#00FF99" opacity="0.17"/><path d="M12 8l2 4h-4l2-4zm0 8a4 4 0 110-8 4 4 0 010 8z" fill="#232b39"/></svg>
+      <span class="cv-title">الشهادات</span>
     </div>
+    <ul class="cv-list">
+      <li><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#181f2b" stroke="#00FF99" stroke-width="2"/><path d="M12 17l-5-3V7l5-3 5 3v7z" fill="#00FF99"/></svg>
+        BlackRock Talent Community <span class="cv-meta">2024</span></li>
+      <li><svg width="14" height="14" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#181f2b"/><path d="M7 15l5 3 5-3V9l-5-3-5 3v6z" fill="#00FF99"/></svg>
+        Honor Society Member <span class="cv-meta">2024</span></li>
+    </ul>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Social -->
+  <div class="social-icons">
+    <a class="linkedin" href="https://linkedin.com/in/mohamed-abdelaziz-815797347" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff" /><path fill="#0077b5" d="M24 24h-3.554v-5.568c0-1.328-.023-3.038-1.852-3.038-1.855 0-2.139 1.448-2.139 2.944V24H13V13h3.414v1.507h.048c.475-.897 1.637-1.845 2.926-1.845 3.127 0 3.703 2.06 3.703 4.74V24zM8.667 11.333a2.001 2.001 0 1 1 0-4.002 2.001 2.001 0 0 1 0 4.002zm1.778 12.667H6.889V13h3.556v11z"/></svg>
+    </a>
+    <a class="instagram" href="https://instagram.com/amrikyy" target="_blank" title="Instagram">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff"/><radialGradient id="ig-gradient" cx="0.5" cy="0.5" r="0.7"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fdf497"/><stop offset="60%" stop-color="#fd5949"/><stop offset="90%" stop-color="#d6249f"/><stop offset="100%" stop-color="#285AEB"/></radialGradient><path fill="url(#ig-gradient)" d="M16 7.2c2.7 0 3 .01 4.1.06 1.1.05 1.7.23 2.1.39.5.2.9.44 1.3.88.44.44.68.8.88 1.3.16.4.34 1 .39 2.1.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.23 1.7-.39 2.1-.2.5-.44.9-.88 1.3-.44.44-.8.68-1.3.88-.4.16-1 .34-2.1.39-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.7-.23-2.1-.39-.5-.2-.9-.44-1.3-.88-.44-.44-.68-.8-.88-1.3-.16-.4-.34-1-.39-2.1C7.21 19 7.2 18.7 7.2 16s.01-3 .06-4.1c.05-1.1.23-1.7.39-2.1.2-.5.44-.9.88-1.3.44-.44.8-.68 1.3-.88.4-.16 1-.34 2.1-.39C13 7.21 13.3 7.2 16 7.2zm0-1.2C13.2 6 12.9 6.01 11.8 6.06c-1.2.05-2.1.23-2.8.49-.8.28-1.5.67-2.1 1.23-.56.56-.95 1.3-1.23 2.1-.26.7-.44 1.6-.49 2.8C6.01 12.9 6 13.2 6 16s.01 3.1.06 4.2c.05 1.2.23 2.1.49 2.8.28.8.67 1.5 1.23 2.1.56.56 1.3.95 2.1 1.23.7.26 1.6.44 2.8.49C12.9 25.99 13.2 26 16 26s3.1-.01 4.2-.06c1.2-.05 2.1-.23 2.8-.49.8-.28 1.5-.67 2.1-1.23.56-.56.95-1.3 1.23-2.1.26-.7.44-1.6.49-2.8.05-1.1.06-1.4.06-4.2s-.01-3.1-.06-4.2c-.05-1.2-.23-2.1-.49-2.8-.28-.8-.67-1.5-1.23-2.1-.56-.56-1.3-.95-2.1-1.23-.7-.26-1.6-.44-2.8-.49C18.1 6.01 17.8 6 16 6zm0 3.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.6a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>
+    </a>
+    <a class="facebook" href="https://facebook.com/share/17qHw2N9PG" target="_blank" title="Facebook">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff"/><path fill="#1877f3" d="M21.5 16h-3v8h-4v-8h-2v-3h2v-2c0-2.2 1.3-3.5 3.5-3.5h3v3h-2c-.6 0-1 .4-1 1v1h3l-.5 3z"/></svg>
+    </a>
+    <a class="email" href="mailto:amrikyy@gmail.com" title="Email">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#fff"/><path fill="#00B7FF" d="M8 10v12h16V10H8zm8 7.5l-8-6V10l8 6 8-6v1.5l-8 6z"/></svg>
+    </a>
+  </div>
+  <button class="chatbot-btn" title="Chat with MHA">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><rect x="8" y="10" width="8" height="4" rx="2" fill="currentColor"/><circle cx="10" cy="12" r="1.5" fill="#090d13"/><circle cx="14" cy="12" r="1.5" fill="#090d13"/></svg>
+  </button>
+</div>
 </body>
 </html>
