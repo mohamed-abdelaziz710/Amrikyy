@@ -1,12 +1,18 @@
 /* ========== Smart Card Website Styles ========== */
 :root {
-  --neon-green: #00FF99;
+  --neon-green: #39FF14; /* Improved, more vibrant neon green */
+  --neon-green-glow: #39ff14cc;
   --dark-bg: #0A0A0A;
   --panel-glass: rgba(23, 35, 37, 0.85);
   --white: #fff;
   --light-gray: #e5e7eb;
   --medium-gray: #A6A6A6;
   --border-neon: 1.5px solid var(--neon-green);
+}
+
+body {
+  background: linear-gradient(135deg, #0A0A0A 0%, #181f1b 100%);
+  color: var(--light-gray);
 }
 
 /* Base Styles */
@@ -1088,6 +1094,78 @@ h1, h2, h3, h4, h5, h6 {
     padding: 8px 12px;
     margin-bottom: 5px;
   }
+}
+
+/* Neon Green Accent Utility */
+.neon {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green-glow), 0 0 18px var(--neon-green-glow);
+}
+
+/* Neon Button Example */
+.neon-btn {
+  background: var(--dark-bg);
+  color: var(--neon-green);
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 12px var(--neon-green-glow);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.neon-btn:hover {
+  background: var(--neon-green);
+  color: var(--dark-bg);
+  box-shadow: 0 0 24px var(--neon-green-glow);
+}
+
+/* Card and Section Neon Accents */
+.wow-card, .cv-section {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 22px var(--neon-green-glow), 0 2px 28px #2228;
+}
+
+.cv-title, .profile-name, .profile-title, .cv-meta {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green-glow);
+}
+
+.cv-list li, .about-box, .cv-section {
+  color: var(--white);
+}
+
+.cv-meta {
+  color: var(--medium-gray);
+  opacity: 0.85;
+}
+
+.social-icons a {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 15px var(--neon-green-glow);
+}
+.social-icons a:hover {
+  background: var(--neon-green);
+  color: var(--dark-bg);
+  box-shadow: 0 0 33px var(--neon-green-glow);
+}
+.social-icons a:hover svg {
+  color: var(--dark-bg);
+}
+
+.skill-particle {
+  background: var(--white);
+  color: var(--neon-green);
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 18px var(--neon-green-glow);
+}
+.skill-particle:hover {
+  background: var(--neon-green);
+  color: var(--dark-bg);
+  box-shadow: 0 0 22px var(--neon-green-glow);
+}
+
+footer {
+  background: rgba(10, 15, 22, 0.9);
+  color: var(--neon-green);
+  border-top: 1px solid var(--neon-green-glow);
+  box-shadow: 0 0 12px var(--neon-green-glow);
 }
 
 /* Animation Classes */
