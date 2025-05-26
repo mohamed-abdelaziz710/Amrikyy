@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohamed Abdelaziz | Cyber Security Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Security Loader -->
+  <div class="security-loader" id="securityLoader">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <svg viewBox="0 0 100 100" width="80" height="80">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#00FF99" stroke-width="2" />
+          <path d="M50 10 L50 90 M10 50 L90 50" stroke="#00FF99" stroke-width="2" />
+          <circle cx="50" cy="50" r="5" fill="#00FF99" />
+        </svg>
+      </div>
+      <div class="loader-text">SECURING CONNECTION</div>
+      <div class="loader-progress"><div class="progress-bar"></div></div>
+      <div class="loader-status">Verifying identity...</div>
+    </div>
+  </div>
+
+  <!-- Background Effects -->
+  <div class="background-container">
+    <div class="grid-matrix-layer"></div>
+    <div class="particle-layer" id="particleLayer"></div>
+    <div class="digital-waves-layer" id="digitalWaves"></div>
+    <div class="data-streams" id="dataStreams"></div>
+    <div class="space-stars" id="spaceStars"></div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="security-status-bar">
+    <div class="status-item"><span class="status-icon secure"></span><span class="status-text">Connection: Secure</span></div>
+    <div class="status-item"><span class="status-icon encryption"></span><span class="status-text">Encryption: Active</span></div>
+    <div class="status-item"><span class="status-icon access"></span><span class="status-text">Access Level: Public</span></div>
+    <div class="status-time" id="statusTime">00:00:00</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="holo-nav">
+    <div class="nav-container">
+      <a href="#identity" class="nav-item active" data-section="identity">
+        <span class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </span>
+        <span class="nav-text">Identity</span>
+        <span class="nav-highlight"></span>
+      </a>
+      <a href="#skills" class="nav-item" data-section="skills">
+        <span class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        </span>
+        <span class="nav-text">Skills</span>
+        <span class="nav-highlight"></span>
+      </a>
+      <a href="#experience" class="nav-item" data-section="experience">
+        <span class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        </span>
+        <span class="nav-text">Experience</span>
+        <span class="nav-highlight"></span>
+      </a>
+      <a href="#projects" class="nav-item" data-section="projects">
+        <span class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        </span>
+        <span class="nav-text">Projects</span>
+        <span class="nav-highlight"></span>
+      </a>
+      <a href="#contact" class="nav-item" data-section="contact">
+        <span class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </span>
+        <span class="nav-text">Contact</span>
+        <span class="nav-highlight"></span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Identity Section -->
+    <section id="identity" class="section active">
+      <div class="biometric-card" data-tilt data-tilt-max="5">
+        <div class="card-header">
+          <div class="profile-image-container">
+            <div class="profile-image-border"></div>
+            <div class="profile-image"></div>
+            <div class="profile-scan-effect"></div>
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name">MOHAMED ABDELAZIZ <span class="profile-age">26</span></h1>
+            <div class="profile-title">Cybersecurity Engineer | AI Prompt Architect | UX-Focused Web Developer</div>
+            <div class="profile-badges">
+              <span class="profile-badge">July 10, 1999</span>
+              <span class="profile-badge">Egyptian American</span>
+            </div>
+            <div class="profile-bio">
+              <div class="bio-section"><div class="bio-label">Status:</div><div class="bio-value">Available for collaboration</div></div>
+              <div class="bio-section"><div class="bio-label">Location:</div><div class="bio-value">Egypt - United States</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="bio-text">Tech-savvy Cybersecurity Engineer with a strong foundation in secure systems, Bitcoin and crypto technologies, and AI-powered solutions. Experienced in human-centered design, prompt engineering, and market analytics.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+      <div class="biometric-card" data-tilt data-tilt-max="5">
+        <h2 class="section-title">Technical Arsenal</h2>
+        <div class="skills-container">
+          <div class="skill-category">
+            <h3 class="category-title">Security & Infrastructure</h3>
+            <div class="skill-chips">
+              <div class="skill-chip">Network Security</div>
+              <div class="skill-chip">Threat Analysis</div>
+              <div class="skill-chip">Risk Assessment</div>
+              <div class="skill-chip">Incident Response</div>
+              <div class="skill-chip">Nmap</div>
+              <div class="skill-chip">Wireshark</div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3 class="category-title">Languages & Tools</h3>
+            <div class="skill-chips">
+              <div class="skill-chip">Python</div>
+              <div class="skill-chip">Java</div>
+              <div class="skill-chip">HTML/CSS</div>
+              <div class="skill-chip">Git</div>
+              <div class="skill-chip">Firebase</div>
+              <div class="skill-chip">Replit</div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3 class="category-title">Frontend & Design</h3>
+            <div class="skill-chips">
+              <div class="skill-chip">React</div>
+              <div class="skill-chip">Tailwind CSS</div>
+              <div class="skill-chip">Figma</div>
+              <div class="skill-chip">Canva</div>
+              <div class="skill-chip">Framer Motion</div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3 class="category-title">AI & Prompting</h3>
+            <div class="skill-chips">
+              <div class="skill-chip">ChatGPT</div>
+              <div class="skill-chip">OpenAI API</div>
+              <div class="skill-chip">Prompt Engineering</div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3 class="category-title">Crypto & Finance</h3>
+            <div class="skill-chips">
+              <div class="skill-chip">Bitcoin</div>
+              <div class="skill-chip">Crypto Trading</div>
+              <div class="skill-chip">Derivatives</div>
+              <div class="skill-chip">Technical Analysis</div>
+              <div class="skill-chip">Risk Management</div>
+              <div class="skill-chip">Bybit</div>
+              <div class="skill-chip">Coinbase</div>
+              <div class="skill-chip">TradingView</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+      <div class="biometric-card" data-tilt data-tilt-max="5">
+        <h2 class="section-title">Mission Log</h2>
+        
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2023 - Present</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">OpenAI + Intel + L'Oréal</h3>
+              <div class="timeline-subtitle">Summer Internship Programs</div>
+              <div class="timeline-description">
+                <p>Research, development, and collaborative AI product experimentation. Explored secure deployment strategies for AI-driven tools and contributed to cross-functional teams blending UX, AI, and data protection.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2022 - 2023</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Alpha Travel, Atlanta, GA</h3>
+              <div class="timeline-subtitle">Amadeus System Specialist</div>
+              <div class="timeline-description">
+                <p>Managed international client bookings with a focus on data privacy and accuracy. Developed secure workflows for travel logistics and enhanced client trust through consistent communication.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2019 - Present</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Independent Crypto Trader</h3>
+              <div class="timeline-subtitle">Cryptocurrency, Derivatives & Futures Markets</div>
+              <div class="timeline-description">
+                <p>Trading Bitcoin and digital assets on Bybit and Coinbase. Utilizing TradingView for technical analysis and trend forecasting with a strong focus on risk control.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="education-section">
+          <h3 class="subsection-title">Education</h3>
+          <div class="education-items">
+            <div class="education-item">
+              <div class="education-year">2022 - 2026</div>
+              <div class="education-details">
+                <div class="education-degree">Bachelor of Science in Cybersecurity Engineering</div>
+                <div class="education-school">Kennesaw State University, GA, USA</div>
+              </div>
+            </div>
+            
+            <div class="education-item">
+              <div class="education-year">2019 - 2021</div>
+              <div class="education-details">
+                <div class="education-degree">Associate Degree in Computer Science</div>
+                <div class="education-school">Chattahoochee Technical College, GA, USA</div>
+              </div>
+            </div>
+            
+            <div class="education-item">
+              <div class="education-year">2017</div>
+              <div class="education-details">
+                <div class="education-degree">High School Diploma</div>
+                <div class="education-school">El Shaheen High School, Kuwait</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="biometric-card" data-tilt data-tilt-max="5">
+        <h2 class="section-title">Deployed Systems</h2>
+        
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-header">
+              <h3 class="project-title">The Global Career Project</h3>
+              <div class="project-tags">
+                <span class="project-tag">Career Development</span>
+                <span class="project-tag">Digital Transformation</span>
+              </div>
+            </div>
+            <div class="project-description">
+              <p>Participated in a career accelerator focused on digital transformation, branding, and global tech fluency.</p>
+            </div>
+            <div class="project-footer">
+              <button class="deploy-btn">
+                <span class="deploy-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
+                </span>
+                <span class="deploy-text">deploy --access</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <h3 class="project-title">charity: water – Landing Page</h3>
+              <div class="project-tags">
+                <span class="project-tag">Responsive Design</span>
+                <span class="project-tag">UX/UI</span>
+              </div>
+            </div>
+            <div class="project-description">
+              <p>Designed and developed an accessible, mobile-first donation page emphasizing emotional storytelling and ethical impact.</p>
+            </div>
+            <div class="project-footer">
+              <button class="deploy-btn">
+                <span class="deploy-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
+                </span>
+                <span class="deploy-text">deploy --access</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <h3 class="project-title">Crypto Analytics Dashboard</h3>
+              <div class="project-tags">
+                <span class="project-tag">Bitcoin</span>
+                <span class="project-tag">Data Visualization</span>
+              </div>
+            </div>
+            <div class="project-description">
+              <p>Custom analytics dashboard for cryptocurrency trading with real-time data visualization and risk management tools.</p>
+            </div>
+            <div class="project-footer">
+              <button class="deploy-btn">
+                <span class="deploy-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
+                </span>
+                <span class="deploy-text">deploy --access</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="biometric-card" data-tilt data-tilt-max="5">
+        <h2 class="section-title">Establish Connection</h2>
+        
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">amrikyy@gmail.com</div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+1 770 616 0211</div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">mohamed-abdelaziz710</div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">Mohamed Abdelaziz</div>
+          </div>
+        </div>
+        
+        <div class="certifications-section">
+          <h3 class="subsection-title">Certifications & Memberships</h3>
+          <div class="certification-items">
+            <div class="certification-item">
+              <div class="certification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="certification-name">Cisco Cybersecurity Certification</div>
+            </div>
+            
+            <div class="certification-item">
+              <div class="certification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="certification-name">Member – BlackRock Talent Community</div>
+            </div>
+            
+            <div class="certification-item">
+              <div class="certification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="certification-name">Member – National Honor Society</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Chatbot -->
+  <div class="chatbot-container" id="chatbotContainer">
+    <button class="chatbot-toggle" id="chatbotToggle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+    </button>
+    <div class="chatbot-panel" id="chatbotPanel">
+      <div class="chatbot-header">
+        <div class="chatbot-title">Terminal Access</div>
+        <button class="chatbot-close" id="chatbotClose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message system">
+          <div class="message-content">
+            <span class="terminal-prompt">system:~$</span> Welcome to Mohamed's terminal. How can I assist you?
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-input-container">
+        <div class="chatbot-suggestions">
+          <button class="suggestion-btn" data-query="What do you do?">What do you do?</button>
+          <button class="suggestion-btn" data-query="Show me your projects">Show me your projects</button>
+          <button class="suggestion-btn" data-query="How to contact you?">How to contact you?</button>
+        </div>
+        <div class="chatbot-input-wrapper">
+          <span class="terminal-prompt">guest:~$</span>
+          <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
