@@ -25,8 +25,8 @@ body {
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: var(--dark-bg);
-  color: var(--light-gray);
+  /* background: var(--dark-bg); Replaced by gradient above */
+  /* color: var(--light-gray); Set above */
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-.loader-logo svg {
+.loader-logo svg { /* This is for security-loader's logo, distinct from loading-skeleton's */
   animation: pulse-neon 2s infinite alternate;
 }
 
@@ -88,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.loader-text {
+.loader-text { /* This is for security-loader's text */
   color: var(--neon-green);
   margin-top: 10px;
   letter-spacing: 2px;
@@ -776,7 +776,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  display: none;
+  display: none; /* Initially hidden */
 }
 
 .chatbot-header {
@@ -921,7 +921,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 18px;
     box-shadow: 0 0 18px var(--neon-green-glow), 0 2px 12px #2228;
   }
-  .profile-img {
+  .profile-img { /* Used by wow-card placeholder */
     width: 62px;
     height: 62px;
   }
@@ -965,7 +965,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     font-size: 0.97em;
   }
-  .profile-img {
+  .profile-img { /* Used by wow-card placeholder */
     width: 48px;
     height: 48px;
   }
@@ -983,10 +983,73 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Make sure flex sections stack and fit on all screens */
-.cv-sections-flex {
+.cv-sections-flex { /* Used by wow-card placeholder */
   width: 100%;
+  display: flex; /* Added for flex behavior */
   flex-wrap: wrap;
+  gap: 15px; /* Added for spacing between sections */
+  justify-content: center; /* Center sections */
 }
-.experience-section, .education-section {
+.experience-section, .education-section { /* Used by wow-card placeholder */
   min-width: 0;
+  flex: 1; /* Allow sections to grow and shrink */
+  min-width: 200px; /* Minimum width before wrapping */
+}
+
+
+/* Styles for the loading-skeleton loader (FontAwesome version) */
+.loading-skeleton {
+  position:fixed; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; background:#101718;
+  animation:neonPulseLoader 1.2s infinite alternate;
+  transition:opacity .6s; z-index:1001; /* Higher than chatbot */
+}
+.loading-skeleton .loader-logo {
+  width:120px; height:120px;
+  background:linear-gradient(135deg, #22272e 0%, #181b1e 100%);
+  border-radius:24px; box-shadow:0 0 20px var(--neon-green);
+  display:flex; align-items:center; justify-content:center;
+  animation:logoPulseLoader 1.4s ease-in-out infinite;
+}
+.loading-skeleton .loader-logo svg { width:70%; height:70%; }
+
+.loading-skeleton .loader-text {
+  font-family:'Space Grotesk',sans-serif; font-size:2.2rem; font-weight:900;
+  letter-spacing:8px; color:var(--white); text-shadow:0 0 15px var(--neon-green);
+  margin-top:16px; animation:textGlitchLoader 1.4s infinite alternate;
+}
+.loading-skeleton .loader-label {
+  font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--neon-green);
+  letter-spacing:1.5px; margin-top:8px;
+  animation:labelPulseLoader 1.8s ease-in-out infinite;
+}
+.loading-skeleton .loading-icons {
+  display:flex; flex-wrap:wrap; gap:16px; margin-top:24px; justify-content:center;
+}
+.loading-skeleton .icon-card { /* Scoped to .loading-skeleton */
+  width:64px; height:64px; display:flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,0.05); border:1px solid var(--neon-green);
+  border-radius:50%; backdrop-filter:blur(6px);
+  box-shadow:0 0 16px rgba(57,255,20,0.6);
+  transition:transform .3s ease, box-shadow .3s ease;
+  font-size:1.8rem; color:var(--white);
+  animation:spinIconLoader 4s linear infinite, iconGlowLoader 2.5s ease-in-out infinite;
+}
+.loading-skeleton .icon-card:hover {
+  transform: scale(1.3);
+  color: var(--neon-green);
+  box-shadow: 0 0 28px rgba(57,255,20,0.8);
+}
+
+/* Keyframes for loading-skeleton loader (renamed to avoid conflicts) */
+@keyframes logoPulseLoader { 0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);} }
+@keyframes textGlitchLoader { 0%,100%{filter:none;}50%{filter:blur(1px);color:var(--neon-green);} }
+@keyframes neonPulseLoader { 0%,100%{filter:drop-shadow(0 0 8px var(--neon-green));}50%{filter:drop-shadow(0 0 24px var(--neon-green));} }
+@keyframes iconGlowLoader { 0%,100% { box-shadow: 0 0 8px rgba(57,255,20,0.4); } 50% { box-shadow: 0 0 24px rgba(57,255,20,1); } }
+@keyframes spinIconLoader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes labelPulseLoader { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+@media(max-width:600px){
+  .loading-skeleton .loader-logo{width:80px;height:80px;}
+  .loading-skeleton .loader-text{font-size:1.6rem;}
 }
