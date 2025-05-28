@@ -157,6 +157,38 @@ ul { list-style: none; }
   margin-bottom: 25px;
 }
 
+/* Tech Icons Grid */
+.tech-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.icon-label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--loader-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  color: var(--white);
+  box-shadow: 0 0 8px var(--neon-blue-glow);
+  transition: background 0.3s, color 0.3s;
+}
+.icon-label i {
+  font-size: 1.4rem;
+  color: var(--neon-blue);
+  transition: color 0.3s;
+}
+.icon-label:hover {
+  background: var(--panel-glass-hover);
+  color: var(--neon-purple);
+}
+.icon-label:hover i {
+  color: var(--neon-purple);
+}
+
 /* Professional Summary */
 .professional-summary p { font-size: clamp(0.9rem, 2.2vw, 1.05rem); line-height: 1.8; }
 
