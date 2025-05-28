@@ -731,13 +731,23 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Profile Image specific to CV Card */
 .profile-img { /* This style is for the main profile image on the CV card */
-  width: 100px; /* Larger profile image */
-  height: 100px;
-  border-radius: 50%; /* Circular image */
-  border: 3px solid var(--neon-green); /* Thicker neon border */
-  box-shadow: var(--border-neon-glow); /* Neon glow around the image */
-  margin-bottom: 15px; /* Space below the image */
+  width: 100px; /* Profile image width */
+  height: 100px; /* Profile image height */
+  border-radius: 50%; /* Makes the image circular */
+  border: 3px solid var(--neon-green); /* Neon green border around the image */
+  box-shadow: 0 0 20px var(--neon-green), 0 0 8px var(--white); /* Enhanced neon glow effect */
   object-fit: cover; /* Ensures the image covers the area without distortion */
+  margin-bottom: 15px; /* Space below the image */
+  display: block; /* Ensures it's a block element for centering or margin auto */
+  margin-left: auto; /* Centers the image if its parent is a block or flex container */
+  margin-right: auto; /* Centers the image */
+
+  /* Debugging additions: */
+  background-color: red; /* To check if the element's space is rendered */
+  opacity: 1 !important; /* Ensure not transparent */
+  visibility: visible !important; /* Ensure not hidden */
+  position: relative; /* Establish stacking context if needed */
+  z-index: 10;      /* Bring to front within its parent context */
 }
 
 /* CV Card Sections Layout */
