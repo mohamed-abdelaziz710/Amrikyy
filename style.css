@@ -4,16 +4,25 @@
 :root {
   --neon-green: #00FF00;
   --neon-green-glow: #00FF00b3;
-  --medium-gray: #A6A6A6;
-  --white: #fff;
+  --neon-blue: #00BFFF; 
+  --neon-blue-glow: #00BFFFB3;
+  --neon-purple: #BF00FF; /* New accent color */
+  --neon-purple-glow: #BF00FFb3;
   --dark-bg: #0A0A0A;
   --loader-bg: #0D0D0D;
-  --panel-glass: rgba(15, 30, 28, 0.88);
+  --panel-glass: rgba(15, 30, 28, 0.88); /* Slightly adjusted panel glass */
   --panel-glass-hover: rgba(20, 40, 38, 0.92);
-  --text-primary: var(--white);
-  --text-secondary: var(--medium-gray);
+  --text-primary: #EAEAEA;
+  --text-secondary: #B0B0B0;
+  --white: #fff;
   --border-neon: 2px solid var(--neon-green);
   --border-neon-glow: 0 0 12px var(--neon-green), 0 0 4px var(--white);
+  --border-neon-blue: 2px solid var(--neon-blue);
+  --border-neon-blue-glow: 0 0 12px var(--neon-blue), 0 0 4px var(--white);
+
+  --particle-color-1: var(--neon-green);
+  --particle-color-2: var(--neon-blue);
+  --particle-line-color: rgba(0, 255, 128, 0.25); 
 }
 
 /* --- Base & Typography --- */
@@ -44,13 +53,13 @@ h1, h2, h3, h4 {
   text-shadow: 0 0 8px var(--neon-green-glow);
 }
 h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); animation: flickerText 3s infinite alternate; margin-bottom: 0.25em;}
-h2 { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-primary); text-shadow: 0 0 5px var(--medium-gray); margin-bottom: 0.75em; font-weight: 400;}
-h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 0.5em; color: var(--white);}
-h4 { font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--medium-gray); text-shadow: 0 0 6px var(--medium-gray); margin-bottom: 0.3em;}
+h2 { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-primary); text-shadow: 0 0 5px rgba(229, 231, 235, 0.5); margin-bottom: 0.75em; font-weight: 400;}
+h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 0.5em;}
+h4 { font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--neon-blue); text-shadow: 0 0 6px var(--neon-blue-glow); margin-bottom: 0.3em;}
 
 p { margin-bottom: 1em; color: var(--text-secondary); }
-a { color: var(--neon-green); text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; }
-a:hover { color: var(--white); text-shadow: 0 0 8px var(--neon-green-glow); }
+a { color: var(--neon-blue); text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; }
+a:hover { color: var(--white); text-shadow: 0 0 8px var(--neon-blue-glow); }
 
 ul { list-style: none; }
 
@@ -191,8 +200,8 @@ main#cv-card-page {
   padding: clamp(15px, 3vw, 25px);
   border-radius: 15px;
   margin-bottom: 25px;
-  border: 1px solid var(--medium-gray);
-  box-shadow: inset 0 0 10px var(--medium-gray);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 .cv-section:hover { background: var(--panel-glass-hover); transform: scale(1.01); }
@@ -210,17 +219,17 @@ main#cv-card-page {
 
 .cv-list li {
   padding-left: 15px; margin-bottom: 0.8em; position: relative;
-  border-left: 2px solid var(--medium-gray);
-  box-shadow: -1px 0 6px var(--medium-gray);
+  border-left: 2px solid var(--neon-blue);
+  box-shadow: -1px 0 6px var(--neon-blue-glow);
   transition: padding-left 0.3s ease, color 0.3s ease;
 }
 .cv-list li::before { /* Custom bullet */
   content: ''; position: absolute; left: -6px; top: 0.5em;
-  width: 8px; height: 8px; background-color: var(--medium-gray);
-  border-radius: 50%; box-shadow: 0 0 8px var(--medium-gray);
+  width: 8px; height: 8px; background-color: var(--neon-blue);
+  border-radius: 50%; box-shadow: 0 0 8px var(--neon-blue);
 }
 .cv-list li:hover { padding-left: 20px; color: var(--neon-blue); }
-.cv-list li strong { color: var(--white); }
+.cv-list li strong { color: var(--text-primary); }
 
 .cv-grid {
     display: grid;
@@ -244,28 +253,32 @@ education-list strong { display: block; margin-bottom: 0.2em; }
 }
 .skill-category {
   background: rgba(0,0,0,0.2);
-  border: 1px solid var(--medium-gray);
+  padding: 15px; border-radius: 10px;
+  border: 1px solid rgba(0,191,255,0.2); /* Neon blue border */
 }
 .skill-category h4 i { margin-right: 8px; font-size: 0.9em; }
 .skill-tags {
   list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
 }
 .skill-tags li {
-  background: var(--medium-gray);
-  color: var(--dark-bg);
-  box-shadow: 0 0 8px var(--medium-gray);
+  background: var(--neon-blue); color: var(--dark-bg);
+  font-family: 'Sora', sans-serif; font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+  padding: 5px 12px; border-radius: 20px;
+  box-shadow: 0 0 8px var(--neon-blue-glow);
   transition: transform 0.2s ease, background-color 0.2s ease;
   border: none; /* Override from .cv-list li if it gets applied */
   padding-left: 12px; /* Override from .cv-list li if it gets applied */
 }
 .skill-tags li::before { display: none; } /* Hide default custom bullet */
-.skill-tags li:hover { background: var(--neon-green); color: var(--dark-bg); }
+.skill-tags li:hover { transform: scale(1.1); background: var(--neon-green); color: var(--dark-bg); }
 
 /* Experience & Projects Sections */
-.experience-item, .project-item { border-left: 2px dashed var(--neon-green); }
-.experience-item h4, .project-item h4 { color: var(--neon-green); text-shadow: 0 0 6px var(--neon-green-glow); }
-.company-names { color: var(--medium-gray); }
-.experience-item ul li { color: var(--medium-gray); }
+.experience-item, .project-item { margin-bottom: 20px; padding-left: 10px; border-left: 2px dashed var(--neon-purple); }
+.experience-item h4, .project-item h4 { color: var(--neon-purple); text-shadow: 0 0 6px var(--neon-purple-glow); }
+.company-names { font-style: italic; color: var(--text-secondary); font-size: 0.9em; margin-bottom: 0.5em; }
+.experience-item ul { list-style-type: disc; padding-left: 25px; } /* Simpler list for job duties */
+.experience-item ul li { border: none; padding-left: 0; margin-bottom: 0.3em; color: var(--text-secondary); }
+.experience-item ul li::before { display: none; }
 
 /* Keyframes (ensure all are present from previous suggestions + new ones) */
 @keyframes cardBreathe { /* Card glow pulse */
