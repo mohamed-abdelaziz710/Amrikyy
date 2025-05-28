@@ -1,17 +1,18 @@
 /* ========== Smart Card Website Styles ========== */
 :root {
-  --neon-green: #39FF14; /* Improved, more vibrant neon green */
-  --neon-green-glow: #39ff14cc;
+  --neon-green: #00FF00; /* Brighter, classic neon green */
+  --neon-green-glow: #00FF00b3; /* Adjusted glow with 70% opacity */
   --dark-bg: #0A0A0A;
-  --panel-glass: rgba(23, 35, 37, 0.85);
+  --panel-glass: rgba(23, 35, 37, 0.85); /* Kept for existing glass effect */
   --white: #fff;
   --light-gray: #e5e7eb;
   --medium-gray: #A6A6A6;
-  --border-neon: 1.5px solid var(--neon-green);
+  --border-neon: 2px solid var(--neon-green); /* Slightly thicker border */
+  --border-neon-glow: 0 0 15px var(--neon-green), 0 0 5px var(--white); /* Added glow for borders */
 }
 
 body {
-  background: linear-gradient(135deg, #0A0A0A 0%, #181f1b 100%);
+  background: linear-gradient(135deg, #050505 0%, #121815 100%); /* Darker gradient */
   color: var(--light-gray);
 }
 
@@ -51,9 +52,9 @@ h1, h2, h3, h4, h5, h6 {
   bottom: -8px;
   left: 0;
   width: 60%;
-  height: 2px;
+  height: 3px; /* Thicker underline */
   background: var(--neon-green);
-  box-shadow: 0 0 8px var(--neon-green);
+  box-shadow: var(--border-neon-glow); /* Apply neon glow to underline */
 }
 
 .subsection-title {
@@ -497,19 +498,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .skill-chip {
-  background: rgba(0, 255, 153, 0.1);
-  border: 1px solid rgba(0, 255, 153, 0.3);
-  color: var(--neon-green);
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  background: var(--neon-green);
+  color: var(--dark-bg); /* Dark text on neon green for contrast */
+  padding: 8px 15px; /* Larger chips */
+  border-radius: 20px; /* More rounded chips */
+  margin: 5px;
+  display: inline-block;
+  font-weight: bold;
+  box-shadow: 0 0 8px var(--neon-green-glow);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .skill-chip:hover {
-  background: rgba(0, 255, 153, 0.2);
-  box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-  transform: translateY(-2px);
+  transform: scale(1.1);
+  background-color: #00FF00; /* Brighter on hover */
+  box-shadow: 0 0 15px #00FF00;
 }
 
 /* Experience Timeline */
@@ -890,112 +893,142 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   z-index: 3;
   margin: 90px auto 0 auto;
-  background: linear-gradient(135deg, rgba(17,30,38,0.97) 80%, rgba(57,255,20,0.07) 100%);
+  background: rgba(10, 25, 20, 0.75); /* Darker, slightly greener glass */
   border-radius: 30px;
   max-width: 440px;
   min-width: 0;
   width: 95vw;
-  border: 2.2px solid var(--neon-green);
+  border: var(--border-neon);
   padding: 38px 35px 33px 35px;
-  box-shadow: 0 0 55px var(--neon-green-glow), 0 2px 28px #2228;
-  backdrop-filter: blur(13px) saturate(155%);
+  box-shadow: var(--border-neon-glow), 0 10px 40px rgba(0, 0, 0, 0.5); /* Enhanced neon glow and deeper shadow */
+  backdrop-filter: blur(12px) saturate(150%);
   font-family: 'Sora', 'IBM Plex Sans', sans-serif;
-  color: #fff;
+  color: var(--white);
   text-align: center;
-  transition: transform 0.22s cubic-bezier(.43,1.5,.36,1), box-shadow 0.33s;
-  will-change: transform;
-  perspective: 1400px;
-  overflow: visible;
-  animation: float-card 3s cubic-bezier(.22,.61,.36,1) infinite alternate;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.wow-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 25px var(--neon-green), 0 0 10px var(--white), 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+
+.wow-card h1 {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green-glow);
+  margin-bottom: 8px; /* Adjusted spacing */
+}
+
+.wow-card h2 {
+  color: var(--light-gray); /* Softer color for subtitle */
+  font-size: 1.2em; /* Slightly larger subtitle */
+  margin-bottom: 25px; /* Increased spacing */
+  font-weight: 400; /* Lighter weight for subtitle */
+}
+
+.profile-img {
+  width: 100px; /* Larger profile image */
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-green);
+  box-shadow: var(--border-neon-glow);
+  margin-bottom: 15px;
+  object-fit: cover; /* Ensure image covers the area */
+}
+
+.cv-sections-flex {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack sections vertically on smaller screens if needed, or keep as row */
+  gap: 25px; /* Increased gap between sections */
+  margin-bottom: 25px;
+}
+
+.cv-section {
+  background: rgba(15, 35, 30, 0.6); /* Slightly different inner panel color */
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 255, 0, 0.2); /* Subtle inner border */
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.cv-title-row {
+  display: flex;
   align-items: center;
-  gap: 0.7em;
+  margin-bottom: 15px; /* Increased spacing */
 }
 
-@media (max-width: 600px) {
-  .wow-card {
-    padding: 18px 4vw 18px 4vw;
-    max-width: 99vw;
-    margin-top: 30px;
-    border-radius: 18px;
-    box-shadow: 0 0 18px var(--neon-green-glow), 0 2px 12px #2228;
-  }
-  .profile-img { /* Used by wow-card placeholder */
-    width: 62px;
-    height: 62px;
-  }
-  .skills-orbit {
-    width: 92vw !important;
-    min-width: 0;
-    height: 110px;
-  }
-  .skill-particle {
-    width: 36px;
-    height: 36px;
-  }
-  .skill-particle svg {
-    width: 20px;
-    height: 20px;
-  }
-  .cv-section {
-    padding: 8px 4px 7px 4px;
-    border-radius: 10px;
-  }
-  .cv-title-row {
-    gap: 4px;
-  }
-  .cv-list li {
-    font-size: 0.98em;
-    gap: 4px;
-  }
-  .social-icons a {
-    width: 34px;
-    height: 34px;
-  }
-  .social-icons svg {
-    width: 18px;
-    height: 18px;
-  }
+.cv-title-row i {
+  font-size: 1.5em; /* Larger icons */
+  margin-right: 12px; /* Increased spacing */
+  color: var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green-glow);
 }
 
-@media (max-width: 400px) {
-  .wow-card {
-    padding: 10px 1vw 10px 1vw;
-    border-radius: 10px;
-    font-size: 0.97em;
-  }
-  .profile-img { /* Used by wow-card placeholder */
-    width: 48px;
-    height: 48px;
-  }
-  .skills-orbit {
-    height: 80px;
-  }
-  .skill-particle {
-    width: 28px;
-    height: 28px;
-  }
-  .cv-section {
-    padding: 4px 2px 4px 2px;
-    border-radius: 7px;
-  }
+.cv-title-row h3 {
+  color: var(--neon-green);
+  font-size: 1.3em; /* Slightly larger section titles */
+  text-shadow: 0 0 3px var(--neon-green-glow);
 }
 
-/* Make sure flex sections stack and fit on all screens */
-.cv-sections-flex { /* Used by wow-card placeholder */
-  width: 100%;
-  display: flex; /* Added for flex behavior */
-  flex-wrap: wrap;
-  gap: 15px; /* Added for spacing between sections */
-  justify-content: center; /* Center sections */
-}
-.experience-section, .education-section { /* Used by wow-card placeholder */
-  min-width: 0;
-  flex: 1; /* Allow sections to grow and shrink */
-  min-width: 200px; /* Minimum width before wrapping */
+.cv-list li {
+  margin-bottom: 10px; /* Increased spacing between list items */
+  line-height: 1.6; /* Improved readability */
+  padding-left: 10px;
+  border-left: 2px solid var(--neon-green-glow); /* Neon accent on list items */
 }
 
+.skills-orbit {
+  border: 2px dashed var(--neon-green); /* Thicker dashed border */
+  padding: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 0 15px var(--neon-green-glow); /* Glow for skills orbit */
+}
+
+.skills-orbit p {
+  color: var(--neon-green);
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Ensure loading-icons within cv-card also get neon styling */
+#cv-card-page .loading-icons .icon-card {
+  background-color: rgba(0, 255, 0, 0.1); /* Subtle neon background */
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 8px var(--neon-green-glow);
+}
+
+#cv-card-page .loading-icons .icon-card i {
+  color: var(--neon-green); /* Ensure icon itself is neon */
+  text-shadow: 0 0 5px var(--neon-green-glow);
+}
+
+/* Style for icon-card directly if it's reused outside loading-icons */
+.icon-card {
+  background-color: rgba(0, 255, 0, 0.1);
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  padding: 10px; /* Adjust padding as needed */
+  border-radius: 8px; /* Rounded corners for icon cards */
+  margin: 5px; /* Spacing between icon cards */
+  display: inline-flex; /* Align icon and potential text nicely */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px var(--neon-green-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--neon-green);
+}
+
+.icon-card i {
+  font-size: 1.5em; /* Adjust icon size as needed */
+  color: var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green-glow);
+}
 
 /* Styles for the loading-skeleton loader (FontAwesome version) */
 .loading-skeleton {
