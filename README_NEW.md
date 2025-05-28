@@ -5,17 +5,20 @@ A cutting-edge cybersecurity portfolio website featuring a modern cyber/neon aes
 ## Features
 
 ### 🎨 Visual Design
+
 - **Cyber/Neon Theme**: Stunning visual design with neon green, blue, and purple color scheme
 - **Animated Particle Background**: Dynamic particle system with interactive mouse effects
 - **Loading Animation**: Professional loading sequence with progress bar and cyber-themed messages
 - **Responsive Design**: Fully responsive layout optimized for all devices
 
 ### 🏗️ Architecture
+
 - **Semantic HTML**: Properly structured HTML5 with ARIA accessibility features
 - **Modern CSS**: Advanced CSS with custom properties, gradients, and animations
 - **Vanilla JavaScript**: Pure JavaScript implementation without dependencies
 
 ### 🤖 AI Chatbot Integration
+
 - **Custom Neon Icons**: Hand-crafted SVG icons with neon gradients and glow effects
 - **Real-time Chat Interface**: Modern chat UI with typing indicators and smooth animations
 - **Replit Backend Integration**: Ready to connect to your personal AI backend hosted on Replit
@@ -23,6 +26,7 @@ A cutting-edge cybersecurity portfolio website featuring a modern cyber/neon aes
 - **Accessibility**: Full keyboard navigation and screen reader support
 
 ### 📋 Content Sections
+
 - **Professional Summary**: Cybersecurity specialist overview
 - **Technical Skills**: Categorized skill sets with visual tags
 - **Certifications**: Professional certifications and achievements
@@ -32,6 +36,7 @@ A cutting-edge cybersecurity portfolio website featuring a modern cyber/neon aes
 ## Setup Instructions
 
 ### Basic Setup
+
 1. Clone or download the repository
 2. Open `index.html` in a modern web browser
 3. The portfolio will load with the animated background and CV card
@@ -39,6 +44,7 @@ A cutting-edge cybersecurity portfolio website featuring a modern cyber/neon aes
 ### AI Chatbot Backend Integration
 
 #### Step 1: Update Backend URL
+
 In `script.js`, replace the placeholder URL with your actual Replit backend:
 
 ```javascript
@@ -46,6 +52,7 @@ const REPLIT_BACKEND_URL = 'https://your-replit-backend-url.replit.dev';
 ```
 
 #### Step 2: Backend API Requirements
+
 Your Replit backend should provide a POST endpoint at `/chat` that accepts:
 
 ```json
@@ -62,6 +69,7 @@ Your Replit backend should provide a POST endpoint at `/chat` that accepts:
 ```
 
 And returns:
+
 ```json
 {
   "response": "AI generated response"
@@ -69,6 +77,7 @@ And returns:
 ```
 
 #### Step 3: Enable CORS (if needed)
+
 Ensure your Replit backend has CORS enabled for your domain.
 
 ## File Structure
@@ -84,7 +93,9 @@ Ensure your Replit backend has CORS enabled for your domain.
 ## Customization
 
 ### Colors
+
 All colors are defined as CSS custom properties in `:root`:
+
 - `--neon-green`: Primary neon green
 - `--neon-blue`: Secondary neon blue  
 - `--neon-purple`: Accent neon purple
@@ -92,7 +103,9 @@ All colors are defined as CSS custom properties in `:root`:
 - `--panel-glass`: Glass panel effect
 
 ### Content
+
 Update the personal information in `index.html`:
+
 - Profile name and title
 - Professional summary
 - Skills and certifications
@@ -100,6 +113,7 @@ Update the personal information in `index.html`:
 - Social media links
 
 ### Chatbot Personality
+
 Modify the fallback responses in `script.js` to match your personality and expertise.
 
 ## Browser Compatibility
