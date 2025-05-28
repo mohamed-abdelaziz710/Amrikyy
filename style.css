@@ -242,8 +242,8 @@ main#cv-card-page {
 .professional-summary p { font-size: clamp(0.9rem, 2.2vw, 1.05rem); line-height: 1.8; }
 
 /* Education List - Specific styling if needed */
-.education-list li { margin-bottom: 1em; }
-.education-list strong { display: block; margin-bottom: 0.2em; }
+education-list li { margin-bottom: 1em; }
+education-list strong { display: block; margin-bottom: 0.2em; }
 
 /* Skills Section */
 .skills-categories {
