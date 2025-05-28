@@ -1,5 +1,16 @@
+// --- Particle System Configuration ---
+const particleConfig = {
+    mouseSeekRadius: 80,
+    densityFactor: 18000, // Lower for more particles
+    maxParticles: 120,
+    minParticles: 40,
+    connectDistanceFactor: 7, // Divisor for canvas dimension
+    maxConnectDistance: 130,
+    baseSpeed: 0.3,
+};
+
 // ----- LOADER SCRIPT -----
-window.addEventListener('load', () => { // Changed to window.load for better accuracy
+window.addEventListener('load', () => {
     const loadingMessages = [
         "Initiating Cyber Core...",
         "Calibrating Neon Flux...",
@@ -28,15 +39,21 @@ window.addEventListener('load', () => { // Changed to window.load for better acc
     }
     
     let currentProgress = 0;
+    let burst = true;
     if(progressBarElement) {
         progressInterval = setInterval(() => {
-            currentProgress += Math.random() * 15; // Simulate variable loading chunks
+            if (burst && currentProgress < 40) {
+                currentProgress += Math.random() * 20 + 10; // Fast initial burst
+            } else {
+                burst = false;
+                currentProgress += Math.random() * 10 + 2; // Smoother after burst
+            }
             if (currentProgress >= 100) {
                 currentProgress = 100;
                 clearInterval(progressInterval);
             }
             progressBarElement.style.width = currentProgress + '%';
-        }, 400); // Update progress bar frequently
+        }, 400);
     }
 
 
@@ -85,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let particleColor2 = cssVariables.getPropertyValue('--particle-color-2').trim() || '#00BFFF';
     let particleLineColor = cssVariables.getPropertyValue('--particle-line-color').trim() || 'rgba(0, 255, 128, 0.3)';
 
-    const mouse = { x: null, y: null, radius: 80 };
+    const mouse = { x: null, y: null, radius: particleConfig.mouseSeekRadius };
 
     function updateColorsFromCSS() {
         particleColor1 = cssVariables.getPropertyValue('--particle-color-1').trim() || '#00FF00';
@@ -105,17 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
     class Particle {
         constructor(x, y, directionX, directionY, size, color) {
             this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY;
-            this.size = size; this.color = color; this.baseSpeed = 0.3; this.opacity = Math.random() * 0.5 + 0.3;
+            this.size = size; this.color = color; this.baseSpeed = particleConfig.baseSpeed; this.opacity = Math.random() * 0.5 + 0.3;
         }
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = this.color.replace(')', `, ${this.opacity})`).replace('rgb(', 'rgba('); // Add opacity
-            if (!this.color.includes('rgba')) { // Handle hex colors by converting to rgba for opacity
-                 let r = parseInt(this.color.slice(1,3), 16), g = parseInt(this.color.slice(3,5), 16), b = parseInt(this.color.slice(5,7), 16);
-                 ctx.fillStyle = `rgba(${r},${g},${b},${this.opacity})`;
-            }
+            const originalGlobalAlpha = ctx.globalAlpha;
+            ctx.globalAlpha = this.opacity;
+            ctx.fillStyle = this.color;
             ctx.fill();
+            ctx.globalAlpha = originalGlobalAlpha;
         }
         update() {
             if (this.x + this.size > canvas.width || this.x - this.size < 0) { this.directionX = -this.directionX; }
@@ -125,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance < mouse.radius + this.size) {
-                    this.x -= dx / (distance * 0.5); // Smoother push
+                    this.x -= dx / (distance * 0.5);
                     this.y -= dy / (distance * 0.5);
                 }
             }
@@ -136,11 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function init() {
         particlesArray = [];
-        updateColorsFromCSS(); // Ensure colors are fresh
-        let numberOfParticles = (canvas.height * canvas.width) / 18000;
-        if (numberOfParticles > 120) numberOfParticles = 120;
-        if (numberOfParticles < 40) numberOfParticles = 40; // Minimum particles
-
+        updateColorsFromCSS();
+        let numberOfParticles = (canvas.height * canvas.width) / particleConfig.densityFactor;
+        if (numberOfParticles > particleConfig.maxParticles) numberOfParticles = particleConfig.maxParticles;
+        if (numberOfParticles < particleConfig.minParticles) numberOfParticles = particleConfig.minParticles;
         for (let i = 0; i < numberOfParticles; i++) {
             let size = (Math.random() * 2) + 0.8;
             let x = Math.random() * (canvas.width - size * 2) + size;
@@ -153,36 +168,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function connectParticles() {
-        let connectDistanceSq = Math.pow(Math.min(canvas.width, canvas.height) / 7, 2); // Responsive connection distance
-        if (connectDistanceSq > 130*130) connectDistanceSq = 130*130;
-
-
+        let connectDistanceSq = Math.pow(Math.min(canvas.width, canvas.height) / particleConfig.connectDistanceFactor, 2);
+        if (connectDistanceSq > Math.pow(particleConfig.maxConnectDistance, 2)) connectDistanceSq = Math.pow(particleConfig.maxConnectDistance, 2);
         for (let a = 0; a < particlesArray.length; a++) {
             for (let b = a + 1; b < particlesArray.length; b++) {
                 let dx = particlesArray[a].x - particlesArray[b].x;
                 let dy = particlesArray[a].y - particlesArray[b].y;
                 let distanceSq = dx * dx + dy * dy;
-
                 if (distanceSq < connectDistanceSq) {
                     const opacityValue = Math.max(0, 1 - (distanceSq / connectDistanceSq) * 0.9);
-                    let strokeColor = particleLineColor;
-                    if (particleLineColor.startsWith('rgba')) {
-                        strokeColor = particleLineColor.replace(/[\d\.]+\)$/g, `${opacityValue.toFixed(2)})`);
-                    } else { // Assuming hex or rgb, convert to rgba
-                        let r,g,b;
-                        if(particleLineColor.startsWith('#')){
-                            r = parseInt(particleLineColor.slice(1,3), 16); g = parseInt(particleLineColor.slice(3,5), 16); b = parseInt(particleLineColor.slice(5,7), 16);
-                        } else { // rgb
-                            [r,g,b] = particleLineColor.match(/\d+/g);
-                        }
-                        strokeColor = `rgba(${r},${g},${b},${opacityValue.toFixed(2)})`;
-                    }
-                    ctx.strokeStyle = strokeColor;
+                    const originalGlobalAlpha = ctx.globalAlpha;
+                    ctx.globalAlpha = opacityValue;
+                    ctx.strokeStyle = particleLineColor;
                     ctx.lineWidth = 0.3;
                     ctx.beginPath();
                     ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                     ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
                     ctx.stroke();
+                    ctx.globalAlpha = originalGlobalAlpha;
                 }
             }
         }
