@@ -4,92 +4,201 @@
   <meta charset="UTF-8">
   <title>Amrikyy | Cyber Neon Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta name="description" content="Mohamed H. Abdelaziz (Amrikyy) - Cybersecurity Engineer, AI Prompt Architect, and UX-Focused Web Developer Portfolio.">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="style.css">
-</head>
+  </head>
 <body>
+  <canvas id="particle-canvas"></canvas>
+
   <div class="loading-skeleton" id="loading-skeleton">
     <div class="loader-logo">
-      <svg viewBox="0 0 100 100"><polyline points="30,75 50,25 70,75" stroke="var(--neon-green)" stroke-width="8" fill="none"/><circle cx="50" cy="25" r="5" fill="var(--neon-green)"/></svg>
+      <svg viewBox="0 0 100 100" aria-label="Loading Logo">
+        <polyline points="30,75 50,25 70,75" stroke="var(--neon-green)" stroke-width="8" fill="none"/>
+        <circle cx="50" cy="25" r="5" fill="var(--neon-green)"/>
+      </svg>
+      <div class="scanline-loader"></div>
     </div>
     <div class="loader-text">AMRIKYY</div>
-    <div class="loader-label">جارٍ تحميل مهاراتك...</div>
-  </div>
-
-  <div id="cv-card-page" style="display: none;">
-    <div class="wow-card">
-        <img class="profile-img" src="https://avatars.githubusercontent.com/u/71965619?v=4" alt="Amrikyy Profile Image">
-        <h1>Amrikyy</h1>
-        <h2 style="color: var(--neon-green); font-size: 1.1em; margin-bottom: 20px;">Cyber Neon Portfolio</h2>
-        
-        <div class="cv-sections-flex">
-            <section class="cv-section experience-section">
-                <div class="cv-title-row">
-                    <i class="fas fa-briefcase" style="margin-right: 8px; color: var(--neon-green);"></i>
-                    <h3>Experience</h3>
-                </div>
-                <ul class="cv-list" style="list-style: none; padding-left: 0; text-align: left;">
-                    <li style="margin-bottom: 5px;">Frontend Developer at Tech Solutions (2022-Present)</li>
-                    <li style="margin-bottom: 5px;">UI/UX Intern at Creative Designs (2021)</li>
-                </ul>
-            </section>
-            
-            <section class="cv-section education-section">
-                <div class="cv-title-row">
-                    <i class="fas fa-graduation-cap" style="margin-right: 8px; color: var(--neon-green);"></i>
-                    <h3>Education</h3>
-                </div>
-                <ul class="cv-list" style="list-style: none; padding-left: 0; text-align: left;">
-                    <li style="margin-bottom: 5px;">B.Sc. Computer Science - XYZ University (2021)</li>
-                </ul>
-            </section>
-        </div>
-        
-        <div class="skills-orbit" style="border: 1px dashed var(--neon-green); padding: 15px; margin-top: 20px; margin-bottom:20px; width:100%; text-align: center;">
-            <p>Skills Orbit Placeholder</p>
-            <!-- Add skill particles here if desired, e.g., using .skill-chip or .skill-particle -->
-            <span class="skill-chip">HTML</span> <span class="skill-chip">CSS</span> <span class="skill-chip">JavaScript</span>
-        </div>
-
-        <div class="loading-icons" style="margin-top: 20px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-          <div class="icon-card" title="Apple"><i class="fab fa-apple"></i></div>
-          <div class="icon-card" title="Microsoft"><i class="fab fa-windows"></i></div>
-          <div class="icon-card" title="Google"><i class="fab fa-google"></i></div>
-          <div class="icon-card" title="Amazon"><i class="fab fa-amazon"></i></div>
-          <div class="icon-card" title="Facebook"><i class="fab fa-facebook-f"></i></div>
-          <div class="icon-card" title="Instagram"><i class="fab fa-instagram"></i></div>
-          <div class="icon-card" title="LinkedIn"><i class="fab fa-linkedin-in"></i></div>
-          <div class="icon-card" title="GitHub"><i class="fab fa-github"></i></div>
-          <div class="icon-card" title="Figma"><i class="fab fa-figma"></i></div>
-          <div class="icon-card" title="Tailwind"><i class="fab fa-css3-alt"></i></div>
-          <div class="icon-card" title="TradingView"><i class="fas fa-chart-line"></i></div>
-          <div class="icon-card" title="Bitcoin"><i class="fab fa-bitcoin"></i></div>
-        </div>
-
-        <div class="social-icons" style="margin-top: 20px;">
-            <a href="#" title="GitHub" style="color: var(--white); margin: 0 10px; font-size: 1.5em;"><i class="fab fa-github"></i></a>
-            <a href="#" title="LinkedIn" style="color: var(--white); margin: 0 10px; font-size: 1.5em;"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" title="Twitter" style="color: var(--white); margin: 0 10px; font-size: 1.5em;"><i class="fab fa-twitter"></i></a>
-        </div>
+    <div class="loader-status-messages">
+        <span id="loader-message">Initiating Cyber Core...</span>
+    </div>
+    <div class="loader-progress-bar-container">
+        <div id="loader-progress-bar" class="loader-progress-bar"></div>
     </div>
   </div>
 
-  <script>
-    window.onload = ()=>{
-      setTimeout(()=>{
-        const loadingSkeleton = document.getElementById('loading-skeleton');
-        if (loadingSkeleton) {
-          loadingSkeleton.style.opacity='0';
-          setTimeout(()=>{
-            loadingSkeleton.style.display='none';
-            const cvCardPage = document.getElementById('cv-card-page');
-            if (cvCardPage) {
-              cvCardPage.style.display='block'; // Or 'flex' if .wow-card itself should be the flex container for the page
-            }
-          }, 600); // Matches opacity transition
-        }
-      }, 1800); // Initial delay for loader visibility
-    };
-  </script>
+  <main id="cv-card-page" style="display: none;">
+    <article class="wow-card">
+        <header class="profile-header">
+          <img class="profile-img" src="https://avatars.githubusercontent.com/u/71965619?v=4" alt="Mohamed H. Abdelaziz (Amrikyy)">
+          <h1>Mohamed H. Abdelaziz <span class="nickname">(Hamoud / Amrikyy)</span></h1>
+          <h2>Cybersecurity Engineer | AI Prompt Architect | UX-Focused Web Developer</h2>
+          
+          <div class="contact-info">
+              <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Cairo, Egypt (U.S. Citizen)</p>
+              <div class="contact-block">
+                <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+17706160211">+1 770 616 0211</a> | <a href="tel:+201094228044">+20 109 422 8044</a></p>
+                <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:amrikyy@gmail.com">amrikyy@gmail.com</a></p>
+              </div>
+              <div class="social-links-header">
+                  <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                  <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" title="Instagram Profile"><i class="fab fa-instagram"></i> Instagram</a>
+                  <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer" title="Facebook Profile"><i class="fab fa-facebook-f"></i> Facebook</a>
+              </div>
+          </div>
+        </header>
+
+        <section class="cv-section professional-summary" aria-labelledby="summary-title">
+            <div class="cv-title-row">
+                <i class="fas fa-user-tie" aria-hidden="true"></i>
+                <h3 id="summary-title">Professional Summary</h3>
+            </div>
+            <p>Dynamic cybersecurity engineer and AI prompt architect with 6+ years of hands-on experience in crypto trading, intrusion detection, and full-stack web development. Skilled in designing bold UX interfaces, developing AI-driven prototypes, and securing cloud-based applications. Proven track record in internships at top tech companies and delivering high-impact digital solutions.</p>
+        </section>
+        
+        <div class="cv-grid"> {/* Using a grid for major sections for better layout potential */}
+            <section class="cv-section education-section" aria-labelledby="education-title">
+                <div class="cv-title-row">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <h3 id="education-title">Education</h3>
+                </div>
+                <ul class="cv-list education-list">
+                    <li><strong>B.S. in Cybersecurity Engineering</strong> (Expected May 2026)<br>Kennesaw State University</li>
+                    <li><strong>A.S. in Computer Science</strong> (May 2021)<br>Chattahoochee Technical College, Marietta, GA</li>
+                    <li><strong>High School Diploma</strong><br>El Shaheen High School, Kuwait</li>
+                </ul>
+            </section>
+
+            <section class="cv-section certifications-section" aria-labelledby="certifications-title">
+                <div class="cv-title-row">
+                    <i class="fas fa-certificate" aria-hidden="true"></i>
+                    <h3 id="certifications-title">Certifications</h3>
+                </div>
+                <ul class="cv-list">
+                    <li>Cisco Certified Cybersecurity Specialist</li>
+                    <li>BlackRock Talent Community Member</li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="cv-section skills-section" aria-labelledby="skills-title">
+            <div class="cv-title-row">
+                <i class="fas fa-cogs" aria-hidden="true"></i>
+                <h3 id="skills-title">Technical Skills</h3>
+            </div>
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h4><i class="fas fa-shield-alt" aria-hidden="true"></i> Security & DevOps</h4>
+                    <ul class="skill-tags">
+                        <li>Intrusion Detection</li><li>Vulnerability Scanning</li><li>Amadeus GDS</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-code" aria-hidden="true"></i> Programming</h4>
+                    <ul class="skill-tags">
+                        <li>Python</li><li>Java</li><li>Firebase</li><li>React</li><li>Tailwind CSS</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-brain" aria-hidden="true"></i> AI & Prompting</h4>
+                    <ul class="skill-tags">
+                        <li>ChatGPT & Gemini API</li><li>Prompt Engineering (Codex)</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-cloud" aria-hidden="true"></i> Cloud & Tools</h4>
+                    <ul class="skill-tags">
+                        <li>Google Cloud (AI Premium)</li><li>Microsoft Azure</li><li>GitHub Copilot</li><li>Docker</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-chart-bar" aria-hidden="true"></i> Data & Analytics</h4>
+                    <ul class="skill-tags">
+                        <li>Excel Advanced</li><li>TradingView</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-coins" aria-hidden="true"></i> Trading</h4>
+                    <ul class="skill-tags">
+                        <li>Crypto & Derivatives (6 yrs exp)</li><li>Bybit</li><li>Coinbase</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="cv-section experience-section" aria-labelledby="experience-title-main">
+            <div class="cv-title-row">
+                <i class="fas fa-briefcase" aria-hidden="true"></i>
+                <h3 id="experience-title-main">Professional Experience</h3>
+            </div>
+            <div class="experience-item">
+                <h4>Summer Internships (2023–2024)</h4>
+                <p class="company-names">OpenAI | Intel | L’Oréal</p>
+                <ul>
+                    <li>Developed AI-powered prototypes for internal tools using OpenAI APIs.</li>
+                    <li>Implemented IDS rules and automated threat detection workflows.</li>
+                    <li>Collaborated on UX redesigns for intranet dashboards.</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h4>Travel Agent (2021–2023)</h4>
+                <p class="company-names">Alpha Travel, Atlanta, GA</p>
+                <ul>
+                    <li>Managed flight bookings via Amadeus Selling Platform.</li>
+                    <li>Provided high-touch customer service and optimized booking processes.</li>
+                    <li>Trained new agents on system workflows and best practices.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cv-section projects-section" aria-labelledby="projects-title">
+            <div class="cv-title-row">
+                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                <h3 id="projects-title">Key Projects</h3>
+            </div>
+            <div class="project-item">
+                <h4>Global Career Platform</h4>
+                <p>Built a Vue.js/Firebase dashboard aggregating job-market analytics with AI-driven recommendations.</p>
+            </div>
+            <div class="project-item">
+                <h4>Charity: water Landing Pages</h4>
+                <p>Designed and developed two high-conversion webpages with custom canvas animations.</p>
+            </div>
+            <div class="project-item">
+                <h4>Personal AI Prompting Guide (Codex)</h4>
+                <p>Architected a modular framework for teaching prompt-engineering best practices.</p>
+            </div>
+        </section>
+        
+        <div class="cv-grid">
+            <section class="cv-section affiliations-section" aria-labelledby="affiliations-title">
+                <div class="cv-title-row">
+                    <i class="fas fa-users" aria-hidden="true"></i>
+                    <h3 id="affiliations-title">Affiliations & Awards</h3>
+                </div>
+                <ul class="cv-list">
+                    <li>Member, BlackRock Talent Community</li>
+                    <li>Recipient, KSU Cybersecurity Innovation Grant (2024)</li>
+                    <li>Dean’s List, Chattahoochee Technical College (2020–2021)</li>
+                </ul>
+            </section>
+
+            <section class="cv-section languages-section" aria-labelledby="languages-title">
+                <div class="cv-title-row">
+                    <i class="fas fa-language" aria-hidden="true"></i>
+                    <h3 id="languages-title">Languages</h3>
+                </div>
+                <ul class="cv-list">
+                    <li>Arabic (Native)</li>
+                    <li>English (Professional proficiency)</li>
+                </ul>
+            </section>
+        </div>
+         </article>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>

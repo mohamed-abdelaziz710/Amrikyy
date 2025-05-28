@@ -1,1027 +1,323 @@
-/* ========== Smart Card Website Styles ========== */
+/* ========== AMRIKYY CYBER NEON PORTFOLIO STYLES ========== */
 
 /* --- Root Variables --- */
-/* Defines global CSS variables for colors, borders, and shadows, promoting consistency and easy theming. */
 :root {
-  --neon-green: #00FF00; /* Brighter, classic neon green */
-  --neon-green-glow: #00FF00b3; /* Adjusted glow with 70% opacity for a softer neon effect */
-  --dark-bg: #0A0A0A; /* Primary dark background color */
-  --panel-glass: rgba(23, 35, 37, 0.85); /* Semi-transparent color for glass-like panels */
-  --white: #fff; /* Standard white color */
-  --light-gray: #e5e7eb; /* Light gray for text and subtle elements */
-  --medium-gray: #A6A6A6; /* Medium gray for secondary text or borders */
-  --border-neon: 2px solid var(--neon-green); /* Standard neon border style */
-  --border-neon-glow: 0 0 15px var(--neon-green), 0 0 5px var(--white); /* Box shadow to create a glowing effect for neon borders */
+  --neon-green: #00FF00;
+  --neon-green-glow: #00FF00b3;
+  --neon-blue: #00BFFF; 
+  --neon-blue-glow: #00BFFFB3;
+  --neon-purple: #BF00FF; /* New accent color */
+  --neon-purple-glow: #BF00FFb3;
+  --dark-bg: #0A0A0A;
+  --loader-bg: #0D0D0D;
+  --panel-glass: rgba(15, 30, 28, 0.88); /* Slightly adjusted panel glass */
+  --panel-glass-hover: rgba(20, 40, 38, 0.92);
+  --text-primary: #EAEAEA;
+  --text-secondary: #B0B0B0;
+  --white: #fff;
+  --border-neon: 2px solid var(--neon-green);
+  --border-neon-glow: 0 0 12px var(--neon-green), 0 0 4px var(--white);
+  --border-neon-blue: 2px solid var(--neon-blue);
+  --border-neon-blue-glow: 0 0 12px var(--neon-blue), 0 0 4px var(--white);
+
+  --particle-color-1: var(--neon-green);
+  --particle-color-2: var(--neon-blue);
+  --particle-line-color: rgba(0, 255, 128, 0.25); 
 }
 
-/* --- Base Body Styles --- */
-/* Sets default styles for the body, including background and base font color. */
-body {
-  background: linear-gradient(135deg, #050505 0%, #121815 100%); /* Dark gradient background for a modern feel */
-  color: var(--light-gray); /* Default text color */
-  /* ...existing code... */
-}
-
-/* --- Global Reset and Box Sizing --- */
-/* Basic reset for margins, padding, and sets box-sizing to border-box for easier layout management. */
-* {
+/* --- Base & Typography --- */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* --- Body Font and Layout --- */
-/* Further body styles, setting font family, ensuring full viewport height and managing overflow. */
+/* Import Fonts (Place at the very top of CSS) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Sora:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
 body {
-  margin: 0; /* Redundant, already in * reset, but kept for explicitness if preferred */
-  font-family: 'Inter', sans-serif; /* Primary font for the body */
-  min-height: 100vh; /* Ensures the body takes at least the full viewport height */
-  overflow-x: hidden; /* Prevents horizontal scrolling */
-}
-
-/* --- Typography --- */
-/* Defines base styles for headings and specific text elements. */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif; /* Futuristic font for headings */
-  letter-spacing: 1px; /* Adds slight spacing between letters for headings */
-}
-
-.section-title {
-  color: var(--neon-green); /* Neon green color for section titles */
-  font-size: 1.8rem; /* Font size for section titles */
-  margin-bottom: 1.5rem; /* Space below section titles */
-  position: relative; /* For positioning the pseudo-element underline */
-  display: inline-block; /* Allows the underline to be sized according to content */
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -8px; /* Positions the underline slightly below the text */
-  left: 0;
-  width: 60%; /* Width of the underline */
-  height: 3px; /* Thickness of the underline */
-  background: var(--neon-green); /* Neon green color for the underline */
-  box-shadow: var(--border-neon-glow); /* Adds a glow effect to the underline */
-}
-
-.subsection-title {
-  color: var(--white);
-  font-size: 1.4rem;
-  margin: 1.5rem 0 1rem;
-}
-
-/* --- Security Loader Styles --- */
-/* Styles for the initial security-themed loading animation. Distinct from the .loading-skeleton. */
-.security-loader {
-  position: fixed; /* Covers the entire viewport */
-  inset: 0;
-  z-index: 1000; /* Ensures it's above other content */
-  background: var(--dark-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s; /* Smooth fade-out transition */
-}
-
-.loader-container {
-  text-align: center;
-}
-
-.loader-logo svg { /* Styles for the SVG logo within the security loader */
-  animation: pulse-neon 2s infinite alternate; /* Pulsing neon animation */
-}
-
-@keyframes pulse-neon {
-  to {
-    filter: drop-shadow(0 0 16px var(--neon-green)); /* Neon glow effect for the pulse */
-  }
-}
-
-.loader-text { /* Styles for the text within the security loader */
-  color: var(--neon-green);
-  margin-top: 10px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  font-family: 'Space Mono', monospace; /* Monospaced font for a techy feel */
-}
-
-.loader-progress {
-  height: 4px;
-  background: #222; /* Dark background for the progress bar track */
-  width: 160px;
-  margin: 16px auto;
-  border-radius: 2px;
-  overflow: hidden; /* Ensures the progress bar stays within bounds */
-}
-
-.progress-bar {
-  width: 0; /* Starts with no width, animates to 100% */
-  height: 100%;
-  background: linear-gradient(90deg, var(--neon-green), #2fae1a); /* Gradient for the progress bar */
-  animation: progbar 4s linear forwards; /* Animation for the progress bar filling up */
-}
-
-@keyframes progbar {
-  to {
-    width: 100%; /* Fills the progress bar */
-  }
-}
-
-.loader-status {
-  color: #b6ffb0; /* Light green color for the status text */
-  font-size: 0.96em;
-  font-family: 'Space Mono', monospace;
-}
-
-/* --- Background Effects --- */
-/* Styles for various animated background elements like grids, particles, and data streams. */
-.background-container {
-  pointer-events: none; /* Allows clicks to pass through the background elements */
-  z-index: 0; /* Places it behind other content */
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-}
-
-.grid-matrix-layer {
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(0deg, rgba(0, 255, 153, 0.08), transparent 1px, transparent 60px),
-    repeating-linear-gradient(90deg, rgba(0, 255, 153, 0.08), transparent 1px, transparent 60px); /* Creates a subtle grid pattern */
-  opacity: 0.6;
-  z-index: 1;
-  animation: subtle-pan 90s linear infinite; /* Slowly pans the grid for a dynamic effect */
-}
-
-@keyframes subtle-pan {
-  to {
-    background-position: 400px 400px; /* Animates the background position */
-  }
-}
-
-.particle-layer .particle {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--neon-green);
-  box-shadow: 0 0 12px var(--neon-green); /* Glow effect for particles */
-  opacity: 0.20; /* Subtle particle visibility */
-  pointer-events: none;
-  z-index: 2;
-}
-
-.digital-waves-layer canvas { /* Styles for a canvas element used for digital wave effects */
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.data-streams .data-stream { /* Styles for falling data stream effect (Matrix-like) */
-  position: absolute;
-  color: rgba(0, 255, 153, 0.8); /* Neon green with some transparency */
-  font-family: 'Space Mono', monospace;
-  writing-mode: vertical-rl; /* Text written vertically */
-  font-size: 1.1em;
-  left: 0;
-  top: 0;
-  user-select: none; /* Prevents text selection */
-  opacity: 0.2;
-  animation: datafall linear infinite; /* Continuous falling animation */
-  z-index: 4;
-}
-
-@keyframes datafall {
-  to {
-    transform: translateY(110vh); /* Moves the stream down the viewport */
-  }
-}
-
-.space-stars { /* Container for starfield effect */
-  position: absolute;
-  inset: 0;
-  z-index: 0; /* Deepest background layer */
-}
-
-.space-stars .star { /* Individual star elements */
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.6;
-}
-
-/* --- Status Bar --- */
-/* Styles for the fixed status bar at the top of the page. */
-.security-status-bar {
-  background: linear-gradient(90deg, rgba(23, 35, 31, 0.8) 70%, rgba(23, 35, 31, 0) 100%); /* Gradient background with transparency */
-  display: flex;
-  align-items: center;
-  gap: 28px; /* Spacing between status items */
-  padding: 7px 22px 7px 10px;
-  font-size: 1.06em;
-  border-bottom: var(--border-neon); /* Neon border at the bottom */
-  position: fixed; /* Fixed at the top */
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 90; /* High z-index to stay on top of most content */
-  box-shadow: 0 2px 22px 0 rgba(0, 255, 153, 0.13); /* Subtle shadow for depth */
-  backdrop-filter: blur(5px); /* Frosted glass effect */
-}
-
-.status-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.status-icon { /* Small circular icons in the status bar */
-  display: inline-block;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  margin-inline-end: 4px;
-}
-
-.secure { /* Style for a "secure" status icon */
-  background: var(--neon-green);
-  box-shadow: 0 0 8px rgba(0, 255, 153, 0.67); /* Glow for the secure icon */
-}
-
-.encryption { background: #2fae1a; } /* Style for an "encryption" status icon */
-.access { background: #c1fa68; } /* Style for an "access" status icon */
-
-.status-time { /* Style for the time display in the status bar */
-  font-family: 'Space Mono', monospace;
-  color: #b6ffb0; /* Light green color */
-  margin-left: auto; /* Pushes the time to the right */
-}
-
-/* --- Holographic Navigation Menu --- */
-/* Styles for the floating navigation menu. */
-.holo-nav {
-  position: fixed; /* Fixed position on the page */
-  right: 16px; /* Positioned to the right */
-  top: 65px; /* Positioned below the status bar */
-  z-index: 95; /* High z-index */
-}
-
-.nav-container {
-  display: flex;
-  flex-direction: column; /* Stacks nav items vertically */
-  background: var(--panel-glass); /* Semi-transparent background */
-  border-radius: 18px;
-  border: var(--border-neon); /* Neon border */
-  box-shadow: 0 0 18px rgba(0, 255, 153, 0.2); /* Neon glow shadow */
-  backdrop-filter: blur(10px); /* Stronger blur for the nav panel */
-}
-
-.nav-item {
-  padding: 17px 24px;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  color: var(--white);
-  cursor: pointer;
-  border: none;
-  background: none;
-  position: relative; /* For the highlight pseudo-element */
-  font-weight: 600;
-  font-size: 1.07em;
-  text-decoration: none;
-  transition: color 0.3s; /* Smooth color transition on hover/active */
-}
-
-.nav-item .nav-icon {
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-item .nav-highlight { /* Small highlight bar for active/hovered nav items */
-  position: absolute;
-  right: 10px;
-  bottom: 7px;
-  width: 11px;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--neon-green);
-  opacity: 0; /* Hidden by default, shown on active/hover */
-  transition: opacity 0.2s;
-}
-
-.nav-item.active, .nav-item:hover {
-  color: var(--neon-green); /* Changes text color to neon green on active/hover */
-}
-
-.nav-item.active .nav-highlight {
-  opacity: 1; /* Shows the highlight bar */
-}
-
-/* --- Main Content Container --- */
-/* Styles for the main content wrapper. */
-.main-container {
-  max-width: 900px; /* Limits the width of the main content area */
-  margin: 110px auto 50px auto; /* Centers the container and adds top/bottom margin */
-  z-index: 3; /* Ensures it's above background elements */
-  position: relative; /* Needed for z-index to work */
-  padding: 0 15px; /* Padding on the sides */
-}
-
-/* --- Biometric Card (General Card Style) --- */
-/* Styles for a generic "biometric" themed card, can be adapted for other card types. */
-.biometric-card {
-  background: var(--panel-glass);
-  border-radius: 24px;
-  border: var(--border-neon);
-  box-shadow: 0 8px 34px 0 rgba(0, 255, 153, 0.15), 0 0 10px rgba(0, 255, 153, 0.2); /* Neon shadow */
-  margin-bottom: 36px;
-  position: relative;
-  padding: 36px 28px 32px 28px;
-  overflow: hidden; /* Important if there are internal animated elements */
-  transition: box-shadow 0.25s, transform 0.22s; /* Smooth transitions for hover effects */
-  z-index: 10;
-  backdrop-filter: blur(5px) saturate(120%); /* Glass effect with saturation boost */
-}
-
-.biometric-card:hover {
-  box-shadow: 0 16px 48px 0 rgba(0, 255, 153, 0.22), 0 0 26px rgba(0, 255, 153, 0.73); /* Enhanced shadow on hover */
-  transform: translateY(-7px) scale(1.014); /* Slight lift and scale effect on hover */
-  border-color: #73ffb8; /* Brighter border color on hover */
-}
-
-/* --- Card Header Elements (within Biometric Card or similar) --- */
-.card-header {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  margin-bottom: 24px;
-}
-
-.profile-image-container { /* Container for the profile image and its decorative border/effects */
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: 'Sora', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
   position: relative;
 }
 
-.profile-image-border { /* Decorative border around the profile image */
-  position: absolute;
-  left: -8px;
-  top: -8px;
-  width: 74px;
-  height: 74px;
-  border-radius: 50%;
-  border: 2.5px solid var(--neon-green);
-  opacity: 0.38;
-  filter: blur(1px); /* Softens the border */
-  z-index: 1; /* Behind the main image but above container background */
-}
-
-.profile-image { /* Main profile image style (used in biometric card) */
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #333 url('https://avatars.githubusercontent.com/u/71965619?v=4') center/cover; /* Placeholder image */
-  border: 2.5px solid var(--neon-green);
-  z-index: 2; /* Above the decorative border */
-}
-
-.profile-scan-effect { /* Animated scan line over the profile image */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(transparent, rgba(0, 255, 153, 0.3), transparent); /* Gradient for the scan line */
-  animation: scan-effect 3s ease-in-out infinite; /* Scanning animation */
-  z-index: 3; /* On top of the profile image */
-}
-
-@keyframes scan-effect {
-  0%, 100% { transform: translateY(-60px); } /* Starts above */
-  50% { transform: translateY(60px); } /* Moves to below */
-}
-
-/* Profile Information (within biometric card or similar) */
-.profile-info { flex: 1; } /* Takes remaining space in the card header */
-.profile-name {
-  font-size: 1.46em;
-  font-weight: 700;
-  color: var(--white);
-  text-shadow: 0 0 10px rgba(0, 255, 153, 0.3); /* Subtle neon text shadow */
-}
-.profile-age { color: #b6ffb0; font-size: 0.8em; margin-inline-start: 9px; }
-.profile-title { color: var(--neon-green); font-size: 1.04em; margin: 8px 0 11px 0; }
-.profile-badges { display: flex; gap: 7px; flex-wrap: wrap; }
-.profile-badge { background: #19291e; color: var(--neon-green); padding: 2px 9px; border-radius: 12px; font-size: 0.98em; }
-.profile-bio { margin-top: 7px; }
-.bio-section { display: flex; gap: 8px; align-items: center; margin-bottom: 2px; }
-.bio-label { color: #bbb; font-size: 0.98em; }
-.bio-value { font-size: 1.03em; }
-.bio-text { line-height: 1.6; margin-top: 10px; }
-
-/* --- Section Display Logic --- */
-/* Basic styles for showing/hiding content sections (likely controlled by JavaScript). */
-.section { display: none; } /* Hides sections by default */
-.section.active { display: block; } /* Shows the active section */
-
-/* --- Skills Section --- */
-.skills-container { display: flex; flex-direction: column; gap: 20px; }
-.skill-category { margin-bottom: 10px; }
-.category-title { font-size: 1.2rem; color: var(--white); margin-bottom: 10px; font-weight: 600; }
-.skill-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-
-/* --- Experience Timeline --- */
-.timeline { position: relative; margin: 30px 0; }
-.timeline::before { /* The central line of the timeline */
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 15px; /* Aligns with the dots */
-  width: 2px;
-  background: rgba(0, 255, 153, 0.3); /* Subtle neon line */
-}
-.timeline-item { position: relative; padding-left: 45px; margin-bottom: 30px; }
-.timeline-dot { /* Dots along the timeline */
-  position: absolute;
-  left: 9px; /* Positioned to align with the ::before line */
-  top: 5px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--neon-green);
-  box-shadow: 0 0 10px rgba(0, 255, 153, 0.7); /* Neon glow for dots */
-}
-.timeline-date { font-family: 'Space Mono', monospace; color: var(--neon-green); font-size: 0.9rem; margin-bottom: 5px; }
-.timeline-title { font-size: 1.2rem; color: var(--white); margin-bottom: 5px; }
-.timeline-subtitle { color: var(--medium-gray); font-size: 0.95rem; margin-bottom: 10px; }
-.timeline-description { line-height: 1.6; }
-
-/* --- Education Section --- */
-.education-section { margin-top: 40px; }
-.education-items { display: flex; flex-direction: column; gap: 20px; }
-.education-item { display: flex; gap: 15px; }
-.education-year { font-family: 'Space Mono', monospace; color: var(--neon-green); font-size: 0.9rem; min-width: 80px; }
-.education-degree { font-weight: 600; margin-bottom: 5px; }
-.education-school { color: var(--medium-gray); font-size: 0.95rem; }
-
-/* --- Projects Section --- */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-.project-card {
-  background: rgba(10, 20, 20, 0.5); /* Dark, semi-transparent background for project cards */
-  border: 1px solid rgba(0, 255, 153, 0.2); /* Subtle neon border */
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-}
-.project-card:hover {
-  box-shadow: 0 0 15px rgba(0, 255, 153, 0.3); /* Neon glow on hover */
-  transform: translateY(-5px); /* Slight lift on hover */
-  border-color: rgba(0, 255, 153, 0.5); /* Brighter border on hover */
-}
-.project-header { margin-bottom: 15px; }
-.project-title { font-size: 1.1rem; color: var(--white); margin-bottom: 10px; }
-.project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.project-tag { background: rgba(0, 255, 153, 0.1); color: var(--neon-green); padding: 3px 8px; border-radius: 10px; font-size: 0.8rem; }
-.project-description { margin-bottom: 20px; line-height: 1.5; }
-.project-footer { display: flex; justify-content: flex-end; } /* Aligns buttons to the right */
-.deploy-btn { /* Button style for project deployment links */
-  background: rgba(0, 0, 0, 0.5);
+h1, h2, h3, h4 {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
   color: var(--neon-green);
-  border: 1px solid rgba(0, 255, 153, 0.3);
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  text-shadow: 0 0 8px var(--neon-green-glow);
 }
-.deploy-btn:hover {
-  background: rgba(0, 255, 153, 0.1); /* Lighter background on hover */
-  box-shadow: 0 0 10px rgba(0, 255, 153, 0.3); /* Neon glow on hover */
-}
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); animation: flickerText 3s infinite alternate; margin-bottom: 0.25em;}
+h2 { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-primary); text-shadow: 0 0 5px rgba(229, 231, 235, 0.5); margin-bottom: 0.75em; font-weight: 400;}
+h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 0.5em;}
+h4 { font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--neon-blue); text-shadow: 0 0 6px var(--neon-blue-glow); margin-bottom: 0.3em;}
 
-/* --- Contact Section --- */
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-.contact-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 15px;
-  background: rgba(10, 20, 20, 0.5);
-  border: 1px solid rgba(0, 255, 153, 0.2);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-.contact-item:hover {
-  box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
-  transform: translateY(-5px);
-  border-color: rgba(0, 255, 153, 0.5);
-}
-.contact-icon { color: var(--neon-green); margin-bottom: 10px; }
-.contact-label { color: var(--medium-gray); font-size: 0.9rem; margin-bottom: 5px; }
-.contact-value { font-weight: 600; }
+p { margin-bottom: 1em; color: var(--text-secondary); }
+a { color: var(--neon-blue); text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; }
+a:hover { color: var(--white); text-shadow: 0 0 8px var(--neon-blue-glow); }
 
-/* --- Certifications Section --- */
-.certification-items { display: flex; flex-direction: column; gap: 15px; }
-.certification-item { display: flex; align-items: center; gap: 10px; }
-.certification-icon { color: var(--neon-green); }
+ul { list-style: none; }
 
-/* --- Chatbot --- */
-/* Styles for the floating chatbot interface. */
-.chatbot-container {
-  position: fixed; /* Fixed position, typically bottom right */
-  bottom: 20px;
-  right: 20px;
-  z-index: 100; /* Above most content but below modals/critical loaders */
+/* --- Screen-reader only class --- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
 }
 
-.chatbot-toggle { /* The button to open/close the chatbot panel */
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--dark-bg);
-  border: var(--border-neon);
-  color: var(--neon-green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(0, 255, 153, 0.3); /* Neon glow for the toggle button */
-  transition: all 0.3s ease;
+/* --- Particle Canvas --- */
+#particle-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
 }
 
-.chatbot-toggle:hover {
-  box-shadow: 0 0 30px rgba(0, 255, 153, 0.5); /* Enhanced glow on hover */
-  transform: scale(1.05); /* Slight scale effect on hover */
-}
-
-.chatbot-panel { /* The main panel for the chatbot interface */
-  position: absolute;
-  bottom: 70px; /* Positioned above the toggle button */
-  right: 0;
-  width: 350px;
-  height: 450px;
-  background: var(--panel-glass); /* Semi-transparent background */
-  border: var(--border-neon);
-  border-radius: 16px;
-  box-shadow: 0 0 30px rgba(0, 255, 153, 0.2); /* Neon shadow for the panel */
-  display: flex;
-  flex-direction: column; /* Stacks header, messages, and input vertically */
-  overflow: hidden; /* Clips content if it overflows */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  display: none; /* Initially hidden, shown by JavaScript */
-}
-
-.chatbot-header {
-  padding: 15px;
-  border-bottom: 1px solid rgba(0, 255, 153, 0.3); /* Subtle neon border */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chatbot-title {
-  font-family: 'Space Mono', monospace;
-  color: var(--neon-green);
-  font-weight: 700;
-}
-
-.chatbot-close { /* Close button for the chatbot panel */
-  background: none;
-  border: none;
-  color: var(--medium-gray);
-  cursor: pointer;
-}
-
-.chatbot-messages { /* Container for chat messages */
-  flex: 1; /* Takes available vertical space */
-  padding: 15px;
-  overflow-y: auto; /* Allows scrolling for messages */
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Space between messages */
-}
-
-.message { /* Individual chat message bubble */
-  max-width: 80%; /* Prevents messages from taking full width */
-  padding: 10px 15px;
-  border-radius: 12px;
-  line-height: 1.4;
-}
-
-.message.system { /* Style for system/bot messages */
-  align-self: flex-start; /* Aligns to the left */
-  background: rgba(0, 255, 153, 0.1); /* Subtle neon green background */
-  border: 1px solid rgba(0, 255, 153, 0.2);
-}
-
-.message.user { /* Style for user messages */
-  align-self: flex-end; /* Aligns to the right */
-  background: rgba(255, 255, 255, 0.1); /* Subtle light background */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.terminal-prompt { /* Prompt symbol (e.g., '$') in terminal-like messages */
-  color: var(--neon-green);
-  font-family: 'Space Mono', monospace;
-  margin-right: 8px;
-}
-
-.chatbot-input-container { /* Container for the input field and suggestions */
-  padding: 15px;
-  border-top: 1px solid rgba(0, 255, 153, 0.3); /* Subtle neon border */
-}
-
-.chatbot-suggestions { /* Container for suggestion buttons */
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-  overflow-x: auto; /* Allows horizontal scrolling for suggestions */
-  padding-bottom: 5px; /* Space for scrollbar if needed */
-}
-
-.suggestion-btn { /* Individual suggestion button */
-  background: rgba(0, 255, 153, 0.1);
-  border: 1px solid rgba(0, 255, 153, 0.3);
-  color: var(--neon-green);
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  white-space: nowrap; /* Prevents suggestions from wrapping */
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.suggestion-btn:hover {
-  background: rgba(0, 255, 153, 0.2); /* Darker neon green on hover */
-}
-
-.chatbot-input-wrapper { /* Wrapper for the text input field */
-  display: flex;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.3); /* Dark, semi-transparent background for input field */
-  border: 1px solid rgba(0, 255, 153, 0.3); /* Subtle neon border */
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-
-.chatbot-input { /* The actual text input field */
-  flex: 1; /* Takes available space */
-  background: none;
-  border: none;
-  color: var(--white);
-  font-family: 'Space Mono', monospace;
-  outline: none; /* Removes default browser outline */
-}
-
-.chatbot-input::placeholder {
-  color: rgba(255, 255, 255, 0.5); /* Light placeholder text */
-}
-
-/* --- CV Card Specific Styles --- */
-/* Styles tailored for the .wow-card element, which serves as the CV card. */
-/* This section consolidates and refines styles previously duplicated or specific to the CV card. */
-.wow-card {
-  position: relative; /* Establishes a stacking context */
-  z-index: 3; /* Ensures it's above general background elements */
-  margin: 90px auto 0 auto; /* Top margin for spacing, centered horizontally */
-  background: rgba(10, 25, 20, 0.75); /* Darker, slightly greener glass effect */
-  border-radius: 30px; /* More pronounced rounded corners */
-  max-width: 440px; /* Maximum width of the card */
-  min-width: 0; /* Allows card to shrink if needed */
-  width: 95vw; /* Responsive width, takes 95% of viewport width */
-  border: var(--border-neon); /* Uses the defined neon border */
-  padding: 38px 35px 33px 35px; /* Generous padding inside the card */
-  box-shadow: var(--border-neon-glow), 0 10px 40px rgba(0, 0, 0, 0.5); /* Combines neon glow with a standard shadow for depth */
-  backdrop-filter: blur(12px) saturate(150%); /* Enhanced frosted glass effect */
-  font-family: 'Sora', 'IBM Plex Sans', sans-serif; /* Specific fonts for the CV card */
-  color: var(--white); /* Default text color within the card */
-  text-align: center; /* Centers text content by default */
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Smooth transitions for hover effects */
-}
-
-.wow-card:hover {
-  transform: translateY(-5px) scale(1.02); /* Lifts and slightly enlarges the card on hover */
-  box-shadow: 0 0 25px var(--neon-green), 0 0 10px var(--white), 0 15px 50px rgba(0, 0, 0, 0.6); /* More intense shadow on hover */
-}
-
-.wow-card h1 {
-  color: var(--neon-green); /* Neon green for the main heading */
-  text-shadow: 0 0 8px var(--neon-green-glow); /* Neon glow for the heading */
-  margin-bottom: 8px; /* Space below the heading */
-}
-
-.wow-card h2 {
-  color: var(--light-gray); /* Softer color for the subtitle */
-  font-size: 1.2em; /* Slightly larger subtitle */
-  margin-bottom: 25px; /* Increased space below the subtitle */
-  font-weight: 400; /* Lighter font weight for the subtitle */
-}
-
-/* Profile Image specific to CV Card */
-.profile-img { /* This style is for the main profile image on the CV card */
-  width: 100px; /* Profile image width */
-  height: 100px; /* Profile image height */
-  border-radius: 50%; /* Makes the image circular */
-  border: 3px solid var(--neon-green); /* Neon green border around the image */
-  box-shadow: 0 0 20px var(--neon-green), 0 0 8px var(--white); /* Enhanced neon glow effect */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
-  margin-bottom: 15px; /* Space below the image */
-  display: block; /* Ensures it's a block element for centering or margin auto */
-  margin-left: auto; /* Centers the image if its parent is a block or flex container */
-  margin-right: auto; /* Centers the image */
-
-  /* Debugging additions: */
-  background-color: red; /* To check if the element's space is rendered */
-  opacity: 1 !important; /* Ensure not transparent */
-  visibility: visible !important; /* Ensure not hidden */
-  position: relative; /* Establish stacking context if needed */
-  z-index: 10;      /* Bring to front within its parent context */
-}
-
-/* CV Card Sections Layout */
-.cv-sections-flex {
-  display: flex;
-  flex-direction: column; /* Stacks sections (Experience, Education) vertically */
-  gap: 25px; /* Space between sections */
-  margin-bottom: 25px; /* Space below the sections container */
-}
-
-.cv-section { /* Styling for individual sections like Experience, Education */
-  background: rgba(15, 35, 30, 0.6); /* Slightly different inner panel color for contrast */
-  padding: 20px;
-  border-radius: 15px; /* Rounded corners for sections */
-  border: 1px solid rgba(0, 255, 0, 0.2); /* Subtle inner neon border */
-  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1); /* Inner shadow for a slight depth effect */
-  text-align: left; /* Overrides the card's center alignment for section content */
-}
-
-.cv-title-row { /* Container for section icon and title */
-  display: flex;
-  align-items: center; /* Aligns icon and title vertically */
-  margin-bottom: 15px; /* Space below the title row */
-}
-
-.cv-title-row i { /* Icon within the section title row */
-  font-size: 1.5em; /* Larger icons */
-  margin-right: 12px; /* Space between icon and title */
-  color: var(--neon-green); /* Neon green for icons */
-  text-shadow: 0 0 5px var(--neon-green-glow); /* Neon glow for icons */
-}
-
-.cv-title-row h3 { /* Section title text */
-  color: var(--neon-green);
-  font-size: 1.3em; /* Slightly larger section titles */
-  text-shadow: 0 0 3px var(--neon-green-glow); /* Neon glow for titles */
-}
-
-.cv-list li { /* List items within CV sections */
-  margin-bottom: 10px; /* Space between list items */
-  line-height: 1.6; /* Improved readability */
-  padding-left: 10px; /* Indentation for list items */
-  border-left: 2px solid var(--neon-green-glow); /* Neon accent line to the left of list items */
-}
-
-/* Skills Orbit Section on CV Card */
-.skills-orbit {
-  border: 2px dashed var(--neon-green); /* Thicker dashed neon border */
-  padding: 20px;
-  margin-top: 25px; /* Space above the skills orbit */
-  margin-bottom: 25px; /* Space below the skills orbit */
-  box-shadow: 0 0 15px var(--neon-green-glow); /* Neon glow around the skills orbit */
-  text-align: center; /* Ensures content like placeholder text is centered */
-}
-
-.skills-orbit p { /* Placeholder text or title within skills orbit */
-  color: var(--neon-green);
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-/* Skill Chip Styles (used in Skills Orbit and potentially elsewhere) */
-.skill-chip {
-  background: var(--neon-green); /* Neon green background for chips */
-  color: var(--dark-bg); /* Dark text for contrast against neon green */
-  padding: 8px 15px; /* Padding for larger chips */
-  border-radius: 20px; /* More rounded chips */
-  margin: 5px; /* Spacing around chips */
-  display: inline-block; /* Allows chips to flow with text but have padding/margin */
-  font-weight: bold;
-  box-shadow: 0 0 8px var(--neon-green-glow); /* Neon glow for chips */
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
-}
-
-.skill-chip:hover {
-  transform: scale(1.1); /* Enlarges chip on hover */
-  background-color: #00FF00; /* Can be a slightly different shade or same for emphasis */
-  box-shadow: 0 0 15px #00FF00; /* More intense glow on hover */
-}
-
-/* Social Icons on CV Card */
-.social-icons { /* Container for social media icons */
-   margin-top: 20px; /* Space above social icons */
-   text-align: center; /* Centers the icons if they are inline-block */
-}
-.social-icons a { /* Individual social icon links */
-    color: var(--white); /* Default color, overridden by icon style below for neon effect */
-    margin: 0 10px; /* Spacing between icons */
-    font-size: 1.5em; /* Base size for link, icon size controlled by <i> */
-}
-
-.social-icons a i { /* The FontAwesome icon itself */
-  font-size: 1.8em; /* Larger social icons */
-  color: var(--neon-green); /* Neon green for icons */
-  text-shadow: 0 0 8px var(--neon-green-glow); /* Neon glow for icons */
-  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for hover */
-}
-
-.social-icons a:hover i {
-  color: var(--white); /* Changes icon color to white on hover for contrast */
-  text-shadow: 0 0 12px var(--white); /* White glow on hover */
-}
-
-
-/* Icon Card Styles (Generic, used for loading icons on CV card and potentially elsewhere) */
-/* This is the primary style for .icon-card elements. */
-.icon-card {
-  background-color: rgba(0, 255, 0, 0.1); /* Subtle neon green background */
-  border: 1px solid var(--neon-green); /* Neon green border */
-  color: var(--neon-green); /* Default text/icon color to neon green */
-  padding: 10px;
-  border-radius: 8px; /* Rounded corners */
-  margin: 5px; /* Spacing between cards */
-  display: inline-flex; /* Aligns icon and any potential text nicely */
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 8px var(--neon-green-glow); /* Neon glow effect */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover transitions */
-}
-
-.icon-card:hover {
-  transform: scale(1.1); /* Enlarges card on hover */
-  box-shadow: 0 0 15px var(--neon-green); /* More intense glow on hover */
-}
-
-.icon-card i { /* Styles for the FontAwesome icon within an .icon-card */
-  font-size: 1.5em; /* Ensures icon is neon green */
-  text-shadow: 0 0 5px var(--neon-green-glow); /* Neon glow for the icon itself */
-}
-
-/* Scoped styles for .loading-icons specifically within #cv-card-page, if different from general .icon-card */
-/* These rules are largely redundant if .icon-card is styled as above, but kept for specificity if needed. */
-
-/* #cv-card-page .loading-icons .icon-card { */
-  /* Most styles are inherited from the general .icon-card rule. */
-  /* Add any specific overrides for icons *only* on the CV card's loading section here if necessary. */
-  /* For example, if they needed a slightly different size or margin ONLY in this context. */
-/* } */
-
-/* #cv-card-page .loading-icons .icon-card i { */
-  /* Inherits from general .icon-card i. Override if needed for this specific context. */
-/* } */
-
-
-/* --- Initial Page Loader (.loading-skeleton) --- */
-/* Styles for the full-page loader that appears before the main content or CV card. */
+/* --- Loading Skeleton --- */
 .loading-skeleton {
-  position:fixed; /* Covers the full viewport */
-  inset:0;
-  display:flex;
-  flex-direction:column; /* Stacks logo, text, label, icons vertically */
-  align-items:center;
-  justify-content:center;
-  background:#101718; /* Dark background for the loader */
-  animation:neonPulseLoader 1.2s infinite alternate; /* Overall pulsing glow for the loader page */
-  transition:opacity .6s; /* Smooth fade-out transition */
-  z-index:1001; /* Ensures it's on top of everything, including chatbot if active early */
+  position: fixed; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--loader-bg);
+  transition: opacity 0.8s ease-out, visibility 0.8s ease-out; /* Added visibility */
+  z-index: 1001;
+  padding: 20px;
 }
-.loading-skeleton .loader-logo { /* Container for the SVG logo */
-  width:120px;
-  height:120px;
-  background:linear-gradient(135deg, #22272e 0%, #181b1e 100%); /* Dark gradient background for logo container */
-  border-radius:24px;
-  box-shadow:0 0 20px var(--neon-green); /* Neon glow around the logo container */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  animation:logoPulseLoader 1.4s ease-in-out infinite; /* Pulsing animation for the logo container */
+.loader-logo {
+  width: clamp(80px, 20vw, 120px); height: clamp(80px, 20vw, 120px);
+  background: linear-gradient(135deg, #1A1A1A 0%, #101010 100%);
+  border-radius: 24px;
+  box-shadow: 0 0 25px var(--neon-green), 0 0 10px var(--white);
+  display: flex; align-items: center; justify-content: center;
+  animation: logoPulseLoader 1.4s ease-in-out infinite;
+  position: relative; /* For scanline */
+  overflow: hidden; /* For scanline */
 }
-.loading-skeleton .loader-logo svg { width:70%; height:70%; } /* Sizes the SVG within its container */
+.loader-logo svg { width: 70%; height: 70%; }
+.scanline-loader {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 3px;
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+  animation: scanlineVertical 2s linear infinite;
+  opacity: 0.6;
+}
+.loader-text {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 900; letter-spacing: clamp(4px, 2vw, 8px); color: var(--white);
+  text-shadow: 0 0 15px var(--neon-green), 0 0 30px var(--neon-green);
+  margin-top: 20px;
+  animation: textGlitchLoader 1.4s infinite alternate, textPulseLoader 2s infinite alternate;
+}
+.loader-status-messages {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--neon-green); letter-spacing: 1.5px; margin-top: 12px;
+  text-shadow: 0 0 5px var(--neon-green-glow); min-height: 1.5em; /* Prevent layout shift */
+}
+.loader-progress-bar-container {
+  width: clamp(200px, 60vw, 300px);
+  height: 8px;
+  background-color: rgba(0, 255, 0, 0.1);
+  border: 1px solid var(--neon-green);
+  border-radius: 4px;
+  margin-top: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0,255,0,0.2);
+}
+.loader-progress-bar {
+  width: 0%; height: 100%;
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+  border-radius: 4px;
+  transition: width 0.3s ease-out; /* Smooth progress update */
+}
 
-.loading-skeleton .loader-text { /* "AMRIKYY" text */
-  font-family:'Space Grotesk',sans-serif; /* Techy, modern font */
-  font-size:2.2rem;
-  font-weight:900; /* Very bold */
-  letter-spacing:8px; /* Wide letter spacing */
-  color:var(--white);
-  text-shadow:0 0 15px var(--neon-green); /* Neon glow for the text */
-  margin-top:16px;
-  animation:textGlitchLoader 1.4s infinite alternate; /* Glitching text animation */
-}
-.loading-skeleton .loader-label { /* "جارٍ تحميل مهاراتك..." text */
-  font-family:'Space Grotesk',sans-serif;
-  font-size:1rem;
-  color:var(--neon-green);
-  letter-spacing:1.5px;
-  margin-top:8px;
-  animation:labelPulseLoader 1.8s ease-in-out infinite; /* Pulsing opacity animation */
+/* --- Main Content Area --- */
+main#cv-card-page {
+  position: relative; z-index: 2;
+  padding: 20px 0; /* Padding for scroll */
 }
 
-/* Icons within the .loading-skeleton (these were moved to CV card, styles below are no longer actively used if icons remain moved) */
-/* Removing the following rules as .loading-icons is no longer a child of .loading-skeleton */
-/*
-.loading-skeleton .loading-icons {
-  display:flex;
-  flex-wrap:wrap; 
-  gap:16px; 
-  margin-top:24px;
-  justify-content:center; 
+/* --- CV Card (.wow-card) --- */
+.wow-card {
+  position: relative; z-index: 3;
+  margin: 70px auto 50px auto;
+  background: var(--panel-glass);
+  border-radius: 25px;
+  max-width: 800px; /* Wider for more content */
+  width: calc(100% - 40px); /* Responsive width with padding */
+  border: var(--border-neon);
+  padding: clamp(20px, 4vw, 40px);
+  box-shadow: var(--border-neon-glow), 0 10px 50px rgba(0,0,0,0.7);
+  backdrop-filter: blur(18px) saturate(180%);
+  animation: cardBreathe 4s ease-in-out infinite alternate;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease-out;
+  opacity: 0; /* For fade in animation */
+  transform: translateY(20px); /* For fade in animation */
 }
-.loading-skeleton .icon-card { 
-  width:64px;
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,0.05); 
-  border:1px solid var(--neon-green); 
-  border-radius:50%; 
-  backdrop-filter:blur(6px); 
-  box-shadow:0 0 16px rgba(57,255,20,0.6); 
-  transition:transform .3s ease, box-shadow .3s ease;
-  font-size:1.8rem; 
-  color:var(--white); 
-  animation:spinIconLoader 4s linear infinite, iconGlowLoader 2.5s ease-in-out infinite; 
+.wow-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 0 30px var(--neon-green), 0 0 12px var(--white), 0 15px 60px rgba(0,0,0,0.8);
 }
-.loading-skeleton .icon-card:hover {
-  transform: scale(1.3); 
-  color: var(--neon-green); 
-  box-shadow: 0 0 28px rgba(57,255,20,0.8); 
-}
-*/
 
-/* --- Keyframes for Animations --- */
-/* Contains all @keyframes rules used throughout the stylesheet. */
+/* Profile Header within Card */
+.profile-header { text-align: center; margin-bottom: 30px; }
+.profile-img {
+  width: clamp(100px, 20vw, 130px); height: clamp(100px, 20vw, 130px);
+  border-radius: 50%; border: 3px solid var(--neon-green);
+  box-shadow: var(--border-neon-glow), 0 0 20px var(--neon-green);
+  margin: 0 auto 15px auto; object-fit: cover; position: relative; overflow: hidden;
+}
+.profile-img::after { /* Scanline effect from previous */
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);
+  animation: scanlineVertical 3s linear infinite; opacity: 0.7;
+}
+.nickname { font-size: 0.7em; color: var(--text-secondary); font-family: 'Sora', sans-serif; }
 
-/* Keyframes for .loading-skeleton loader animations (renamed to avoid conflicts if similar names existed) */
-@keyframes logoPulseLoader { /* For .loading-skeleton .loader-logo */
-  0%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-  100%{transform:scale(1);}
+/* Contact Info in Header */
+.contact-info { margin-top: 20px; font-size: clamp(0.8rem, 2vw, 0.95rem); }
+.contact-info p { margin-bottom: 0.5em; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
+.contact-info i { color: var(--neon-blue); margin-right: 8px; font-size: 1.1em; }
+.contact-block { margin-bottom: 10px; }
+.contact-block p { margin-bottom: 0.3em; }
+.social-links-header { margin-top: 15px; }
+.social-links-header a {
+  margin: 0 10px; color: var(--neon-green); font-family: 'Sora', sans-serif;
+  transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
+  display: inline-block; /* For transform */
 }
-@keyframes textGlitchLoader { /* For .loading-skeleton .loader-text */
-  0%,100%{filter:none;}
-  50%{filter:blur(1px);color:var(--neon-green);} /* Simulates a glitch effect */
+.social-links-header a:hover {
+  color: var(--white); text-shadow: 0 0 10px var(--neon-green-glow);
+  transform: translateY(-2px);
 }
-@keyframes neonPulseLoader { /* For the entire .loading-skeleton page */
-  0%,100%{filter:drop-shadow(0 0 8px var(--neon-green));}
-  50%{filter:drop-shadow(0 0 24px var(--neon-green));} /* Wider glow at 50% */
+.social-links-header i { color: inherit; margin-right: 5px; }
+
+
+/* General CV Section Styling */
+.cv-section {
+  background: rgba(0,0,0,0.15); /* More subtle inner sections */
+  padding: clamp(15px, 3vw, 25px);
+  border-radius: 15px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
-@keyframes iconGlowLoader { /* For .loading-skeleton .icon-card */
-  0%,100% { box-shadow: 0 0 8px rgba(57,255,20,0.4); }
-  50% { box-shadow: 0 0 24px rgba(57,255,20,1); } /* Brighter, wider glow at 50% */
+.cv-section:hover { background: var(--panel-glass-hover); transform: scale(1.01); }
+
+.cv-title-row {
+  display: flex; align-items: center; margin-bottom: 15px;
+  padding-bottom: 10px; border-bottom: 1px solid rgba(0,255,0,0.2);
 }
-@keyframes spinIconLoader { /* For .loading-skeleton .icon-card */
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); } /* Continuous spin */
+.cv-title-row i {
+  font-size: clamp(1.3em, 3vw, 1.6em); margin-right: 12px;
+  color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green-glow);
+  transition: transform 0.3s ease;
 }
-@keyframes labelPulseLoader { /* For .loading-skeleton .loader-label */
-  0% { opacity: 1; }
-  50% { opacity: 0.5; } /* Fades out slightly */
-  100% { opacity: 1; }
+.cv-title-row:hover i { transform: scale(1.15) rotate(-3deg); }
+
+.cv-list li {
+  padding-left: 15px; margin-bottom: 0.8em; position: relative;
+  border-left: 2px solid var(--neon-blue);
+  box-shadow: -1px 0 6px var(--neon-blue-glow);
+  transition: padding-left 0.3s ease, color 0.3s ease;
+}
+.cv-list li::before { /* Custom bullet */
+  content: ''; position: absolute; left: -6px; top: 0.5em;
+  width: 8px; height: 8px; background-color: var(--neon-blue);
+  border-radius: 50%; box-shadow: 0 0 8px var(--neon-blue);
+}
+.cv-list li:hover { padding-left: 20px; color: var(--neon-blue); }
+.cv-list li strong { color: var(--text-primary); }
+
+.cv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); /* Responsive grid */
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* Professional Summary */
+.professional-summary p { font-size: clamp(0.9rem, 2.2vw, 1.05rem); line-height: 1.8; }
+
+/* Education List - Specific styling if needed */
+.education-list li { margin-bottom: 1em; }
+.education-list strong { display: block; margin-bottom: 0.2em; }
+
+/* Skills Section */
+.skills-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.skill-category {
+  background: rgba(0,0,0,0.2);
+  padding: 15px; border-radius: 10px;
+  border: 1px solid rgba(0,191,255,0.2); /* Neon blue border */
+}
+.skill-category h4 i { margin-right: 8px; font-size: 0.9em; }
+.skill-tags {
+  list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+}
+.skill-tags li {
+  background: var(--neon-blue); color: var(--dark-bg);
+  font-family: 'Sora', sans-serif; font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+  padding: 5px 12px; border-radius: 20px;
+  box-shadow: 0 0 8px var(--neon-blue-glow);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border: none; /* Override from .cv-list li if it gets applied */
+  padding-left: 12px; /* Override from .cv-list li if it gets applied */
+}
+.skill-tags li::before { display: none; } /* Hide default custom bullet */
+.skill-tags li:hover { transform: scale(1.1); background: var(--neon-green); color: var(--dark-bg); }
+
+/* Experience & Projects Sections */
+.experience-item, .project-item { margin-bottom: 20px; padding-left: 10px; border-left: 2px dashed var(--neon-purple); }
+.experience-item h4, .project-item h4 { color: var(--neon-purple); text-shadow: 0 0 6px var(--neon-purple-glow); }
+.company-names { font-style: italic; color: var(--text-secondary); font-size: 0.9em; margin-bottom: 0.5em; }
+.experience-item ul { list-style-type: disc; padding-left: 25px; } /* Simpler list for job duties */
+.experience-item ul li { border: none; padding-left: 0; margin-bottom: 0.3em; color: var(--text-secondary); }
+.experience-item ul li::before { display: none; }
+
+/* Keyframes (ensure all are present from previous suggestions + new ones) */
+@keyframes cardBreathe { /* Card glow pulse */
+  0% { box-shadow: 0 0 12px var(--neon-green), 0 0 4px var(--white), 0 10px 50px rgba(0,0,0,0.7); }
+  100% { box-shadow: 0 0 25px var(--neon-green), 0 0 8px var(--white), 0 0 50px var(--neon-green-glow), 0 10px 55px rgba(0,0,0,0.8); }
+}
+@keyframes flickerText { /* Main title H1 flicker */
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-green-glow), 0 0 20px var(--neon-green); }
+  50% { opacity: 0.85; text-shadow: 0 0 15px var(--neon-green-glow), 0 0 25px var(--neon-green); }
+}
+@keyframes scanlineVertical { /* For profile image and loader logo */
+  0% { transform: translateY(-100%); opacity: 0.1; }
+  50% { transform: translateY(0%); opacity: 0.6; }
+  100% { transform: translateY(100%); opacity: 0.1; }
+}
+@keyframes logoPulseLoader { /* Loader logo pulse */
+  0%{transform:scale(1);} 50%{transform:scale(1.05);} 100%{transform:scale(1);}
+}
+@keyframes textGlitchLoader { /* Loader text glitch */
+  0%,100%{filter:none;} 50%{filter:blur(0.5px);color:var(--neon-green);}
+}
+@keyframes textPulseLoader { /* Loader text pulse */
+  0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); }
+}
+@keyframes fadeInUp { /* Card fade in */
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- Responsive Design --- */
-/* Media queries for adjusting layout and styles on smaller screens. */
-@media(max-width:600px){
-  /* Adjustments for .loading-skeleton on small screens */
-  .loading-skeleton .loader-logo{width:80px;height:80px;}
-  .loading-skeleton .loader-text{font-size:1.6rem;}
-
-  /* Add other responsive adjustments for CV card, etc., if needed */
-  .wow-card {
-    padding: 25px 20px; /* Reduce padding on smaller screens */
-    margin-top: 60px; /* Adjust top margin */
-  }
-  .wow-card h1 { font-size: 1.8rem; /* Adjust heading sizes */ }
-  .wow-card h2 { font-size: 1rem; }
-  .profile-img { width: 80px; height: 80px; }
-
-  .cv-title-row i { font-size: 1.3em; }
-  .cv-title-row h3 { font-size: 1.1em; }
-
-  .skill-chip { padding: 6px 12px; font-size: 0.9em; }
-  .icon-card i { font-size: 1.3em; }
-  .social-icons a i { font-size: 1.6em; }
+@media(max-width: 768px) {
+  .wow-card { margin: 50px auto 30px auto; width: calc(100% - 30px); }
+  .contact-info p { justify-content: center; text-align: center; }
+  .skills-categories { grid-template-columns: 1fr; /* Stack skill categories */ }
+}
+@media(max-width: 480px) {
+  h1 {font-size: 1.6rem;} h2 {font-size: 1rem;} h3 {font-size: 1.1rem;}
+  .profile-img { width: 90px; height: 90px; }
+  .contact-info { font-size: 0.85rem; }
+  .cv-section { padding: 15px; }
+  .skill-tags li { font-size: 0.8rem; padding: 4px 10px; }
 }
