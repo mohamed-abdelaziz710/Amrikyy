@@ -209,12 +209,23 @@
                     <section aria-labelledby="certifications-heading">
                         <div class="section-header">
                             <i class="fas fa-certificate" aria-hidden="true"></i>
-                            <h2 id="certifications-heading">Certifications</h2>
+                            <h2 id="certifications-heading" class="en-content">Certifications</h2>
+                            <h2 id="certifications-heading-ar" class="ar-content" style="display: none;">الشهادات</h2>
                         </div>
-                        <ul class="cert-list">
+                        <ul class="cert-list en-content">
                             <li class="cert-item">
                                 <i class="fas fa-medal" aria-hidden="true"></i>
                                 <span>Certified Ethical Hacker (CEH)</span>
+                            </li>
+                            <li class="cert-item">
+                                <i class="fas fa-medal" aria-hidden="true"></i>
+                                <span>CompTIA Security+</span>
+                            </li>
+                        </ul>
+                        <ul class="cert-list ar-content" style="display: none;">
+                            <li class="cert-item">
+                                <i class="fas fa-medal" aria-hidden="true"></i>
+                                <span>مخترق أخلاقي معتمد (CEH)</span>
                             </li>
                             <li class="cert-item">
                                 <i class="fas fa-medal" aria-hidden="true"></i>
@@ -227,9 +238,10 @@
                     <section aria-labelledby="projects-heading" class="full-width">
                         <div class="section-header">
                             <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            <h2 id="projects-heading">Key Projects</h2>
+                            <h2 id="projects-heading" class="en-content">Key Projects</h2>
+                            <h2 id="projects-heading-ar" class="ar-content" style="display: none;">المشاريع الرئيسية</h2>
                         </div>
-                        <div class="projects-grid">
+                        <div class="projects-grid en-content">
                             <article class="project-card">
                                 <h3>Security Assessment Tool</h3>
                                 <p>Developed automated vulnerability scanning tool using Python and Nmap for network security assessments.</p>
@@ -249,15 +261,36 @@
                                 </ul>
                             </article>
                         </div>
+                        <div class="projects-grid ar-content" style="display: none;">
+                            <article class="project-card">
+                                <h3>أداة تقييم الأمان</h3>
+                                <p>تطوير أداة فحص الثغرات الآلية باستخدام Python و Nmap لتقييمات أمان الشبكة.</p>
+                                <ul class="project-tech">
+                                    <li class="tech-tag">Python</li>
+                                    <li class="tech-tag">Nmap</li>
+                                    <li class="tech-tag">أمان</li>
+                                </ul>
+                            </article>
+                            <article class="project-card">
+                                <h3>تطبيق ويب آمن</h3>
+                                <p>بناء تطبيق ويب شامل مع ميزات أمان متقدمة بما في ذلك الامتثال لـ OWASP والتشفير.</p>
+                                <ul class="project-tech">
+                                    <li class="tech-tag">React</li>
+                                    <li class="tech-tag">Node.js</li>
+                                    <li class="tech-tag">أمان</li>
+                                </ul>
+                            </article>
+                        </div>
                     </section>
 
                     <!-- Languages -->
                     <section aria-labelledby="languages-heading">
                         <div class="section-header">
                             <i class="fas fa-language" aria-hidden="true"></i>
-                            <h2 id="languages-heading">Languages</h2>
+                            <h2 id="languages-heading" class="en-content">Languages</h2>
+                            <h2 id="languages-heading-ar" class="ar-content" style="display: none;">اللغات</h2>
                         </div>
-                        <ul class="language-list">
+                        <ul class="language-list en-content">
                             <li class="language-item">
                                 <span class="language">Arabic</span>
                                 <span class="level">Native</span>
@@ -265,6 +298,16 @@
                             <li class="language-item">
                                 <span class="language">English</span>
                                 <span class="level">Professional</span>
+                            </li>
+                        </ul>
+                        <ul class="language-list ar-content" style="display: none;">
+                            <li class="language-item">
+                                <span class="language">العربية</span>
+                                <span class="level">لغة أم</span>
+                            </li>
+                            <li class="language-item">
+                                <span class="language">الإنجليزية</span>
+                                <span class="level">محترف</span>
                             </li>
                         </ul>
                     </section>
@@ -276,7 +319,8 @@
                     <section aria-labelledby="tech-platforms-heading">
                         <div class="section-header">
                             <i class="fas fa-laptop-code" aria-hidden="true"></i>
-                            <h2 id="tech-platforms-heading">Technologies & Platforms</h2>
+                            <h2 id="tech-platforms-heading" class="en-content">Technologies & Platforms</h2>
+                            <h2 id="tech-platforms-heading-ar" class="ar-content" style="display: none;">التقنيات والمنصات</h2>
                         </div>
                         <ul class="tech-icons-grid">
                             <li class="icon-label"><i class="fab fa-apple" aria-hidden="true"></i> <span>Apple</span></li>
@@ -288,7 +332,8 @@
                     </section>
                 </div>
                 <div class="footer-text">
-                    <p>Powered by Cyber Innovation • Built with Security in Mind</p>
+                    <p class="en-content">Powered by Cyber Innovation • Built with Security in Mind</p>
+                    <p class="ar-content" style="display: none;">مدعوم بالابتكار السيبراني • مبني مع وضع الأمان في الاعتبار</p>
                 </div>
             </div>
         </div>
