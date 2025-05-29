@@ -8,26 +8,13 @@
 
 // --- Loader Animation & Hide Logic ---
 (function() {
-  // Loader elements
-  const loader = document.getElementById('fullpage-loader'); // Should be 'loader' in your HTML
+  const loader = document.getElementById('loader');
   const mainContent = document.getElementById('main-content');
-  const progressBar = document.querySelector('.loader-progress-bar');
-  // Loader hints for progress
-  const loaderHints = [
-    'يتم تجهيز تجربة AI الخاصة بك...'
-    ,'تحميل عناصر السيبرانية...'
-    ,'تفعيل واجهة المستخدم الذكية...'
-    ,'توصيل الذكاء الاصطناعي...'
-    ,'تجهيز بطاقة السيرة الذاتية...'
-    ,'جارٍ الإقلاع...'
-  ];
-  let hintIdx = 0;
-  let progress = 0;
-  let hintEl = document.getElementById('loader-hint');
-  let dots = document.querySelectorAll('.loader-dot');
-  let dotStep = 0;
+  const progressBar = document.querySelector('.loader-bar-progress');
+  const hintEl = document.getElementById('loader-hint');
+  const dots = document.querySelectorAll('.loader-dots span');
 
-  // Animate loader dots
+  let dotStep = 0;
   setInterval(() => {
     dots.forEach((dot, i) => {
       dot.style.opacity = (i === dotStep % 3) ? '1' : '0.3';
@@ -35,7 +22,17 @@
     dotStep++;
   }, 400);
 
-  // Animate progress bar and hints
+  const loaderHints = [
+    'يتم تجهيز تجربة AI الخاصة بك...',
+    'تحميل عناصر السيبرانية...',
+    'تفعيل واجهة المستخدم الذكية...',
+    'توصيل الذكاء الاصطناعي...',
+    'تجهيز بطاقة السيرة الذاتية...',
+    'جارٍ الإقلاع...'
+  ];
+  let hintIdx = 0;
+  let progress = 0;
+
   const loaderInterval = setInterval(() => {
     progress += Math.random() * 8 + 3;
     if (progress > 100) progress = 100;
@@ -47,21 +44,19 @@
     if (progress >= 100) {
       clearInterval(loaderInterval);
       setTimeout(() => {
-        loader.classList.add('hidden');
+        loader.classList.add('hide');
         setTimeout(() => {
           loader.style.display = 'none';
           document.body.classList.remove('loading');
           document.body.classList.add('loaded');
           if (mainContent) mainContent.style.display = 'flex';
-          // Animate CV card in
           const cvCard = document.querySelector('.cv-card');
-          if (cvCard) setTimeout(()=>cvCard.classList.add('visible'), 350);
-          // Auto-scroll to CV card after loader
+          if (cvCard) setTimeout(() => cvCard.classList.add('visible'), 350);
           const cvSection = document.getElementById('cv-card-page');
           if (cvSection) {
-            setTimeout(()=>{
-              cvSection.scrollIntoView({behavior:'smooth'});
-              cvSection.setAttribute('tabindex','-1');
+            setTimeout(() => {
+              cvSection.scrollIntoView({ behavior: 'smooth' });
+              cvSection.setAttribute('tabindex', '-1');
               cvSection.focus();
             }, 700);
           }
@@ -70,29 +65,23 @@
     }
   }, 350);
 
-  // Add event for loader CTA button to skip to CV card
-  document.addEventListener('DOMContentLoaded', function() {
-    var loaderCta = document.getElementById('loaderToCvBtn');
+  document.addEventListener('DOMContentLoaded', () => {
+    const loaderCta = document.getElementById('loaderToCvBtn');
     if (loaderCta) {
-      loaderCta.onclick = function() {
-        // Instantly finish loader and scroll to CV card
-        const loader = document.getElementById('loader');
-        const mainContent = document.getElementById('main-content');
-        loader.classList.add('hidden');
+      loaderCta.onclick = () => {
+        loader.classList.add('hide');
         setTimeout(() => {
           loader.style.display = 'none';
           document.body.classList.remove('loading');
           document.body.classList.add('loaded');
           if (mainContent) mainContent.style.display = 'flex';
-          // Animate CV card in
           const cvCard = document.querySelector('.cv-card');
-          if (cvCard) setTimeout(()=>cvCard.classList.add('visible'), 350);
-          // Auto-scroll to CV card
+          if (cvCard) setTimeout(() => cvCard.classList.add('visible'), 350);
           const cvSection = document.getElementById('cv-card-page');
           if (cvSection) {
-            setTimeout(()=>{
-              cvSection.scrollIntoView({behavior:'smooth'});
-              cvSection.setAttribute('tabindex','-1');
+            setTimeout(() => {
+              cvSection.scrollIntoView({ behavior: 'smooth' });
+              cvSection.setAttribute('tabindex', '-1');
               cvSection.focus();
             }, 700);
           }
@@ -105,11 +94,14 @@
 // --- Smooth Scroll to CV Card ---
 const scrollBtn = document.getElementById('scrollToCvBtn');
 if (scrollBtn) {
-  scrollBtn.onclick = function() {
+  scrollBtn.onclick = () => {
     const cvSection = document.getElementById('cv-card-page');
     if (cvSection) {
-      cvSection.scrollIntoView({behavior:'smooth'});
-      setTimeout(()=>{cvSection.setAttribute('tabindex','-1');cvSection.focus();},700);
+      cvSection.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        cvSection.setAttribute('tabindex', '-1');
+        cvSection.focus();
+      }, 700);
     }
   };
 }
