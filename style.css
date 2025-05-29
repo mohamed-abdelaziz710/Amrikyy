@@ -4,10 +4,6 @@
 :root {
   --neon-green: #00FF00;
   --neon-green-glow: #00FF00b3;
-  --neon-blue: #00BFFF; 
-  --neon-blue-glow: #00BFFFB3;
-  --neon-purple: #BF00FF; /* New accent color */
-  --neon-purple-glow: #BF00FFb3;
   --dark-bg: #0A0A0A;
   --loader-bg: #0D0D0D;
   --panel-glass: rgba(15, 30, 28, 0.88); /* Slightly adjusted panel glass */
@@ -17,12 +13,6 @@
   --white: #fff;
   --border-neon: 2px solid var(--neon-green);
   --border-neon-glow: 0 0 12px var(--neon-green), 0 0 4px var(--white);
-  --border-neon-blue: 2px solid var(--neon-blue);
-  --border-neon-blue-glow: 0 0 12px var(--neon-blue), 0 0 4px var(--white);
-
-  --particle-color-1: var(--neon-green);
-  --particle-color-2: var(--neon-blue);
-  --particle-line-color: rgba(0, 255, 128, 0.25); 
 }
 
 /* --- Base & Typography --- */
@@ -55,11 +45,11 @@ h1, h2, h3, h4 {
 h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); animation: flickerText 3s infinite alternate; margin-bottom: 0.25em;}
 h2 { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-primary); text-shadow: 0 0 5px rgba(229, 231, 235, 0.5); margin-bottom: 0.75em; font-weight: 400;}
 h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 0.5em;}
-h4 { font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--neon-blue); text-shadow: 0 0 6px var(--neon-blue-glow); margin-bottom: 0.3em;}
+h4 { font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--neon-green); text-shadow: 0 0 6px var(--neon-green-glow); margin-bottom: 0.3em;}
 
 p { margin-bottom: 1em; color: var(--text-secondary); }
-a { color: var(--neon-blue); text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; }
-a:hover { color: var(--white); text-shadow: 0 0 8px var(--neon-blue-glow); }
+a { color: var(--neon-green); text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; }
+a:hover { color: var(--white); text-shadow: 0 0 8px var(--neon-green-glow); }
 
 ul { list-style: none; }
 
@@ -69,12 +59,12 @@ ul { list-style: none; }
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
 }
 
-/* --- Loader & CV Card Styles --- */
+/* --- Loader & Neon Green Only Styles --- */
 #particle-canvas {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
 }
 #loading-skeleton {
-  background: linear-gradient(135deg, #0D0D0D 60%, #1a1a1a 100%);
+  background: linear-gradient(135deg, #0D0D0D 60%, #181818 100%);
   position: fixed; inset: 0; display: flex;
   align-items: center; justify-content: center; z-index: 1000;
   transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -85,7 +75,7 @@ ul { list-style: none; }
 .loader-container {
   background: rgba(20, 40, 38, 0.92);
   border-radius: 24px;
-  box-shadow: 0 0 32px 8px var(--neon-green-glow), 0 0 0 4px var(--neon-blue-glow) inset;
+  box-shadow: 0 0 32px 8px var(--neon-green-glow), 0 0 0 4px var(--neon-green-glow) inset;
   border: 2.5px solid var(--neon-green);
   padding: 3.5rem 2.5rem 2.5rem 2.5rem;
   position: relative;
@@ -98,8 +88,8 @@ ul { list-style: none; }
   animation: loaderCardGlow 2.5s infinite alternate;
 }
 @keyframes loaderCardGlow {
-  0% { box-shadow: 0 0 32px 8px var(--neon-green-glow), 0 0 0 4px var(--neon-blue-glow) inset; }
-  100% { box-shadow: 0 0 48px 16px var(--neon-purple-glow), 0 0 0 8px var(--neon-green-glow) inset; }
+  0% { box-shadow: 0 0 32px 8px var(--neon-green-glow), 0 0 0 4px var(--neon-green-glow) inset; }
+  100% { box-shadow: 0 0 48px 16px var(--neon-green-glow), 0 0 0 8px var(--neon-green-glow) inset; }
 }
 /* Cyber circuit SVG background */
 .loader-container::before {
@@ -107,9 +97,7 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url('data:image/svg+xml;utf8,<svg width="100%25" height="100%25" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.13"><rect x="10" y="10" width="380" height="180" rx="24" stroke="%2300FF00" stroke-width="2"/><path d="M30 30H370V170H30V30Z" stroke="%2300BFFF" stroke-width="1.5"/><path d="M60 60H340V140H60V60Z" stroke="%23BF00FF" stroke-width="1"/><circle cx="200" cy="100" r="60" stroke="%2300FF00" stroke-width="1.5"/><circle cx="200" cy="100" r="30" stroke="%2300BFFF" stroke-width="1"/></g></svg>');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: none;
   border-radius: 24px;
   pointer-events: none;
 }
@@ -123,14 +111,14 @@ ul { list-style: none; }
 }
 .cyber-logo .logo-icon {
   font-size: 5.2rem;
-  color: var(--neon-purple);
-  text-shadow: 0 0 24px var(--neon-purple-glow), 0 0 8px var(--neon-blue-glow);
+  color: var(--neon-green);
+  text-shadow: 0 0 24px var(--neon-green-glow), 0 0 8px var(--neon-green-glow);
   animation: logoPulseLoader 1.8s infinite alternate, cyberScanline 2.5s linear infinite;
   filter: drop-shadow(0 0 16px var(--neon-green-glow));
 }
 @keyframes cyberScanline {
   0% { filter: brightness(1) drop-shadow(0 0 16px var(--neon-green-glow)); }
-  50% { filter: brightness(1.2) drop-shadow(0 0 32px var(--neon-blue-glow)); }
+  50% { filter: brightness(1.2) drop-shadow(0 0 32px var(--neon-green-glow)); }
   100% { filter: brightness(1) drop-shadow(0 0 16px var(--neon-green-glow)); }
 }
 .logo-text {
@@ -138,7 +126,7 @@ ul { list-style: none; }
   font-size: 2.7rem;
   letter-spacing: 6px;
   color: var(--neon-green);
-  text-shadow: 0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow);
+  text-shadow: 0 0 16px var(--neon-green-glow), 0 0 8px var(--white);
   margin-top: 0.5rem;
   margin-bottom: 0.2rem;
   animation: textPulseLoader 2.2s infinite alternate;
@@ -147,14 +135,14 @@ ul { list-style: none; }
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--neon-blue);
-  text-shadow: 0 0 8px var(--neon-blue-glow);
+  color: var(--text-secondary);
+  text-shadow: 0 0 8px var(--neon-green-glow);
   margin-bottom: 1.7rem;
   letter-spacing: 2px;
   animation: textGlitchLoader 2.5s infinite alternate;
 }
 @keyframes textGlitchLoader {
-  0%,100%{filter:none;} 20%{filter:blur(0.5px) brightness(1.2);color:var(--neon-green);} 40%{filter:blur(1px) brightness(1.1);color:var(--neon-blue);} 60%{filter:blur(0.5px) brightness(1.2);color:var(--neon-purple);} 80%{filter:blur(0.5px) brightness(1.1);color:var(--neon-green);}
+  0%,100%{filter:none;} 20%{filter:blur(0.5px) brightness(1.2);color:var(--neon-green);} 40%{filter:blur(1px) brightness(1.1);color:var(--white);} 60%{filter:blur(0.5px) brightness(1.2);color:var(--text-secondary);} 80%{filter:blur(0.5px) brightness(1.1);color:var(--neon-green);}
 }
 .loader-progress {
   width: 100%;
@@ -170,15 +158,15 @@ ul { list-style: none; }
   border-radius: 8px;
   margin: 0 auto;
   overflow: hidden;
-  box-shadow: 0 0 12px var(--neon-blue-glow);
-  border: 1.5px solid var(--neon-blue);
+  box-shadow: 0 0 12px var(--neon-green-glow);
+  border: 1.5px solid var(--neon-green);
   position: relative;
 }
 .progress-bar {
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, var(--neon-green) 0%, var(--neon-blue) 100%);
-  box-shadow: 0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow);
+  background: linear-gradient(90deg, var(--neon-green) 0%, var(--white) 100%);
+  box-shadow: 0 0 16px var(--neon-green-glow), 0 0 8px var(--white);
   border-radius: 8px;
   transition: width 0.4s cubic-bezier(0.4, 0.8, 0.6, 1.2);
   position: relative;
@@ -192,8 +180,8 @@ ul { list-style: none; }
   transform: translateY(-50%);
   width: 18px; height: 18px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--neon-green) 60%, var(--neon-blue) 100%);
-  box-shadow: 0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow);
+  background: radial-gradient(circle, var(--neon-green) 60%, var(--white) 100%);
+  box-shadow: 0 0 16px var(--neon-green-glow), 0 0 8px var(--white);
   opacity: 0.85;
   transition: right 0.4s cubic-bezier(0.4, 0.8, 0.6, 1.2);
 }
@@ -202,8 +190,8 @@ ul { list-style: none; }
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 1.5px;
   font-size: 1.08rem;
-  color: var(--neon-blue);
-  text-shadow: 0 0 8px var(--neon-blue-glow);
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green-glow);
   transition: opacity 0.3s ease;
   text-align: center;
   min-height: 1.5em;
@@ -274,7 +262,7 @@ ul { list-style: none; }
   color: var(--white);
 }
 .cert-list li.cert-item i {
-  color: var(--neon-blue);
+  color: var(--neon-green);
 }
 .language-list {
   display: flex;
@@ -325,20 +313,20 @@ ul { list-style: none; }
   border-radius: 6px;
   font-size: 1.05rem;
   color: var(--white);
-  box-shadow: 0 0 8px var(--neon-blue-glow);
+  box-shadow: 0 0 8px var(--neon-green-glow);
   transition: background 0.3s, color 0.3s;
 }
 .tech-icons-grid li.icon-label i {
   font-size: 1.4rem;
-  color: var(--neon-blue);
+  color: var(--neon-green);
   transition: color 0.3s;
 }
 .tech-icons-grid li.icon-label:hover {
   background: var(--panel-glass-hover);
-  color: var(--neon-purple);
+  color: var(--neon-green);
 }
 .tech-icons-grid li.icon-label:hover i {
-  color: var(--neon-purple);
+  color: var(--neon-green);
 }
 
 /* --- Semantic Section Styles --- */
@@ -613,8 +601,8 @@ section.full-width {
 }
 
 .user-message .message-avatar {
-  border-color: var(--neon-blue);
-  box-shadow: 0 0 8px var(--neon-blue-glow);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 8px var(--neon-green-glow);
 }
 
 .message-content {
@@ -798,23 +786,23 @@ section.full-width {
   background: var(--panel-glass-hover);
   border-radius: 10px;
   padding: 1.1rem 1.2rem 0.7rem 1.2rem;
-  box-shadow: 0 0 12px var(--neon-blue-glow), 0 2px 12px rgba(0,255,0,0.08);
+  box-shadow: 0 0 12px var(--neon-green-glow), 0 2px 12px rgba(0,255,0,0.08);
   margin-bottom: 0.5rem;
   flex: 1 1 260px;
-  border: 1.5px solid var(--neon-blue);
+  border: 1.5px solid var(--neon-green);
   position: relative;
   transition: box-shadow 0.2s, border 0.2s;
 }
 .skills-group h3 {
-  color: var(--neon-purple);
+  color: var(--neon-green);
   font-size: 1.1rem;
   margin-bottom: 0.7em;
   font-family: 'Orbitron', sans-serif;
-  text-shadow: 0 0 8px var(--neon-purple-glow);
+  text-shadow: 0 0 8px var(--neon-green-glow);
 }
 .skill-badge {
   display: inline-block;
-  background: linear-gradient(90deg, var(--neon-green) 0%, var(--neon-blue) 100%);
+  background: linear-gradient(90deg, var(--neon-green) 0%, var(--white) 100%);
   color: var(--dark-bg);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.98rem;
@@ -822,16 +810,16 @@ section.full-width {
   border-radius: 20px;
   padding: 0.35em 1.1em;
   margin: 0.18em 0.3em 0.18em 0;
-  box-shadow: 0 0 8px var(--neon-blue-glow);
+  box-shadow: 0 0 8px var(--neon-green-glow);
   letter-spacing: 0.5px;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  border: 1.5px solid var(--neon-blue);
+  border: 1.5px solid var(--neon-green);
 }
 .skill-badge:hover {
-  background: linear-gradient(90deg, var(--neon-purple) 0%, var(--neon-green) 100%);
-  color: var(--white);
-  box-shadow: 0 0 16px var(--neon-purple-glow);
-  border-color: var(--neon-purple);
+  background: linear-gradient(90deg, var(--white) 0%, var(--neon-green) 100%);
+  color: var(--dark-bg);
+  box-shadow: 0 0 16px var(--neon-green-glow);
+  border-color: var(--neon-green);
 }
 
 @media (max-width: 700px) {
