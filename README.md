@@ -1,6 +1,6 @@
 # Amrikyy | Cyber Intelligence Platform & Portfolio V2
 
-**Live Demo:** [Link to your live portfolio (e.g., amrikyy.github.io/portfolio)](https://example.com) *(Replace with your actual link once deployed)*
+**Live Demo:** [https://amrikyy.github.io/portfolio](https://amrikyy.github.io/portfolio)
 
 ## 🚀 Ignition Point: The Vision
 
@@ -19,13 +19,11 @@ The core design philosophy revolves around a **"GenZ Cyber Neon"** aesthetic. Th
 
 ### 🌈 Color Palette: Code of Light
 
-The palette is meticulously chosen to evoke a high-tech, cybernetic world:
-
-* **Primary Accent - Neon Green (`#39FF14`):** The signature color, symbolizing digital energy, growth, and positive action. Used for CTAs, logos, vital highlights, and glows (`--neon-green`, `--neon-green-glow`, `--neon-green-soft-glow`).
-* **Secondary Accents - Neon Blue (`#00d4ff`) & Neon Purple (`#b600ff`):** These add depth and dynamism, primarily featured in the loader's progress bar and available for subtle highlights or hover effects, enriching the neon spectrum.
-* **Base - Deep Darks (`--dark-bg: #13181c`, `#10161e`, etc.):** Create a vast, digital canvas, allowing neon accents to pierce through with maximum impact and ensuring excellent contrast.
-* **Supporting - White (`--white`) & Grays (`--gray: #a0a0a0`, `--text-primary: #EAEAEA`):** Provide clarity for text, structure for UI elements, and balance to the vibrant neons.
-* **Material - Glassmorphism (`--glass: rgba(30, 40, 44, 0.87)`):** Used for card backgrounds and UI panels, adding a layer of sophistication and a futuristic, semi-transparent interface feel.
+* **Primary Accent** – Neon Green (`#39FF14`)
+* **Secondary Accents** – Neon Blue (`#00d4ff`) & Neon Purple (`#b600ff`)
+* **Base** – Deep Darks (`--dark-bg-primary: #0A0A0A`, etc.)
+* **Supporting** – White (`#FFFFFF`) & Grays (`#808080`, `#E0E0E0`)
+* **Glassmorphism** – (`--glass: rgba(30, 20, 50, 0.8)`)
 
 ### ✒️ Typography: The Digital Scribe
 
