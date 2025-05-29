@@ -1,3 +1,6 @@
+// DEBUG LOG: script.js loaded successfully on 2025-05-29
+// NOTE: This file contains loader, scroll, and chatbot logic for the portfolio.
+
 // === Amrikyy Cyber Portfolio Main Script ===
 // Loader animation, transitions, scroll, and chatbot logic
 // --------------------------------------------------------
@@ -37,10 +40,10 @@
     progress += Math.random() * 8 + 3;
     if (progress > 100) progress = 100;
     progressBar.style.width = progress + '%';
-    if (progress > 20 && hintIdx === 0) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
-    if (progress > 40 && hintIdx === 1) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
-    if (progress > 60 && hintIdx === 2) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
-    if (progress > 80 && hintIdx === 3) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
+    if (progress > 20 && hintIdx === 0) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; console.log('Loader hint:', loaderHints[hintIdx]); }
+    if (progress > 40 && hintIdx === 1) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; console.log('Loader hint:', loaderHints[hintIdx]); }
+    if (progress > 60 && hintIdx === 2) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; console.log('Loader hint:', loaderHints[hintIdx]); }
+    if (progress > 80 && hintIdx === 3) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; console.log('Loader hint:', loaderHints[hintIdx]); }
     if (progress >= 100) {
       clearInterval(loaderInterval);
       setTimeout(() => {
@@ -51,13 +54,14 @@
           document.body.classList.add('loaded');
           if (mainContent) mainContent.style.display = 'flex';
           const cvCard = document.querySelector('.cv-card');
-          if (cvCard) setTimeout(() => cvCard.classList.add('visible'), 350);
+          if (cvCard) setTimeout(() => {cvCard.classList.add('visible'); console.log('CV card made visible');}, 350);
           const cvSection = document.getElementById('cv-card-page');
           if (cvSection) {
             setTimeout(() => {
               cvSection.scrollIntoView({ behavior: 'smooth' });
               cvSection.setAttribute('tabindex', '-1');
               cvSection.focus();
+              console.log('Auto-scrolled to CV card');
             }, 700);
           }
         }, 700);
@@ -76,13 +80,14 @@
           document.body.classList.add('loaded');
           if (mainContent) mainContent.style.display = 'flex';
           const cvCard = document.querySelector('.cv-card');
-          if (cvCard) setTimeout(() => cvCard.classList.add('visible'), 350);
+          if (cvCard) setTimeout(() => {cvCard.classList.add('visible'); console.log('CV card made visible (CTA)');}, 350);
           const cvSection = document.getElementById('cv-card-page');
           if (cvSection) {
             setTimeout(() => {
               cvSection.scrollIntoView({ behavior: 'smooth' });
               cvSection.setAttribute('tabindex', '-1');
               cvSection.focus();
+              console.log('CTA: Scrolled to CV card');
             }, 700);
           }
         }, 700);
@@ -91,7 +96,7 @@
   });
 })();
 
-// --- Smooth Scroll to CV Card ---
+// Smooth Scroll to CV Card
 const scrollBtn = document.getElementById('scrollToCvBtn');
 if (scrollBtn) {
   scrollBtn.onclick = () => {
@@ -101,6 +106,7 @@ if (scrollBtn) {
       setTimeout(() => {
         cvSection.setAttribute('tabindex', '-1');
         cvSection.focus();
+        console.log('Manual scroll to CV card');
       }, 700);
     }
   };
