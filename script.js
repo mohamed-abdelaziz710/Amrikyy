@@ -1,11 +1,18 @@
 // === Amrikyy Cyber Portfolio Main Script ===
 // Loader animation, transitions, scroll, and chatbot logic
+// --------------------------------------------------------
+// - Loader: handles progress bar, hints, and hiding
+// - Smooth scroll to CV card
+// - Chatbot: open/close, keyboard, focus, messaging
+// - Accessibility and minor enhancements
 
 // --- Loader Animation & Hide Logic ---
 (function() {
-  const loader = document.getElementById('fullpage-loader');
+  // Loader elements
+  const loader = document.getElementById('fullpage-loader'); // Should be 'loader' in your HTML
   const mainContent = document.getElementById('main-content');
   const progressBar = document.querySelector('.loader-progress-bar');
+  // Loader hints for progress
   const loaderHints = [
     'يتم تجهيز تجربة AI الخاصة بك...'
     ,'تحميل عناصر السيبرانية...'
@@ -126,6 +133,7 @@ if (chatbotForm) {
     }, 1200 + Math.random()*900);
   };
 }
+// Add a message to the chatbot window
 function addMessage(text, sender){
   const msgDiv = document.createElement('div');
   msgDiv.className = `chatbot-message ${sender}`;
@@ -142,6 +150,8 @@ function addMessage(text, sender){
   chatbotMessages.appendChild(msgDiv);
   chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
+
+// On DOM ready, show welcome message and animate CV card if loader is gone
 window.addEventListener('DOMContentLoaded', function() {
   setTimeout(()=>{
     addMessage('مرحباً! أنا Amrikyy AI، كيف يمكنني خدمتك اليوم؟', 'ai');

@@ -1,3 +1,11 @@
+/*
+  Minimal loader and base CSS for Amrikyy Cyber Portfolio
+  ------------------------------------------------------
+  - Loader styles for #loader and .loader-card3d
+  - Neon theme variables and base body styling
+  - Add more theme and responsive styles as needed
+*/
+
 /* --- Global Theme Variables --- */
 :root {
   --neon-green: #39FF14;
