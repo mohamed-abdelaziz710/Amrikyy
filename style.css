@@ -154,7 +154,156 @@ body.loaded #main-content { display: flex; flex-direction: column; }
   transform: none;
 }
 
+/* --- Responsive Improvements for Small Devices --- */
+@media (max-width: 900px) {
+  body, html {
+    font-size: 15px;
+  }
+  .loader-card3d {
+    padding: 1.2rem 1.2rem 1rem;
+    min-width: 0;
+    width: 95vw;
+    max-width: 400px;
+  }
+  .cv-card {
+    max-width: 98vw;
+    margin: 0 auto;
+  }
+}
 @media (max-width: 600px) {
-  .loader-card3d { padding: 1.2rem 1.2rem 1rem; }
-  .loader-bar { width: 150px; }
+  body, html {
+    font-size: 14px;
+  }
+  .loader-card3d {
+    padding: 0.7rem 0.5rem 0.7rem;
+    width: 99vw;
+    max-width: 99vw;
+    border-radius: 1.2rem;
+  }
+  .loader-logo {
+    font-size: 2rem;
+  }
+  .loader-avatar {
+    width: 44px; height: 44px;
+  }
+  .loader-bar { width: 110px; height: 9px; }
+  .loader-msg { font-size: 0.95rem; }
+  .cv-card {
+    padding: 0.7rem 0.5rem;
+    border-radius: 1.2rem;
+    max-width: 99vw;
+    margin: 0 auto;
+  }
+  .cv-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7em;
+  }
+  .cv-avatar {
+    width: 60px; height: 60px;
+    margin-bottom: 0.5em;
+  }
+  .cv-header-info h2 {
+    font-size: 1.1rem;
+  }
+  .cv-header-info p {
+    font-size: 0.95rem;
+  }
+  .cv-links a span {
+    display: none;
+  }
+  .cv-links a i {
+    font-size: 1.2em;
+  }
+  .cv-section h3 {
+    font-size: 1.05rem;
+  }
+  .skills-list li {
+    font-size: 0.95em;
+    padding: 0.3em 0.7em;
+  }
+  .cta-btn {
+    font-size: 1em;
+    padding: 0.7em 1.2em;
+  }
+  .amrikyy-visual-logo {
+    font-size: 1.3rem;
+  }
+  .hero-section {
+    padding: 1.2em 0.2em;
+  }
+  .hero-content {
+    padding: 0.5em 0.2em;
+  }
+}
+@media (max-width: 400px) {
+  body, html {
+    font-size: 12px;
+  }
+  .loader-card3d, .cv-card {
+    padding: 0.3rem 0.1rem;
+    border-radius: 0.7rem;
+  }
+  .loader-logo {
+    font-size: 1.2rem;
+  }
+  .cv-avatar {
+    width: 40px; height: 40px;
+  }
+  .cta-btn {
+    font-size: 0.95em;
+    padding: 0.5em 0.7em;
+  }
+}
+
+/* Make chatbot window responsive */
+#chatbot-window {
+  max-width: 98vw;
+  width: 350px;
+  right: 1vw;
+  left: 1vw;
+  bottom: 1vw;
+  border-radius: 1.2rem;
+}
+@media (max-width: 600px) {
+  #chatbot-window {
+    width: 99vw;
+    min-width: 0;
+    left: 0.5vw;
+    right: 0.5vw;
+    bottom: 0.5vw;
+    border-radius: 0.7rem;
+  }
+  .chatbot-header, .chatbot-body, .chatbot-form {
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+  }
+  .chatbot-title {
+    font-size: 1.1em;
+  }
+  #chatbot-input {
+    font-size: 1em;
+    padding: 0.5em 0.7em;
+  }
+}
+
+/* Improve touch targets for buttons */
+.cta-btn, #loaderToCvBtn, #scrollToCvBtn, #chatbot-close, #chatbot-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+/* Hide scrollbars on mobile for a cleaner look */
+body, .cv-card, #chatbot-window {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon-green) var(--dark-bg-primary);
+}
+body::-webkit-scrollbar, .cv-card::-webkit-scrollbar, #chatbot-window::-webkit-scrollbar {
+  width: 6px;
+  background: var(--dark-bg-primary);
+}
+body::-webkit-scrollbar-thumb, .cv-card::-webkit-scrollbar-thumb, #chatbot-window::-webkit-scrollbar-thumb {
+  background: var(--neon-green);
+  border-radius: 6px;
 }
