@@ -145,3 +145,28 @@ body { background: #10161e; color: #fff; margin: 0; font-family: 'Cairo', 'Orbit
 .loader-bar-progress { height: 100%; background: linear-gradient(90deg, #39FF14, #00f0ff); border-radius: 8px; width: 0; box-shadow: 0 0 10px #39FF14; transition: width 0.3s; }
 .loader-msg { color: #A0A0A0; font-size: 1.04rem; font-weight: 700; text-align: center; text-shadow: 0 0 10px #39FF14; }
 .loader-dots span { display: inline-block; width: 7px; height: 7px; margin: 0 2px; background: #39FF14; border-radius: 50%; opacity: 0.5; }
+
+/*
+  Show main content after loader is hidden
+  Hide main content by default
+*/
+#main-content {
+  display: none;
+}
+body.loaded #main-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+  Hide CV card by default, show with .visible
+*/
+.cv-card {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(.44,1.7,.58,1), transform 0.7s cubic-bezier(.44,1.7,.58,1);
+}
+.cv-card.visible {
+  opacity: 1;
+  transform: none;
+}
