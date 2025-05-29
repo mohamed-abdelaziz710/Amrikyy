@@ -156,7 +156,179 @@
   </div>
 
   <script>
-    // ...existing code...
+    // === Amrikyy Cyber Portfolio Main Script ===
+    // Loader animation, transitions, scroll, and chatbot logic
+
+    // --- Loader Animation & Hide Logic ---
+    (function() {
+      const loader = document.getElementById('fullpage-loader');
+      const mainContent = document.getElementById('main-content');
+      const progressBar = document.querySelector('.loader-progress-bar');
+      const loaderHints = [
+        'يتم تجهيز تجربة AI الخاصة بك...'
+        ,'تحميل عناصر السيبرانية...'
+        ,'تفعيل واجهة المستخدم الذكية...'
+        ,'توصيل الذكاء الاصطناعي...'
+        ,'تجهيز بطاقة السيرة الذاتية...'
+        ,'جارٍ الإقلاع...'
+      ];
+      let hintIdx = 0;
+      let progress = 0;
+      let hintEl = document.getElementById('loader-hint');
+      let dots = document.querySelectorAll('.loader-dot');
+      let dotStep = 0;
+
+      // Animate loader dots
+      setInterval(() => {
+        dots.forEach((dot, i) => {
+          dot.style.opacity = (i === dotStep % 3) ? '1' : '0.3';
+        });
+        dotStep++;
+      }, 400);
+
+      // Animate progress bar and hints
+      const loaderInterval = setInterval(() => {
+        progress += Math.random() * 8 + 3;
+        if (progress > 100) progress = 100;
+        progressBar.style.width = progress + '%';
+        if (progress > 20 && hintIdx === 0) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
+        if (progress > 40 && hintIdx === 1) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
+        if (progress > 60 && hintIdx === 2) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
+        if (progress > 80 && hintIdx === 3) { hintIdx++; hintEl.textContent = loaderHints[hintIdx]; }
+        if (progress >= 100) {
+          clearInterval(loaderInterval);
+          setTimeout(() => {
+            loader.classList.add('fade-out');
+            setTimeout(() => {
+              loader.style.display = 'none';
+              document.body.classList.remove('loading');
+              mainContent.style.opacity = 1;
+            }, 700);
+          }, 600);
+        }
+      }, 350);
+    })();
+
+    // --- Smooth Scroll to CV Card ---
+    function scrollToCV() {
+      const cvSection = document.getElementById('cv-card-page');
+      if (cvSection) {
+        cvSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Focus for accessibility
+        setTimeout(() => {
+          cvSection.setAttribute('tabindex', '-1');
+          cvSection.focus();
+        }, 700);
+      }
+    }
+    window.scrollToCV = scrollToCV;
+
+    // --- Chatbot Open/Close, Keyboard, and Focus Logic ---
+    (function() {
+      const chatbotToggle = document.getElementById('chatbot-toggle');
+      const chatbotWindow = document.getElementById('chatbot-window');
+      const chatbotClose = document.getElementById('chatbot-close');
+      const chatbotInput = document.getElementById('chatbot-input');
+      let lastActiveElement = null;
+
+      // Open chatbot
+      function openChatbot() {
+        lastActiveElement = document.activeElement;
+        chatbotWindow.classList.add('open');
+        setTimeout(() => {
+          chatbotWindow.classList.add('visible');
+          chatbotInput.focus();
+        }, 50);
+      }
+      // Close chatbot
+      function closeChatbot() {
+        chatbotWindow.classList.remove('visible');
+        setTimeout(() => {
+          chatbotWindow.classList.remove('open');
+          if (lastActiveElement) lastActiveElement.focus();
+        }, 300);
+      }
+      chatbotToggle.addEventListener('click', openChatbot);
+      chatbotToggle.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openChatbot(); }
+      });
+      chatbotClose.addEventListener('click', closeChatbot);
+      chatbotClose.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); closeChatbot(); }
+      });
+      // ESC to close
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && chatbotWindow.classList.contains('open')) closeChatbot();
+      });
+    })();
+
+    // --- Chatbot Messaging, Typing, and Accessibility ---
+    (function() {
+      const messagesEl = document.getElementById('chatbot-messages');
+      const typingIndicator = document.getElementById('typing-indicator');
+      const chatbotForm = document.getElementById('chatbot-form');
+      const chatbotInput = document.getElementById('chatbot-input');
+
+      // Add message to chat
+      function addMessage(text, isAI = false) {
+        const messageEl = document.createElement('div');
+        messageEl.className = 'chatbot-message' + (isAI ? ' ai' : ' user');
+        messageEl.innerHTML = `
+          <span class="avatar">
+            <svg width="28" height="28" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="11" fill="var(--neon-green)" opacity="0.1"/>
+              <circle cx="12" cy="12" r="7" fill="var(--neon-green)" opacity="0.4"/>
+            </svg>
+          </span>
+          <div class="text">${text}</div>
+        `;
+        messagesEl.appendChild(messageEl);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      // Simulate AI typing
+      function simulateAITyping(responseText) {
+        typingIndicator.classList.add('active');
+        setTimeout(() => {
+          typingIndicator.classList.remove('active');
+          addMessage(responseText, true);
+        }, 1200 + Math.random() * 800);
+      }
+
+      // Handle form submit
+      chatbotForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const userText = chatbotInput.value.trim();
+        if (!userText) return;
+        addMessage(userText, false);
+        chatbotInput.value = '';
+        simulateAITyping('هذه إجابة تجريبية من Amrikyy AI.');
+      });
+
+      // Accessibility: send on Enter, focus trap
+      chatbotInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          chatbotForm.dispatchEvent(new Event('submit'));
+        }
+        // Trap focus inside chatbot
+        if (e.key === 'Tab') {
+          const focusable = chatbotForm.querySelectorAll('input,button');
+          if (e.shiftKey && document.activeElement === focusable[0]) {
+            e.preventDefault();
+            focusable[focusable.length - 1].focus();
+          } else if (!e.shiftKey && document.activeElement === focusable[focusable.length - 1]) {
+            e.preventDefault();
+            focusable[0].focus();
+          }
+        }
+      });
+
+      // Initial AI welcome message
+      setTimeout(() => {
+        addMessage('مرحباً! أنا Amrikyy AI، كيف يمكنني خدمتك اليوم؟', true);
+      }, 1200);
+    })();
   </script>
 </body>
 </html>
