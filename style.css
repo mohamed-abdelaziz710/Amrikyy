@@ -282,7 +282,9 @@ body.loaded {
 }
 .highlight { 
   background:linear-gradient(90deg, var(--neon-green) 65%, var(--white) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
   font-family: 'Orbitron', sans-serif; 
 }
 .hero-section .subtitle {
