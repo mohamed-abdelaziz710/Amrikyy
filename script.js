@@ -56,6 +56,15 @@
           // Animate CV card in
           const cvCard = document.querySelector('.cv-card');
           if (cvCard) setTimeout(()=>cvCard.classList.add('visible'), 350);
+          // Auto-scroll to CV card after loader
+          const cvSection = document.getElementById('cv-card-page');
+          if (cvSection) {
+            setTimeout(()=>{
+              cvSection.scrollIntoView({behavior:'smooth'});
+              cvSection.setAttribute('tabindex','-1');
+              cvSection.focus();
+            }, 700);
+          }
         }, 700);
       }, 600);
     }
