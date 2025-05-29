@@ -6,11 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <style>
-    /* ...existing code... */
-  </style>
 </head>
-<body class="loading"> <div id="fullpage-loader">
+<body class="loading">
+  <div id="fullpage-loader">
     <div class="loader-content-wrapper">
       <div class="loader-main-identity">Mohamed H Abdelaziz</div>
       <div class="loader-logo-card-3d">
@@ -54,7 +52,7 @@
       <div class="hero-content">
         <div class="amrikyy-visual-logo">AMRIKYY</div> <h1 class="tagline">أهلاً بك في منصة <span class="highlight">الذكاء السيبراني</span></h1>
         <p class="subtitle">مشاريع، مهارات، وأفكار جريئة — مصممة للتميز في عالم التقنية والأمن.</p>
-        <button class="cta-btn" onclick="scrollToCV()">اكتشف الـ CV الذكي</button>
+        <button class="cta-btn" id="scrollToCvBtn">اكتشف الـ CV الذكي</button>
       </div>
     </section>
 
@@ -155,100 +153,6 @@
     </form>
   </div>
 
-  <script>
-    // زر سكرول للCV
-    const scrollBtn = document.getElementById('scrollToCVBtn');
-    if (scrollBtn) {
-      scrollBtn.onclick = function() {
-        document.getElementById('cv-card-page').scrollIntoView({behavior:'smooth'});
-      };
-    }
-
-    // عناصر الشات بوت
-    const chatbotToggle = document.getElementById('chatbot-toggle');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const chatbotClose = document.getElementById('chatbot-close');
-    const chatbotForm = document.getElementById('chatbot-form');
-    const chatbotInput = document.getElementById('chatbot-input');
-    const chatbotMessages = document.getElementById('chatbot-messages');
-    const typingIndicator = document.getElementById('typing-indicator');
-
-    // فتح الشات بوت
-    if (chatbotToggle) {
-      chatbotToggle.onclick = () => {
-        chatbotWindow.classList.add('active');
-        setTimeout(()=>{ chatbotInput && chatbotInput.focus(); }, 200);
-      };
-    }
-    // إغلاق الشات بوت بزر الإغلاق
-    if (chatbotClose) {
-      chatbotClose.onclick = () => chatbotWindow.classList.remove('active');
-    }
-    // إغلاق بالضغط خارج النافذة
-    window.addEventListener('mousedown', function(e){
-      if (chatbotWindow.classList.contains('active') && !chatbotWindow.contains(e.target) && e.target !== chatbotToggle) {
-        chatbotWindow.classList.remove('active');
-      }
-    });
-    // إغلاق بزر Esc
-    window.addEventListener('keydown', function(e){
-      if(e.key === "Escape") chatbotWindow.classList.remove('active');
-    });
-
-    // إرسال رسالة في الشات بوت
-    if (chatbotForm) {
-      chatbotForm.onsubmit = function(e){
-        e.preventDefault();
-        const msg = chatbotInput.value.trim();
-        if(!msg) return;
-        // عرض رسالة المستخدم
-        addMessage(msg, 'user');
-        chatbotInput.value = "";
-        chatbotInput.focus();
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        // إظهار مؤشر الكتابة
-        typingIndicator.style.display = 'flex';
-        // رد افتراضي (استبدله بباكيند لاحقاً)
-        setTimeout(()=>{
-          typingIndicator.style.display = 'none';
-          addMessage('سأعود عليك بإجابة مميزة أو أرسل لي سؤالك التقني القادم!', 'ai');
-        }, 1200 + Math.random()*900);
-      };
-    }
-
-    // وظيفة عرض الرسائل
-    function addMessage(text, sender){
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `chatbot-message ${sender}`;
-      msgDiv.innerHTML = `
-        <span class="avatar">
-          ${
-            sender === 'user'
-            ? `<svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#fff" opacity="0.09"/><circle cx="12" cy="12" r="8" fill="#a0a0a0" opacity="0.33"/></svg>`
-            : `<svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#39FF14" opacity="0.14"/><circle cx="12" cy="12" r="8" fill="#39FF14" opacity="0.44"/></svg>`
-          }
-        </span>
-        <div class="text">${text}</div>
-      `;
-      chatbotMessages.appendChild(msgDiv);
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    // رسالة ترحيب تلقائية عند فتح الصفحة لأول مرة
-    window.addEventListener('DOMContentLoaded', function() {
-      setTimeout(()=>{
-        addMessage('مرحباً! أنا Amrikyy AI، كيف يمكنني خدمتك اليوم؟', 'ai');
-      }, 900);
-    });
-
-    // تحسين صورة CV لاستخدام الصورة المحلية إذا وجدت
-    const cvAvatar = document.querySelector('.cv-avatar');
-    if (cvAvatar && cvAvatar.src && cvAvatar.src.includes('avatar-amrikyy.png')) {
-      // إذا كانت الصورة الافتراضية، استبدلها بالصورة المحلية إن وجدت
-      fetch('IMG_0073 2.PNG', {method:'HEAD'}).then(resp => {
-        if (resp.ok) cvAvatar.src = 'IMG_0073 2.PNG';
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
