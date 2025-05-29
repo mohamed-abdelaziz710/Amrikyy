@@ -832,3 +832,17 @@ section.full-width {
     padding: 1rem 0.7rem 0.7rem 0.7rem;
   }
 }
+
+.profile-image img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--neon-green);
+  box-shadow: 0 0 16px var(--neon-green-glow);
+  background: #111;
+  display: block;
+}
+.profile-image i {
+  color: var(--neon-green) !important;
+}
