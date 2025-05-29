@@ -18,7 +18,17 @@
       <div class="loader-msg">
         يتم تجهيز تجربة السيبر... <span class="loader-dots"><span></span><span></span><span></span></span>
       </div>
-      <button class="cta-btn" id="loaderToCvBtn" style="margin-top:1.2em;">اذهب إلى الـ CV الآن</button>
+      <button class="cta-btn loader-cta-btn" id="loaderToCvBtn" style="margin-top:1.2em; font-size:1.15rem; padding:0.7em 2.2em; border-radius:1.7em; border:2px solid var(--neon-green); background:transparent; color:var(--neon-green); box-shadow:0 0 18px var(--neon-green-glow); font-family:'Orbitron',sans-serif; font-weight:900; letter-spacing:2px; cursor:pointer; transition:background 0.2s, color 0.2s, box-shadow 0.2s;">
+        <i class="fas fa-id-card" style="margin-left:0.7em;"></i>اذهب مباشرة إلى الـ CV
+      </button>
+      <style>
+        .loader-cta-btn:hover, .loader-cta-btn:focus {
+          background: var(--neon-green);
+          color: var(--dark-bg-primary);
+          box-shadow: 0 0 32px var(--neon-green-glow), 0 0 8px var(--neon-green);
+          outline: none;
+        }
+      </style>
     </div>
   </div>
 

@@ -65,23 +65,23 @@ Designed to be "smart, small, and eye-catching":
 * **3D Interactivity:** Features a mouse-driven 3D tilt effect, making the card respond to user interaction, enhancing depth and engagement. The `box-shadow` dynamically adjusts with the tilt.
 * **Aesthetics:** Utilizes the `--glass` background for a modern, layered feel, bordered with `--neon-green`. A faint animated grid pattern (`::before`) adds a subtle tech texture.
 * **Structure:**
-    * **Header (`.cv-header`):** Contains Amrikyy's avatar (with hover effect), name, title, and contact/social media links (using Font Awesome icons). Includes a "Download CV" button.
-    * **Body (`.cv-body`):**
-        * **Sections (`.cv-section`):** Professional Summary, Skills, Certifications, Key Projects. Each section is a distinct visual block with an 'Orbitron' title (often accompanied by a Font Awesome icon) and themed hover states.
-        * **Skills List (`.skills-list`):** Presented as "cyber-chip" like badges with neon green text/borders and interactive hover effects. Each skill is prepended with a relevant Font Awesome icon.
-        * **Certifications & Projects:** Listed items also feature icons and refined hover states for better engagement.
-    * **Content Language:** Primarily in Arabic, as per the latest design.
+  * **Header (`.cv-header`):** Contains Amrikyy's avatar (with hover effect), name, title, and contact/social media links (using Font Awesome icons). Includes a "Download CV" button.
+  * **Body (`.cv-body`):**
+    * **Sections (`.cv-section`):** Professional Summary, Skills, Certifications, Key Projects. Each section is a distinct visual block with an 'Orbitron' title (often accompanied by a Font Awesome icon) and themed hover states.
+    * **Skills List (`.skills-list`):** Presented as "cyber-chip" like badges with neon green text/borders and interactive hover effects. Each skill is prepended with a relevant Font Awesome icon.
+    * **Certifications & Projects:** Listed items also feature icons and refined hover states for better engagement.
+  * **Content Language:** Primarily in Arabic, as per the latest design.
 
 ### 4. AI Chatbot Assistant (`#chatbot-toggle`, `#chatbot-window`)
 
 * **Unique Toggle:** The "Data Shard" SVG icon serves as the chatbot launcher, with custom neon pulse and hover animations. A small "AI" text label appears on hover.
 * **Themed Interface:** The chat window (header, messages, input) adheres to the dark, neon green, and glassmorphism theme.
 * **Core Functionality:**
-    * Toggling window visibility.
-    * Displaying user and AI messages with distinct styling and avatars.
-    * Input field and send button.
-    * Typing indicator.
-    * **Note:** Frontend logic is implemented. Full AI capabilities require connecting the provided `REPLIT_BACKEND_URL` placeholder in `script.js` to a live backend service.
+  * Toggling window visibility.
+  * Displaying user and AI messages with distinct styling and avatars.
+  * Input field and send button.
+  * Typing indicator.
+  * **Note:** Frontend logic is implemented. Full AI capabilities require connecting the provided `REPLIT_BACKEND_URL` placeholder in `script.js` to a live backend service.
 
 ## 🛠️ Technical Stack (MVP Focus)
 
@@ -89,19 +89,19 @@ This portfolio is built with a focus on modern, lightweight technologies, ensuri
 
 * **HTML5:** Semantic markup for content structure and accessibility.
 * **CSS3:**
-    * Custom Properties (Variables) for robust theming and maintainability.
-    * Flexbox and CSS Grid for responsive layouts.
-    * Advanced animations and transitions (`@keyframes`, `transition`).
-    * Pseudo-elements (`::before`, `::after`) for intricate UI details and effects.
-    * Filters (`drop-shadow`, `blur`) for glows and glassmorphism.
-    * `clamp()` for fluid typography and spacing.
-    * Mobile-first responsive design principles with `@media` queries.
+  * Custom Properties (Variables) for robust theming and maintainability.
+  * Flexbox and CSS Grid for responsive layouts.
+  * Advanced animations and transitions (`@keyframes`, `transition`).
+  * Pseudo-elements (`::before`, `::after`) for intricate UI details and effects.
+  * Filters (`drop-shadow`, `blur`) for glows and glassmorphism.
+  * `clamp()` for fluid typography and spacing.
+  * Mobile-first responsive design principles with `@media` queries.
 * **JavaScript (Vanilla):**
-    * DOM manipulation for dynamic content and UI updates (loader, chatbot, CV card visibility).
-    * Event handling for user interactions (button clicks, mouse movements for 3D tilt).
-    * `setTimeout` / `setInterval` for timed animations and sequences.
-    * Canvas API for the main page's interactive particle background.
-    * Web Animations API (implicitly, via `element.animate()` if used - though current version relies more on CSS + class toggles).
+  * DOM manipulation for dynamic content and UI updates (loader, chatbot, CV card visibility).
+  * Event handling for user interactions (button clicks, mouse movements for 3D tilt).
+  * `setTimeout` / `setInterval` for timed animations and sequences.
+  * Canvas API for the main page's interactive particle background.
+  * Web Animations API (implicitly, via `element.animate()` if used - though current version relies more on CSS + class toggles).
 * **Google Fonts:** For 'Orbitron' and 'Cairo'.
 * **Font Awesome 6 (CDN):** For scalable vector icons.
 
@@ -117,12 +117,12 @@ The project is organized into three core files for simplicity and ease of deploy
 
 ## 🚀 Setup & Usage
 
-1.  **Download Files:** Ensure `index.html`, `style.css`, and `script.js` are in the same project directory.
-2.  **Add Assets:**
+1. **Download Files:** Ensure `index.html`, `style.css`, and `script.js` are in the same project directory.
+2. **Add Assets:**
     * Place your profile picture (e.g., `avatar.jpg`) in the same directory or update the `src` path in `index.html`.
     * Place your CV PDF (e.g., `your-cv-filename.pdf`) in the directory and update the `href` for the "Download CV" button in `index.html`.
-3.  **Open `index.html`:** Launch the `index.html` file in any modern web browser.
-4.  **Chatbot Backend (Crucial):** For full AI chatbot functionality, open `script.js` and replace the placeholder `'YOUR_REPLIT_BACKEND_URL_HERE'` with your actual Replit (or other) backend API endpoint.
+3. **Open `index.html`:** Launch the `index.html` file in any modern web browser.
+4. **Chatbot Backend (Crucial):** For full AI chatbot functionality, open `script.js` and replace the placeholder `'YOUR_REPLIT_BACKEND_URL_HERE'` with your actual Replit (or other) backend API endpoint.
 
 ## ⚙️ Customization Notes
 
