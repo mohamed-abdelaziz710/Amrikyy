@@ -37,6 +37,10 @@
     <div id="cv-card-page" style="display: none;">
         <div class="wow-card">
             <div class="card-header">
+                <div class="translations-toggle">
+                    <button id="lang-ar" class="lang-btn active">العربية</button>
+                    <button id="lang-en" class="lang-btn">English</button>
+                </div>
                 <div class="profile-section">
                     <div class="profile-image">
                         <i class="fas fa-user-circle"></i>
@@ -80,6 +84,88 @@
 
             <div class="card-content">
                 <div class="content-grid">
+                    <!-- Skills Section (Bilingual, Toggleable) -->
+                    <section aria-labelledby="skills-section-heading">
+                        <div class="section-header">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                            <h2 id="skills-section-heading">Skills & Expertise</h2>
+                        </div>
+                        <div id="skills-ar" class="skills-bilingual">
+                            <div class="skills-group">
+                                <h3>هندسة الأمن السيبراني</h3>
+                                <span class="skill-badge">الكشف عن التسلل (Intrusion Detection)</span>
+                                <span class="skill-badge">تحليل نقاط الضعف (Vulnerability Assessment)</span>
+                                <span class="skill-badge">شهادات Cisco في أمن الشبكات</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>تطوير واجهات وتجربة المستخدم (UI/UX)</h3>
+                                <span class="skill-badge">تصميم جريء وعصري باستخدام Figma</span>
+                                <span class="skill-badge">كتابة مكونات React مع Tailwind CSS</span>
+                                <span class="skill-badge">Microinteractions وGlassmorphism و3D Effects</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>تطوير الويب والبرمجة</h3>
+                                <span class="skill-badge">JavaScript (React)</span>
+                                <span class="skill-badge">Python</span>
+                                <span class="skill-badge">Java</span>
+                                <span class="skill-badge">Firebase (Authentication, Firestore)</span>
+                                <span class="skill-badge">Excel لأتمتة وتحليل البيانات</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>هندسة البرومبت (Prompt Engineering)</h3>
+                                <span class="skill-badge">تصميم وتطوير سيناريوهات تفاعلية لـ ChatGPT / Gemini</span>
+                                <span class="skill-badge">بناء MVP سريع بالتكامل مع واجهات API للذكاء الاصطناعي</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>التداول والاستثمار في العملات الرقمية</h3>
+                                <span class="skill-badge">تداول المشتقات والعقود الآجلة (Derivatives & Futures) منذ 2019</span>
+                                <span class="skill-badge">منصات Bybit وCoinbase وTradingView</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>لغات</h3>
+                                <span class="skill-badge">العربية (لغة أم)</span>
+                                <span class="skill-badge">الإنجليزية (محترف)</span>
+                            </div>
+                        </div>
+                        <div id="skills-en" class="skills-bilingual" style="display:none">
+                            <div class="skills-group">
+                                <h3>Cybersecurity Engineering</h3>
+                                <span class="skill-badge">Intrusion Detection</span>
+                                <span class="skill-badge">Vulnerability Assessment</span>
+                                <span class="skill-badge">Cisco Network Security Certifications</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>UI/UX Development</h3>
+                                <span class="skill-badge">Bold & Modern Design with Figma</span>
+                                <span class="skill-badge">React Components with Tailwind CSS</span>
+                                <span class="skill-badge">Microinteractions, Glassmorphism & 3D Effects</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>Web Development & Programming</h3>
+                                <span class="skill-badge">JavaScript (React)</span>
+                                <span class="skill-badge">Python</span>
+                                <span class="skill-badge">Java</span>
+                                <span class="skill-badge">Firebase (Authentication, Firestore)</span>
+                                <span class="skill-badge">Excel for Automation & Data Analysis</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>Prompt Engineering</h3>
+                                <span class="skill-badge">Interactive Scenario Design for ChatGPT / Gemini</span>
+                                <span class="skill-badge">Rapid MVP Building with AI API Integrations</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>Crypto Trading & Investment</h3>
+                                <span class="skill-badge">Derivatives & Futures Trading since 2019</span>
+                                <span class="skill-badge">Bybit, Coinbase & TradingView Platforms</span>
+                            </div>
+                            <div class="skills-group">
+                                <h3>Languages</h3>
+                                <span class="skill-badge">Arabic (Native)</span>
+                                <span class="skill-badge">English (Professional)</span>
+                            </div>
+                        </div>
+                    </section>
+
                     <!-- Professional Summary -->
                     <section aria-labelledby="professional-summary-heading">
                         <div class="section-header">
@@ -89,42 +175,6 @@
                         <p>Passionate cybersecurity specialist with expertise in threat analysis, penetration testing, and secure application development. Skilled in full-stack development with a focus on creating robust, secure digital solutions.</p>
                     </section>
 
-                    <!-- Technical Skills -->
-                    <section aria-labelledby="technical-skills-heading">
-                        <div class="section-header">
-                            <i class="fas fa-cogs" aria-hidden="true"></i>
-                            <h2 id="technical-skills-heading">Technical Skills</h2>
-                        </div>
-                        <div class="skills-grid">
-                            <div class="skill-category">
-                                <h3><i class="fas fa-shield-alt" aria-hidden="true"></i> Security & DevOps</h3>
-                                <ul class="skill-tags">
-                                    <li class="skill-tag">Penetration Testing</li>
-                                    <li class="skill-tag">Vulnerability Assessment</li>
-                                    <li class="skill-tag">Network Security</li>
-                                    <li class="skill-tag">DevSecOps</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-code" aria-hidden="true"></i> Programming</h3>
-                                <ul class="skill-tags">
-                                    <li class="skill-tag">Python</li>
-                                    <li class="skill-tag">JavaScript</li>
-                                    <li class="skill-tag">C++</li>
-                                    <li class="skill-tag">Bash</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-cloud" aria-hidden="true"></i> Cloud & Tools</h3>
-                                <ul class="skill-tags">
-                                    <li class="skill-tag">AWS</li>
-                                    <li class="skill-tag">Docker</li>
-                                    <li class="skill-tag">Kubernetes</li>
-                                    <li class="skill-tag">Linux</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
 
                     <!-- Education -->
                     <section aria-labelledby="education-heading">

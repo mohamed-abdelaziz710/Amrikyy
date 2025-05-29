@@ -677,26 +677,88 @@ section.full-width {
   display: flex;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .chatbot-container {
-    bottom: 15px;
-    right: 15px;
+/* Translations Toggle Styles */
+.translations-toggle {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.lang-btn {
+  background: var(--panel-glass);
+  color: var(--neon-green);
+  border: 1.5px solid var(--neon-green);
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  padding: 0.3em 1.2em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 8px var(--neon-green-glow);
+}
+.lang-btn.active, .lang-btn:hover {
+  background: var(--neon-green);
+  color: var(--dark-bg);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 16px var(--neon-green-glow);
+}
+
+/* Skills Section Styles */
+.skills-bilingual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+}
+.skills-group {
+  min-width: 220px;
+  background: var(--panel-glass-hover);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem 0.7rem 1.2rem;
+  box-shadow: 0 0 12px var(--neon-blue-glow), 0 2px 12px rgba(0,255,0,0.08);
+  margin-bottom: 0.5rem;
+  flex: 1 1 260px;
+  border: 1.5px solid var(--neon-blue);
+  position: relative;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.skills-group h3 {
+  color: var(--neon-purple);
+  font-size: 1.1rem;
+  margin-bottom: 0.7em;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 8px var(--neon-purple-glow);
+}
+.skill-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--neon-green) 0%, var(--neon-blue) 100%);
+  color: var(--dark-bg);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 0.35em 1.1em;
+  margin: 0.18em 0.3em 0.18em 0;
+  box-shadow: 0 0 8px var(--neon-blue-glow);
+  letter-spacing: 0.5px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border: 1.5px solid var(--neon-blue);
+}
+.skill-badge:hover {
+  background: linear-gradient(90deg, var(--neon-purple) 0%, var(--neon-green) 100%);
+  color: var(--white);
+  box-shadow: 0 0 16px var(--neon-purple-glow);
+  border-color: var(--neon-purple);
+}
+
+@media (max-width: 700px) {
+  .skills-bilingual {
+    flex-direction: column;
+    gap: 1.2rem;
   }
-  
-  .chatbot-window {
-    width: calc(100vw - 30px);
-    height: 60vh;
-    right: -15px;
-  }
-  
-  .chatbot-toggle {
-    width: 55px;
-    height: 55px;
-  }
-  
-  .chatbot-icon {
-    width: 22px;
-    height: 22px;
+  .skills-group {
+    min-width: unset;
+    padding: 1rem 0.7rem 0.7rem 0.7rem;
   }
 }

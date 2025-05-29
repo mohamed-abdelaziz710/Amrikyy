@@ -447,3 +447,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('AI Chatbot initialized successfully');
 });
+
+// ----- TRANSLATIONS TOGGLE SCRIPT -----
+document.addEventListener('DOMContentLoaded', function() {
+    const btnAr = document.getElementById('lang-ar');
+    const btnEn = document.getElementById('lang-en');
+    const skillsAr = document.getElementById('skills-ar');
+    const skillsEn = document.getElementById('skills-en');
+    if (btnAr && btnEn && skillsAr && skillsEn) {
+        btnAr.addEventListener('click', function() {
+            btnAr.classList.add('active');
+            btnEn.classList.remove('active');
+            skillsAr.style.display = '';
+            skillsEn.style.display = 'none';
+        });
+        btnEn.addEventListener('click', function() {
+            btnEn.classList.add('active');
+            btnAr.classList.remove('active');
+            skillsAr.style.display = 'none';
+            skillsEn.style.display = '';
+        });
+    }
+});
