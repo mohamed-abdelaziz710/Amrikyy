@@ -200,10 +200,3 @@ window.addEventListener('DOMContentLoaded', function() {
     setTimeout(()=>cvCard.classList.add('visible'), 350);
   }
 });
-// تحسين صورة CV لاستخدام الصورة المحلية إذا وجدت
-const cvAvatar = document.querySelector('.cv-avatar');
-if (cvAvatar && cvAvatar.src && cvAvatar.src.includes('avatar.jpg')) {
-  fetch('IMG_0073 2.PNG', {method:'HEAD'}).then(resp => {
-    if (resp.ok) cvAvatar.src = 'IMG_0073 2.PNG';
-  });
-}
