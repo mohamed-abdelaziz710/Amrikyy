@@ -28,9 +28,9 @@ window.addEventListener('load', () => {
         if (!progressBarElement) return;
         progressBarElement.style.backgroundPosition = '0 0';
         progressBarElement.animate([
-            { boxShadow: '0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow)' },
-            { boxShadow: '0 0 32px var(--neon-blue-glow), 0 0 16px var(--neon-green-glow)' },
-            { boxShadow: '0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow)' }
+            { boxShadow: '0 0 16px var(--neon-green-glow), 0 0 8px var(--white)' },
+            { boxShadow: '0 0 32px var(--neon-green-glow), 0 0 16px var(--white)' },
+            { boxShadow: '0 0 16px var(--neon-green-glow), 0 0 8px var(--white)' }
         ], {
             duration: 1800,
             iterations: Infinity
@@ -276,14 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function createUserAvatar() {
         return `
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="userAvatarGradient${Date.now()}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#BF00FF;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <circle cx="12" cy="12" r="10" fill="url(#userAvatarGradient${Date.now()})" opacity="0.2"/>
-                <path d="M12 12C14.21 12 16 10.21 16 8S14.21 4 12 4S8 5.79 8 8S9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="url(#userAvatarGradient${Date.now()})"/>
+                <circle cx="12" cy="12" r="10" fill="#00FF00" opacity="0.15"/>
+                <path d="M12 12C14.21 12 16 10.21 16 8S14.21 4 12 4S8 5.79 8 8S9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#00FF00"/>
             </svg>
         `;
     }
@@ -292,14 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function createAIAvatar() {
         return `
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="aiAvatarGradient${Date.now()}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#00FF00;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#00BFFF;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <circle cx="12" cy="12" r="10" fill="url(#aiAvatarGradient${Date.now()})" opacity="0.2"/>
-                <path d="M12 6.5C13.38 6.5 14.5 7.62 14.5 9S13.38 11.5 12 11.5S9.5 10.38 9.5 9S10.62 6.5 12 6.5ZM12 13C14.21 13 16 14.79 16 17V18H8V17C8 14.79 9.79 13 12 13Z" fill="url(#aiAvatarGradient${Date.now()})"/>
+                <circle cx="12" cy="12" r="10" fill="#00FF00" opacity="0.15"/>
+                <path d="M12 6.5C13.38 6.5 14.5 7.62 14.5 9S13.38 11.5 12 11.5S9.5 10.38 9.5 9S10.62 6.5 12 6.5ZM12 13C14.21 13 16 14.79 16 17V18H8V17C8 14.79 9.79 13 12 13Z" fill="#00FF00"/>
             </svg>
         `;
     }
@@ -361,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         role: 'Cybersecurity Specialist & Full-Stack Developer',
                         skills: ['Cybersecurity', 'Penetration Testing', 'Full-Stack Development', 'Threat Analysis'],
                         languages: ['English', 'Arabic'],
-                        platforms: ['Apple', 'Microsoft', 'Google', 'GitHub', 'Linux', 'Docker', 'AWS', 'Python']
+                        platforms: ['Apple', 'Microsoft', 'Google', 'GitHub', 'Python']
                     }
                 })
             });
