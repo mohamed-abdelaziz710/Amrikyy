@@ -23,6 +23,20 @@ window.addEventListener('load', () => {
     const progressBarElement = document.getElementById('loader-progress-bar');
     let progressInterval;
 
+    // Loader shimmer effect
+    function animateLoaderBarShimmer() {
+        if (!progressBarElement) return;
+        progressBarElement.style.backgroundPosition = '0 0';
+        progressBarElement.animate([
+            { boxShadow: '0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow)' },
+            { boxShadow: '0 0 32px var(--neon-blue-glow), 0 0 16px var(--neon-green-glow)' },
+            { boxShadow: '0 0 16px var(--neon-green-glow), 0 0 8px var(--neon-blue-glow)' }
+        ], {
+            duration: 1800,
+            iterations: Infinity
+        });
+    }
+
     function updateLoaderMessage() {
         if (loaderMessageElement) {
             loaderMessageElement.style.opacity = 0;
@@ -30,13 +44,14 @@ window.addEventListener('load', () => {
                 currentMessageIndex = (currentMessageIndex + 1) % loadingMessages.length;
                 loaderMessageElement.textContent = loadingMessages[currentMessageIndex];
                 loaderMessageElement.style.opacity = 1;
-            }, 300); // fade out/in duration
+            }, 350); // fade out/in duration
         }
     }
 
-    if (loaderMessageElement) { // Start message cycling if element exists
-       setInterval(updateLoaderMessage, 2000); // Change message every 2 seconds
+    if (loaderMessageElement) {
+       setInterval(updateLoaderMessage, 2200); // Change message every 2.2 seconds
     }
+    animateLoaderBarShimmer();
     
     let currentProgress = 0;
     let burst = true;
@@ -53,6 +68,8 @@ window.addEventListener('load', () => {
                 clearInterval(progressInterval);
             }
             progressBarElement.style.width = currentProgress + '%';
+            // Animate glowing dot at the end
+            progressBarElement.style.setProperty('--progress-dot', currentProgress + '%');
         }, 400);
     }
 
