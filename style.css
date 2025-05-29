@@ -29,82 +29,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Sora:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
 
 body {
-  background-color: var(--dark-bg);
+  font-family: 'Cairo', 'Sora', sans-serif;
+  font-weight: 400;
   color: var(--text-primary);
-  font-family: 'Cairo', Arial, sans-serif;
-  font-weight: 700;
-  line-height: 1.7;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
+  background: var(--dark-bg);
+  /* ...existing code... */
 }
 
-h1, h2, h3, h4, .profile-name, .logo-text, .amrikyy-logo-3dsvg {
-  font-family: 'Orbitron', Arial, sans-serif;
+.logo-text, .profile-name {
+  font-family: 'Orbitron', sans-serif;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  font-size: clamp(2rem, 5vw, 2.7rem);
   color: var(--neon-green);
-  text-shadow: 0 0 8px var(--neon-green-glow), 0 0 2px var(--white);
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px var(--neon-green-glow), 0 0 2px var(--white);
+  background: none;
 }
 
-.profile-title, .loader-message, .footer-text, .contact-link, .skills-bilingual, .summary-content, .education-item, .cert-list, .project-card, .language-list, .status-badge, .ar-content {
-  font-family: 'Cairo', Arial, sans-serif;
+.logo-subtitle, .profile-title, .contact-link span, .footer-text, .education-item, .cert-list, .language-list, .project-tech, .skills-bilingual, .skills-group, .skill-badge, .summary-content, .education-status, .status-badge {
+  font-family: 'Cairo', 'Sora', sans-serif;
   font-weight: 700;
   color: var(--text-primary);
-  text-shadow: 0 0 4px var(--neon-green-glow);
+  background: none;
 }
 
-.logo-text {
-  font-size: clamp(2.2rem, 6vw, 3.2rem);
-  letter-spacing: 0.12em;
-}
-.profile-name {
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  letter-spacing: 0.09em;
+h1, h2, h3, h4 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green-glow);
+  background: none;
 }
 
-h2 {
+h1.profile-name {
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  font-weight: 900;
+  margin-bottom: 0.1em;
+}
+
+h2, .section-header h2 {
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   color: var(--neon-green);
-  text-shadow: 0 0 8px var(--neon-green-glow);
-  font-weight: 900;
-}
-
-h3 {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: var(--neon-green);
-  text-shadow: 0 0 6px var(--neon-green-glow);
-  font-weight: 900;
-}
-
-h4 {
-  font-size: clamp(1rem, 2vw, 1.1rem);
-  color: var(--neon-green);
-  text-shadow: 0 0 6px var(--neon-green-glow);
-  font-weight: 900;
-}
-
-p, .profile-title, .footer-text {
-  font-family: 'Cairo', Arial, sans-serif;
   font-weight: 700;
-  color: var(--text-primary);
-  text-shadow: 0 0 4px var(--neon-green-glow);
-}
-
-a {
-  color: var(--neon-green);
-  text-decoration: none;
-  transition: color 0.3s, text-shadow 0.3s;
-}
-a:hover {
-  color: var(--white);
   text-shadow: 0 0 8px var(--neon-green-glow);
 }
 
-/* SVG Logo 3D Neon Theme */
-.amrikyy-logo-3dsvg [stroke], .amrikyy-logo-3dsvg [fill] {
-  stroke: url(#amrikyy-neon-green-white-gradient) !important;
-  fill: url(#amrikyy-neon-green-white-gradient) !important;
+.logo-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  text-shadow: 0 0 6px var(--neon-green-glow);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.profile-title {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-bottom: 0.2em;
+}
+
+/* Arabic text always Cairo */
+.ar-content, .ar-content * {
+  font-family: 'Cairo', sans-serif !important;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .logo-text, .profile-name { font-size: clamp(1.2rem, 6vw, 1.7rem); }
+  h2, .section-header h2 { font-size: clamp(0.95rem, 3vw, 1.1rem); }
 }
 
 /* --- Loader & Neon Green Only Styles --- */
