@@ -1,436 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amrikyy - Cyber Portfolio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Sora:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <title>Amrikyy | Landing & CV - Special Edition</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>
+    /* ...existing code... */
+  </style>
 </head>
-<body>
-    <!-- Particle Canvas Background -->
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- Loading Page -->
-    <div id="loading-skeleton" role="status" aria-live="polite">
-        <div class="loader-container">
-            <span class="sr-only">Loading portfolio, please wait...</span>
-            <!--
-              Custom cyber/neon SVG logo for a modern, professional loading effect.
-              The logo features a glowing green polygon, gradients, and a central neon core.
-              You can further animate this SVG with CSS if desired.
-            -->
-            <div class="cyber-logo">
-                <div class="logo-icon" aria-hidden="true" style="position: relative;">
-                    <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <defs>
-                            <radialGradient id="cyberGlow" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#00FF00" stop-opacity="0.9"/>
-                                <stop offset="80%" stop-color="#00FF00" stop-opacity="0.2"/>
-                                <stop offset="100%" stop-color="#111" stop-opacity="0.0"/>
-                            </radialGradient>
-                            <linearGradient id="cyberEdge" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#00FF00" stop-opacity="0.8"/>
-                                <stop offset="100%" stop-color="#fff" stop-opacity="0.2"/>
-                            </linearGradient>
-                            <filter id="cyberShadow" x="-30%" y="-30%" width="160%" height="160%">
-                                <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00FF00" flood-opacity="0.7"/>
-                            </filter>
-                        </defs>
-                        <circle cx="35" cy="35" r="30" fill="url(#cyberGlow)"/>
-                        <polygon points="35,10 60,35 35,60 10,35" fill="none" stroke="url(#cyberEdge)" stroke-width="3.5" filter="url(#cyberShadow)"/>
-                        <circle cx="35" cy="35" r="10" fill="#111" stroke="#00FF00" stroke-width="2.5" filter="url(#cyberShadow)"/>
-                        <circle cx="35" cy="35" r="4" fill="#00FF00" filter="url(#cyberShadow)"/>
-                    </svg>
-                </div>
-                <h1 class="logo-text">AMRIKYY</h1>
-                <p class="logo-subtitle">Cyber Portfolio</p>
-            </div>
-            <!-- Loader progress bar and message -->
-            <div class="loader-progress">
-                <div class="progress-container">
-                    <div id="loader-progress-bar" class="progress-bar"></div>
-                </div>
-                <p id="loader-message" class="loader-message">Initiating Cyber Core...</p>
-            </div>
-        </div>
+<body class="loading"> <div id="fullpage-loader">
+    <div class="loader-content-wrapper">
+      <div class="loader-main-identity">Mohamed H Abdelaziz</div>
+      <div class="loader-logo-card-3d">
+        <div class="loader-amrikyy-text-logo">Amrikyy</div>
+        <svg class="loader-amrikyy-logo-3dsvg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="loaderMainGrad" x1="0" y1="44" x2="44" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="var(--neon-green)"/>
+              <stop offset="1" stop-color="var(--white)"/> 
+            </linearGradient>
+          </defs>
+          <ellipse cx="22" cy="24" rx="14" ry="10" fill="var(--dark-element-bg)" opacity=".15"/>
+          <ellipse cx="22" cy="26" rx="10" ry="4" fill="url(#loaderMainGrad)" opacity="0.08"/>
+          <path d="M10 33 L22 6 L34 33" stroke="url(#loaderMainGrad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="23" r="7" fill="url(#loaderMainGrad)" fill-opacity="0.1"/> 
+          <ellipse cx="22" cy="26.2" rx="3" ry="1.3" fill="var(--white)" opacity="0.12"/> 
+          <circle cx="17" cy="29" r="1.2" fill="var(--neon-green)"/>
+          <circle cx="27" cy="29" r="1.2" fill="var(--neon-green)"/>
+        </svg>
+        <div class="loader-logo-reflection-card"></div>
+      </div>
+      <div class="loader-brand-signature">حمود – أمريكي</div>
+      <div class="loader-loader-text">
+        جاري التحميل
+        <span class="loader-dots">
+          <span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span>
+        </span>
+      </div>
+      <div class="loader-progress-bg" role="status" aria-label="Loading progress"><div class="loader-progress-bar"></div></div>
+      <div id="loader-hint" class="loader-hint" aria-live="polite">يتم تجهيز تجربة AI الخاصة بك...</div>
+      <div class="loader-powered">Powered by <b>Amrikyy</b> & AI / Cyber Vision</div>
     </div>
-
-    <!-- CV Card Page -->
-    <div id="cv-card-page" style="display: none;">
-        <div class="wow-card">
-            <!--
-              Card Header: Contains language toggle, profile image, and contact/social links.
-              The language toggle allows users to switch between Arabic and English content.
-            -->
-            <div class="card-header">
-                <div class="translations-toggle">
-                    <button id="lang-ar" class="lang-btn active">العربية</button>
-                    <button id="lang-en" class="lang-btn">English</button>
-                </div>
-                <div class="profile-section">
-                    <div class="profile-image">
-                        <!-- Profile image with neon border -->
-                        <img src="IMG_0073 2.PNG" alt="Profile photo of Amrikyy" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2.5px solid #00FF00; box-shadow: 0 0 16px #00FF00b3; background: #111;" />
-                    </div>
-                    <div class="profile-info">
-                        <!-- Main profile name and title -->
-                        <h1 class="profile-name">Mohamed H Abdelaziz</h1>
-                        <p class="profile-title">Cybersecurity Specialist & Full-Stack Developer</p>
-                        <!-- Contact links (location, email, LinkedIn, GitHub) -->
-                        <div class="contact-links">
-                            <a href="#" class="contact-link" title="Location">
-                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                                <span>Cairo, Egypt</span>
-                            </a>
-                            <a href="mailto:amrikyy@gmail.com" class="contact-link" title="Email">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <span>amrikyy@gmail.com</span>
-                            </a>
-                            <a href="https://linkedin.com/in/amrikyy" class="contact-link" title="LinkedIn" target="_blank">
-                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://github.com/amrikyy" class="contact-link" title="GitHub" target="_blank">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                                <span>GitHub</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Social media links -->
-                <div class="social-links">
-                    <a href="#" class="social-icon" title="Follow on Instagram" aria-label="Follow on Instagram">
-                        <i class="fab fa-instagram" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="social-icon" title="Follow on Facebook" aria-label="Follow on Facebook">
-                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="social-icon" title="Follow on Twitter" aria-label="Follow on Twitter">
-                        <i class="fab fa-twitter" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="card-content">
-                <div class="content-grid">
-                    <!-- Skills Section (Bilingual, Toggleable) -->
-                    <section aria-labelledby="skills-section-heading">
-                        <div class="section-header">
-                            <i class="fas fa-bolt" aria-hidden="true"></i>
-                            <h2 id="skills-section-heading">Skills & Expertise</h2>
-                        </div>
-                        <div id="skills-ar" class="skills-bilingual">
-                            <div class="skills-group">
-                                <h3>هندسة الأمن السيبراني</h3>
-                                <span class="skill-badge"><i class="fas fa-shield-alt skill-icon"></i> الكشف عن التسلل (Intrusion Detection)</span>
-                                <span class="skill-badge"><i class="fas fa-bug skill-icon"></i> تحليل نقاط الضعف (Vulnerability Assessment)</span>
-                                <span class="skill-badge"><i class="fas fa-network-wired skill-icon"></i> شهادات Cisco في أمن الشبكات</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>تطوير واجهات وتجربة المستخدم (UI/UX)</h3>
-                                <span class="skill-badge"><i class="fas fa-paint-brush skill-icon"></i> تصميم جريء وعصري باستخدام Figma</span>
-                                <span class="skill-badge"><i class="fab fa-react skill-icon"></i> كتابة مكونات React مع Tailwind CSS</span>
-                                <span class="skill-badge"><i class="fas fa-magic skill-icon"></i> Microinteractions وGlassmorphism و3D Effects</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>تطوير الويب والبرمجة</h3>
-                                <span class="skill-badge"><i class="fab fa-js-square skill-icon"></i> JavaScript (React)</span>
-                                <span class="skill-badge"><i class="fab fa-python skill-icon"></i> Python</span>
-                                <span class="skill-badge"><i class="fab fa-java skill-icon"></i> Java</span>
-                                <span class="skill-badge"><i class="fas fa-fire skill-icon"></i> Firebase (Authentication, Firestore)</span>
-                                <span class="skill-badge"><i class="fas fa-table skill-icon"></i> Excel لأتمتة وتحليل البيانات</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>هندسة البرومبت (Prompt Engineering)</h3>
-                                <span class="skill-badge"><i class="fas fa-comments skill-icon"></i> تصميم وتطوير سيناريوهات تفاعلية لـ ChatGPT / Gemini</span>
-                                <span class="skill-badge"><i class="fas fa-rocket skill-icon"></i> بناء MVP سريع بالتكامل مع واجهات API للذكاء الاصطناعي</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>التداول والاستثمار في العملات الرقمية</h3>
-                                <span class="skill-badge"><i class="fas fa-chart-line skill-icon"></i> تداول المشتقات والعقود الآجلة (Derivatives & Futures) منذ 2019</span>
-                                <span class="skill-badge"><i class="fas fa-coins skill-icon"></i> منصات Bybit وCoinbase وTradingView</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>لغات</h3>
-                                <span class="skill-badge"><i class="fas fa-language skill-icon"></i> العربية (لغة أم)</span>
-                                <span class="skill-badge"><i class="fas fa-language skill-icon"></i> الإنجليزية (محترف)</span>
-                            </div>
-                        </div>
-                        <div id="skills-en" class="skills-bilingual" style="display:none">
-                            <div class="skills-group">
-                                <h3>Cybersecurity Engineering</h3>
-                                <span class="skill-badge"><i class="fas fa-shield-alt skill-icon"></i> Intrusion Detection</span>
-                                <span class="skill-badge"><i class="fas fa-bug skill-icon"></i> Vulnerability Assessment</span>
-                                <span class="skill-badge"><i class="fas fa-network-wired skill-icon"></i> Cisco Network Security Certifications</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>UI/UX Development</h3>
-                                <span class="skill-badge"><i class="fas fa-paint-brush skill-icon"></i> Bold & Modern Design with Figma</span>
-                                <span class="skill-badge"><i class="fab fa-react skill-icon"></i> React Components with Tailwind CSS</span>
-                                <span class="skill-badge"><i class="fas fa-magic skill-icon"></i> Microinteractions, Glassmorphism & 3D Effects</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>Web Development & Programming</h3>
-                                <span class="skill-badge"><i class="fab fa-js-square skill-icon"></i> JavaScript (React)</span>
-                                <span class="skill-badge"><i class="fab fa-python skill-icon"></i> Python</span>
-                                <span class="skill-badge"><i class="fab fa-java skill-icon"></i> Java</span>
-                                <span class="skill-badge"><i class="fas fa-fire skill-icon"></i> Firebase (Authentication, Firestore)</span>
-                                <span class="skill-badge"><i class="fas fa-table skill-icon"></i> Excel for Automation & Data Analysis</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>Prompt Engineering</h3>
-                                <span class="skill-badge"><i class="fas fa-comments skill-icon"></i> Interactive Scenario Design for ChatGPT / Gemini</span>
-                                <span class="skill-badge"><i class="fas fa-rocket skill-icon"></i> Rapid MVP Building with AI API Integrations</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>Crypto Trading & Investment</h3>
-                                <span class="skill-badge"><i class="fas fa-chart-line skill-icon"></i> Derivatives & Futures Trading since 2019</span>
-                                <span class="skill-badge"><i class="fas fa-coins skill-icon"></i> Bybit, Coinbase & TradingView Platforms</span>
-                            </div>
-                            <div class="skills-group">
-                                <h3>Languages</h3>
-                                <span class="skill-badge"><i class="fas fa-language skill-icon"></i> Arabic (Native)</span>
-                                <span class="skill-badge"><i class="fas fa-language skill-icon"></i> English (Professional)</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Professional Summary -->
-                    <section aria-labelledby="professional-summary-heading">
-                        <div class="section-header">
-                            <i class="fas fa-user-tie" aria-hidden="true"></i>
-                            <h2 id="professional-summary-heading" class="en-content">Professional Summary</h2>
-                            <h2 id="professional-summary-heading-ar" class="ar-content" style="display: none;">الملخص المهني</h2>
-                        </div>
-                        <div class="summary-content">
-                            <p class="en-content">Passionate cybersecurity specialist with expertise in threat analysis, penetration testing, and secure application development. Skilled in full-stack development with a focus on creating robust, secure digital solutions.</p>
-                            <p class="ar-content" style="display: none;">متخصص شغوف في الأمن السيبراني مع خبرة في تحليل التهديدات واختبار الاختراق وتطوير التطبيقات الآمنة. ماهر في التطوير الشامل مع التركيز على إنشاء حلول رقمية قوية وآمنة.</p>
-                        </div>
-                    </section>
-
-
-                    <!-- Education -->
-                    <section aria-labelledby="education-heading">
-                        <div class="section-header">
-                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                            <h2 id="education-heading" class="en-content">Education</h2>
-                            <h2 id="education-heading-ar" class="ar-content" style="display: none;">التعليم</h2>
-                        </div>
-                        <div class="education-item en-content">
-                            <h3>Bachelor's in Cybersecurity</h3>
-                            <p class="institution">King Saud University (KSU)</p>
-                            <p class="year">2022 - 2026</p>
-                            <div class="education-status">
-                                <span class="status-badge">Currently Enrolled</span>
-                            </div>
-                        </div>
-                        <div class="education-item ar-content" style="display: none;">
-                            <h3>بكالوريوس في الأمن السيبراني</h3>
-                            <p class="institution">جامعة الملك سعود</p>
-                            <p class="year">2022 - 2026</p>
-                            <div class="education-status">
-                                <span class="status-badge">طالب حالياً</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Certifications -->
-                    <section aria-labelledby="certifications-heading">
-                        <div class="section-header">
-                            <i class="fas fa-certificate" aria-hidden="true"></i>
-                            <h2 id="certifications-heading" class="en-content">Certifications</h2>
-                            <h2 id="certifications-heading-ar" class="ar-content" style="display: none;">الشهادات</h2>
-                        </div>
-                        <ul class="cert-list en-content">
-                            <li class="cert-item">
-                                <i class="fas fa-medal" aria-hidden="true"></i>
-                                <span>Certified Ethical Hacker (CEH)</span>
-                            </li>
-                            <li class="cert-item">
-                                <i class="fas fa-medal" aria-hidden="true"></i>
-                                <span>CompTIA Security+</span>
-                            </li>
-                        </ul>
-                        <ul class="cert-list ar-content" style="display: none;">
-                            <li class="cert-item">
-                                <i class="fas fa-medal" aria-hidden="true"></i>
-                                <span>مخترق أخلاقي معتمد (CEH)</span>
-                            </li>
-                            <li class="cert-item">
-                                <i class="fas fa-medal" aria-hidden="true"></i>
-                                <span>CompTIA Security+</span>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <!-- Key Projects -->
-                    <section aria-labelledby="projects-heading" class="full-width">
-                        <div class="section-header">
-                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            <h2 id="projects-heading" class="en-content">Key Projects</h2>
-                            <h2 id="projects-heading-ar" class="ar-content" style="display: none;">المشاريع الرئيسية</h2>
-                        </div>
-                        <div class="projects-grid en-content">
-                            <article class="project-card">
-                                <h3>Security Assessment Tool</h3>
-                                <p>Developed automated vulnerability scanning tool using Python and Nmap for network security assessments.</p>
-                                <ul class="project-tech">
-                                    <li class="tech-tag">Python</li>
-                                    <li class="tech-tag">Nmap</li>
-                                    <li class="tech-tag">Security</li>
-                                </ul>
-                            </article>
-                            <article class="project-card">
-                                <h3>Secure Web Application</h3>
-                                <p>Built full-stack web application with advanced security features including OWASP compliance and encryption.</p>
-                                <ul class="project-tech">
-                                    <li class="tech-tag">React</li>
-                                    <li class="tech-tag">Node.js</li>
-                                    <li class="tech-tag">Security</li>
-                                </ul>
-                            </article>
-                        </div>
-                        <div class="projects-grid ar-content" style="display: none;">
-                            <article class="project-card">
-                                <h3>أداة تقييم الأمان</h3>
-                                <p>تطوير أداة فحص الثغرات الآلية باستخدام Python و Nmap لتقييمات أمان الشبكة.</p>
-                                <ul class="project-tech">
-                                    <li class="tech-tag">Python</li>
-                                    <li class="tech-tag">Nmap</li>
-                                    <li class="tech-tag">أمان</li>
-                                </ul>
-                            </article>
-                            <article class="project-card">
-                                <h3>تطبيق ويب آمن</h3>
-                                <p>بناء تطبيق ويب شامل مع ميزات أمان متقدمة بما في ذلك الامتثال لـ OWASP والتشفير.</p>
-                                <ul class="project-tech">
-                                    <li class="tech-tag">React</li>
-                                    <li class="tech-tag">Node.js</li>
-                                    <li class="tech-tag">أمان</li>
-                                </ul>
-                            </article>
-                        </div>
-                    </section>
-
-                    <!-- Languages -->
-                    <section aria-labelledby="languages-heading">
-                        <div class="section-header">
-                            <i class="fas fa-language" aria-hidden="true"></i>
-                            <h2 id="languages-heading" class="en-content">Languages</h2>
-                            <h2 id="languages-heading-ar" class="ar-content" style="display: none;">اللغات</h2>
-                        </div>
-                        <ul class="language-list en-content">
-                            <li class="language-item">
-                                <span class="language">Arabic</span>
-                                <span class="level">Native</span>
-                            </li>
-                            <li class="language-item">
-                                <span class="language">English</span>
-                                <span class="level">Professional</span>
-                            </li>
-                        </ul>
-                        <ul class="language-list ar-content" style="display: none;">
-                            <li class="language-item">
-                                <span class="language">العربية</span>
-                                <span class="level">لغة أم</span>
-                            </li>
-                            <li class="language-item">
-                                <span class="language">الإنجليزية</span>
-                                <span class="level">محترف</span>
-                            </li>
-                        </ul>
-                    </section>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div class="tech-showcase">
-                    <section aria-labelledby="tech-platforms-heading">
-                        <div class="section-header">
-                            <i class="fas fa-laptop-code" aria-hidden="true"></i>
-                            <h2 id="tech-platforms-heading" class="en-content">Technologies & Platforms</h2>
-                            <h2 id="tech-platforms-heading-ar" class="ar-content" style="display: none;">التقنيات والمنصات</h2>
-                        </div>
-                        <ul class="tech-icons-grid">
-                            <li class="icon-label"><i class="fab fa-apple" aria-hidden="true"></i> <span>Apple</span></li>
-                            <li class="icon-label"><i class="fab fa-windows" aria-hidden="true"></i> <span>Microsoft</span></li>
-                            <li class="icon-label"><i class="fab fa-google" aria-hidden="true"></i> <span>Google</span></li>
-                            <li class="icon-label"><i class="fab fa-github" aria-hidden="true"></i> <span>GitHub</span></li>
-                            <li class="icon-label"><i class="fab fa-python" aria-hidden="true"></i> <span>Python</span></li>
-                        </ul>
-                    </section>
-                </div>
-                <div class="footer-text">
-                    <p class="en-content">Powered by Cyber Innovation • Built with Security in Mind</p>
-                    <p class="ar-content" style="display: none;">مدعوم بالابتكار السيبراني • مبني مع وضع الأمان في الاعتبار</p>
-                </div>
-            </div>
-        </div>
+    <div class="bg-particles"> <div class="bg-particle p1"></div> <div class="bg-particle p2"></div>
+        <div class="bg-particle p3"></div> <div class="bg-particle p4"></div>
+        <div class="bg-particle p5"></div>
     </div>
+  </div>
 
-    <!-- AI Chatbot Component -->
-    <div id="ai-chatbot" class="chatbot-container">
-        <div id="chatbot-toggle" class="chatbot-toggle" aria-label="Open AI Assistant">
-            <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="#00FF00" opacity="0.15"/>
-                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5C14.8 7.5 14.6 7.4 14.5 7.3L12 4.8C11.9 4.7 11.7 4.7 11.6 4.8L9.1 7.3C9 7.4 8.8 7.5 8.6 7.5L3 7V9L8.6 8.5C9.2 8.4 9.7 8.1 10 7.6L12 5.6L14 7.6C14.3 8.1 14.8 8.4 15.4 8.5L21 9ZM12 10.5C13.7 10.5 15 11.8 15 13.5S13.7 16.5 12 16.5S9 15.2 9 13.5S10.3 10.5 12 10.5ZM12 12C11.2 12 10.5 12.7 10.5 13.5S11.2 15 12 15S13.5 14.3 13.5 13.5S12.8 12 12 12ZM12 18C15.3 18 18 20.7 18 24H6C6 20.7 8.7 18 12 18Z" fill="#00FF00"/>
-            </svg>
-            <span class="toggle-text">AI</span>
+  <div id="main-content">
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="amrikyy-visual-logo">AMRIKYY</div> <h1 class="tagline">أهلاً بك في منصة <span class="highlight">الذكاء السيبراني</span></h1>
+        <p class="subtitle">مشاريع، مهارات، وأفكار جريئة — مصممة للتميز في عالم التقنية والأمن.</p>
+        <button class="cta-btn" onclick="scrollToCV()">اكتشف الـ CV الذكي</button>
+      </div>
+    </section>
+
+    <section id="cv-card-page" class="cv-card">
+      <div class="cv-header">
+        <img class="cv-avatar" src="IMG_0073 2.PNG" alt="Amrikyy"/> <div class="cv-header-info">
+          <h2>محمد عبدالعزيز (Amrikyy)</h2>
+          <p>مهندس أمن سيبراني | مطور ويب وذكاء صناعي</p>
+          <div class="cv-links">
+            <a href="mailto:amrikyy@gmail.com" title="Email"><i class="fas fa-envelope"></i> <span>amrikyy@gmail.com</span></a>
+            <a href="https://linkedin.com/in/amrikyy" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i> <span>LinkedIn</span></a>
+            <a href="https://github.com/amrikyy" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i> <span>GitHub</span></a>
+          </div>
         </div>
-        
-        <div id="chatbot-window" class="chatbot-window">
-            <div class="chatbot-header">
-                <div class="chatbot-title">
-                    <svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#00FF00"/>
-                        <path d="M2 17L12 22L22 17" stroke="#00FF00" stroke-width="2" fill="none"/>
-                        <path d="M2 12L12 17L22 12" stroke="#00FF00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span>Cyber AI Assistant</span>
-                </div>
-                <button id="chatbot-close" class="chatbot-close" aria-label="Close AI Assistant">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="chatbot-messages" class="chatbot-messages">
-                <div class="message ai-message">
-                    <div class="message-avatar">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="10" fill="#00FF00" opacity="0.15"/>
-                            <path d="M12 6.5C13.38 6.5 14.5 7.62 14.5 9S13.38 11.5 12 11.5S9.5 10.38 9.5 9S10.62 6.5 12 6.5ZM12 13C14.21 13 16 14.79 16 17V18H8V17C8 14.79 9.79 13 12 13Z" fill="#00FF00"/>
-                        </svg>
-                    </div>
-                    <div class="message-content">
-                        <span class="message-text">Hello! I'm Amrikyy's AI assistant. I can help you learn more about my background, skills, and projects. What would you like to know?</span>
-                        <span class="message-time">Now</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chatbot-input-container">
-                <div class="input-wrapper">
-                    <input type="text" id="chatbot-input" placeholder="Ask me anything about Amrikyy..." aria-label="Chat message input">
-                    <button id="chatbot-send" class="send-button" aria-label="Send message">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="#00FF00"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="typing-indicator" id="typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+      </div>
+      <div class="cv-body">
+        <div class="cv-section">
+          <h3>الملخص المهني</h3>
+          <p>شغوف بالأمن السيبراني، هندسة البرومبت، وتجربة المستخدم. خبرة في بناء حلول رقمية ذكية وتصميم واجهات تدهش، مع تركيز على أحدث التقنيات وأفضل ممارسات الأمان.</p>
         </div>
+        <div class="cv-section">
+          <h3>المهارات الرئيسية</h3>
+          <ul class="skills-list">
+            <li>هندسة الأمن السيبراني</li><li>React & Next.js</li><li>Tailwind CSS</li>
+            <li>Figma & UI/UX</li><li>تحليل الثغرات</li><li>Python & Node.js</li>
+            <li>Firebase & AWS</li><li>هندسة البرومبت (AI)</li><li>تداول العملات الرقمية</li>
+          </ul>
+        </div>
+        <div class="cv-section">
+          <h3>الشهادات</h3>
+          <ul>
+            <li>CompTIA Security+</li>
+            <li>Cisco Certified CyberOps Associate</li>
+            <li>(شهادات أخرى ذات صلة)</li>
+          </ul>
+        </div>
+        <div class="cv-section">
+          <h3>مشاريع رئيسية</h3>
+          <ul>
+            <li>لوحة تحكم متقدمة للأمن السيبراني (React, Python)</li>
+            <li>تطبيق روبوت دردشة ذكي بتقنيات AI</li>
+            <li>تصميم واجهة مستخدم لموقع Landing Page لـ charity:water (مفهوم)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="chatbot-toggle" aria-label="افتح مساعد أمريكي الذكي">
+      <svg id="dataShardIcon" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+              <linearGradient id="shardGradient" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="var(--neon-green)" stop-opacity="0.7"/>
+                  <stop offset="100%" stop-color="var(--neon-green)" stop-opacity="0.3"/>
+              </linearGradient>
+              <filter id="shardGlowEffect" x="-70%" y="-70%" width="240%" height="240%"> <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+              </filter>
+          </defs>
+          <path class="data-shard-main" d="M30 3 L57 22 L44 67 L16 67 L3 22 Z" 
+                fill="url(#shardGradient)" stroke="var(--neon-green)" stroke-width="1.5" filter="url(#shardGlowEffect)"/>
+          <path class="data-shard-facet" d="M30 3 L30 42 L16 67 M30 3 L30 42 L44 67 M3 22 L30 42 L57 22" 
+                stroke="var(--neon-green)" stroke-width="0.7" stroke-opacity="0.6"/>
+          <circle class="data-shard-core" cx="30" cy="40" r="3" fill="var(--white)" opacity="0.8"/>
+      </svg>
+      <span class="toggle-text">AI</span>
+  </div>
+
+  <div id="chatbot-window">
+    <div class="chatbot-header">
+      <span class="chatbot-title">Amrikyy AI</span>
+      <button id="chatbot-close" aria-label="إغلاق">
+        <svg width="18" height="18" viewBox="0 0 20 20">
+          <line x1="4" y1="4" x2="16" y2="16" stroke="var(--medium-gray-light)" stroke-width="2.5"/>
+          <line x1="16" y1="4" x2="4" y2="16" stroke="var(--medium-gray-light)" stroke-width="2.5"/>
+        </svg>
+      </button>
     </div>
+    <div class="chatbot-body">
+        <div id="chatbot-messages">
+            <div class="chatbot-message ai">
+                <span class="avatar">
+                    <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="var(--neon-green)" opacity="0.1"/><circle cx="12" cy="12" r="7" fill="var(--neon-green)" opacity="0.4"/></svg>
+                </span>
+                <div class="text">مرحباً! أنا Amrikyy AI، كيف يمكنني خدمتك اليوم؟</div>
+            </div>
+        </div>
+        <div id="typing-indicator"><span></span><span></span><span></span></div>
+    </div>
+    <form id="chatbot-form" autocomplete="off">
+      <input id="chatbot-input" type="text" placeholder="اكتب سؤالك هنا..." autocomplete="off" />
+      <button type="submit" aria-label="إرسال">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z"/></svg>
+      </button>
+    </form>
+  </div>
 
-    <script src="script.js"></script>
+  <script>
+    // ...existing code...
+  </script>
 </body>
 </html>
