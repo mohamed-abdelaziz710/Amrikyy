@@ -437,6 +437,11 @@ html[dir="ltr"] #lang-toggle-container {
   text-decoration: none;
 }
 
+.cv-section ul li i, .education-item p i, .project-item p i {
+    width: auto;
+    text-align: left;
+}
+
 /* =========== Chatbot Styles =========== */
 #chatbot-toggle-btn {
     position: fixed;
