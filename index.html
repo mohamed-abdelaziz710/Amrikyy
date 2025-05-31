@@ -13,8 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div id="loading-screen">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="loading-screen" role="status" aria-live="polite" aria-label="Loading" tabindex="0">
         <div class="loading-starfield" id="loading-starfield"></div>
         <div class="loading-static-overlay"></div>
         <div class="logo-container">
@@ -28,137 +28,136 @@
         </div>
         <button id="skip-button" class="skip-button">Skip</button>
     </div>
-
-    <div id="cv-section" style="display:none;">
-        <div id="main-info-card" class="ui-overlay" style="position:relative;top:unset;left:unset;transform:none;margin:2rem auto;max-width:600px;width:95%;">
-            <div class="data-flow-border"></div>
-            <h1 class="name-title">Mohamed H Abdelaziz (Amrikyy)</h1>
-            <div class="bio-slogan-container">
-                <p id="bio-slogan-text" class="bio-slogan">Cybersecurity Innovator | AI Prompt Engineer | UI/UX Visionary</p>
-            </div>
-            <p class="text-neutral-400 text-sm md:text-base">Passionate about cybersecurity, prompt engineering, and user experience. Experienced in building smart digital solutions and stunning interfaces, focusing on cutting-edge tech and best security practices.</p>
-            <button class="cta-button" id="launch-resume-btn">Show Full Resume</button>
-        </div>
-        <div id="resume-modal" class="show">
-            <div class="resume-content-card">
-                <button class="resume-close-btn" id="resume-close-btn">X</button>
-                <h2 class="text-center">Full Professional Profile</h2>
-                <div class="flex justify-center mb-6">
-                    <img src="avatar.jpg" alt="Mohamed H Abdelaziz (Amrikyy)" class="rounded-full w-32 h-32 object-cover shadow-lg" />
+    <main id="main-content" tabindex="-1">
+        <section id="cv-section" style="display:none;" aria-label="CV Section">
+            <div id="main-info-card" class="ui-overlay" style="position:relative;top:unset;left:unset;transform:none;margin:2rem auto;max-width:600px;width:95%;">
+                <div class="data-flow-border"></div>
+                <h1 class="name-title">Mohamed H Abdelaziz (Amrikyy)</h1>
+                <div class="bio-slogan-container">
+                    <p id="bio-slogan-text" class="bio-slogan">Cybersecurity Innovator | AI Prompt Engineer | UI/UX Visionary</p>
                 </div>
-                <section class="mb-6">
-                    <h3><span class="icon">💼</span> Experience</h3>
-                    <div>
-                        <p class="font-bold text-neutral-200">Cybersecurity Engineer & AI Solutions Architect</p>
-                        <p class="text-neutral-400">Freelance / Amrikyy.com | 2022 – Present</p>
-                        <ul class="list-disc list-inside text-neutral-400 ml-4">
-                            <li>Developed and secured web applications and AI-powered chatbots for clients in fintech, healthcare, and education.</li>
-                            <li>Specialized in prompt engineering for LLMs (Arabic/English), building custom AI tools and automations.</li>
-                            <li>Performed penetration testing, vulnerability assessments, and security audits for organizations and startups.</li>
-                            <li>Designed and delivered cybersecurity awareness and technical training for teams and individuals.</li>
-                            <li>Consulted on UI/UX and secure product design for SaaS and digital platforms.</li>
-                        </ul>
+                <p class="text-neutral-400 text-sm md:text-base">Passionate about cybersecurity, prompt engineering, and user experience. Experienced in building smart digital solutions and stunning interfaces, focusing on cutting-edge tech and best security practices.</p>
+                <button class="cta-button" id="launch-resume-btn" aria-haspopup="dialog" aria-controls="resume-modal">Show Full Resume</button>
+            </div>
+            <div id="resume-modal" class="show" role="dialog" aria-modal="true" aria-labelledby="resume-title" tabindex="-1">
+                <div class="resume-content-card">
+                    <button class="resume-close-btn" id="resume-close-btn" aria-label="Close Resume">X</button>
+                    <h2 id="resume-title" class="text-center">Full Professional Profile</h2>
+                    <div class="flex justify-center mb-6">
+                        <img src="avatar.jpg" alt="Portrait of Mohamed H Abdelaziz (Amrikyy)" class="rounded-full w-32 h-32 object-cover shadow-lg" />
                     </div>
-                    <div class="mt-4">
-                        <p class="font-bold text-neutral-200">Lead Web & Security Developer</p>
-                        <p class="text-neutral-400">Various Startups & Projects | 2018 – 2022</p>
-                        <ul class="list-disc list-inside text-neutral-400 ml-4">
-                            <li>Led development of secure, scalable web platforms using React, Next.js, Node.js, and Python.</li>
-                            <li>Integrated cloud solutions (Firebase, AWS) and implemented CI/CD pipelines for rapid deployment.</li>
-                            <li>Worked closely with designers to deliver modern, accessible, and user-focused interfaces.</li>
-                            <li>Provided technical mentorship and code reviews for junior developers.</li>
-                        </ul>
+                    <section class="mb-6">
+                        <h3><span class="icon">💼</span> Experience</h3>
+                        <div>
+                            <p class="font-bold text-neutral-200">Cybersecurity Engineer & AI Solutions Architect</p>
+                            <p class="text-neutral-400">Freelance / Amrikyy.com | 2022 – Present</p>
+                            <ul class="list-disc list-inside text-neutral-400 ml-4">
+                                <li>Developed and secured web applications and AI-powered chatbots for clients in fintech, healthcare, and education.</li>
+                                <li>Specialized in prompt engineering for LLMs (Arabic/English), building custom AI tools and automations.</li>
+                                <li>Performed penetration testing, vulnerability assessments, and security audits for organizations and startups.</li>
+                                <li>Designed and delivered cybersecurity awareness and technical training for teams and individuals.</li>
+                                <li>Consulted on UI/UX and secure product design for SaaS and digital platforms.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-bold text-neutral-200">Lead Web & Security Developer</p>
+                            <p class="text-neutral-400">Various Startups & Projects | 2018 – 2022</p>
+                            <ul class="list-disc list-inside text-neutral-400 ml-4">
+                                <li>Led development of secure, scalable web platforms using React, Next.js, Node.js, and Python.</li>
+                                <li>Integrated cloud solutions (Firebase, AWS) and implemented CI/CD pipelines for rapid deployment.</li>
+                                <li>Worked closely with designers to deliver modern, accessible, and user-focused interfaces.</li>
+                                <li>Provided technical mentorship and code reviews for junior developers.</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="mb-6">
+                        <h3><span class="icon">💻</span> Technical Skills</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🛡️</span> Cybersecurity Engineering
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🔍</span> Penetration Testing
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🤖</span> AI Prompt Engineering
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">⚛️</span> React & Next.js
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🎨</span> UI/UX Design
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🐍</span> Python & Node.js
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">☁️</span> Firebase & AWS
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🔒</span> Vulnerability Assessment
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🌐</span> Web Security & DevSecOps
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">💬</span> Bilingual (Arabic/English)
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🧑‍🏫</span> Security Training & Awareness
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-300">
+                                <span class="text-xl icon">🧠</span> LLMs & Generative AI
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3><span class="icon">🎓</span> Education</h3>
+                        <div>
+                            <p class="font-bold text-neutral-200">B.Sc. Computer Science (Cybersecurity)</p>
+                            <p class="text-neutral-400">Ain Shams University | 2018</p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-bold text-neutral-200">Certifications</p>
+                            <p class="text-neutral-400">CompTIA Security+, Cisco CyberOps Associate, and more</p>
+                        </div>
+                    </section>
+                    <div class="flex justify-center mt-8 space-x-6">
+                        <a href="https://linkedin.com/in/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-8 h-8" />
+                        </a>
+                        <a href="https://github.com/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" class="w-8 h-8" />
+                        </a>
+                        <a href="mailto:amrikyy@gmail.com" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email" class="w-8 h-8" />
+                        </a>
                     </div>
-                </section>
-                <section class="mb-6">
-                    <h3><span class="icon">💻</span> Technical Skills</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🛡️</span> Cybersecurity Engineering
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🔍</span> Penetration Testing
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🤖</span> AI Prompt Engineering
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">⚛️</span> React & Next.js
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🎨</span> UI/UX Design
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🐍</span> Python & Node.js
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">☁️</span> Firebase & AWS
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🔒</span> Vulnerability Assessment
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🌐</span> Web Security & DevSecOps
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">💬</span> Bilingual (Arabic/English)
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🧑‍🏫</span> Security Training & Awareness
-                        </div>
-                        <div class="flex items-center gap-2 text-neutral-300">
-                            <span class="text-xl icon">🧠</span> LLMs & Generative AI
+                    <div class="flex justify-center mt-8">
+                        <div class="bg-white p-4 rounded-md">
+                            <img src="https://placehold.co/100x100/FFFFFF/000000?text=QR+Code" alt="QR Code" class="w-24 h-24" />
                         </div>
                     </div>
-                </section>
-                <section>
-                    <h3><span class="icon">🎓</span> Education</h3>
-                    <div>
-                        <p class="font-bold text-neutral-200">B.Sc. Computer Science (Cybersecurity)</p>
-                        <p class="text-neutral-400">Ain Shams University | 2018</p>
-                    </div>
-                    <div class="mt-4">
-                        <p class="font-bold text-neutral-200">Certifications</p>
-                        <p class="text-neutral-400">CompTIA Security+, Cisco CyberOps Associate, and more</p>
-                    </div>
-                </section>
-                <div class="flex justify-center mt-8 space-x-6">
-                    <a href="https://linkedin.com/in/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-8 h-8" />
-                    </a>
-                    <a href="https://github.com/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" class="w-8 h-8" />
-                    </a>
-                    <a href="mailto:amrikyy@gmail.com" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email" class="w-8 h-8" />
-                    </a>
+                    <p class="text-xs text-neutral-500 mt-6 text-center">Note: This content is for Mohamed H Abdelaziz (Amrikyy). For more, contact amrikyy@gmail.com.</p>
                 </div>
-                <div class="flex justify-center mt-8">
-                    <div class="bg-white p-4 rounded-md">
-                        <img src="https://placehold.co/100x100/FFFFFF/000000?text=QR+Code" alt="QR Code" class="w-24 h-24" />
-                    </div>
+            </div>
+        </section>
+        <section id="chatbot-overlay" class="ui-overlay hidden" aria-label="AI Chatbot" aria-live="polite">
+            <div class="chatbot-header">
+                <h3>Chat with AI</h3>
+                <button class="chatbot-toggle-btn" id="chatbot_close_btn" aria-label="Close Chatbot">X</button>
+            </div>
+            <div class="chatbot-content">
+                <div class="chatbot-messages" id="chatbot-messages">
+                    <div class="chatbot-message bot">Hello! Ask me anything about this portfolio or Web3.</div>
                 </div>
-                <p class="text-xs text-neutral-500 mt-6 text-center">Note: This content is for Mohamed H Abdelaziz (Amrikyy). For more, contact amrikyy@gmail.com.</p>
+                <div class="chatbot-input-area">
+                    <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type your message..." aria-label="Type your message" autocomplete="off">
+                    <button id="chatbot-send-btn" class="chatbot-send-btn" aria-label="Send message">Send</button>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div id="chatbot-overlay" class="ui-overlay hidden">
-        <div class="chatbot-header">
-            <h3>Chat with AI</h3>
-            <button class="chatbot-toggle-btn" id="chatbot_close_btn">X</button>
-        </div>
-        <div class="chatbot-content">
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="chatbot-message bot">Hello! Ask me anything about this portfolio or Web3.</div>
-            </div>
-            <div class="chatbot-input-area">
-                <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type your message...">
-                <button id="chatbot-send-btn" class="chatbot-send-btn">Send</button>
-            </div>
-        </div>
-    </div>
-
+        </section>
+    </main>
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
 </body>
