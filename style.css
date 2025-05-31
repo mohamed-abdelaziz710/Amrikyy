@@ -3,116 +3,125 @@
   --neon-green: #39FF14;
   --neon-blue: #00d4ff;
   --neon-purple: #b600ff;
-  --medium-gray: #888888; 
-  --dark-bg-primary: #0A0A0A; 
-  --dark-element-bg: #1C1C1C; 
-  --chatbot-bg: #101010; /* خلفية أغمق قليلاً للتشات بوت */
-  
-  --glass-bg: rgba(15, 15, 15, 0.7); 
-  --glass-border: rgba(57, 255, 20, 0.3); 
-  --glass-inner-glow: rgba(57, 255, 20, 0.1); 
+  --medium-gray: #888888;
+  --dark-bg-primary: #0A0A0A;
+  --dark-element-bg: #1C1C1C;
+  --chatbot-bg: #101010;
 
-  --text-primary: #E5E5E5; 
-  --text-on-neon: #0A0A0A; 
+  --glass-bg: rgba(15, 15, 15, 0.7); /* زجاجي داكن */
+  --glass-border: rgba(57, 255, 20, 0.3); /* حدود زجاجية بلون النيون الأخضر */
+  --glass-inner-glow: rgba(57, 255, 20, 0.1); /* توهج داخلي للزجاج */
+
+  --text-primary: #E5E5E5; /* لون النص الأساسي (فاتح) */
+  --text-secondary: #b0b0b0; /* لون نص ثانوي (أقل سطوعًا) */
+  --text-on-neon: #0A0A0A; /* لون النص فوق خلفيات النيون (داكن) */
   --white: #FFFFFF;
-  
-  --font-orbitron: 'Orbitron', sans-serif;
-  --font-cairo: 'Cairo', sans-serif;
-  
-  --transition-speed: 0.5s;
-  --transition-easing: ease-in-out;
-  --hover-transition-speed: 0.3s; 
+
+  --font-orbitron: 'Orbitron', sans-serif; /* خط للعناوين والشعارات */
+  --font-cairo: 'Cairo', sans-serif; /* خط للنصوص الأساسية */
+
+  --transition-speed: 0.5s; /* سرعة الانتقال العامة */
+  --transition-easing: ease-in-out; /* نوع الانتقال العام */
+  --hover-transition-speed: 0.3s; /* سرعة الانتقال عند التحويم */
+  --neon-blue-rgb: 0, 212, 255; /* RGB for neon blue for rgba() usage */
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html, body {
   height: 100%;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* تمرير سلس للصفحة */
 }
 
 body {
   background: var(--dark-bg-primary);
-  font-family: var(--font-cairo); 
+  font-family: var(--font-cairo);
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* توسيط المحتوى أثناء التحميل */
   align-items: center;
-  overflow-x: hidden; /* إخفاء التمرير الأفقي فقط مبدئياً */
+  overflow-x: hidden; /* منع التمرير الأفقي غير المرغوب فيه */
   overflow-y: hidden; /* منع التمرير العمودي أثناء التحميل */
   transition: background var(--transition-speed) var(--transition-easing);
 }
 
 body.loaded {
-  justify-content: flex-start;
-  overflow-y: auto; 
+  justify-content: flex-start; /* محاذاة المحتوى للأعلى بعد التحميل */
+  overflow-y: auto; /* السماح بالتمرير العمودي بعد التحميل */
 }
 
 /* =========== شاشة التحميل المحسنة مع خلفية متحركة =========== */
 #loader-container {
   position: fixed;
-  inset: 0;
-  z-index: 10000;
+  inset: 0; /* top, right, bottom, left = 0 */
+  z-index: 10000; /* فوق كل شيء آخر */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--dark-bg-primary); 
+  background-color: var(--dark-bg-primary);
   opacity: 1;
   visibility: visible;
   transition: opacity var(--transition-speed) var(--transition-easing), visibility var(--transition-speed) var(--transition-easing);
-  overflow: hidden; 
+  overflow: hidden; /* منع ظهور أي أشرطة تمرير داخل شاشة التحميل */
 }
 
+/* تأثير الشبكة المتحركة لخلفية شاشة التحميل */
 #loader-container::before {
     content: "";
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-image: 
+    background-image:
         linear-gradient(0deg, transparent 24px, rgba(57, 255, 20, 0.04) 25px, rgba(57, 255, 20, 0.04) 26px, transparent 27px, transparent 74px, rgba(57, 255, 20, 0.04) 75px, rgba(57, 255, 20, 0.04) 76px, transparent 77px, transparent),
         linear-gradient(90deg, transparent 24px, rgba(57, 255, 20, 0.04) 25px, rgba(57, 255, 20, 0.04) 26px, transparent 27px, transparent 74px, rgba(57, 255, 20, 0.04) 75px, rgba(57, 255, 20, 0.04) 76px, transparent 77px, transparent);
-    background-size: 80px 80px; 
+    background-size: 80px 80px;
     animation: moveGrid 25s linear infinite;
-    opacity: 0.4; 
-    z-index: -2; 
+    opacity: 0.4;
+    z-index: -2; /* خلف العناصر الأخرى في شاشة التحميل */
 }
 
 @keyframes moveGrid {
     0% { background-position: 0 0; }
-    100% { background-position: 160px 160px; } 
+    100% { background-position: 160px 160px; } /* تحريك الشبكة */
 }
 
+/* تأثير الجسيمات المتحركة لخلفية شاشة التحميل */
 #loader-container::after {
     content: "";
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-image: radial-gradient(circle, rgba(57, 255, 20, 0.15) 1px, transparent 1.5px);
-    background-size: 50px 50px; 
+    background-size: 50px 50px;
     animation: moveParticles 40s linear infinite, particleFade 8s ease-in-out infinite alternate;
-    opacity: 0; 
-    z-index: -1; 
+    opacity: 0; /* تبدأ مخفية وتظهر بالحركة */
+    z-index: -1; /* فوق الشبكة ولكن خلف المحتوى */
 }
 @keyframes moveParticles {
     0% { background-position: 0 0; }
-    100% { background-position: -100px 100px; } 
+    100% { background-position: -100px 100px; } /* تحريك الجسيمات */
 }
 @keyframes particleFade {
-    0%, 100% { opacity: 0.1; }
-    50% { opacity: 0.4; } 
+    0%, 100% { opacity: 0.1; } /* تلاشي الجسيمات للداخل والخارج */
+    50% { opacity: 0.4; }
 }
 
-
+/* إخفاء شاشة التحميل عند اكتمال التحميل */
 #loader-container.hidden {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none; /* لمنع التفاعل معها وهي مخفية */
 }
 
 .loader-content {
   text-align: center;
-  z-index: 1; 
+  z-index: 1; /* فوق تأثيرات الخلفية */
 }
 
 .loader-logo {
@@ -120,35 +129,28 @@ body.loaded {
   font-size: 2.2rem;
   line-height: 1.2;
   color: var(--neon-green);
-  text-shadow:
+  text-shadow: /* تأثير ظل متعدد لخلق عمق وتوهج */
     0 0 5px var(--neon-green),
     0 0 10px var(--neon-green),
     0 0 15px rgba(57, 255, 20, 0.8),
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000,
-    -2px -2px 0 #000,
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
+    -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000, /* حدود سوداء */
+    -2px -2px 0 #000, 2px -2px 0 #000, -2px  2px 0 #000, 2px  2px 0 #000,
      0 0 3px #000;
   margin-bottom: 1.5rem;
-  padding: 0 1rem;
+  padding: 0 1rem; /* مساحة في حال كان النص طويلاً */
   animation: pulseLogoEnhanced 2.5s infinite alternate ease-in-out;
-  white-space: normal;
-  max-width: 90vw;
+  white-space: normal; /* السماح بالتفاف النص إذا لزم الأمر */
+  max-width: 90vw; /* لضمان عدم تجاوز الشعار عرض الشاشة */
   text-align: center;
 }
 
+/* تحريك نبضي للشعار مع تأثير ثلاثي الأبعاد خفيف */
 @keyframes pulseLogoEnhanced {
   0% {
     opacity: 0.8;
     transform: scale(0.97) perspective(600px) rotateY(1deg);
     text-shadow:
-      0 0 4px var(--neon-green),
-      0 0 8px var(--neon-green),
-      0 0 12px rgba(57, 255, 20, 0.7),
+      0 0 4px var(--neon-green), 0 0 8px var(--neon-green), 0 0 12px rgba(57, 255, 20, 0.7),
       -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
       -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
       0 0 2px #000;
@@ -157,10 +159,7 @@ body.loaded {
     opacity: 1;
     transform: scale(1.03) perspective(600px) rotateY(-1deg);
     text-shadow:
-      0 0 6px var(--neon-green),
-      0 0 12px var(--neon-green),
-      0 0 20px rgba(57, 255, 20, 0.9),
-      0 0 30px rgba(57, 255, 20, 0.6),
+      0 0 6px var(--neon-green), 0 0 12px var(--neon-green), 0 0 20px rgba(57, 255, 20, 0.9), 0 0 30px rgba(57, 255, 20, 0.6),
       -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
       -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
       0 0 4px #000;
@@ -171,7 +170,7 @@ body.loaded {
   font-family: var(--font-cairo);
   font-size: 1.1rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem; 
+  margin-bottom: 1.5rem;
 }
 
 .progress-bar-container {
@@ -179,42 +178,42 @@ body.loaded {
   height: 8px;
   background-color: var(--dark-element-bg);
   border-radius: 4px;
-  overflow: hidden;
-  margin: 0 auto; 
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  border: 1px solid rgba(57, 255, 20, 0.2); 
+  overflow: hidden; /* لإخفاء الجزء الزائد من شريط التقدم */
+  margin: 0 auto; /* توسيط الحاوية */
+  box-shadow: 0 0 10px rgba(0,0,0,0.5); /* ظل خفيف */
+  border: 1px solid rgba(57, 255, 20, 0.2); /* حدود بلون النيون */
 }
 
 .progress-bar {
-  width: 0%;
+  width: 0%; /* يبدأ فارغًا، ويتم ملؤه بواسطة JavaScript و CSS transition */
   height: 100%;
-  background: var(--neon-green); 
-  border-radius: 4px;
-  transition: width 2.5s cubic-bezier(0.25, 1, 0.5, 1); 
+  background: var(--neon-green);
+  border-radius: 4px; /* نفس تقويس الحاوية */
+  transition: width 2.5s cubic-bezier(0.25, 1, 0.5, 1); /* انتقال سلس لملء الشريط */
 }
 
 /* =========== المحتوى الرئيسي =========== */
 #main-content {
   width: 100%;
-  padding: 2rem 1rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity var(--transition-speed) var(--transition-easing) 0.3s, transform var(--transition-speed) var(--transition-easing) 0.3s; 
+  padding: 2rem 1rem; /* مساحات داخلية للمحتوى */
+  opacity: 0; /* يبدأ مخفيًا */
+  transform: translateY(30px); /* يبدأ مزاحًا للأسفل قليلاً */
+  transition: opacity var(--transition-speed) var(--transition-easing) 0.3s, transform var(--transition-speed) var(--transition-easing) 0.3s; /* انتقال سلس للظهور */
 }
 
 body.loaded #main-content {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1; /* يظهر عند اكتمال التحميل */
+  transform: translateY(0); /* يعود إلى مكانه الأصلي */
 }
 
 /* زر تبديل اللغة */
 #lang-toggle-container {
-    position: absolute;
+    position: absolute; /* تموضع مطلق بالنسبة لأقرب عنصر له تموضع نسبي (أو الجسم) */
     top: 1.5rem;
-    left: 1.5rem; 
-    z-index: 100;
+    left: 1.5rem; /* الافتراضي للغة العربية (RTL) */
+    z-index: 100; /* فوق المحتوى الآخر */
 }
-html[dir="ltr"] #lang-toggle-container {
+html[dir="ltr"] #lang-toggle-container { /* تعديل للغة الإنجليزية (LTR) */
     left: auto;
     right: 1.5rem;
 }
@@ -229,227 +228,214 @@ html[dir="ltr"] #lang-toggle-container {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color var(--hover-transition-speed), color var(--hover-transition-speed), box-shadow var(--hover-transition-speed);
-    box-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.4); /* ظل خفيف بلون النيون */
 }
 .lang-toggle-btn:hover {
     background-color: var(--neon-green);
     color: var(--text-on-neon);
-    box-shadow: 0 0 15px var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-green); /* ظل أقوى عند التحويم */
 }
 
 
 /* =========== بطاقة الـ CV الذكية =========== */
 .smart-cv-card-container {
-  position: relative; /* Changed from fixed */
-  top: auto; /* Removed fixed positioning */
-  left: auto; /* Removed fixed positioning */
-  transform: none; /* Removed transform */
-  z-index: 10;
-  width: 100%; /* Allow container to take full width */
-  max-width: 600px; /* Set a max-width for the container */
-  min-width: 0;
-  pointer-events: auto;
-  margin: 40px auto; /* Center horizontally and add vertical margin */
-  box-sizing: border-box;
-  padding: 0 20px; /* Add horizontal padding */
+  position: relative; /* تموضع نسبي للسماح بتحديد موقع العناصر المطلقة داخله إذا لزم الأمر */
+  z-index: 10; /* فوق الخلفية المتحركة */
+  width: 100%;
+  max-width: 600px; /* أقصى عرض للبطاقة */
+  margin: 40px auto; /* توسيط البطاقة مع هوامش علوية وسفلية */
+  padding: 0 20px; /* مساحات داخلية للحاوية نفسها (للاستجابة) */
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align items to the top */
+  justify-content: center; /* توسيط البطاقة داخل الحاوية إذا كانت الحاوية أوسع */
 }
 
 .smart-cv-card {
-  background: var(--dark-element-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(57, 255, 20, 0.4);
-  padding: 30px;
+  background: var(--dark-element-bg); /* خلفية البطاقة */
+  border: 1px solid var(--glass-border); /* حدود زجاجية */
+  border-radius: 15px; /* زوايا دائرية */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(57, 255, 20, 0.4); /* ظل متعدد الأبعاد */
+  padding: 30px; /* مساحات داخلية للبطاقة */
   display: flex;
-  flex-direction: column;
-  gap: 25px; /* Space between main sections */
-  max-width: 100%; /* Ensure card doesn't exceed container width */
-  width: 100%;
-  box-sizing: border-box;
+  flex-direction: column; /* ترتيب العناصر بشكل عمودي */
+  gap: 25px; /* مسافة بين الأقسام الرئيسية داخل البطاقة */
+  width: 100%; /* البطاقة تأخذ عرض الحاوية بالكامل */
 }
 
-@media (max-width: 768px) {
+/* استجابة البطاقة للشاشات المختلفة */
+@media (max-width: 768px) { /* للأجهزة اللوحية والشاشات الأصغر */
   .smart-cv-card-container {
-    margin: 20px auto; /* Adjust vertical margin for smaller screens */
-    padding: 0 10px; /* Adjust horizontal padding for smaller screens */
+    margin: 20px auto; /* تقليل الهوامش */
+    padding: 0 10px; /* تقليل المساحات الداخلية للحاوية */
   }
   .smart-cv-card {
-    padding: 20px;
-    gap: 20px;
-  }
-}
-
-@media (max-width: 900px) {
-  .smart-cv-card-container {
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-  .smart-cv-card {
-    padding: 22px 10px 18px 10px;
-    max-width: 98vw;
+    padding: 20px; /* تقليل المساحات الداخلية للبطاقة */
+    gap: 20px; /* تقليل المسافة بين الأقسام */
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) { /* للهواتف المحمولة */
   .smart-cv-card-container {
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0 1vw;
-    margin: 0 auto;
+    padding: 0 1vw; /* مساحات داخلية قليلة جدًا */
+    margin: 10px auto; /* هوامش أقل */
   }
   .smart-cv-card {
-    padding: 12px 2vw 10px 2vw;
-    max-width: 100vw;
-    min-width: 0;
+    padding: 15px;
     border-radius: 14px;
   }
-  .cv-header { flex-direction: column; text-align: center; gap: 1rem; }
-  .cv-avatar { width: 70px; height: 70px; }
-  .cv-header-info h2 { font-size: 1.2rem; }
-  .cv-header-info p.role { font-size: 0.85rem; }
-}
-
-@media (max-width: 400px) {
-  .smart-cv-card {
-    padding: 6px 1vw 6px 1vw;
-    border-radius: 8px;
+  .cv-header { /* تغيير تخطيط رأس البطاقة للهواتف */
+    flex-direction: column; /* ترتيب الصورة والمعلومات بشكل عمودي */
+    text-align: center; /* توسيط النصوص */
+    gap: 1rem; /* مسافة بين الصورة والمعلومات */
+  }
+  .cv-avatar {
+    width: 70px; /* تصغير الصورة الشخصية */
+    height: 70px;
+  }
+  .cv-header-info h2 {
+    font-size: 1.4rem; /* تصغير حجم الاسم */
+  }
+  .cv-header-info p.role {
+    font-size: 0.9rem; /* تصغير حجم الدور الوظيفي */
   }
 }
 
-@media (min-width: 1200px) {
-  .smart-cv-card-container {
-    max-width: 600px;
-  }
-  .smart-cv-card {
-    padding: 48px 48px 36px 48px;
-    font-size: 1.1rem;
-    max-width: 600px;
-  }
-}
-
+/* رأس البطاقة (الاسم والصورة والروابط) */
 .cv-header {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+  align-items: center; /* محاذاة العناصر رأسيًا */
+  gap: 20px; /* مسافة بين الصورة والمعلومات */
+  padding-bottom: 20px; /* مسافة سفلية قبل الخط الفاصل */
+  border-bottom: 1px solid rgba(57, 255, 20, 0.1); /* خط فاصل خفيف */
 }
 
 .cv-avatar {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--neon-green);
-  box-shadow: 0 0 15px var(--neon-green);
-  flex-shrink: 0;
+  border-radius: 50%; /* صورة دائرية */
+  object-fit: cover; /* لضمان ملاءمة الصورة دون تشويه */
+  border: 3px solid var(--neon-green); /* حدود بلون النيون */
+  box-shadow: 0 0 15px var(--neon-green); /* توهج حول الصورة */
+  flex-shrink: 0; /* منع الصورة من التقلص إذا كان النص طويلاً */
 }
 
 .cv-header-info {
-  flex-grow: 1;
+  flex-grow: 1; /* السماح لمعلومات الرأس بأخذ المساحة المتبقية */
 }
 
-.cv-header-info h2 {
+.cv-header-info h2 { /* الاسم */
   font-family: var(--font-orbitron);
   font-size: 1.8rem;
   color: var(--neon-green);
   margin-bottom: 5px;
-  text-shadow: 0 0 10px var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green); /* توهج للاسم */
 }
 
-.cv-header-info p.role {
+.cv-header-info p.role { /* الدور الوظيفي */
   font-size: 1rem;
   color: var(--medium-gray);
-  line-height: 1.4;
+  line-height: 1.4; /* ارتفاع سطر مناسب */
 }
 
-.cv-social-links {
+.cv-social-links { /* روابط التواصل الاجتماعي */
   margin-top: 15px;
   display: flex;
-  gap: 15px;
+  gap: 15px; /* مسافة بين الأيقونات */
+}
+/* توسيط روابط التواصل الاجتماعي في عرض الهاتف عندما يكون رأس البطاقة في المنتصف */
+html[dir="rtl"] .cv-header.text-center .cv-social-links,
+html[dir="ltr"] .cv-header.text-center .cv-social-links {
+    justify-content: center;
 }
 
-.cv-social-links a {
+.cv-social-links a { /* أيقونات التواصل */
   color: var(--text-primary);
   font-size: 1.4rem;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease; /* انتقال سلس عند التحويم */
 }
 
 .cv-social-links a:hover {
-  color: var(--neon-green); /* Changed hover color to neon green */
-  transform: scale(1.1);
+  color: var(--neon-green); /* تغيير اللون عند التحويم */
+  transform: scale(1.1); /* تكبير طفيف عند التحويم */
 }
 
+/* الأقسام المختلفة داخل البطاقة (الملخص، التعليم، المهارات، إلخ) */
 .cv-section {
   padding-bottom: 25px;
-  border-bottom: 1px dashed rgba(57, 255, 20, 0.08);
+  border-bottom: 1px dashed rgba(57, 255, 20, 0.08); /* خط فاصل منقط وخفيف بين الأقسام */
 }
 
-.cv-section:last-child {
+.cv-section:last-child { /* إزالة الخط الفاصل من القسم الأخير */
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.cv-section h3 {
+.cv-section h3 { /* عناوين الأقسام */
   font-family: var(--font-orbitron);
   font-size: 1.5rem;
-  color: var(--neon-green); /* Changed color to neon green */
+  color: var(--neon-green);
   margin-bottom: 15px;
-  text-shadow: 0 0 8px var(--neon-green); /* Changed text-shadow to neon green */
+  text-shadow: 0 0 8px var(--neon-green); /* توهج للعناوين */
 }
 
-.cv-section p {
+.cv-section p { /* الفقرات العامة داخل الأقسام */
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text-primary);
 }
 
+/* قسم المهارات */
 .skills-category {
-  margin-top: 20px;
+  margin-top: 20px; /* مسافة علوية قبل كل فئة مهارات */
 }
 
-.skills-category h4 {
-  font-family: var(--font-cairo);
+.skills-category h4 { /* عناوين فئات المهارات (مثل الأمن السيبراني) */
+  font-family: var(--font-cairo); /* استخدام خط القاهرة هنا */
   font-size: 1.1rem;
   color: var(--neon-green);
   margin-bottom: 10px;
-  display: flex;
+  display: flex; /* لمحاذاة الأيقونة مع النص */
   align-items: center;
-  gap: 8px;
+  gap: 8px; /* مسافة بين الأيقونة والنص */
+}
+.skills-category h4 i { /* أيقونات فئات المهارات */
+  color: var(--neon-green);
+  width: 20px; /* عرض ثابت للأيقونة */
+  text-align: center; /* توسيط الأيقونة إذا كانت أصغر من العرض */
 }
 
-.skills-list {
-  list-style: none;
+.skills-list { /* قائمة المهارات */
+  list-style: none; /* إزالة نقاط القائمة الافتراضية */
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-wrap: wrap; /* السماح بالتفاف المهارات إلى أسطر جديدة */
+  gap: 10px; /* مسافة بين عناصر المهارات */
 }
 
-.skills-list li {
-  background-color: rgba(57, 255, 20, 0.1); /* Changed background to use neon green rgba */
+.skills-list li { /* كل عنصر مهارة */
+  background-color: rgba(57, 255, 20, 0.1); /* خلفية شفافة بلون النيون */
   color: var(--text-primary);
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 8px 15px; /* مساحات داخلية للمهارة */
+  border-radius: 20px; /* زوايا دائرية للمهارة */
   font-size: 0.9rem;
-  border: 1px solid rgba(57, 255, 20, 0.3); /* Changed border to use neon green rgba */
+  border: 1px solid rgba(57, 255, 20, 0.3); /* حدود شفافة بلون النيون */
+}
+.skills-list li span { /* لضمان أن النص داخل span يظهر بشكل صحيح */
+    display: inline-block;
 }
 
+/* عناصر التعليم والمشاريع */
 .education-item, .project-item {
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px dotted rgba(57, 255, 20, 0.05);
+  border-bottom: 1px dotted rgba(57, 255, 20, 0.05); /* خط فاصل منقط وخفيف جدًا */
 }
 
-.education-item:last-child, .project-item:last-child {
+.education-item:last-child, .project-item:last-child { /* إزالة الخط من العنصر الأخير */
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.education-item p, .project-item p {
+.education-item p, .project-item p { /* عناوين عناصر التعليم والمشاريع */
   font-weight: bold;
   color: var(--neon-green);
   margin-bottom: 5px;
@@ -457,34 +443,53 @@ html[dir="ltr"] #lang-toggle-container {
   align-items: center;
   gap: 8px;
 }
-
-.education-item span, .project-item span {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--medium-gray);
-  margin-left: 28px; /* Indent details */
+.education-item p i, .project-item p i { /* أيقونات عناصر التعليم والمشاريع */
+    color: var(--neon-green);
+    width: 20px;
+    text-align: center;
 }
 
-.project-item a {
-  color: var(--neon-green); /* Changed color to neon green */
-  text-decoration: none;
-  margin-right: 15px;
+.education-item span, .project-item span { /* تفاصيل عناصر التعليم والمشاريع */
+  display: block; /* كل تفصيل في سطر جديد */
+  font-size: 0.9rem;
+  color: var(--medium-gray);
+  margin-left: 28px; /* إزاحة لليمين (يفترض LTR، يتم التعامل مع RTL بواسطة اتجاه HTML) */
+}
+html[dir="rtl"] .education-item span, html[dir="rtl"] .project-item span { /* تعديل الإزاحة لـ RTL */
+    margin-left: 0;
+    margin-right: 28px;
+}
+
+.project-item a { /* روابط المشاريع (عرض مباشر، المستودع) */
+  color: var(--neon-green);
+  text-decoration: none; /* إزالة الخط السفلي الافتراضي */
+  margin: 0 5px; /* هوامش أفقية للروابط */
   font-size: 0.95rem;
   transition: color 0.3s ease;
+  display: inline-flex; /* لمحاذاة الأيقونة مع نص الرابط */
+  align-items: center;
+  gap: 5px; /* مسافة بين أيقونة الرابط والنص */
+}
+.project-item a i { /* أيقونات روابط المشاريع */
+    color: var(--neon-green); /* ضمان تطابق لون الأيقونة مع الرابط */
 }
 
 .project-item a:hover {
-  color: var(--text-primary); /* Changed hover color to text primary */
-  text-decoration: underline;
+  color: var(--text-primary); /* تغيير اللون عند التحويم */
+  text-decoration: underline; /* إضافة خط سفلي عند التحويم */
+}
+.project-item a:hover i { /* تغيير لون أيقونة الرابط عند التحويم أيضًا */
+    color: var(--text-primary);
 }
 
+/* قسم الإجراءات (مثل زر تحميل السيرة الذاتية) */
 .cv-actions {
   margin-top: 30px;
-  text-align: center;
+  text-align: center; /* توسيط محتويات القسم */
 }
 
-.cv-download-btn {
-  display: inline-block;
+.cv-download-btn { /* زر تحميل السيرة الذاتية */
+  display: inline-block; /* للسماح بتطبيق الهوامش والمساحات الداخلية */
   background-color: var(--neon-green);
   color: var(--text-on-neon);
   border: none;
@@ -495,309 +500,282 @@ html[dir="ltr"] #lang-toggle-container {
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   box-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
-  text-decoration: none;
+  text-decoration: none; /* إزالة الخط السفلي إذا كان الرابط < a > */
 }
 
 .cv-download-btn:hover {
-  background-color: #2de20f;
+  background-color: #2de20f; /* لون أخضر أفتح قليلاً عند التحويم */
   box-shadow: 0 0 15px var(--neon-green), 0 0 25px rgba(57, 255, 20, 0.4);
-  transform: translateY(-2px);
-}
-
-.cv-section ul li i, .education-item p i, .project-item p i, .skills-category h4 i {
-    width: 20px; /* Fixed width for icons */
-    text-align: center;
-    color: var(--neon-green); /* Ensured icons use neon green */
+  transform: translateY(-2px); /* تأثير رفع خفيف عند التحويم */
 }
 
 /* =========== Chatbot Styles =========== */
-#chatbot-toggle-btn {
-    position: fixed;
+#chatbot-toggle-btn { /* زر فتح/إغلاق الشات بوت */
+    position: fixed; /* تموضع ثابت بالنسبة لنافذة العرض */
     bottom: 2rem;
-    right: 2rem; 
+    right: 2rem; /* الافتراضي لـ LTR */
     background-color: var(--neon-green);
     color: var(--text-on-neon);
     border: none;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    font-size: 1.8rem; 
-    display: flex;
+    border-radius: 50%; /* زر دائري */
+    font-size: 1.8rem; /* حجم الأيقونة */
+    display: flex; /* لتوسيط الأيقونة داخل الزر */
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4), 0 0 0 0 var(--neon-green);
-    animation: chatbotNeonPulse 1.7s infinite alternate;
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4), 0 0 0 0 rgba(57, 255, 20, 0.7); /* ظل متعدد وتأثير نبض أولي */
+    animation: chatbotNeonPulse 1.7s infinite alternate; /* تحريك نبضي للزر */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    z-index: 999;
+    z-index: 999; /* فوق معظم العناصر الأخرى */
 }
-html[dir="rtl"] #chatbot-toggle-btn {
+html[dir="rtl"] #chatbot-toggle-btn { /* تعديل لـ RTL */
     right: auto;
     left: 2rem;
 }
 #chatbot-toggle-btn:hover {
-    transform: scale(1.1) rotate(5deg); 
+    transform: scale(1.1) rotate(5deg); /* تكبير ودوران خفيف عند التحويم */
     box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
-    background-color: #30f00f; 
+    background-color: #30f00f; /* لون أخضر أفتح */
 }
-#chatbot-toggle-btn i {
+#chatbot-toggle-btn i { /* أيقونة الشات بوت */
     transition: transform 0.3s ease;
 }
 #chatbot-toggle-btn:hover i {
-    transform: scale(1.1);
+    transform: scale(1.1); /* تكبير الأيقونة عند التحويم على الزر */
 }
+
+/* تحريك نبضي لظل زر الشات بوت */
 @keyframes chatbotNeonPulse {
   0% {
-    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4), 0 0 0 0 var(--neon-green);
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4), 0 0 0 0 rgba(57, 255, 20, 0.7);
     filter: brightness(1);
   }
   70% {
-    box-shadow: 0 8px 30px 8px var(--neon-green), 0 0 0 8px var(--neon-green);
-    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(57, 255, 20, 0.5), 0 0 0 8px rgba(57, 255, 20, 0.5);
+    filter: brightness(1.15); /* زيادة سطوع الزر */
   }
   100% {
-    box-shadow: 0 12px 40px 16px var(--neon-green), 0 0 0 16px var(--neon-green);
+    box-shadow: 0 12px 40px rgba(57, 255, 20, 0.6), 0 0 0 16px rgba(57, 255, 20, 0.3);
     filter: brightness(1.25);
   }
 }
 
-
-#chatbot-container {
+#chatbot-container { /* حاوية الشات بوت الرئيسية */
     position: fixed;
-    bottom: 90px; 
-    right: 2rem; 
-    width: 350px;
-    max-width: 90vw;
-    height: 450px;
-    max-height: 70vh;
-    background-color: var(--chatbot-bg);
-    border: 1px solid var(--glass-border);
+    bottom: 90px; /* فوق زر التبديل */
+    right: 2rem; /* الافتراضي لـ LTR */
+    width: 350px; /* عرض الشات بوت */
+    max-width: 90vw; /* أقصى عرض للشاشات الصغيرة */
+    height: 450px; /* ارتفاع الشات بوت */
+    max-height: 70vh; /* أقصى ارتفاع بالنسبة لنافذة العرض */
+    background-color: var(--chatbot-bg); /* خلفية داكنة للشات بوت */
+    border: 1.5px solid var(--neon-green); /* حدود بلون النيون */
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--neon-green-shadow, transparent);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 10px 40px 0 rgba(57, 255, 20, 0.8), 0 0 0 2px rgba(57, 255, 20, 0.26); /* ظل قوي */
+    backdrop-filter: blur(14px); /* تأثير زجاجي للخلفية (إذا كانت الخلفية شفافة جزئيًا) */
+    -webkit-backdrop-filter: blur(14px);
+    display: none; /* يبدأ مخفيًا، ويتم التحكم به بواسطة JavaScript (.visible) */
+    flex-direction: column; /* ترتيب العناصر الداخلية بشكل عمودي */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(20px) scale(0.95); /* تأثير ظهور من الأسفل مع تكبير */
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    z-index: 998;
+    z-index: 998; /* تحت زر التبديل إذا كانا متداخلين */
 }
-html[dir="rtl"] #chatbot-container {
+html[dir="rtl"] #chatbot-container { /* تعديل لـ RTL */
     right: auto;
     left: 2rem;
 }
 
-#chatbot-container.visible {
+#chatbot-container.visible { /* كلاس يتم إضافته بواسطة JavaScript لإظهار الشات بوت */
+    display: flex; /* مهم لإظهار المحتوى المرن */
     opacity: 1;
     visibility: visible;
     transform: translateY(0) scale(1);
-    --neon-green-shadow: var(--neon-green);
 }
 
-.chatbot-header {
+.chatbot-header { /* رأس الشات بوت (العنوان وزر الإغلاق) */
     padding: 0.8rem 1rem;
-    background-color: rgba(57, 255, 20, 0.1);
-    border-bottom: 1px solid var(--glass-border);
+    background-color: rgba(57, 255, 20, 0.1); /* خلفية شفافة بلون النيون */
+    border-bottom: 1px solid var(--glass-border); /* خط فاصل زجاجي */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* توزيع العنوان وزر الإغلاق على الأطراف */
     align-items: center;
+    flex-shrink: 0; /* منع الرأس من التقلص */
 }
-.chatbot-header h4 {
+.chatbot-header h4 { /* عنوان الشات بوت */
     font-family: var(--font-orbitron);
     color: var(--neon-green);
     font-size: 1rem;
-    margin: 0;
+    margin: 0; /* إزالة الهوامش الافتراضية */
 }
-.chatbot-close-btn {
+.chatbot-close-btn { /* زر إغلاق الشات بوت */
     background: none;
     border: none;
     color: var(--medium-gray);
     font-size: 1.2rem;
     cursor: pointer;
+    padding: 5px; /* لتسهيل النقر */
     transition: color 0.3s;
 }
 .chatbot-close-btn:hover {
-    color: var(--neon-green);
+    color: var(--neon-green); /* تغيير اللون عند التحويم */
 }
 
-#chatbot-messages {
-    flex-grow: 1;
+#chatbot-messages { /* حاوية رسائل الشات */
+    flex-grow: 1; /* تأخذ المساحة المتبقية في الشات بوت */
     padding: 1rem;
-    overflow-y: auto;
+    overflow-y: auto; /* السماح بالتمرير العمودي للرسائل */
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    flex-direction: column; /* ترتيب الرسائل بشكل عمودي */
+    gap: 0.75rem; /* مسافة بين الرسائل */
+    scrollbar-width: thin; /* شريط تمرير نحيف (Firefox) */
+    scrollbar-color: var(--neon-green) var(--dark-element-bg); /* ألوان شريط التمرير (Firefox) */
 }
-.chat-message {
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
-    max-width: 80%;
-    line-height: 1.5;
-    font-size: 0.9rem;
-}
-.user-message {
-    background-color: var(--neon-green);
-    color: var(--text-on-neon);
-    align-self: flex-end; 
-    border-bottom-right-radius: 0;
-}
-html[dir="rtl"] .user-message {
-    align-self: flex-start; 
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 0;
-}
-.ai-message {
-    background-color: var(--dark-element-bg);
-    color: var(--text-primary);
-    align-self: flex-start; 
-    border-bottom-left-radius: 0;
-}
- html[dir="rtl"] .ai-message {
-    align-self: flex-end; 
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 0;
-}
-.error-message {
-    background-color: rgba(255, 57, 57, 0.2); 
-    color: #ff8f8f;
-    border: 1px solid rgba(255, 57, 57, 0.5);
-    align-self: center;
-    font-size: 0.85rem;
-}
-
-
-.chatbot-input-area {
-    display: flex;
-    padding: 0.75rem;
-    border-top: 1px solid var(--glass-border);
-    background-color: rgba(10,10,10, 0.5);
-}
-#chatbot-input {
-    flex-grow: 1;
-    padding: 0.6rem 0.8rem;
-    border: 1px solid var(--glass-border);
-    background-color: var(--dark-element-bg);
-    color: var(--text-primary);
-    border-radius: 8px;
-    font-family: var(--font-cairo);
-    margin-left: 0.5rem; 
-}
-html[dir="ltr"] #chatbot-input {
-    margin-left: 0;
-    margin-right: 0.5rem;
-}
-#chatbot-input:focus {
-    outline: none;
-    border-color: var(--neon-green);
-    box-shadow: 0 0 8px var(--neon-green);
-}
-#chatbot-send-btn {
-    background-color: var(--neon-green);
-    color: var(--text-on-neon);
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    font-family: var(--font-orbitron);
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-#chatbot-send-btn:hover {
-    background-color: #2de20f; 
-    transform: scale(1.05);
-}
-
-/* Typing indicator styles */
-.typing-indicator {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 24px;
-  margin: 2px 0 2px 0;
-}
-.typing-indicator .dot {
+#chatbot-messages::-webkit-scrollbar { /* شريط التمرير (Chrome, Safari, Edge) */
   width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--neon-green);
-  opacity: 0.7;
-  animation: typingBlink 1.2s infinite both;
 }
-.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes typingBlink {
-  0%, 80%, 100% { opacity: 0.3; }
-  40% { opacity: 1; }
-}
-
-/* Chatbox visual polish */
-#chatbot-container {
-  box-shadow: 0 10px 40px 0 #39FF14cc, 0 0 0 2px #39FF1444;
-  border: 1.5px solid var(--neon-green);
-  background: linear-gradient(135deg, #101010 80%, #39FF1422 100%);
-  backdrop-filter: blur(14px);
-}
-#chatbot-messages {
-  scrollbar-width: thin;
-  scrollbar-color: var(--neon-green) var(--dark-element-bg);
-}
-#chatbot-messages::-webkit-scrollbar {
-  width: 7px;
+#chatbot-messages::-webkit-scrollbar-track { /* مسار شريط التمرير */
   background: var(--dark-element-bg);
 }
-#chatbot-messages::-webkit-scrollbar-thumb {
+#chatbot-messages::-webkit-scrollbar-thumb { /* مقبض شريط التمرير */
   background: var(--neon-green);
   border-radius: 8px;
 }
 
-.user-message, .ai-message {
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+.chat-message { /* كل رسالة في الشات */
+    padding: 0.6rem 1rem;
+    border-radius: 10px; /* زوايا دائرية للرسائل */
+    max-width: 80%; /* أقصى عرض للرسالة لتجنب ملء الشاشة */
+    line-height: 1.5;
+    font-size: 0.9rem;
+    word-break: break-word; /* التفاف الكلمات الطويلة */
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s; /* انتقال سلس للتغييرات */
 }
-.user-message {
-  box-shadow: 0 2px 8px #39FF1440;
+.user-message { /* رسائل المستخدم */
+    background-color: var(--neon-green);
+    color: var(--text-on-neon);
+    align-self: flex-end; /* محاذاة لليمين (LTR) */
+    border-bottom-right-radius: 0; /* شكل مميز لزاوية الرسالة */
+    box-shadow: 0 2px 8px rgba(57, 255, 20, 0.25); /* ظل خفيف */
 }
-.ai-message {
-  box-shadow: 0 2px 8px #00d4ff40;
+html[dir="rtl"] .user-message { /* تعديل لـ RTL */
+    align-self: flex-start; /* محاذاة لليسار */
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0;
+}
+.ai-message { /* رسائل الذكاء الاصطناعي */
+    background-color: var(--dark-element-bg);
+    color: var(--text-primary);
+    align-self: flex-start; /* محاذاة لليسار (LTR) */
+    border-bottom-left-radius: 0; /* شكل مميز لزاوية الرسالة */
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.25); /* ظل خفيف بلون مختلف */
+}
+ html[dir="rtl"] .ai-message { /* تعديل لـ RTL */
+    align-self: flex-end; /* محاذاة لليمين */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 0;
+}
+.error-message { /* رسائل الخطأ */
+    background-color: rgba(255, 57, 57, 0.2); /* خلفية حمراء شفافة */
+    color: #ff8f8f; /* لون نص فاتح للتباين */
+    border: 1px solid rgba(255, 57, 57, 0.5); /* حدود حمراء */
+    align-self: center; /* توسيط رسائل الخطأ */
+    font-size: 0.85rem;
+    width: 90%; /* عرض أوسع قليلاً لرسائل الخطأ */
+    text-align: center; /* توسيط النص داخل رسالة الخطأ */
 }
 
-#chatbot-input {
-  min-height: 38px;
-  resize: none;
-  font-size: 1rem;
-  background: #181818;
-  color: var(--text-primary);
-  border: 1.5px solid var(--neon-green);
-  box-shadow: 0 0 8px #39FF1422;
+.chatbot-input-area { /* منطقة إدخال الرسائل */
+    display: flex;
+    padding: 0.75rem;
+    border-top: 1px solid var(--glass-border); /* خط فاصل زجاجي */
+    background-color: rgba(10,10,10, 0.5); /* خلفية شفافة قليلاً */
+    flex-shrink: 0; /* منع منطقة الإدخال من التقلص */
 }
-#chatbot-input:focus {
-  outline: none;
-  border-color: #00d4ff;
-  box-shadow: 0 0 12px #00d4ff99;
+#chatbot-input { /* حقل إدخال النص */
+    flex-grow: 1; /* يأخذ المساحة المتبقية */
+    padding: 0.6rem 0.8rem;
+    border: 1.5px solid var(--neon-green);
+    background-color: #181818; /* خلفية داكنة لحقل الإدخال */
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-family: var(--font-cairo);
+    margin-right: 0.5rem; /* الافتراضي لـ LTR */
+    min-height: 38px; /* ارتفاع أدنى */
+    resize: none; /* منع تغيير الحجم يدويًا */
+    font-size: 1rem; /* حجم خط مناسب */
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.13); /* ظل خفيف */
+    transition: border-color 0.3s, box-shadow 0.3s; /* انتقال سلس عند التركيز */
 }
-
-#chatbot-send-btn {
-  font-size: 1.1rem;
-  padding: 0.6rem 1.2rem;
-  background: linear-gradient(90deg, #39FF14 60%, #00d4ff 100%);
-  color: #101010;
-  font-weight: bold;
-  letter-spacing: 1px;
-  box-shadow: 0 0 8px #39FF1440;
+html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
+    margin-right: 0;
+    margin-left: 0.5rem;
 }
-#chatbot-send-btn:active {
-  background: #00d4ff;
+#chatbot-input:focus { /* عند التركيز على حقل الإدخال */
+    outline: none; /* إزالة الحدود الافتراضية للتركيز */
+    border-color: var(--neon-blue); /* تغيير لون الحدود إلى الأزرق النيون */
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6); /* ظل أزرق أقوى */
+}
+#chatbot-send-btn { /* زر إرسال الرسالة */
+    background: linear-gradient(90deg, var(--neon-green) 60%, var(--neon-blue) 100%); /* تدرج لوني للزر */
+    color: var(--text-on-neon); /* ضمان تباين النص */
+    border: none;
+    padding: 0.6rem 1.2rem; /* زيادة المساحة الداخلية للزر */
+    border-radius: 8px;
+    font-family: var(--font-orbitron);
+    font-weight: bold; /* نص أعرض */
+    letter-spacing: 1px; /* تباعد بين الأحرف */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.25); /* ظل خفيف */
+}
+#chatbot-send-btn:hover {
+    background: linear-gradient(90deg, #2de20f 60%, #00c0ef 100%); /* تدرج أفتح عند التحويم */
+    transform: scale(1.05); /* تكبير طفيف */
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.4); /* ظل أقوى */
+}
+#chatbot-send-btn:active { /* عند النقر على الزر */
+  background: var(--neon-blue); /* تغيير الخلفية للتأكيد البصري */
   color: #fff;
+  transform: scale(1); /* إعادة الحجم الأصلي */
 }
+
+/* مؤشر الكتابة (النقاط المتحركة) */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* مسافة بين النقاط */
+  min-height: 24px; /* ضمان أن المؤشر يأخذ مساحة كافية */
+  margin: 2px 0; /* هوامش رأسية متناسقة */
+}
+.typing-indicator .dot { /* كل نقطة في المؤشر */
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  opacity: 0.7; /* تبدأ شفافة قليلاً */
+  animation: typingBlink 1.2s infinite both; /* تحريك وميض للنقاط */
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; } /* تأخير للنقطة الثانية */
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; } /* تأخير للنقطة الثالثة */
+
+@keyframes typingBlink { /* تحريك وميض النقاط */
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); } /* تصغير وتعتيم */
+  40% { opacity: 1; transform: scale(1); } /* تكبير وإظهار كامل */
+}
+
 
 /* =========== استجابة الشاشات الصغيرة =========== */
-@media (max-width: 768px) {
-  .loader-logo { 
-    font-size: 1.8rem; 
+@media (max-width: 768px) { /* للأجهزة اللوحية والهواتف الكبيرة */
+  .loader-logo {
+    font-size: 1.8rem;
     line-height: 1.3;
   }
   .progress-bar-container { width: 200px; }
-  
+
   #lang-toggle-container {
     top: 1rem;
     left: 1rem;
@@ -810,233 +788,219 @@ html[dir="ltr"] #chatbot-input {
     padding: 0.4rem 0.8rem;
     font-size: 0.7rem;
   }
-  .smart-cv-card { 
-    padding: 1.5rem; 
-    padding-top: 3.5rem; 
-    margin: 1rem auto; 
-    max-width: 95vw; 
-  }
-  .smart-cv-card:hover {
-    transform: translateY(-5px) scale(1.01) rotateX(3deg) rotateY(-1deg); 
-  }
-  .smart-cv-card:hover .cv-avatar {
-    transform: translateZ(15px) rotateY(2deg);
-  }
-   .smart-cv-card:hover .cv-header-info {
-    transform: translateZ(10px);
+  .smart-cv-card {
+    padding: 1.5rem;
+    padding-top: 3.5rem; /* مساحة لزر تبديل اللغة إذا تداخل */
+    margin: 1rem auto;
+    max-width: 95vw; /* عرض أقصى أكبر قليلاً للشاشات المتوسطة */
   }
 
   .cv-header { flex-direction: column; text-align: center; gap: 1rem;}
+  .cv-header.text-center .cv-social-links { /* ضمان توسيط روابط التواصل في عرض الهاتف */
+      justify-content: center;
+  }
   .cv-avatar { width: 80px; height: 80px; }
   .cv-header-info h2 { font-size: 1.6rem; }
   .cv-header-info p.role { font-size: 0.9rem; }
   .cv-social-links a { font-size: 1.2rem; margin: 0 0.5rem; }
-  .cv-section h3 { font-size: 1.2rem; letter-spacing: 1px; }
-  .cv-section p, .cv-section .education-item p, .cv-section .project-item p { font-size: 0.9rem; }
-  .cv-section .education-item span, .cv-section .project-item span { font-size: 0.8rem; }
+  .cv-section h3 { font-size: 1.3rem; letter-spacing: 0.5px; }
+  .cv-section p, .education-item p, .project-item p { font-size: 0.9rem; }
+  .education-item span, .project-item span { font-size: 0.8rem; }
 
   .skills-list { gap: 0.6rem; }
-  .skills-list li { font-size: 0.85rem; padding: 0.5rem 0.9rem; gap: 0.4rem;} 
-  .skills-list li i { font-size: 1rem; width: 18px; }
+  .skills-list li { font-size: 0.85rem; padding: 0.5rem 0.9rem;}
   .cv-download-btn { font-size: 0.9rem; padding: 0.8rem 1.6rem; width: 100%; letter-spacing: 1px;}
 
-  #chatbot-toggle-btn {
+  #chatbot-toggle-btn { /* تصغير زر الشات بوت */
     bottom: 1rem;
     right: 1rem;
     width: 50px;
     height: 50px;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
   }
   html[dir="rtl"] #chatbot-toggle-btn {
     right: auto;
     left: 1rem;
   }
-  #chatbot-container {
-    bottom: 70px; 
+  #chatbot-container { /* تعديل أبعاد الشات بوت للشاشات المتوسطة */
+    bottom: 70px; /* فوق زر التبديل المصغر */
     right: 1rem;
-    width: calc(100vw - 2rem); 
-    height: calc(100vh - 80px); 
-    max-height: none;
+    width: calc(100vw - 2rem); /* عرض كامل مع هوامش */
+    height: calc(100vh - 80px - 1rem); /* ارتفاع كامل مع هوامش ومساحة لزر التبديل */
+    max-height: none; /* إلغاء الارتفاع الأقصى السابق */
   }
   html[dir="rtl"] #chatbot-container {
     right: auto;
     left: 1rem;
   }
 }
- @media (max-width: 480px) {
+ @media (max-width: 480px) { /* للهواتف الصغيرة جدًا */
     .loader-logo {
-        font-size: 1.5rem; 
-        letter-spacing: 0.5px; 
+        font-size: 1.6rem;
+        letter-spacing: 0.5px;
     }
      .cv-header-info h2 { font-size: 1.4rem; }
+     .cv-section h3 { font-size: 1.2rem; }
 }
 
-/* --- Chatbot Responsive & Mobile Improvements --- */
+/* --- تحسينات الشات بوت للشاشات الصغيرة (ملء الشاشة أقل من 600 بكسل) --- */
 @media (max-width: 600px) {
-  #chatbot-container {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    top: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    max-width: 100vw !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    z-index: 9999;
-    padding: 0 !important;
-    background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%) !important;
-    display: flex;
+  #chatbot-container.visible { /* تطبيق فقط عندما يكون الشات بوت مرئيًا */
+    position: fixed !important; /* ضمان التموضع الثابت فوق كل شيء */
+    left: 0 !important; right: 0 !important; bottom: 0 !important; top: 0 !important; /* ملء الشاشة */
+    width: 100vw !important; height: 100vh !important;
+    max-width: 100vw !important; max-height: 100vh !important;
+    border-radius: 0 !important; /* إزالة تقويس الزوايا */
+    margin: 0 !important; /* إزالة الهوامش */
+    box-shadow: none !important; /* إزالة الظل */
+    z-index: 9999; /* فوق كل شيء باستثناء زر التبديل إذا كان مرئيًا */
+    padding: 0 !important; /* إزالة المساحات الداخلية */
+    background: linear-gradient(135deg, #0A0A0A 0%, #1C1C1C 100%) !important; /* خلفية داكنة لملء الشاشة */
+    display: flex !important; /* ضمان التخطيط المرن */
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: stretch;
+    justify-content: space-between; /* توزيع المساحة بين الرأس والرسائل ومنطقة الإدخال */
   }
-  #chatbot-header {
-    font-size: 1.2rem !important;
-    padding: 1.2rem 1rem 1rem 1rem !important;
-    min-height: 56px;
+  .chatbot-header { /* تعديل رأس الشات بوت في وضع ملء الشاشة */
+    font-size: 1.1rem !important;
+    padding: 1rem !important;
+    min-height: 56px; /* ارتفاع أدنى للرأس */
+    background-color: rgba(0,0,0,0.3); /* خلفية شفافة قليلاً للرأس */
   }
-  #chatbot-close-btn {
-    top: 1.1rem !important;
-    right: 1.1rem !important;
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 2rem !important;
+  .chatbot-close-btn { /* تعديل زر الإغلاق */
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.3rem !important;
     border-radius: 50%;
     background: rgba(0,0,0,0.2);
-    color: #0ff6fc;
-    z-index: 10001;
+    color: var(--neon-blue); /* استخدام الأزرق النيون لزر الإغلاق */
+    display: flex; /* لتوسيط الأيقونة */
+    align-items: center;
+    justify-content: center;
   }
-  #chatbot-messages {
-    flex: 1 1 auto;
-    max-height: none !important;
-    min-height: 0;
-    padding: 1.2rem 0.7rem 0.7rem 0.7rem !important;
-    font-size: 1.05rem !important;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+  #chatbot-messages { /* تعديل منطقة الرسائل */
+    flex: 1 1 auto; /* السماح لمنطقة الرسائل بأخذ المساحة المتاحة */
+    padding: 0.7rem !important; /* مساحات داخلية متناسقة */
+    font-size: 1rem !important; /* حجم خط مناسب للقراءة */
+    overscroll-behavior: contain; /* منع مشاكل السحب للتحديث في المتصفحات المحمولة */
   }
-  #chatbot-input-row {
-    flex-direction: row;
-    align-items: flex-end;
-    padding: 0.7rem 0.7rem 1.1rem 0.7rem !important;
+  .chatbot-input-area { /* تعديل منطقة الإدخال */
+    padding: 0.7rem !important;
     gap: 0.5rem;
+    background-color: rgba(0,0,0,0.2); /* خلفية شفافة قليلاً */
+    border-top: 1px solid rgba(var(--neon-blue-rgb), 0.2); /* خط فاصل علوي بلون أزرق نيون */
   }
-  #chatbot-input {
-    font-size: 1.05rem !important;
+  #chatbot-input { /* تعديل حقل الإدخال */
+    font-size: 1rem !important;
     min-height: 44px !important;
-    max-height: 120px !important;
+    max-height: 120px !important; /* السماح بتوسيع الحقل لعدة أسطر */
     padding: 0.7rem 1rem !important;
-    border-radius: 1.5rem !important;
-    flex: 1 1 auto;
-    width: 1px;
-    background: rgba(20,30,40,0.95);
+    border-radius: 22px !important; /* زوايا دائرية أكثر */
+    background: rgba(10, 10, 10, 0.95); /* خلفية داكنة جدًا */
     color: #fff;
-    box-shadow: 0 0 8px #0ff6fc44;
-    outline: none;
-    border: 1.5px solid #0ff6fc;
-    resize: none;
-    transition: border 0.2s;
+    box-shadow: 0 0 8px rgba(var(--neon-blue-rgb), 0.26); /* ظل أزرق خفيف */
+    border: 1.5px solid var(--neon-blue); /* حدود بلون أزرق نيون */
   }
-  #chatbot-send-btn {
-    min-width: 48px !important;
+  #chatbot-send-btn { /* تعديل زر الإرسال */
+    min-width: 44px !important; /* حجم أدنى للزر */
     min-height: 44px !important;
-    font-size: 1.5rem !important;
-    border-radius: 50% !important;
-    padding: 0 !important;
-    background: linear-gradient(135deg, #0ff6fc 0%, #6f00ff 100%) !important;
+    font-size: 1.3rem !important; /* حجم أيقونة مناسب */
+    border-radius: 50% !important; /* زر دائري */
+    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%) !important; /* تدرج لوني مختلف */
     color: #fff !important;
-    box-shadow: 0 0 12px #0ff6fc99;
-    border: none !important;
-    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 12px rgba(var(--neon-blue-rgb), 0.6); /* ظل أزرق أقوى */
+    display: flex; /* لتوسيط الأيقونة */
+    align-items: center;
+    justify-content: center;
   }
-  #chatbot-send-btn:active {
-    background: linear-gradient(135deg, #6f00ff 0%, #0ff6fc 100%) !important;
-    box-shadow: 0 0 18px #0ff6fcbb;
+  #chatbot-send-btn:active { /* عند النقر على زر الإرسال */
+    background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-blue) 100%) !important; /* عكس التدرج */
+    box-shadow: 0 0 18px rgba(var(--neon-blue-rgb), 0.73); /* ظل أقوى */
   }
-  .chat-message {
-    font-size: 1.05rem !important;
-    word-break: break-word;
+  .chat-message { /* تعديل الرسائل في وضع ملء الشاشة */
+    font-size: 1rem !important;
     padding: 0.7rem 1rem !important;
     margin-bottom: 0.5rem !important;
-    border-radius: 1.2rem !important;
+    border-radius: 1.2rem !important; /* زوايا دائرية أكثر */
   }
-  .typing-indicator {
+  .typing-indicator { /* تعديل مؤشر الكتابة */
     min-height: 32px;
     padding: 0.7rem 1rem !important;
   }
 }
 
-/* Make sure the chatbot toggle button is always visible on mobile */
+/* ضمان ظهور زر تبديل الشات بوت دائمًا في وضع الهاتف، حتى فوق الشات بوت المفتوح بملء الشاشة */
 @media (max-width: 600px) {
   #chatbot-toggle-btn {
-    position: fixed !important;
+    position: fixed !important; /* ضمان التموضع الثابت */
     bottom: 1.2rem !important;
-    right: 1.2rem !important;
-    z-index: 10002 !important;
+    right: 1.2rem !important; /* الافتراضي لـ LTR */
+    z-index: 10002 !important; /* فوق الشات بوت الذي بملء الشاشة */
     width: 56px !important;
     height: 56px !important;
     border-radius: 50% !important;
-    font-size: 2.1rem !important;
-    box-shadow: 0 0 16px #0ff6fc99;
-    background: linear-gradient(135deg, #0ff6fc 0%, #6f00ff 100%) !important;
+    font-size: 2.1rem !important; /* أيقونة أكبر */
+    box-shadow: 0 0 16px rgba(var(--neon-blue-rgb), 0.6); /* ظل أزرق */
+    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%) !important; /* نفس تدرج زر الإرسال */
     color: #fff !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none !important;
-    transition: background 0.2s, box-shadow 0.2s;
   }
-  #chatbot-toggle-btn:active {
-    background: linear-gradient(135deg, #6f00ff 0%, #0ff6fc 100%) !important;
-    box-shadow: 0 0 24px #0ff6fcbb;
+  html[dir="rtl"] #chatbot-toggle-btn { /* تعديل لـ RTL */
+    right: auto !important;
+    left: 1.2rem !important;
+  }
+  #chatbot-toggle-btn:active { /* عند النقر على زر التبديل */
+    background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-blue) 100%) !important; /* عكس التدرج */
+    box-shadow: 0 0 24px rgba(var(--neon-blue-rgb), 0.73); /* ظل أقوى */
   }
 }
 
 /* =========== قسم المعلومات الشخصية =========== */
 .personal-info-section {
-  background: rgba(20, 20, 30, 0.7);
+  background: rgba(20, 20, 30, 0.7); /* خلفية داكنة شفافة قليلاً */
   border-radius: 12px;
-  margin: 18px 0 10px 0;
-  padding: 14px 18px 10px 18px;
-  box-shadow: 0 0 12px 2px #00fff7, 0 0 2px 1px #0ff inset;
+  margin: 18px 0 10px 0; /* هوامش مناسبة */
+  padding: 14px 18px 10px 18px; /* مساحات داخلية */
+  box-shadow: 0 0 12px 2px var(--neon-blue), 0 0 2px 1px var(--neon-blue) inset; /* ظل وتوهج داخلي بلون أزرق نيون */
 }
-.personal-info-section h4 {
-  color: #00fff7;
+.personal-info-section h4 { /* عنوان قسم المعلومات الشخصية */
+  color: var(--neon-blue);
   font-size: 1.1em;
   margin-bottom: 8px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 6px #00fff7, 0 0 2px #000;
+  letter-spacing: 1px; /* تباعد بين الأحرف */
+  text-shadow: 0 0 6px var(--neon-blue), 0 0 2px #000; /* توهج وظل خفيف */
 }
-.personal-info-list {
+.personal-info-list { /* قائمة المعلومات الشخصية */
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.personal-info-list li {
-  color: #fff;
+.personal-info-list li { /* كل عنصر في القائمة */
+  color: var(--text-primary);
   font-size: 1em;
-  margin-bottom: 5px;
-  display: flex;
+  margin-bottom: 5px; /* مسافة بين العناصر */
+  display: flex; /* لمحاذاة الأيقونة مع النص */
   align-items: center;
-  gap: 8px;
-  text-shadow: 0 0 2px #00fff7, 0 0 1px #000;
+  gap: 8px; /* مسافة بين الأيقونة والنص */
+  text-shadow: 0 0 2px var(--neon-blue), 0 0 1px #000; /* توهج خفيف للنص */
 }
-.personal-info-list i {
-  color: #00fff7;
-  text-shadow: 0 0 6px #00fff7, 0 0 2px #000;
+.personal-info-list li i { /* أيقونات المعلومات الشخصية */
+  color: var(--neon-blue);
+  text-shadow: 0 0 6px var(--neon-blue), 0 0 2px #000;
+  width: 20px; /* عرض ثابت للأيقونة */
+  text-align: center; /* توسيط الأيقونة */
 }
-@media (max-width: 600px) {
-  .personal-info-section {
-    padding: 10px 8px 8px 8px;
-  }
-  .personal-info-list li {
-    font-size: 0.95em;
-  }
+.personal-info-list li strong { /* تسميات المعلومات (مثل "تاريخ الميلاد:") */
+    color: var(--text-primary); /* لون أساسي أو أفتح قليلاً إذا لزم الأمر */
+    font-weight: bold;
+}
+.personal-info-list li span { /* قيم المعلومات (مثل "10 يوليو 1999") */
+    color: var(--medium-gray); /* لون أهدأ للقيم */
 }
 
-/* Neon/Tech color guideline: Use only --neon-green, --neon-blue, --neon-purple, --dark-bg-primary, --dark-element-bg, --glass-bg, --glass-border, --glass-inner-glow, --text-primary, --text-on-neon, --white, --medium-gray for all backgrounds, borders, text, and effects. No hardcoded colors except for special effects. */
+@media (max-width: 600px) { /* تعديلات قسم المعلومات الشخصية للشاشات الصغيرة */
+  .personal-info-section {
+    padding: 10px 12px 8px 12px; /* تقليل المساحات الداخلية */
+  }
+  .personal-info-list li {
+    font-size: 0.95em; /* تصغير حجم الخط قليلاً */
+  }
+}
