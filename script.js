@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     en: {
       loaderMessage: 'Initializing TECH & CRYPTO experience...',
       langToggle: 'AR',
-      cvName: 'Mohamed H Abdelaziz',
+      cvName: 'Mohamed Abdelaziz', // Improved English translation
       cvRole: 'Cybersecurity Engineering Student | Junior Web Developer & AI Enthusiast',
       summaryTitle: 'Professional Summary',
       summaryText: 'Highly motivated cybersecurity engineering student with international mindset and diverse experience in financial trading, travel services, and customer-facing roles. Skilled in risk management and Amadeus platform, rapidly developing expertise in AI agents, web development, and cloud technologies. Eager to leverage a blend of technical know-how, adaptability, and strong customer acumen to contribute to innovative projects and growth opportunities.',
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ar: {
       loaderMessage: 'يتم تهيئة تجربة TECH & CRYPTO...',
       langToggle: 'EN',
-      cvName: 'محمد H عبدالعزيز',
+      cvName: 'محمد عبدالعزيز', // Removed H from Arabic translation
       cvRole: 'طالب هندسة أمن سيبراني | مطور ويب ناشئ ومتحمس للذكاء الاصطناعي',
       summaryTitle: 'الملخص المهني',
       summaryText: 'طالب هندسة أمن سيبراني متحفز للغاية وذو عقلية دولية، يتمتع بخبرة متنوعة في التداول المالي وخدمات السفر والأدوار التي تتطلب التعامل المباشر مع العملاء. يتقن إدارة المخاطر ومنصة أماديوس للبيع، ويطور مهاراته بسرعة في وكلاء الذكاء الاصطناعي وتطوير الويب وتقنيات الحوسبة السحابية. يتوق إلى الاستفادة من مزيج من الخبرة التقنية والقدرة على التكيف والفطنة القوية في خدمة العملاء للمساهمة في المشاريع المبتكرة وفرص النمو.',
