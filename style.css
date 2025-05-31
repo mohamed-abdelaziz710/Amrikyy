@@ -253,12 +253,24 @@ html[dir="ltr"] #lang-toggle-container { /* تعديل للغة الإنجليز
   background: var(--dark-element-bg); /* خلفية البطاقة */
   border: 1px solid var(--glass-border); /* حدود زجاجية */
   border-radius: 15px; /* زوايا دائرية */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(57, 255, 20, 0.4); /* ظل متعدد الأبعاد */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 28px 6px var(--neon-green); /* ظل متعدد الأبعاد */
   padding: 30px; /* مساحات داخلية للبطاقة */
   display: flex;
   flex-direction: column; /* ترتيب العناصر بشكل عمودي */
   gap: 25px; /* مسافة بين الأقسام الرئيسية داخل البطاقة */
   width: 100%; /* البطاقة تأخذ عرض الحاوية بالكامل */
+}
+
+/* Fix for any blue border or shadow at the bottom of the CV card */
+.smart-cv-card::after {
+  content: '';
+  display: block;
+  height: 8px;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+  background: linear-gradient(90deg, transparent 0%, var(--neon-green) 50%, transparent 100%);
+  box-shadow: 0 0 24px 8px var(--neon-green);
+  margin-top: 12px;
 }
 
 /* استجابة البطاقة للشاشات المختلفة */
@@ -521,7 +533,7 @@ html[dir="rtl"] .education-item span, html[dir="rtl"] .project-item span { /* ت
     height: 60px;
     border-radius: 50%; /* زر دائري */
     font-size: 1.8rem; /* حجم الأيقونة */
-    display: flex; /* لتوسيط الأيقونة داخل الزر */
+    display: flex; /* لتوسيع الأيقونة داخل الزر */
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -873,7 +885,7 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
     border-radius: 50%;
     background: rgba(0,0,0,0.2);
     color: var(--neon-blue); /* استخدام الأزرق النيون لزر الإغلاق */
-    display: flex; /* لتوسيط الأيقونة */
+    display: flex; /* لتوسيع الأيقونة */
     align-items: center;
     justify-content: center;
   }
@@ -908,7 +920,7 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
     background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%) !important; /* تدرج لوني مختلف */
     color: #fff !important;
     box-shadow: 0 0 12px rgba(var(--neon-blue-rgb), 0.6); /* ظل أزرق أقوى */
-    display: flex; /* لتوسيط الأيقونة */
+    display: flex; /* لتوسيع الأيقونة */
     align-items: center;
     justify-content: center;
   }
