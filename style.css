@@ -255,19 +255,16 @@ html[dir="ltr"] #lang-toggle-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Added padding for smaller screens */
-  padding: 0 10px;
 }
 
 .smart-cv-card {
   background: rgba(10, 12, 24, 0.92);
   border: 3px solid #39FF14;
   border-radius: 22px;
-  /* Adjusted padding */
-  padding: 30px 25px;
-  /* Refined box-shadow */
-  box-shadow: 0 0 40px rgba(57, 255, 20, 0.6), 0 4px 20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 32px #39FF1480, 0 2px 16px #000a;
   margin: 0 auto;
+  padding: 32px 24px 24px 24px;
+  box-sizing: border-box;
   transition: box-shadow 0.3s, border-color 0.3s;
   max-width: 480px;
   min-width: 0;
@@ -323,6 +320,123 @@ html[dir="ltr"] #lang-toggle-container {
     max-width: 600px;
   }
 }
+
+.cv-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.cv-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  box-shadow: 0 0 24px #39FF14,0 2px 8px #000a;
+  object-fit: cover;
+}
+
+.cv-header-info h2 {
+  font-family: var(--font-cairo);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.cv-header-info p.role {
+  font-size: 1rem;
+  color: var(--medium-gray);
+}
+
+.cv-social-links {
+  margin-top: 10px;
+}
+
+.cv-social-links a {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin-right: 15px;
+}
+
+.cv-body {
+  /* Default styles or remove if not needed */
+}
+
+.cv-section {
+  margin-bottom: 20px;
+}
+
+.cv-section h3 {
+  font-family: var(--font-cairo);
+  font-size: 1.3rem;
+  color: var(--neon-green);
+  margin-bottom: 10px;
+}
+
+.cv-section p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.skills-category h4 {
+  font-family: var(--font-cairo);
+  font-size: 1.1rem;
+  color: var(--neon-blue);
+  margin-bottom: 8px;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.education-item, .project-item {
+  margin-bottom: 15px;
+}
+
+.education-item p, .project-item p {
+  font-weight: bold;
+  color: var(--neon-green);
+  margin-bottom: 5px;
+}
+
+.education-item span, .project-item span {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--medium-gray);
+  margin-left: 20px;
+}
+
+.project-item a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.cv-actions {
+  margin-top: 20px;
+}
+
+.cv-download-btn {
+  display: inline-block;
+  background-color: var(--neon-green);
+  color: var(--text-on-neon);
+  border: none;
+  padding: 10px 20px;
+  font-family: var(--font-orbitron);
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 /* =========== Chatbot Styles =========== */
 #chatbot-toggle-btn {
     position: fixed;
