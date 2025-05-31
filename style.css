@@ -1806,4 +1806,97 @@ body {
 }
 .chatbot-container.expanded .chatbot-toggle-btn {
     transform: rotate(180deg); /* Rotate arrow when expanded */
-    box-shadow: 0 0 10px rgba(0, 255, 156,
+    box-shadow: 0 0 10px rgba(0, 255, 156, 0.5); /* Maintain glow but no scale */
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background-color: #1E1E1E;
+}
+.chatbot-message {
+    max-width: 85%;
+    padding: 0.7rem 1rem; /* Slightly more padding */
+    border-radius: 1rem; /* More rounded bubbles */
+    font-size: 0.85rem;
+    line-height: 1.4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+.chatbot-message.user {
+    background-color: #7E57C2; /* Purple for user messages */
+    color: #FFFFFF;
+    align-self: flex-end;
+    border-bottom-right-radius: 0.25rem; /* Sharper corner on one side */
+    box-shadow: 0 2px 8px rgba(126, 87, 194, 0.4); /* Purple glow */
+}
+.chatbot-message.bot {
+    background-color: #2d2d2d;
+    color: #D7DADC;
+    align-self: flex-start;
+    border-bottom-left-radius: 0.25rem; /* Sharper corner on one side */
+    box-shadow: 0 2px 8px rgba(0, 196, 154, 0.2); /* Cyan glow */
+}
+.chatbot-input-area {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #444;
+    background-color: #282828;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+.chatbot-input {
+    flex-grow: 1;
+    background-color: #121212;
+    border: 1px solid #F9A826; /* Yellow border for input */
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: #D7DADC;
+    font-size: 0.9rem;
+    outline: none;
+    margin-right: 0.5rem;
+    box-shadow: 0 0 8px rgba(249, 168, 38, 0.3); /* Yellow glow */
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.chatbot-input:focus {
+    border-color: #00FF9C; /* Neon Green on focus */
+    box-shadow: 0 0 12px rgba(0, 255, 156, 0.5); /* Neon Green glow on focus */
+}
+.chatbot-input::placeholder {
+    color: #666;
+}
+.chatbot-send-btn {
+    background-color: #00FF9C; /* Primary Accent (Neon Green) */
+    color: #121212; /* Dark text for contrast */
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 156, 0.3);
+}
+.chatbot-send-btn:hover {
+    background-color: #00E68C; /* Slightly darker neon green */
+    box-shadow: 0 6px 20px rgba(0, 255, 156, 0.5);
+    transform: translateY(-1px);
+}
+.chatbot-send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+.chatbot-loading-indicator {
+    font-size: 1.5rem;
+    color: #F9A826;
+    animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
