@@ -156,24 +156,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Chatbot Toggle ---
-  // Removed redeclaration of chatbotToggleBtn, chatbotContainer, and chatbotCloseBtn to avoid block-scoped variable errors.
-
+  // Only one toggle logic should be present. Remove duplicate/conflicting event listeners.
   if (chatbotToggleBtn && chatbotContainer) {
     chatbotToggleBtn.addEventListener('click', () => {
-      chatbotContainer.classList.toggle('open');
-      if (chatbotContainer.classList.contains('open')) {
+      // Use a single class for visibility and animation
+      chatbotContainer.classList.toggle('visible');
+      if (chatbotContainer.classList.contains('visible')) {
         chatbotContainer.style.display = 'flex';
-        setTimeout(() => chatbotContainer.classList.add('show'), 10);
+        setTimeout(() => chatbotInput.focus(), 100);
+        // Add initial greeting if chat is empty
+        if (chatbotMessages.children.length === 0) {
+          const currentLang = document.documentElement.lang || 'ar';
+          const greeting = currentLang === 'ar' ? "مرحباً! كيف يمكنني مساعدتك اليوم؟" : "Hello! How can I assist you today?";
+          addMessageToChat(greeting, 'ai');
+        }
       } else {
-        chatbotContainer.classList.remove('show');
-        setTimeout(() => chatbotContainer.style.display = 'none', 300);
+        chatbotContainer.style.display = 'none';
       }
     });
   }
   if (chatbotCloseBtn && chatbotContainer) {
     chatbotCloseBtn.addEventListener('click', () => {
-      chatbotContainer.classList.remove('show', 'open');
-      setTimeout(() => chatbotContainer.style.display = 'none', 300);
+      chatbotContainer.classList.remove('visible');
+      chatbotContainer.style.display = 'none';
     });
   }
 
