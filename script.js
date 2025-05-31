@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotBackendUrl = 'https://9b41f350-1a5e-4907-804b-0546d3f09cb9-00-1qcq97gluha85.worf.replit.dev:5000/utils/systemPrompt.js'; // Your backend URL with endpoint
+  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/'; // Updated backend URL
 
   chatbotToggleBtn.addEventListener('click', () => {
       chatbotContainer.classList.toggle('visible');
