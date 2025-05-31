@@ -12,83 +12,32 @@
 // Replit Backend URL for Chatbot
 const REPLIT_CHATBOT_URL = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chatbot';
 
-// --- Loading Screen Logic ---
-const loadingTexts = [
-    "Initializing Systems...",
-    "Establishing Secure Connection...",
-    "Compiling Data Streams...",
-    "Deploying Digital Presence...",
-    "Engaging Subspace Communications..."
-];
-let currentLoadingTextIndex = 0;
-let progressBarWidth = 0;
-let loadingInterval;
-let typingInterval;
+// --- Amrikyy Cyber Neon Loader Script ---
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+  const loaderContainer = document.getElementById('loader-container');
+  const progressBar = document.getElementById('progressBar');
+  let loadingCompleted = false;
 
-function updateLoadingScreen() {
-    const dynamicLoadingText = document.getElementById('dynamic-loading-text');
-    const progressBarFill = document.getElementById('progress-bar-fill');
-
-    if (typingInterval) {
-        clearInterval(typingInterval);
-    }
-
-    const fullText = loadingTexts[currentLoadingTextIndex];
-    let charIndex = 0;
-    dynamicLoadingText.textContent = '';
-    dynamicLoadingText.classList.add('typing-effect');
-
-    typingInterval = setInterval(() => {
-        if (charIndex < fullText.length) {
-            dynamicLoadingText.textContent += fullText.charAt(charIndex);
-            charIndex++;
-        } else {
-            clearInterval(typingInterval);
-            dynamicLoadingText.classList.remove('typing-effect');
-        }
-    }, 50);
-
-    dynamicLoadingText.style.opacity = 1;
-
-    progressBarWidth += (100 / (loadingTexts.length * 10));
-    if (progressBarWidth > 100) progressBarWidth = 100;
-    progressBarFill.style.width = progressBarWidth + '%';
-
-    if (progressBarWidth >= 100) {
-        clearInterval(loadingInterval);
-        setTimeout(showPortfolioPage, 500);
-    } else {
-        setTimeout(() => {
-            currentLoadingTextIndex = (currentLoadingTextIndex + 1) % loadingTexts.length;
-        }, 2000);
-    }
-}
-
-function createStars(containerId, numStars) {
-    const container = document.getElementById(containerId);
-    for (let i = 0; i < numStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const size = Math.random() * 3 + 1;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        container.appendChild(star);
-    }
-}
-
-function showPortfolioPage() {
-    const loadingScreen = document.getElementById('loading-screen');
-    const cvSection = document.getElementById('cv-section');
-    loadingScreen.style.opacity = '0';
+  function completeLoading() {
+    if (loadingCompleted) return;
+    loadingCompleted = true;
+    progressBar.style.width = '100%';
+    loaderContainer.classList.add('hidden');
     setTimeout(() => {
-        loadingScreen.style.display = 'none';
-        cvSection.style.display = 'block';
-        document.body.style.overflow = 'auto';
-    }, 500);
-}
+      body.classList.remove('loading');
+      body.classList.add('loaded');
+    }, 500); // ينسجم مع مدة انتقال الإخفاء
+  }
+
+  // بدء حركة شريط التحميل فوراً
+  requestAnimationFrame(() => {
+    progressBar.style.width = '100%';
+  });
+
+  // انتهاء التحميل بعد 2.7 ثانية (كأنك تهيئ النظام)
+  setTimeout(completeLoading, 2700);
+});
 
 // --- Chatbot Logic ---
 function addMessageToChat(sender, message) {
