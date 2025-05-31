@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       birthPlaceValue: 'سوريا',
       residencyLabel: 'الإقامة:',
       residencyValue: '18 سنة في الكويت، 7 سنوات في أتلانتا (IUS)، سنة واحدة في القاهرة',
-      chatbotTitle: "عمريكي AI"
+      chatbotTitle: "أمريكي AI"
     }
   };
 
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotBackendUrl = 'https://9b41f350-1a5e-4907-804b-0546d3f09cb9-00-1qcq97gluha85.worf.replit.dev:5000/'; // Your backend URL
+  const chatbotBackendUrl = 'https://9b41f350-1a5e-4907-804b-0546d3f09cb9-00-1qcq97gluha85.worf.replit.dev:5000/utils/systemPrompt.js'; // Your backend URL with endpoint
 
   chatbotToggleBtn.addEventListener('click', () => {
       chatbotContainer.classList.toggle('visible');
