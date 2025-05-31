@@ -1,159 +1,123 @@
-<!-- DEBUG LOG: index.html loaded successfully on 2025-05-29 -->
-<!-- NOTE: This file contains the main structure for loader, hero, CV card, and chatbot. -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Digital Presence: Launching Soon</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title id="pageTitle">محمد H عبدالعزيز | CV الذكي - نسخة تقنية محسنة</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        rel="stylesheet" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <!-- صفحة التحميل النهائية | Amrikyy Cyber Neon Loader -->
+<body class="loading">
+
   <div id="loader-container">
     <div class="loader-content">
-      <div class="loader-logo">AMRIKYY</div>
-      <p class="loader-message">يتم تهيئة تجربة الذكاء السيبراني...</p>
+      <div class="loader-logo">MOHAMED H ABDELAZIZ</div>
+      <p class="loader-message" data-translate="loaderMessage">يتم تهيئة تجربة TECH & CRYPTO...</p> 
       <div class="progress-bar-container">
         <div class="progress-bar" id="progressBar"></div>
       </div>
     </div>
   </div>
-    <main id="main-content" tabindex="-1">
-        <section id="cv-section" style="display:none;" aria-label="CV Section">
-            <div id="main-info-card" class="ui-overlay" style="position:relative;top:unset;left:unset;transform:none;margin:2rem auto;max-width:600px;width:95%;">
-                <div class="data-flow-border"></div>
-                <h1 class="name-title">Mohamed H Abdelaziz (Amrikyy)</h1>
-                <div class="bio-slogan-container">
-                    <p id="bio-slogan-text" class="bio-slogan">Cybersecurity Innovator | AI Prompt Engineer | UI/UX Visionary</p>
-                </div>
-                <p class="text-neutral-400 text-sm md:text-base">Passionate about cybersecurity, prompt engineering, and user experience. Experienced in building smart digital solutions and stunning interfaces, focusing on cutting-edge tech and best security practices.</p>
-                <button class="cta-button" id="launch-resume-btn" aria-haspopup="dialog" aria-controls="resume-modal">Show Full Resume</button>
+
+  <div id="main-content">
+    <section id="cv-section" class="smart-cv-card-container">
+      <div id="lang-toggle-container">
+          <button id="langToggleBtn" class="lang-toggle-btn" data-translate="langToggle">EN</button>
+      </div>
+      <div class="smart-cv-card">
+        <div class="cv-header">
+          <img class="cv-avatar" src="https://i.ibb.co/pWwQnYg/avatar-amrikyy.png" alt="Mohamed H Abdelaziz Personal Photo">
+          <div class="cv-header-info">
+            <h2 data-translate="cvName">محمد H عبدالعزيز</h2> 
+            <p class="role" data-translate="cvRole">طالب هندسة أمن سيبراني | مطور ويب ناشئ ومتحمس للذكاء الاصطناعي</p>
+            <div class="cv-social-links">
+              <a href="mailto:amrikyy@gmail.com" title="البريد الإلكتروني" data-translate-title="emailTitle"><i class="fas fa-at"></i></a> 
+              <a href="https://linkedin.com/in/mohamed-abdelaziz-815797347" target="_blank" title="لينكدإن" data-translate-title="linkedinTitle"><i class="fab fa-linkedin-in"></i></a> 
+              <a href="https://github.com/mohamed-abdelaziz710/amrikyy" target="_blank" title="جيت هاب الشخصي" data-translate-title="githubTitle"><i class="fab fa-github-alt"></i></a> 
             </div>
-            <div id="resume-modal" class="show" role="dialog" aria-modal="true" aria-labelledby="resume-title" tabindex="-1">
-                <div class="resume-content-card">
-                    <button class="resume-close-btn" id="resume-close-btn" aria-label="Close Resume">X</button>
-                    <h2 id="resume-title" class="text-center">Full Professional Profile</h2>
-                    <div class="flex justify-center mb-6">
-                        <img src="avatar.jpg" alt="Portrait of Mohamed H Abdelaziz (Amrikyy)" class="rounded-full w-32 h-32 object-cover shadow-lg" />
-                    </div>
-                    <section class="mb-6">
-                        <h3><span class="icon">💼</span> Experience</h3>
-                        <div>
-                            <p class="font-bold text-neutral-200">Cybersecurity Engineer & AI Solutions Architect</p>
-                            <p class="text-neutral-400">Freelance / Amrikyy.com | 2022 – Present</p>
-                            <ul class="list-disc list-inside text-neutral-400 ml-4">
-                                <li>Developed and secured web applications and AI-powered chatbots for clients in fintech, healthcare, and education.</li>
-                                <li>Specialized in prompt engineering for LLMs (Arabic/English), building custom AI tools and automations.</li>
-                                <li>Performed penetration testing, vulnerability assessments, and security audits for organizations and startups.</li>
-                                <li>Designed and delivered cybersecurity awareness and technical training for teams and individuals.</li>
-                                <li>Consulted on UI/UX and secure product design for SaaS and digital platforms.</li>
-                            </ul>
-                        </div>
-                        <div class="mt-4">
-                            <p class="font-bold text-neutral-200">Lead Web & Security Developer</p>
-                            <p class="text-neutral-400">Various Startups & Projects | 2018 – 2022</p>
-                            <ul class="list-disc list-inside text-neutral-400 ml-4">
-                                <li>Led development of secure, scalable web platforms using React, Next.js, Node.js, and Python.</li>
-                                <li>Integrated cloud solutions (Firebase, AWS) and implemented CI/CD pipelines for rapid deployment.</li>
-                                <li>Worked closely with designers to deliver modern, accessible, and user-focused interfaces.</li>
-                                <li>Provided technical mentorship and code reviews for junior developers.</li>
-                            </ul>
-                        </div>
-                    </section>
-                    <section class="mb-6">
-                        <h3><span class="icon">💻</span> Technical Skills</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🛡️</span> Cybersecurity Engineering
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🔍</span> Penetration Testing
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🤖</span> AI Prompt Engineering
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">⚛️</span> React & Next.js
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🎨</span> UI/UX Design
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🐍</span> Python & Node.js
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">☁️</span> Firebase & AWS
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🔒</span> Vulnerability Assessment
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🌐</span> Web Security & DevSecOps
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">💬</span> Bilingual (Arabic/English)
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🧑‍🏫</span> Security Training & Awareness
-                            </div>
-                            <div class="flex items-center gap-2 text-neutral-300">
-                                <span class="text-xl icon">🧠</span> LLMs & Generative AI
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h3><span class="icon">🎓</span> Education</h3>
-                        <div>
-                            <p class="font-bold text-neutral-200">B.Sc. Computer Science (Cybersecurity)</p>
-                            <p class="text-neutral-400">Ain Shams University | 2018</p>
-                        </div>
-                        <div class="mt-4">
-                            <p class="font-bold text-neutral-200">Certifications</p>
-                            <p class="text-neutral-400">CompTIA Security+, Cisco CyberOps Associate, and more</p>
-                        </div>
-                    </section>
-                    <div class="flex justify-center mt-8 space-x-6">
-                        <a href="https://linkedin.com/in/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                            <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-8 h-8" />
-                        </a>
-                        <a href="https://github.com/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                            <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" class="w-8 h-8" />
-                        </a>
-                        <a href="mailto:amrikyy@gmail.com" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                            <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email" class="w-8 h-8" />
-                        </a>
-                    </div>
-                    <div class="flex justify-center mt-8">
-                        <div class="bg-white p-4 rounded-md">
-                            <img src="https://placehold.co/100x100/FFFFFF/000000?text=QR+Code" alt="QR Code" class="w-24 h-24" />
-                        </div>
-                    </div>
-                    <p class="text-xs text-neutral-500 mt-6 text-center">Note: This content is for Mohamed H Abdelaziz (Amrikyy). For more, contact amrikyy@gmail.com.</p>
-                </div>
+          </div>
+        </div>
+        <div class="cv-body">
+          <div class="cv-section">
+            <h3 data-translate="summaryTitle">الملخص المهني</h3>
+            <p data-translate="summaryText">طالب هندسة أمن سيبراني متحفز للغاية وذو عقلية دولية، يتمتع بخبرة متنوعة في التداول المالي وخدمات السفر والأدوار التي تتطلب التعامل المباشر مع العملاء. يتقن إدارة المخاطر ومنصة أماديوس للبيع، ويطور مهاراته بسرعة في وكلاء الذكاء الاصطناعي وتطوير الويب وتقنيات الحوسبة السحابية. يتوق إلى الاستفادة من مزيج من الخبرة التقنية والقدرة على التكيف والفطنة القوية في خدمة العملاء للمساهمة في المشاريع المبتكرة وفرص النمو.</p>
+          </div>
+          
+          <div class="cv-section">
+            <h3 data-translate="educationTitle">التعليم</h3>
+            <div class="education-item">
+                <p data-translate="eduKSUDegree"><i class="fas fa-user-astronaut"></i> بكالوريوس العلوم في هندسة الأمن السيبراني</p> 
+                <span data-translate="eduKSUDetail">جامعة ولاية كينيساو | كينيساو، جورجيا، الولايات المتحدة الأمريكية (المتوقع: مايو 2026)</span>
             </div>
-        </section>
-        <section id="chatbot-overlay" class="ui-overlay hidden" aria-label="AI Chatbot" aria-live="polite">
-            <div class="chatbot-header">
-                <h3>Chat with AI</h3>
-                <button class="chatbot-toggle-btn" id="chatbot_close_btn" aria-label="Close Chatbot">X</button>
+            <div class="education-item">
+                <p data-translate="eduCTCDegree"><i class="fas fa-certificate"></i> دبلوم مشارك في علوم الحاسب الآلي</p> 
+                <span data-translate="eduCTCDetail">كلية تشاتاهوتشي التقنية | ماريتا، جورجيا، الولايات المتحدة الأمريكية (تخرج: مايو 2021)</span>
             </div>
-            <div class="chatbot-content">
-                <div class="chatbot-messages" id="chatbot-messages">
-                    <div class="chatbot-message bot">Hello! Ask me anything about this portfolio or Web3.</div>
-                </div>
-                <div class="chatbot-input-area">
-                    <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type your message..." aria-label="Type your message" autocomplete="off">
-                    <button id="chatbot-send-btn" class="chatbot-send-btn" aria-label="Send message">Send</button>
-                </div>
+          </div>
+
+          <div class="cv-section">
+            <h3 data-translate="skillsTitle">المهارات الرئيسية</h3>
+            <ul class="skills-list">
+              <li data-translate="skillCybersecurity"><i class="fas fa-shield-halved"></i> الأمن السيبراني</li> 
+              <li data-translate="skillReact"><span><i class="fab fa-react"></i> React & Next.js</span></li>
+              <li data-translate="skillWebDev"><i class="fas fa-file-code"></i> HTML, CSS, JS</li> 
+              <li data-translate="skillPython"><span><i class="fab fa-python"></i> Python</span></li>
+              <li data-translate="skillNode"><span><i class="fab fa-node-js"></i> Node.js</span></li>
+              <li data-translate="skillAI"><i class="fas fa-robot"></i> الذكاء الاصطناعي</li> 
+              <li data-translate="skillCloud"><i class="fas fa-server"></i> الحوسبة السحابية</li> 
+              <li data-translate="skillUIUX"><i class="fas fa-object-group"></i> تصميم واجهات</li> 
+              <li data-translate="skillTrading"><i class="fab fa-bitcoin"></i> تداول العملات</li> 
+              <li data-translate="skillAmadeus"><i class="fas fa-plane-departure"></i> منصة أماديوس</li> 
+              <li data-translate="skillFirebase"><span><i class="fas fa-fire"></i> Firebase</span></li> 
+              <li data-translate="skillGitHub"><span><i class="fab fa-git-alt"></i> GitHub</span></li> 
+            </ul>
+          </div>
+
+          <div class="cv-section">
+            <h3 data-translate="projectsTitle">أبرز المشاريع</h3>
+            <div class="project-item">
+                <p data-translate="projectCharityTitle"><i class="fas fa-rocket"></i> تصميم صفحة هبوط (Charity: Water)</p> 
+                <span data-translate="projectCharityDesc">استخدام HTML, CSS ومساعدة الذكاء الاصطناعي لتعزيز الوعي وتشجيع التبرعات.</span>
+                <a href="https://mohamed-abdelaziz710.github.io/CR-02-charity-water-lp/" target="_blank" title="عرض المشروع" data-translate="projectLiveDemo" data-translate-title="projectLiveDemoTitle"><i class="fas fa-external-link-square-alt"></i> عرض مباشر</a> |  
+                <a href="https://github.com/mohamed-abdelaziz710/CR-02-charity-water-lp" target="_blank" title="مستودع جيت هاب" data-translate="projectRepo" data-translate-title="projectRepoTitle"><i class="fab fa-github-square"></i> المستودع</a> 
             </div>
-        </section>
-    </main>
-    <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
+             <div class="project-item">
+                <p data-translate="projectPortfolioTitle"><i class="fas fa-user-tie"></i> موقع السيرة الذاتية الشخصي</p> 
+                <span data-translate="projectPortfolioDesc">عرض شامل للمهارات والمشاريع والخلفية المهنية.</span>
+                <a href="https://mohamed-abdelaziz710.github.io/amrikyy/" target="_blank" title="عرض الموقع" data-translate="projectLiveDemo" data-translate-title="projectLiveDemoTitlePortfolio"><i class="fas fa-external-link-square-alt"></i> عرض مباشر</a> |
+                <a href="https://github.com/mohamed-abdelaziz710/amrikyy" target="_blank" title="مستودع جيت هاب" data-translate="projectRepo" data-translate-title="projectRepoTitlePortfolio"><i class="fab fa-github-square"></i> المستودع</a>
+            </div>
+          </div>
+
+          <div class="cv-section cv-actions" style="text-align: center;">
+             <a href="Mohamed_H_Abdelaziz_CV.pdf" download="Mohamed_H_Abdelaziz_CV.pdf" class="cv-download-btn" data-translate="downloadCV">
+              <i class="fas fa-download"></i> تحميل السيرة الذاتية 
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <button id="chatbot-toggle-btn" aria-label="Open Chatbot" data-translate-title="chatbotToggleTitle">
+      <i class="fas fa-coins"></i> 
+  </button>
+  <div id="chatbot-container">
+      <div class="chatbot-header">
+          <h4 data-translate="chatbotHeader">مساعد افتراضي</h4>
+          <button id="chatbot-close-btn" class="chatbot-close-btn" aria-label="Close Chatbot" data-translate-title="chatbotCloseTitle"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="chatbot-messages">
+          </div>
+      <div class="chatbot-input-area">
+          <input type="text" id="chatbot-input" placeholder="اكتب رسالتك هنا..." data-translate-placeholder="chatbotInputPlaceholder">
+          <button id="chatbot-send-btn" data-translate="chatbotSend">إرسال</button>
+      </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
