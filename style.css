@@ -732,287 +732,47 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
     box-shadow: 0 0 12px rgba(0, 212, 255, 0.6); /* ظل أزرق أقوى */
 }
 #chatbot-send-btn { /* زر إرسال الرسالة */
-    background: linear-gradient(90deg, var(--neon-green) 60%, var(--neon-blue) 100%); /* تدرج لوني للزر */
-    color: var(--text-on-neon); /* ضمان تباين النص */
-    border: none;
-    padding: 0.6rem 1.2rem; /* زيادة المساحة الداخلية للزر */
-    border-radius: 8px;
-    font-family: var(--font-orbitron);
-    font-weight: bold; /* نص أعرض */
-    letter-spacing: 1px; /* تباعد بين الأحرف */
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    box-shadow: 0 0 8px rgba(57, 255, 20, 0.25); /* ظل خفيف */
+    background: linear-gradient(90deg, var(--neon-green) 60%, var(--neon-green) 100%) !important;
+    color: var(--text-on-neon) !important;
+    box-shadow: 0 0 12px var(--neon-green) !important;
+    /* ...existing code... */
 }
 #chatbot-send-btn:hover {
-    background: linear-gradient(90deg, #2de20f 60%, #00c0ef 100%); /* تدرج أفتح عند التحويم */
-    transform: scale(1.05); /* تكبير طفيف */
-    box-shadow: 0 0 12px rgba(57, 255, 20, 0.4); /* ظل أقوى */
+    background: linear-gradient(90deg, #2de20f 60%, #39FF14 100%) !important;
+    box-shadow: 0 0 16px var(--neon-green) !important;
+    /* ...existing code... */
 }
-#chatbot-send-btn:active { /* عند النقر على الزر */
-  background: var(--neon-blue); /* تغيير الخلفية للتأكيد البصري */
-  color: #fff;
-  transform: scale(1); /* إعادة الحجم الأصلي */
-}
-
-/* مؤشر الكتابة (النقاط المتحركة) */
-.typing-indicator {
-  display: flex;
-  align-items: center;
-  gap: 4px; /* مسافة بين النقاط */
-  min-height: 24px; /* ضمان أن المؤشر يأخذ مساحة كافية */
-  margin: 2px 0; /* هوامش رأسية متناسقة */
-}
-.typing-indicator .dot { /* كل نقطة في المؤشر */
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--neon-green);
-  opacity: 0.7; /* تبدأ شفافة قليلاً */
-  animation: typingBlink 1.2s infinite both; /* تحريك وميض للنقاط */
-}
-.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; } /* تأخير للنقطة الثانية */
-.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; } /* تأخير للنقطة الثالثة */
-
-@keyframes typingBlink { /* تحريك وميض النقاط */
-  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); } /* تصغير وتعتيم */
-  40% { opacity: 1; transform: scale(1); } /* تكبير وإظهار كامل */
-}
-
-
-/* =========== استجابة الشاشات الصغيرة =========== */
-@media (max-width: 768px) { /* للأجهزة اللوحية والهواتف الكبيرة */
-  .loader-logo {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-  .progress-bar-container { width: 200px; }
-
-  #lang-toggle-container {
-    top: 1rem;
-    left: 1rem;
-  }
-  html[dir="ltr"] #lang-toggle-container {
-    left: auto;
-    right: 1rem;
-  }
-  .lang-toggle-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.7rem;
-  }
-  .smart-cv-card {
-    padding: 1.5rem;
-    padding-top: 3.5rem; /* مساحة لزر تبديل اللغة إذا تداخل */
-    margin: 1rem auto;
-    max-width: 95vw; /* عرض أقصى أكبر قليلاً للشاشات المتوسطة */
-  }
-
-  .cv-header { flex-direction: column; text-align: center; gap: 1rem;}
-  .cv-header.text-center .cv-social-links { /* ضمان توسيط روابط التواصل في عرض الهاتف */
-      justify-content: center;
-  }
-  .cv-avatar { width: 80px; height: 80px; }
-  .cv-header-info h2 { font-size: 1.6rem; }
-  .cv-header-info p.role { font-size: 0.9rem; }
-  .cv-social-links a { font-size: 1.2rem; margin: 0 0.5rem; }
-  .cv-section h3 { font-size: 1.3rem; letter-spacing: 0.5px; }
-  .cv-section p, .education-item p, .project-item p { font-size: 0.9rem; }
-  .education-item span, .project-item span { font-size: 0.8rem; }
-
-  .skills-list { gap: 0.6rem; }
-  .skills-list li { font-size: 0.85rem; padding: 0.5rem 0.9rem;}
-  .cv-download-btn { font-size: 0.9rem; padding: 0.8rem 1.6rem; width: 100%; letter-spacing: 1px;}
-
-  #chatbot-toggle-btn { /* تصغير زر الشات بوت */
-    bottom: 1rem;
-    right: 1rem;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-  }
-  html[dir="rtl"] #chatbot-toggle-btn {
-    right: auto;
-    left: 1rem;
-  }
-  #chatbot-container { /* تعديل أبعاد الشات بوت للشاشات المتوسطة */
-    bottom: 70px; /* فوق زر التبديل المصغر */
-    right: 1rem;
-    width: calc(100vw - 2rem); /* عرض كامل مع هوامش */
-    height: calc(100vh - 80px - 1rem); /* ارتفاع كامل مع هوامش ومساحة لزر التبديل */
-    max-height: none; /* إلغاء الارتفاع الأقصى السابق */
-  }
-  html[dir="rtl"] #chatbot-container {
-    right: auto;
-    left: 1rem;
-  }
-}
- @media (max-width: 480px) { /* للهواتف الصغيرة جدًا */
-    .loader-logo {
-        font-size: 1.6rem;
-        letter-spacing: 0.5px;
-    }
-     .cv-header-info h2 { font-size: 1.4rem; }
-     .cv-section h3 { font-size: 1.2rem; }
-}
-
-/* --- تحسينات الشات بوت للشاشات الصغيرة (ملء الشاشة أقل من 600 بكسل) --- */
-@media (max-width: 600px) {
-  #chatbot-container.visible { /* تطبيق فقط عندما يكون الشات بوت مرئيًا */
-    position: fixed !important; /* ضمان التموضع الثابت فوق كل شيء */
-    left: 0 !important; right: 0 !important; bottom: 0 !important; top: 0 !important; /* ملء الشاشة */
-    width: 100vw !important; height: 100vh !important;
-    max-width: 100vw !important; max-height: 100vh !important;
-    border-radius: 0 !important; /* إزالة تقويس الزوايا */
-    margin: 0 !important; /* إزالة الهوامش */
-    box-shadow: none !important; /* إزالة الظل */
-    z-index: 9999; /* فوق كل شيء باستثناء زر التبديل إذا كان مرئيًا */
-    padding: 0 !important; /* إزالة المساحات الداخلية */
-    background: linear-gradient(135deg, #0A0A0A 0%, #1C1C1C 100%) !important; /* خلفية داكنة لملء الشاشة */
-    display: flex !important; /* ضمان التخطيط المرن */
-    flex-direction: column;
-    justify-content: space-between; /* توزيع المساحة بين الرأس والرسائل ومنطقة الإدخال */
-  }
-  .chatbot-header { /* تعديل رأس الشات بوت في وضع ملء الشاشة */
-    font-size: 1.1rem !important;
-    padding: 1rem !important;
-    min-height: 56px; /* ارتفاع أدنى للرأس */
-    background-color: rgba(0,0,0,0.3); /* خلفية شفافة قليلاً للرأس */
-  }
-  .chatbot-close-btn { /* تعديل زر الإغلاق */
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 1.3rem !important;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.2);
-    color: var(--neon-blue); /* استخدام الأزرق النيون لزر الإغلاق */
-    display: flex; /* لتوسيع الأيقونة */
-    align-items: center;
-    justify-content: center;
-  }
-  #chatbot-messages { /* تعديل منطقة الرسائل */
-    flex: 1 1 auto; /* السماح لمنطقة الرسائل بأخذ المساحة المتاحة */
-    padding: 0.7rem !important; /* مساحات داخلية متناسقة */
-    font-size: 1rem !important; /* حجم خط مناسب للقراءة */
-    overscroll-behavior: contain; /* منع مشاكل السحب للتحديث في المتصفحات المحمولة */
-  }
-  .chatbot-input-area { /* تعديل منطقة الإدخال */
-    padding: 0.7rem !important;
-    gap: 0.5rem;
-    background-color: rgba(0,0,0,0.2); /* خلفية شفافة قليلاً */
-    border-top: 1px solid rgba(var(--neon-blue-rgb), 0.2); /* خط فاصل علوي بلون أزرق نيون */
-  }
-  #chatbot-input { /* تعديل حقل الإدخال */
-    font-size: 1rem !important;
-    min-height: 44px !important;
-    max-height: 120px !important; /* السماح بتوسيع الحقل لعدة أسطر */
-    padding: 0.7rem 1rem !important;
-    border-radius: 22px !important; /* زوايا دائرية أكثر */
-    background: rgba(10, 10, 10, 0.95); /* خلفية داكنة جدًا */
-    color: #fff;
-    box-shadow: 0 0 8px rgba(var(--neon-blue-rgb), 0.26); /* ظل أزرق خفيف */
-    border: 1.5px solid var(--neon-blue); /* حدود بلون أزرق نيون */
-  }
-  #chatbot-send-btn { /* تعديل زر الإرسال */
-    min-width: 44px !important; /* حجم أدنى للزر */
-    min-height: 44px !important;
-    font-size: 1.3rem !important; /* حجم أيقونة مناسب */
-    border-radius: 50% !important; /* زر دائري */
-    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%) !important; /* تدرج لوني مختلف */
+#chatbot-send-btn:active {
+    background: var(--neon-green) !important;
+    box-shadow: 0 0 18px var(--neon-green) !important;
     color: #fff !important;
-    box-shadow: 0 0 12px rgba(var(--neon-blue-rgb), 0.6); /* ظل أزرق أقوى */
-    display: flex; /* لتوسيع الأيقونة */
-    align-items: center;
-    justify-content: center;
-  }
-  #chatbot-send-btn:active { /* عند النقر على زر الإرسال */
-    background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-blue) 100%) !important; /* عكس التدرج */
-    box-shadow: 0 0 18px rgba(var(--neon-blue-rgb), 0.73); /* ظل أقوى */
-  }
-  .chat-message { /* تعديل الرسائل في وضع ملء الشاشة */
-    font-size: 1rem !important;
-    padding: 0.7rem 1rem !important;
-    margin-bottom: 0.5rem !important;
-    border-radius: 1.2rem !important; /* زوايا دائرية أكثر */
-  }
-  .typing-indicator { /* تعديل مؤشر الكتابة */
-    min-height: 32px;
-    padding: 0.7rem 1rem !important;
-  }
+    /* ...existing code... */
 }
 
-/* ضمان ظهور زر تبديل الشات بوت دائمًا في وضع الهاتف، حتى فوق الشات بوت المفتوح بملء الشاشة */
 @media (max-width: 600px) {
-  #chatbot-toggle-btn {
-    position: fixed !important; /* ضمان التموضع الثابت */
-    bottom: 1.2rem !important;
-    right: 1.2rem !important; /* الافتراضي لـ LTR */
-    z-index: 10002 !important; /* فوق الشات بوت الذي بملء الشاشة */
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 50% !important;
-    font-size: 2.1rem !important; /* أيقونة أكبر */
-    box-shadow: 0 0 16px rgba(var(--neon-blue-rgb), 0.6); /* ظل أزرق */
-    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%) !important; /* نفس تدرج زر الإرسال */
+  #chatbot-send-btn {
+    background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-green) 100%) !important;
+    box-shadow: 0 0 12px var(--neon-green) !important;
     color: #fff !important;
   }
-  html[dir="rtl"] #chatbot-toggle-btn { /* تعديل لـ RTL */
-    right: auto !important;
-    left: 1.2rem !important;
-  }
-  #chatbot-toggle-btn:active { /* عند النقر على زر التبديل */
-    background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-blue) 100%) !important; /* عكس التدرج */
-    box-shadow: 0 0 24px rgba(var(--neon-blue-rgb), 0.73); /* ظل أقوى */
+  #chatbot-send-btn:active {
+    background: var(--neon-green) !important;
+    box-shadow: 0 0 18px var(--neon-green) !important;
   }
 }
 
-/* =========== قسم المعلومات الشخصية =========== */
 .personal-info-section {
-  background: rgba(20, 20, 30, 0.7); /* خلفية داكنة شفافة قليلاً */
-  border-radius: 12px;
-  margin: 18px 0 10px 0; /* هوامش مناسبة */
-  padding: 14px 18px 10px 18px; /* مساحات داخلية */
-  box-shadow: 0 0 12px 2px var(--neon-blue), 0 0 2px 1px var(--neon-blue) inset; /* ظل وتوهج داخلي بلون أزرق نيون */
+  box-shadow: 0 0 12px 2px var(--neon-green), 0 0 2px 1px var(--neon-green) inset;
 }
-.personal-info-section h4 { /* عنوان قسم المعلومات الشخصية */
-  color: var(--neon-blue);
-  font-size: 1.1em;
-  margin-bottom: 8px;
-  letter-spacing: 1px; /* تباعد بين الأحرف */
-  text-shadow: 0 0 6px var(--neon-blue), 0 0 2px #000; /* توهج وظل خفيف */
+.personal-info-section h4 {
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green), 0 0 2px #000;
 }
-.personal-info-list { /* قائمة المعلومات الشخصية */
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.personal-info-list li {
+  text-shadow: 0 0 2px var(--neon-green), 0 0 1px #000;
 }
-.personal-info-list li { /* كل عنصر في القائمة */
-  color: var(--text-primary);
-  font-size: 1em;
-  margin-bottom: 5px; /* مسافة بين العناصر */
-  display: flex; /* لمحاذاة الأيقونة مع النص */
-  align-items: center;
-  gap: 8px; /* مسافة بين الأيقونة والنص */
-  text-shadow: 0 0 2px var(--neon-blue), 0 0 1px #000; /* توهج خفيف للنص */
+.personal-info-list li i {
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green), 0 0 2px #000;
 }
-.personal-info-list li i { /* أيقونات المعلومات الشخصية */
-  color: var(--neon-blue);
-  text-shadow: 0 0 6px var(--neon-blue), 0 0 2px #000;
-  width: 20px; /* عرض ثابت للأيقونة */
-  text-align: center; /* توسيط الأيقونة */
-}
-.personal-info-list li strong { /* تسميات المعلومات (مثل "تاريخ الميلاد:") */
-    color: var(--text-primary); /* لون أساسي أو أفتح قليلاً إذا لزم الأمر */
-    font-weight: bold;
-}
-.personal-info-list li span { /* قيم المعلومات (مثل "10 يوليو 1999") */
-    color: var(--medium-gray); /* لون أهدأ للقيم */
-}
-
-@media (max-width: 600px) { /* تعديلات قسم المعلومات الشخصية للشاشات الصغيرة */
-  .personal-info-section {
-    padding: 10px 12px 8px 12px; /* تقليل المساحات الداخلية */
-  }
-  .personal-info-list li {
-    font-size: 0.95em; /* تصغير حجم الخط قليلاً */
-  }
-}
+/* ...existing code... */
