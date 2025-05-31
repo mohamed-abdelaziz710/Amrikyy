@@ -154,6 +154,8 @@
     </section>
   </div>
 
+  <div id="page-background-animations"></div>
+
   <button id="chatbot-toggle-btn" aria-label="Open Chatbot" data-translate-title="chatbotToggleTitle">
       <i class="fas fa-coins"></i> 
   </button>
@@ -171,5 +173,93 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // ====== 3D Space-Bitcoin-Tech Micro Animations Background ======
+    (function() {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'space-bg-canvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = 0;
+      canvas.style.left = 0;
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.zIndex = '-2';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.opacity = '0.7';
+      document.getElementById('page-background-animations').appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr;
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        w = window.innerWidth; h = window.innerHeight;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.scale(dpr, dpr);
+      }
+      window.addEventListener('resize', resize); resize();
+
+      // --- Micro 3D objects: stars, bitcoin, tech chips ---
+      const icons = [
+        // Bitcoin SVG Path
+        {type:'bitcoin', color:'#f7931a', size:22},
+        // Tech chip (square)
+        {type:'chip', color:'#00d4ff', size:18},
+        // Star
+        {type:'star', color:'#fff', size:2},
+        // Neon planet
+        {type:'planet', color:'#39FF14', size:16}
+      ];
+      const objects = [];
+      for(let i=0;i<32;i++) {
+        const icon = icons[Math.floor(Math.random()*icons.length)];
+        objects.push({
+          ...icon,
+          x: Math.random()*w,
+          y: Math.random()*h,
+          z: Math.random()*1+0.5,
+          angle: Math.random()*Math.PI*2,
+          speed: 0.1+Math.random()*0.2
+        });
+      }
+      function drawBitcoin(x, y, s, a) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        ctx.beginPath(); ctx.arc(0,0,s,0,2*Math.PI); ctx.fillStyle='#222'; ctx.fill();
+        ctx.lineWidth=2; ctx.strokeStyle='#f7931a'; ctx.stroke();
+        ctx.font = `${s*1.1}px Orbitron,Arial`; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillStyle='#f7931a'; ctx.fillText('₿',0,1);
+        ctx.restore();
+      }
+      function drawChip(x, y, s, a) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        ctx.fillStyle='#00d4ff'; ctx.fillRect(-s/2,-s/2,s,s);
+        ctx.strokeStyle='#fff'; ctx.lineWidth=1.2; ctx.strokeRect(-s/2,-s/2,s,s);
+        ctx.restore();
+      }
+      function drawStar(x, y, s) {
+        ctx.save(); ctx.globalAlpha=0.7; ctx.beginPath(); ctx.arc(x,y,s,0,2*Math.PI); ctx.fillStyle='#fff'; ctx.shadowColor='#39FF14'; ctx.shadowBlur=8; ctx.fill(); ctx.restore();
+      }
+      function drawPlanet(x, y, s, a) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        ctx.beginPath(); ctx.arc(0,0,s,0,2*Math.PI); ctx.fillStyle='#39FF14'; ctx.shadowColor='#00d4ff'; ctx.shadowBlur=16; ctx.fill();
+        ctx.lineWidth=2; ctx.strokeStyle='#fff'; ctx.stroke();
+        ctx.restore();
+      }
+      function render() {
+        ctx.clearRect(0,0,w,h);
+        for(const obj of objects) {
+          let x = obj.x + Math.sin(Date.now()/1200*obj.z+obj.x)*12*obj.z;
+          let y = obj.y + Math.cos(Date.now()/1400*obj.z+obj.y)*8*obj.z;
+          let a = obj.angle + Date.now()/3000*obj.z;
+          if(obj.type==='bitcoin') drawBitcoin(x,y,obj.size,a);
+          else if(obj.type==='chip') drawChip(x,y,obj.size,a);
+          else if(obj.type==='star') drawStar(x,y,obj.size);
+          else if(obj.type==='planet') drawPlanet(x,y,obj.size,a);
+        }
+        requestAnimationFrame(render);
+      }
+      render();
+    })();
+  </script>
 </body>
 </html>
