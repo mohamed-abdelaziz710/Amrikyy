@@ -1,8 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // --- تعريف كل المتغيرات في الأعلى مرّة واحدة ---
   const body = document.body;
   const loaderContainer = document.getElementById('loader-container');
   const progressBar = document.getElementById('progressBar');
+  const langToggleBtn = document.getElementById('langToggleBtn');
+  const htmlTag = document.documentElement;
+  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+  const chatbotContainer = document.getElementById('chatbot-container');
+  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+  const chatbotInput = document.getElementById('chatbot-input');
+  const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat';
   let loadingCompleted = false;
+  let currentLang = htmlTag.lang || 'ar';
 
   function completeLoading() {
     if (loadingCompleted) return;
@@ -26,10 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingTimeout = setTimeout(completeLoading, 3000); 
 
   // --- Language Toggle & Translation ---
-  const langToggleBtn = document.getElementById('langToggleBtn');
-  const htmlTag = document.documentElement;
-  let currentLang = htmlTag.lang || 'ar';
-
   const translations = {
     en: {
       loaderMessage: 'Initializing TECH & CRYPTO experience...',
@@ -208,8 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Translation Logic ---
     const htmlEl = document.documentElement;
-  // The following object literal was misplaced and caused syntax errors. It has been removed.
-  // If you need to add more translations, add them to the existing 'translations' object above.
 
   function setLanguage(lang) {
     htmlEl.lang = lang;
@@ -256,13 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Chatbot Logic ---
   // Move all chatbot DOM element queries to the top, before any event listeners or usage
-  const chatbotMessages = document.getElementById('chatbot-messages');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotContainer = document.getElementById('chatbot-container');
-  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat';
 
   // --- UX Improvements ---
   // 1. Auto-focus input when chat opens
