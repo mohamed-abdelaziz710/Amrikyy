@@ -465,16 +465,47 @@ html[dir="ltr"] .cv-section .project-item a i {
     text-align: center; 
 }
 
-
-.skills-list li:hover {
-  background-color: rgba(57, 255, 20, 0.15); 
-  border-color: var(--neon-green); 
-  color: var(--white); 
-  transform: translateY(-3px) scale(1.06); 
-  box-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
+.skill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 50%;
+  background: rgba(20, 20, 30, 0.85);
+  box-shadow: 0 0 8px 2px var(--neon-green), 0 0 2px 1px var(--neon-green) inset;
+  margin-left: 0.6em;
+  margin-right: 0.2em;
+  transition: box-shadow 0.3s, background 0.3s;
+  border: 1.5px solid var(--neon-green);
+  position: relative;
 }
-.skills-list li:hover i {
-    color: var(--white); 
+.skill-icon i {
+  font-size: 1.2em;
+  color: var(--neon-green);
+  filter: drop-shadow(0 0 4px var(--neon-green));
+  transition: color 0.3s, filter 0.3s;
+}
+/* Unique color accents for each tech */
+.skill-icon.react i { color: #00d8ff; filter: drop-shadow(0 0 6px #00d8ff); }
+.skill-icon.python i { color: #ffd43b; filter: drop-shadow(0 0 6px #ffd43b); }
+.skill-icon.node i { color: #8cc84b; filter: drop-shadow(0 0 6px #8cc84b); }
+.skill-icon.ai i { color: #b600ff; filter: drop-shadow(0 0 6px #b600ff); }
+.skill-icon.cloud i { color: #00d4ff; filter: drop-shadow(0 0 6px #00d4ff); }
+.skill-icon.uiux i { color: #ff61a6; filter: drop-shadow(0 0 6px #ff61a6); }
+.skill-icon.trading i { color: #f7931a; filter: drop-shadow(0 0 6px #f7931a); }
+.skill-icon.amadeus i { color: #005baa; filter: drop-shadow(0 0 6px #005baa); }
+.skill-icon.firebase i { color: #ffcb2b; filter: drop-shadow(0 0 6px #ffcb2b); }
+.skill-icon.github i { color: #fff; filter: drop-shadow(0 0 6px #fff); }
+.skill-icon.code i { color: #39FF14; filter: drop-shadow(0 0 6px #39FF14); }
+
+.skills-list li:hover .skill-icon {
+  box-shadow: 0 0 18px 4px var(--neon-green), 0 0 8px 2px var(--neon-green) inset;
+  background: rgba(20, 20, 30, 1);
+}
+.skills-list li:hover .skill-icon i {
+  color: var(--white);
+  filter: drop-shadow(0 0 8px var(--neon-green));
 }
 
 
