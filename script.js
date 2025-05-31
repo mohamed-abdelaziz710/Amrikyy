@@ -252,112 +252,116 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage('ar');
 
   // --- Chatbot Logic ---
-  // chatbotToggleBtn, chatbotContainer, chatbotCloseBtn already declared above
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat'; // Updated to live Replit backend URL
+  const chatbotContainer = document.getElementById('chatbot-container');
+  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat';
 
+  // --- UX Improvements ---
+  // 1. Auto-focus input when chat opens
   chatbotToggleBtn.addEventListener('click', () => {
-      chatbotContainer.classList.toggle('visible');
-      if (chatbotContainer.classList.contains('visible')) {
-          chatbotInput.focus();
-          // Add initial greeting from AI if chat is empty
-          if(chatbotMessages.children.length === 0) {
-            const currentLang = htmlEl.lang || 'ar';
-            const greeting = currentLang === 'ar' ? "مرحباً! كيف يمكنني مساعدتك اليوم بخصوص الكريبتو؟" : "Hello! How can I assist you today regarding crypto?";
-            addMessageToChat(greeting, 'ai');
-          }
+    chatbotContainer.classList.toggle('visible');
+    if (chatbotContainer.classList.contains('visible')) {
+      setTimeout(() => chatbotInput.focus(), 100);
+      // Add initial greeting if chat is empty
+      if (chatbotMessages.children.length === 0) {
+        const currentLang = document.documentElement.lang || 'ar';
+        const greeting = currentLang === 'ar' ? "مرحباً! كيف يمكنني مساعدتك اليوم؟" : "Hello! How can I assist you today?";
+        addMessageToChat(greeting, 'ai');
       }
+    }
   });
 
-  chatbotCloseBtn.addEventListener('click', () => {
+  // 2. Close chat on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatbotContainer.classList.contains('visible')) {
       chatbotContainer.classList.remove('visible');
+      chatbotInput.blur();
+    }
   });
 
-  function addMessageToChat(message, sender, isError = false) {
-      const messageElement = document.createElement('div');
-      messageElement.classList.add('chat-message');
-      if (isError) {
-        messageElement.classList.add('error-message');
-      } else {
-        messageElement.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
-      }
-      messageElement.textContent = message; // Using textContent to prevent XSS from backend
-      chatbotMessages.appendChild(messageElement);
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll to bottom
-  }
-
-  async function sendMessageToBackend(message) {
-      addMessageToChat(message, 'user');
-      chatbotInput.value = '';
-      chatbotInput.disabled = true;
-      chatbotSendBtn.disabled = true;
-      
-      // Add a thinking indicator for AI
-      const thinkingMessage = htmlEl.lang === 'ar' ? "يفكر..." : "Thinking...";
-      addMessageToChat(thinkingMessage, 'ai', false); // Not an error, just an indicator
-      const thinkingElement = chatbotMessages.lastChild; // Get the thinking message element
-
-      try {
-          const response = await fetch(chatbotBackendUrl, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ prompt: message }), // Assuming backend expects "prompt"
-          });
-
-          chatbotMessages.removeChild(thinkingElement); // Remove thinking indicator
-
-          if (!response.ok) {
-              const errorData = await response.text(); // Or response.json() if backend sends structured error
-              throw new Error(`Network response was not ok: ${response.status} - ${errorData}`);
-          }
-
-          const data = await response.json();
-          // Assuming backend returns { response: "AI message" }
-          if (data && data.response) {
-              addMessageToChat(data.response, 'ai');
-          } else {
-              throw new Error('Invalid response format from AI backend.');
-          }
-
-      } catch (error) {
-          console.error('Error sending message to backend:', error);
-          if(chatbotMessages.contains(thinkingElement)) { // Check if thinkingElement is still there
-            chatbotMessages.removeChild(thinkingElement); // Remove thinking indicator if error occurred before response
-          }
-          let errorText;
-          if (error.message.includes('Failed to fetch')) {
-            errorText = htmlEl.lang === 'ar' ?
-              'تعذر الاتصال بالخادم. يرجى التأكد أن الخادم يعمل وأن الاتصال بالإنترنت متاح.' :
-              'Unable to connect to the assistant server. Please make sure the backend is running and your internet connection is active.';
-          } else {
-            errorText = htmlEl.lang === 'ar' ? `خطأ في الاتصال بالمساعد: ${error.message}` : `Error connecting to assistant: ${error.message}`;
-          }
-          addMessageToChat(errorText, 'ai', true);
-      } finally {
-          chatbotInput.disabled = false;
-          chatbotSendBtn.disabled = false;
-          chatbotInput.focus();
-      }
-  }
-
-  chatbotSendBtn.addEventListener('click', () => {
+  // 3. Send on Enter, Shift+Enter for newline
+  chatbotInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
       const message = chatbotInput.value.trim();
-      if (message) {
-          sendMessageToBackend(message);
-      }
+      if (message) sendMessageToBackend(message);
+    }
   });
 
-  chatbotInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-          const message = chatbotInput.value.trim();
-          if (message) {
-              sendMessageToBackend(message);
-          }
+  // 4. Show typing indicator
+  function showTypingIndicator() {
+    const typing = document.createElement('div');
+    typing.className = 'chat-message ai-message typing-indicator';
+    typing.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    chatbotMessages.appendChild(typing);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    return typing;
+  }
+
+  // 5. Add smooth scroll to new messages
+  function addMessageToChat(message, sender, isError = false) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message');
+    if (isError) {
+      messageElement.classList.add('error-message');
+    } else {
+      messageElement.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
+    }
+    messageElement.textContent = message;
+    chatbotMessages.appendChild(messageElement);
+    messageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  // 6. Improved sendMessageToBackend with typing indicator
+  async function sendMessageToBackend(message) {
+    addMessageToChat(message, 'user');
+    chatbotInput.value = '';
+    chatbotInput.disabled = true;
+    chatbotSendBtn.disabled = true;
+    const typingElement = showTypingIndicator();
+    try {
+      const response = await fetch(chatbotBackendUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: message })
+      });
+      chatbotMessages.removeChild(typingElement);
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(`Network response was not ok: ${response.status} - ${errorData}`);
       }
+      const data = await response.json();
+      if (data && data.response) {
+        addMessageToChat(data.response, 'ai');
+      } else {
+        throw new Error('Invalid response format from AI backend.');
+      }
+    } catch (error) {
+      if (chatbotMessages.contains(typingElement)) chatbotMessages.removeChild(typingElement);
+      let errorText;
+      if (error.message.includes('Failed to fetch')) {
+        errorText = document.documentElement.lang === 'ar' ?
+          'تعذر الاتصال بالخادم. يرجى التأكد أن الخادم يعمل وأن الاتصال بالإنترنت متاح.' :
+          'Unable to connect to the assistant server. Please make sure the backend is running and your internet connection is active.';
+      } else {
+        errorText = document.documentElement.lang === 'ar' ? `خطأ في الاتصال بالمساعد: ${error.message}` : `Error connecting to assistant: ${error.message}`;
+      }
+      addMessageToChat(errorText, 'ai', true);
+    } finally {
+      chatbotInput.disabled = false;
+      chatbotSendBtn.disabled = false;
+      chatbotInput.focus();
+    }
+  }
+
+  // 7. Send on button click
+  chatbotSendBtn.addEventListener('click', () => {
+    const message = chatbotInput.value.trim();
+    if (message) sendMessageToBackend(message);
   });
 
 });
