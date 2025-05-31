@@ -306,6 +306,59 @@ skipLink.addEventListener('click', function(event) {
 
 // --- Initialize ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Loading screen logic
+    createStars('loading-starfield', 80);
+    updateLoadingScreen();
+    loadingInterval = setInterval(updateLoadingScreen, 3000);
+
+    // Skip button for accessibility
+    const skipBtn = document.getElementById('skip-button');
+    skipBtn.addEventListener('click', showPortfolioPage);
+    skipBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') showPortfolioPage();
+    });
+
+    // Resume modal logic
+    const launchResumeBtn = document.getElementById('launch-resume-btn');
+    const resumeModal = document.getElementById('resume-modal');
+    const resumeCloseBtn = document.getElementById('resume-close-btn');
+    launchResumeBtn.addEventListener('click', () => {
+        resumeModal.classList.add('show');
+        resumeModal.focus();
+    });
+    resumeCloseBtn.addEventListener('click', () => {
+        resumeModal.classList.remove('show');
+        launchResumeBtn.focus();
+    });
+    resumeModal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            resumeModal.classList.remove('show');
+            launchResumeBtn.focus();
+        }
+    });
+
+    // Chatbot modal logic
+    const chatbotOverlay = document.getElementById('chatbot-overlay');
+    const chatbotCloseBtn = document.getElementById('chatbot_close_btn');
+    chatbotCloseBtn.addEventListener('click', () => {
+        chatbotOverlay.classList.add('hidden');
+    });
+    chatbotCloseBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+            chatbotOverlay.classList.add('hidden');
+        }
+    });
+
+    // Chatbot send logic
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+    chatbotInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') chatbotSendBtn.click();
+    });
+    chatbotSendBtn.addEventListener('click', async () => {
+        await sendMessageToChatbot();
+    });
+
     // Hide loader and show main content immediately for development
     const loader = document.getElementById('loader');
     const mainContent = document.getElementById('main-content');
@@ -313,13 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mainContent.style.display = 'flex';
     document.body.classList.remove('loading');
     document.body.classList.add('loaded');
-
-    // Update loading screen for a smoother experience
-    updateLoadingScreen();
-    loadingInterval = setInterval(updateLoadingScreen, 5000);
-
-    // Create stars in the background
-    createStars('stars-container', 100);
 
     // Initialize Three.js after a short delay to allow loading screen to show
     setTimeout(initThreeJS, 500);
