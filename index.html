@@ -174,7 +174,7 @@
 
   <script src="script.js"></script>
   <script>
-    // ====== Enhanced 3D Space-Bitcoin-Tech Micro Animations Background ======
+    // ====== Enhanced 3D Space-Bitcoin-Tech Micro Animations Background (Interactive) ======
     (function() {
       const canvas = document.createElement('canvas');
       canvas.id = 'space-bg-canvas';
@@ -184,7 +184,7 @@
       canvas.style.width = '100vw';
       canvas.style.height = '100vh';
       canvas.style.zIndex = '-2';
-      canvas.style.pointerEvents = 'none';
+      canvas.style.pointerEvents = 'auto'; // allow pointer events for interactivity
       canvas.style.opacity = '0.7';
       document.getElementById('page-background-animations').appendChild(canvas);
       const ctx = canvas.getContext('2d');
@@ -218,12 +218,12 @@
 
       // --- Micro 3D objects: stars, bitcoin, tech chips, planets, rings, satellites, sparkles, shooting stars ---
       const icons = [
-        {type:'bitcoin', color:'#f7931a', size:22, z:1.1},
-        {type:'chip', color:'#00d4ff', size:18, z:0.9},
+        {type:'bitcoin', color:'#f7931a', size:22, z:1.1, label:'Bitcoin'},
+        {type:'chip', color:'#00d4ff', size:18, z:0.9, label:'Tech Chip'},
         {type:'star', color:'#fff', size:2, z:0.7},
-        {type:'planet', color:'#39FF14', size:16, z:1.2},
+        {type:'planet', color:'#39FF14', size:16, z:1.2, label:'Neon Planet'},
         {type:'ring', color:'#fff', size:24, z:1.05},
-        {type:'satellite', color:'#00fff7', size:10, z:1.15},
+        {type:'satellite', color:'#00fff7', size:10, z:1.15, label:'Satellite'},
         {type:'sparkle', color:'#fff', size:1.5, z:0.8},
       ];
       const objects = [];
@@ -241,6 +241,8 @@
           orbitSpeed: 0.0007+Math.random()*0.0015,
           trail: Math.random()>0.8,
           color2: Math.random()>0.5 ? '#39FF14' : '#00d4ff',
+          pulse: false,
+          pulseT: 0,
         });
       }
       // Shooting stars
@@ -254,42 +256,125 @@
       }
       setInterval(spawnShootingStar, 1800);
 
-      function drawBitcoin(x, y, s, a, glow) {
+      // --- Interactivity State ---
+      let mouse = {x: w/2, y: h/2, active: false};
+      let parallax = {x: 0, y: 0};
+      let hoverObj = null;
+      let tooltipAlpha = 0;
+      let burstSparkles = [];
+
+      // Mouse/touch parallax
+      function onPointerMove(e) {
+        let px, py;
+        if(e.touches && e.touches.length) {
+          px = e.touches[0].clientX; py = e.touches[0].clientY;
+        } else {
+          px = e.clientX; py = e.clientY;
+        }
+        mouse.x = px; mouse.y = py; mouse.active = true;
+        parallax.x = (px-w/2)/w*60;
+        parallax.y = (py-h/2)/h*60;
+      }
+      canvas.addEventListener('mousemove', onPointerMove);
+      canvas.addEventListener('touchmove', onPointerMove);
+      // Reset parallax on leave
+      canvas.addEventListener('mouseleave', ()=>{mouse.active=false;parallax.x=0;parallax.y=0;});
+      canvas.addEventListener('touchend', ()=>{mouse.active=false;parallax.x=0;parallax.y=0;});
+
+      // Click/tap: burst of sparkles
+      function burstAt(x, y) {
+        for(let i=0;i<18;i++) {
+          burstSparkles.push({
+            x, y,
+            vx: Math.cos(i/18*2*Math.PI)*2.5+Math.random()*1.2,
+            vy: Math.sin(i/18*2*Math.PI)*2.5+Math.random()*1.2,
+            alpha: 1,
+            size: 2+Math.random()*2,
+            t: 0
+          });
+        }
+      }
+      canvas.addEventListener('click', e => {
+        burstAt(e.clientX, e.clientY);
+      });
+      canvas.addEventListener('touchstart', e => {
+        if(e.touches && e.touches.length) burstAt(e.touches[0].clientX, e.touches[0].clientY);
+      });
+
+      // Hover/tap: pulse/glow and tooltip
+      function getObjAt(mx, my) {
+        for(const obj of objects) {
+          if(!obj.label) continue;
+          let t = Date.now()/1200*obj.z+obj.x;
+          let x = obj.x + Math.sin(t)*18*obj.z + parallax.x*obj.z;
+          let y = obj.y + Math.cos(t*0.9)*12*obj.z + parallax.y*obj.z;
+          if(obj.orbit) {
+            let orbitA = Date.now()*obj.orbitSpeed + obj.angle;
+            x = obj.orbitCenter[0] + Math.cos(orbitA)*60*obj.orbit + parallax.x*obj.z;
+            y = obj.orbitCenter[1] + Math.sin(orbitA)*30*obj.orbit + parallax.y*obj.z;
+          }
+          let r = obj.size*1.2;
+          if(Math.abs(mx-x)<r && Math.abs(my-y)<r) return obj;
+        }
+        return null;
+      }
+      canvas.addEventListener('mousemove', e => {
+        hoverObj = getObjAt(e.clientX, e.clientY);
+        if(hoverObj) hoverObj.pulseT = 0;
+      });
+      canvas.addEventListener('touchstart', e => {
+        if(e.touches && e.touches.length) {
+          hoverObj = getObjAt(e.touches[0].clientX, e.touches[0].clientY);
+          if(hoverObj) hoverObj.pulseT = 0;
+        }
+      });
+      canvas.addEventListener('mouseleave', ()=>{hoverObj=null;});
+      canvas.addEventListener('touchend', ()=>{hoverObj=null;});
+
+      // --- Drawing functions (same as before, but add pulse effect) ---
+      function drawBitcoin(x, y, s, a, glow, pulse) {
         ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        let scale = pulse ? 1.18+0.08*Math.sin(Date.now()/120) : 1;
+        ctx.scale(scale, scale);
         ctx.beginPath(); ctx.arc(0,0,s,0,2*Math.PI); ctx.fillStyle='#222'; ctx.shadowColor='#f7931a'; ctx.shadowBlur=glow?18:0; ctx.fill();
         ctx.lineWidth=2; ctx.strokeStyle='#f7931a'; ctx.stroke();
         ctx.font = `${s*1.1}px Orbitron,Arial`; ctx.textAlign='center'; ctx.textBaseline='middle';
         ctx.fillStyle='#f7931a'; ctx.shadowColor='#fff'; ctx.shadowBlur=glow?12:0; ctx.fillText('₿',0,1);
         ctx.restore();
       }
-      function drawChip(x, y, s, a, glow) {
+      function drawChip(x, y, s, a, glow, pulse) {
         ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        let scale = pulse ? 1.15+0.07*Math.sin(Date.now()/120) : 1;
+        ctx.scale(scale, scale);
         ctx.fillStyle='#00d4ff'; ctx.shadowColor='#00d4ff'; ctx.shadowBlur=glow?12:0; ctx.fillRect(-s/2,-s/2,s,s);
         ctx.strokeStyle='#fff'; ctx.lineWidth=1.2; ctx.strokeRect(-s/2,-s/2,s,s);
+        ctx.restore();
+      }
+      function drawPlanet(x, y, s, a, glow, pulse) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        let scale = pulse ? 1.13+0.06*Math.sin(Date.now()/120) : 1;
+        ctx.scale(scale, scale);
+        ctx.beginPath(); ctx.arc(0,0,s,0,2*Math.PI); ctx.fillStyle='#39FF14'; ctx.shadowColor='#00d4ff'; ctx.shadowBlur=glow?18:10; ctx.fill();
+        ctx.lineWidth=2; ctx.strokeStyle='#fff'; ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(0,0,s*1.2,s*0.5,Math.PI/4,0,2*Math.PI);
+        ctx.strokeStyle='#00d4ff88'; ctx.lineWidth=1.2; ctx.stroke();
+        ctx.restore();
+      }
+      function drawSatellite(x, y, s, a, color, glow, pulse) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
+        let scale = pulse ? 1.12+0.05*Math.sin(Date.now()/120) : 1;
+        ctx.scale(scale, scale);
+        ctx.fillStyle=color; ctx.shadowColor=color; ctx.shadowBlur=glow?8:0; ctx.fillRect(-s/2,-s/4,s,s/2);
+        ctx.fillStyle='#fff'; ctx.fillRect(-s/8,-s/8,s/4,s/4);
         ctx.restore();
       }
       function drawStar(x, y, s, glow) {
         ctx.save(); ctx.globalAlpha=0.7; ctx.beginPath(); ctx.arc(x,y,s,0,2*Math.PI); ctx.fillStyle='#fff'; ctx.shadowColor='#39FF14'; ctx.shadowBlur=glow?10:6; ctx.fill(); ctx.restore();
       }
-      function drawPlanet(x, y, s, a, glow) {
-        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
-        ctx.beginPath(); ctx.arc(0,0,s,0,2*Math.PI); ctx.fillStyle='#39FF14'; ctx.shadowColor='#00d4ff'; ctx.shadowBlur=glow?18:10; ctx.fill();
-        ctx.lineWidth=2; ctx.strokeStyle='#fff'; ctx.stroke();
-        // Orbiting ring
-        ctx.beginPath(); ctx.ellipse(0,0,s*1.2,s*0.5,Math.PI/4,0,2*Math.PI);
-        ctx.strokeStyle='#00d4ff88'; ctx.lineWidth=1.2; ctx.stroke();
-        ctx.restore();
-      }
       function drawRing(x, y, s, a, color, glow) {
         ctx.save(); ctx.translate(x, y); ctx.rotate(a);
         ctx.beginPath(); ctx.ellipse(0,0,s,s*0.35,Math.PI/3,0,2*Math.PI);
         ctx.strokeStyle=color; ctx.lineWidth=2; ctx.shadowColor=color; ctx.shadowBlur=glow?12:0; ctx.globalAlpha=0.7; ctx.stroke();
-        ctx.restore();
-      }
-      function drawSatellite(x, y, s, a, color, glow) {
-        ctx.save(); ctx.translate(x, y); ctx.rotate(a);
-        ctx.fillStyle=color; ctx.shadowColor=color; ctx.shadowBlur=glow?8:0; ctx.fillRect(-s/2,-s/4,s,s/2);
-        ctx.fillStyle='#fff'; ctx.fillRect(-s/8,-s/8,s/4,s/4);
         ctx.restore();
       }
       function drawSparkle(x, y, s, glow) {
@@ -317,36 +402,81 @@
         ctx.stroke();
         ctx.restore();
       }
+      // Draw burst sparkles
+      function drawBurstSparkles() {
+        for(let i=burstSparkles.length-1;i>=0;i--) {
+          const s = burstSparkles[i];
+          ctx.save();
+          ctx.globalAlpha = s.alpha;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, 2*Math.PI);
+          ctx.fillStyle = '#fff';
+          ctx.shadowColor = '#39FF14';
+          ctx.shadowBlur = 12;
+          ctx.fill();
+          ctx.restore();
+          s.x += s.vx; s.y += s.vy;
+          s.alpha -= 0.025; s.t++;
+          if(s.alpha<=0) burstSparkles.splice(i,1);
+        }
+      }
+      // Tooltip
+      function drawTooltip(obj, x, y) {
+        if(!obj || !obj.label) return;
+        tooltipAlpha += 0.12; if(tooltipAlpha>1) tooltipAlpha=1;
+        ctx.save();
+        ctx.globalAlpha = 0.7*tooltipAlpha;
+        ctx.font = 'bold 16px Cairo,Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillStyle = '#222';
+        ctx.shadowColor = '#39FF14';
+        ctx.shadowBlur = 18;
+        ctx.fillRect(x-48, y-38, 96, 28);
+        ctx.globalAlpha = tooltipAlpha;
+        ctx.fillStyle = '#39FF14';
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 0;
+        ctx.fillText(obj.label, x, y-18);
+        ctx.restore();
+      }
+
       function render() {
         ctx.clearRect(0,0,w,h);
         drawNebula();
         // --- Animate micro objects ---
+        let hoverDrawn = false;
         for(const obj of objects) {
           let t = Date.now()/1200*obj.z+obj.x;
-          let x = obj.x + Math.sin(t)*18*obj.z;
-          let y = obj.y + Math.cos(t*0.9)*12*obj.z;
+          let x = obj.x + Math.sin(t)*18*obj.z + parallax.x*obj.z;
+          let y = obj.y + Math.cos(t*0.9)*12*obj.z + parallax.y*obj.z;
           let a = obj.angle + Date.now()/3000*obj.z;
-          // Parallax
-          let px = x + (w/2-x)*(1-obj.z)*0.18;
-          let py = y + (h/2-y)*(1-obj.z)*0.18;
           // Orbit
           if(obj.orbit) {
             let orbitA = Date.now()*obj.orbitSpeed + obj.angle;
-            px = obj.orbitCenter[0] + Math.cos(orbitA)*60*obj.orbit;
-            py = obj.orbitCenter[1] + Math.sin(orbitA)*30*obj.orbit;
+            x = obj.orbitCenter[0] + Math.cos(orbitA)*60*obj.orbit + parallax.x*obj.z;
+            y = obj.orbitCenter[1] + Math.sin(orbitA)*30*obj.orbit + parallax.y*obj.z;
           }
           // Trail
           if(obj.trail && (obj.type==='chip'||obj.type==='bitcoin'||obj.type==='satellite')) {
-            drawTrail(px, py, 32*obj.z, a, obj.color2);
+            drawTrail(x, y, 32*obj.z, a, obj.color2);
           }
+          // Pulse if hovered
+          let pulse = (hoverObj===obj);
+          if(pulse) obj.pulseT += 0.1; else obj.pulseT = 0;
           // Draw
-          if(obj.type==='bitcoin') drawBitcoin(px,py,obj.size,a,true);
-          else if(obj.type==='chip') drawChip(px,py,obj.size,a,true);
-          else if(obj.type==='star') drawStar(px,py,obj.size,true);
-          else if(obj.type==='planet') drawPlanet(px,py,obj.size,a,true);
-          else if(obj.type==='ring') drawRing(px,py,obj.size,a,obj.color,true);
-          else if(obj.type==='satellite') drawSatellite(px,py,obj.size,a,obj.color,true);
-          else if(obj.type==='sparkle') drawSparkle(px,py,obj.size,true);
+          if(obj.type==='bitcoin') drawBitcoin(x,y,obj.size,a,true,pulse);
+          else if(obj.type==='chip') drawChip(x,y,obj.size,a,true,pulse);
+          else if(obj.type==='star') drawStar(x,y,obj.size,true);
+          else if(obj.type==='planet') drawPlanet(x,y,obj.size,a,true,pulse);
+          else if(obj.type==='ring') drawRing(x,y,obj.size,a,obj.color,true);
+          else if(obj.type==='satellite') drawSatellite(x,y,obj.size,a,obj.color,true,pulse);
+          else if(obj.type==='sparkle') drawSparkle(x,y,obj.size,true);
+          // Tooltip
+          if(pulse && obj.label && !hoverDrawn) {
+            drawTooltip(obj, x, y);
+            hoverDrawn = true;
+          }
         }
         // --- Animate shooting stars ---
         for(let i=shootingStars.length-1;i>=0;i--) {
@@ -358,6 +488,10 @@
           drawShootingStar(s);
           if(s.x > w+100 || s.alpha<=0) shootingStars.splice(i,1);
         }
+        // --- Animate burst sparkles ---
+        drawBurstSparkles();
+        // Fade tooltip if not hovering
+        if(!hoverObj) tooltipAlpha -= 0.08; if(tooltipAlpha<0) tooltipAlpha=0;
         requestAnimationFrame(render);
       }
       render();
