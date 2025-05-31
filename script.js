@@ -156,9 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Chatbot Toggle ---
-  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-  const chatbotContainer = document.getElementById('chatbot-container');
-  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+  // Removed redeclaration of chatbotToggleBtn, chatbotContainer, and chatbotCloseBtn to avoid block-scoped variable errors.
 
   if (chatbotToggleBtn && chatbotContainer) {
     chatbotToggleBtn.addEventListener('click', () => {
