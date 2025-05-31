@@ -166,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (chatbotToggleBtn && chatbotContainer) {
     chatbotToggleBtn.addEventListener('click', () => {
       chatbotContainer.classList.toggle('visible');
-      // Always set display:flex when opening, let CSS handle closing
       if (chatbotContainer.classList.contains('visible')) {
         chatbotContainer.style.display = 'flex';
         setTimeout(() => chatbotInput.focus(), 100);
@@ -176,14 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
           addMessageToChat(greeting, 'ai');
         }
       } else {
-        chatbotContainer.style.display = '';
+        chatbotContainer.style.display = 'none';
       }
     });
   }
   if (chatbotCloseBtn && chatbotContainer) {
     chatbotCloseBtn.addEventListener('click', () => {
       chatbotContainer.classList.remove('visible');
-      chatbotContainer.style.display = '';
+      chatbotContainer.style.display = 'none';
     });
   }
 
