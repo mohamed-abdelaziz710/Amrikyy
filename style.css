@@ -240,21 +240,21 @@ html[dir="ltr"] #lang-toggle-container {
 
 /* =========== بطاقة الـ CV الذكية =========== */
 .smart-cv-card-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative; /* Changed from fixed */
+  top: auto; /* Removed fixed positioning */
+  left: auto; /* Removed fixed positioning */
+  transform: none; /* Removed transform */
   z-index: 10;
-  width: 100vw;
-  max-width: 480px;
+  width: 100%; /* Allow container to take full width */
+  max-width: 600px; /* Set a max-width for the container */
   min-width: 0;
   pointer-events: auto;
-  margin: 0 auto;
+  margin: 40px auto; /* Center horizontally and add vertical margin */
   box-sizing: border-box;
-  padding: 0 1.5vw;
+  padding: 0 20px; /* Add horizontal padding */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align items to the top */
 }
 
 .smart-cv-card {
@@ -266,10 +266,20 @@ html[dir="ltr"] #lang-toggle-container {
   display: flex;
   flex-direction: column;
   gap: 25px; /* Space between main sections */
-  max-width: 600px;
+  max-width: 100%; /* Ensure card doesn't exceed container width */
   width: 100%;
-  margin: 20px auto; /* Center the card and add vertical margin */
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .smart-cv-card-container {
+    margin: 20px auto; /* Adjust vertical margin for smaller screens */
+    padding: 0 10px; /* Adjust horizontal padding for smaller screens */
+  }
+  .smart-cv-card {
+    padding: 20px;
+    gap: 20px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -280,13 +290,6 @@ html[dir="ltr"] #lang-toggle-container {
   .smart-cv-card {
     padding: 22px 10px 18px 10px;
     max-width: 98vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .smart-cv-card {
-    padding: 20px;
-    gap: 20px;
   }
 }
 
