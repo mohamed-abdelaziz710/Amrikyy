@@ -25,6 +25,164 @@ document.addEventListener('DOMContentLoaded', () => {
   // Complete loading after progress bar animation finishes (2.5s) + buffer
   const loadingTimeout = setTimeout(completeLoading, 3000); 
 
+  // --- Language Toggle & Translation ---
+  const langToggleBtn = document.getElementById('langToggleBtn');
+  const htmlTag = document.documentElement;
+  let currentLang = htmlTag.lang || 'ar';
+
+  const translations = {
+    en: {
+      loaderMessage: 'Initializing TECH & CRYPTO experience...',
+      langToggle: 'AR',
+      cvName: 'Mohamed H Abdelaziz',
+      cvRole: 'Cybersecurity Engineering Student | Junior Web Developer & AI Enthusiast',
+      summaryTitle: 'Professional Summary',
+      summaryText: 'Highly motivated cybersecurity engineering student with international mindset and diverse experience in financial trading, travel services, and customer-facing roles. Skilled in risk management and Amadeus platform, rapidly developing expertise in AI agents, web development, and cloud technologies. Eager to leverage a blend of technical know-how, adaptability, and strong customer acumen to contribute to innovative projects and growth opportunities.',
+      educationTitle: 'Education',
+      eduKSUDegree: 'B.Sc. in Cybersecurity Engineering',
+      eduKSUDetail: 'Kennesaw State University | Kennesaw, GA, USA (Expected: May 2026)',
+      eduCTCDegree: 'Associate Diploma in Computer Science',
+      eduCTCDetail: 'Chattahoochee Technical College | Marietta, GA, USA (Graduated: May 2021)',
+      skillsTitle: 'Key Skills',
+      skillCybersecurity: 'Cybersecurity',
+      skillReact: 'React & Next.js',
+      skillWebDev: 'HTML, CSS, JS',
+      skillPython: 'Python',
+      skillNode: 'Node.js',
+      skillAI: 'Artificial Intelligence',
+      skillCloud: 'Cloud Computing',
+      skillUIUX: 'UI/UX Design',
+      skillTrading: 'Crypto Trading',
+      skillAmadeus: 'Amadeus Platform',
+      skillFirebase: 'Firebase',
+      skillGitHub: 'GitHub',
+      projectsTitle: 'Featured Projects',
+      projectCharityTitle: 'Landing Page Design (Charity: Water)',
+      projectCharityDesc: 'Using HTML, CSS, and AI assistance to raise awareness and encourage donations.',
+      projectPortfolioTitle: 'Personal CV Website',
+      projectPortfolioDesc: 'Comprehensive showcase of skills, projects, and professional background.',
+      downloadCV: 'Download CV',
+      chatbotHeader: 'Virtual Assistant',
+      chatbotSend: 'Send',
+      chatbotToggleTitle: 'Open Chatbot',
+      chatbotCloseTitle: 'Close Chatbot',
+      chatbotInputPlaceholder: 'Type your message here...'
+    },
+    ar: {
+      loaderMessage: 'يتم تهيئة تجربة TECH & CRYPTO...',
+      langToggle: 'EN',
+      cvName: 'محمد H عبدالعزيز',
+      cvRole: 'طالب هندسة أمن سيبراني | مطور ويب ناشئ ومتحمس للذكاء الاصطناعي',
+      summaryTitle: 'الملخص المهني',
+      summaryText: 'طالب هندسة أمن سيبراني متحفز للغاية وذو عقلية دولية، يتمتع بخبرة متنوعة في التداول المالي وخدمات السفر والأدوار التي تتطلب التعامل المباشر مع العملاء. يتقن إدارة المخاطر ومنصة أماديوس للبيع، ويطور مهاراته بسرعة في وكلاء الذكاء الاصطناعي وتطوير الويب وتقنيات الحوسبة السحابية. يتوق إلى الاستفادة من مزيج من الخبرة التقنية والقدرة على التكيف والفطنة القوية في خدمة العملاء للمساهمة في المشاريع المبتكرة وفرص النمو.',
+      educationTitle: 'التعليم',
+      eduKSUDegree: 'بكالوريوس العلوم في هندسة الأمن السيبراني',
+      eduKSUDetail: 'جامعة ولاية كينيساو | كينيساو، جورجيا، الولايات المتحدة الأمريكية (المتوقع: مايو 2026)',
+      eduCTCDegree: 'دبلوم مشارك في علوم الحاسب الآلي',
+      eduCTCDetail: 'كلية تشاتاهوتشي التقنية | ماريتا، جورجيا، الولايات المتحدة الأمريكية (تخرج: مايو 2021)',
+      skillsTitle: 'المهارات الرئيسية',
+      skillCybersecurity: 'الأمن السيبراني',
+      skillReact: 'React & Next.js',
+      skillWebDev: 'HTML, CSS, JS',
+      skillPython: 'Python',
+      skillNode: 'Node.js',
+      skillAI: 'الذكاء الاصطناعي',
+      skillCloud: 'الحوسبة السحابية',
+      skillUIUX: 'تصميم واجهات',
+      skillTrading: 'تداول العملات',
+      skillAmadeus: 'منصة أماديوس',
+      skillFirebase: 'Firebase',
+      skillGitHub: 'GitHub',
+      projectsTitle: 'أبرز المشاريع',
+      projectCharityTitle: 'تصميم صفحة هبوط (Charity: Water)',
+      projectCharityDesc: 'استخدام HTML, CSS ومساعدة الذكاء الاصطناعي لتعزيز الوعي وتشجيع التبرعات.',
+      projectPortfolioTitle: 'موقع السيرة الذاتية الشخصي',
+      projectPortfolioDesc: 'عرض شامل للمهارات والمشاريع والخلفية المهنية.',
+      downloadCV: 'تحميل السيرة الذاتية',
+      chatbotHeader: 'مساعد افتراضي',
+      chatbotSend: 'إرسال',
+      chatbotToggleTitle: 'فتح المساعد',
+      chatbotCloseTitle: 'إغلاق المساعد',
+      chatbotInputPlaceholder: 'اكتب رسالتك هنا...'
+    }
+  };
+
+  function applyTranslations(lang) {
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      if (translations[lang][key]) el.textContent = translations[lang][key];
+    });
+    document.querySelectorAll('[data-translate-title]').forEach(el => {
+      const key = el.getAttribute('data-translate-title');
+      if (translations[lang][key]) el.title = translations[lang][key];
+    });
+    document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-translate-placeholder');
+      if (translations[lang][key]) el.placeholder = translations[lang][key];
+    });
+    // Update direction and lang
+    htmlTag.lang = lang;
+    htmlTag.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  }
+
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      langToggleBtn.textContent = translations[currentLang].langToggle;
+      applyTranslations(currentLang);
+    });
+    // Initial translation
+    applyTranslations(currentLang);
+  }
+
+  // --- Chatbot Toggle ---
+  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+  const chatbotContainer = document.getElementById('chatbot-container');
+  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+
+  if (chatbotToggleBtn && chatbotContainer) {
+    chatbotToggleBtn.addEventListener('click', () => {
+      chatbotContainer.classList.toggle('open');
+      if (chatbotContainer.classList.contains('open')) {
+        chatbotContainer.style.display = 'flex';
+        setTimeout(() => chatbotContainer.classList.add('show'), 10);
+      } else {
+        chatbotContainer.classList.remove('show');
+        setTimeout(() => chatbotContainer.style.display = 'none', 300);
+      }
+    });
+  }
+  if (chatbotCloseBtn && chatbotContainer) {
+    chatbotCloseBtn.addEventListener('click', () => {
+      chatbotContainer.classList.remove('show', 'open');
+      setTimeout(() => chatbotContainer.style.display = 'none', 300);
+    });
+  }
+
+  // --- Loader & Progress Bar ---
+  const loader = document.getElementById('loader');
+  const progress = document.getElementById('progress');
+
+  function updateProgress(percent) {
+    if (loader) {
+      loader.style.width = `${percent}%`;
+      loader.setAttribute('aria-valuenow', percent);
+    }
+  }
+
+  // Simulate loading progress
+  let progressInterval = setInterval(() => {
+    const currentWidth = parseInt(getComputedStyle(loader).width);
+    const parentWidth = parseInt(getComputedStyle(loader.parentElement).width);
+    const percent = Math.min(100, Math.round((currentWidth / parentWidth) * 100));
+    updateProgress(percent);
+
+    if (percent === 100) {
+      clearInterval(progressInterval);
+      setTimeout(completeLoading, 500);
+    }
+  }, 30);
+
   // --- Translation Logic ---
   const langToggleBtn = document.getElementById('langToggleBtn');
   const htmlEl = document.documentElement;
