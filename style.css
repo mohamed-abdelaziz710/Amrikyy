@@ -240,8 +240,15 @@ html[dir="ltr"] #lang-toggle-container {
 
 /* =========== بطاقة الـ CV الذكية =========== */
 .smart-cv-card-container { 
-    perspective: 1000px;
-    position: relative; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 100vw;
+    max-width: 480px;
+    min-width: 320px;
+    pointer-events: auto;
 }
 
 .smart-cv-card {
