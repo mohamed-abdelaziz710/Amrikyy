@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Simulate loading progress
   let progressInterval = setInterval(() => {
-    // Add a check to ensure loader is not null before calling getComputedStyle
+    console.log('Loader element:', loader); // Debug: check loader value
     if (loader) {
       const currentWidth = parseInt(getComputedStyle(loader).width);
       const parentWidth = parseInt(getComputedStyle(loader.parentElement).width);
@@ -207,11 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
       updateProgress(percent);
       if (percent === 100) {
         clearInterval(progressInterval);
-        // Assuming completeLoading is defined elsewhere
         setTimeout(completeLoading, 500);
       }
     } else {
-      // If loader is null, clear the interval to prevent further errors
       clearInterval(progressInterval);
       console.error("Element with ID 'loader' not found.");
     }
