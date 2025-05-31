@@ -81,13 +81,12 @@ function createStars(containerId, numStars) {
 
 function showPortfolioPage() {
     const loadingScreen = document.getElementById('loading-screen');
-    const portfolioPage = document.getElementById('portfolio-page');
+    const cvSection = document.getElementById('cv-section');
     loadingScreen.style.opacity = '0';
     setTimeout(() => {
         loadingScreen.style.display = 'none';
-        portfolioPage.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        initThreeJS();
+        cvSection.style.display = 'block';
+        document.body.style.overflow = 'auto';
     }, 500);
 }
 

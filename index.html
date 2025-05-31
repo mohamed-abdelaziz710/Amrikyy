@@ -16,7 +16,8 @@
 
     <div id="loading-screen">
         <div class="loading-starfield" id="loading-starfield"></div>
-        <div class="loading-static-overlay"></div> <div class="logo-container">
+        <div class="loading-static-overlay"></div>
+        <div class="logo-container">
             <span class="logo-text">AMRIKYY</span>
         </div>
         <div class="loading-text-container">
@@ -28,134 +29,117 @@
         <button id="skip-button" class="skip-button">Skip</button>
     </div>
 
-    <div id="portfolio-page">
-        <canvas id="portfolio-canvas"></canvas>
-
-        <div id="main-info-card" class="ui-overlay">
-            <div class="data-flow-border"></div> <h1 class="name-title">Mohamed H Abdelaziz (Amrikyy)</h1>
+    <div id="cv-section" style="display:none;">
+        <div id="main-info-card" class="ui-overlay" style="position:relative;top:unset;left:unset;transform:none;margin:2rem auto;max-width:600px;width:95%;">
+            <div class="data-flow-border"></div>
+            <h1 class="name-title">Mohamed H Abdelaziz (Amrikyy)</h1>
             <div class="bio-slogan-container">
                 <p id="bio-slogan-text" class="bio-slogan">Cybersecurity Innovator | AI Prompt Engineer | UI/UX Visionary</p>
-                <button id="generate-slogan-btn" class="generate-slogan-button">✨ Generate Slogan</button>
-                <button id="generate-project-btn" class="generate-project-button">✨ Generate Project Idea</button>
-                <div id="project-idea-output" class="project-idea-display hidden"></div>
             </div>
             <p class="text-neutral-400 text-sm md:text-base">Passionate about cybersecurity, prompt engineering, and user experience. Experienced in building smart digital solutions and stunning interfaces, focusing on cutting-edge tech and best security practices.</p>
-            <button class="cta-button" id="launch-resume-btn">Launch Resume</button>
+            <button class="cta-button" id="launch-resume-btn">Show Full Resume</button>
         </div>
-
-        <div id="skill-description-overlay" class="ui-overlay">
-            <button class="close-btn" id="skill-description-close-btn">X</button>
-            <p id="skill-description-text"></p>
-        </div>
-    </div>
-
-    <div id="resume-modal">
-        <div class="resume-content-card">
-            <button class="resume-close-btn" id="resume-close-btn">X</button>
-            <h2 class="text-center">Full Professional Profile</h2>
-
-            <div class="flex justify-center mb-6">
-                <img src="avatar.jpg" alt="Mohamed H Abdelaziz (Amrikyy)" class="rounded-full w-32 h-32 object-cover shadow-lg" />
+        <div id="resume-modal" class="show">
+            <div class="resume-content-card">
+                <button class="resume-close-btn" id="resume-close-btn">X</button>
+                <h2 class="text-center">Full Professional Profile</h2>
+                <div class="flex justify-center mb-6">
+                    <img src="avatar.jpg" alt="Mohamed H Abdelaziz (Amrikyy)" class="rounded-full w-32 h-32 object-cover shadow-lg" />
+                </div>
+                <section class="mb-6">
+                    <h3><span class="icon">💼</span> Experience</h3>
+                    <div>
+                        <p class="font-bold text-neutral-200">Cybersecurity Engineer & AI Solutions Architect</p>
+                        <p class="text-neutral-400">Freelance / Amrikyy.com | 2022 – Present</p>
+                        <ul class="list-disc list-inside text-neutral-400 ml-4">
+                            <li>Developed and secured web applications and AI-powered chatbots for clients in fintech, healthcare, and education.</li>
+                            <li>Specialized in prompt engineering for LLMs (Arabic/English), building custom AI tools and automations.</li>
+                            <li>Performed penetration testing, vulnerability assessments, and security audits for organizations and startups.</li>
+                            <li>Designed and delivered cybersecurity awareness and technical training for teams and individuals.</li>
+                            <li>Consulted on UI/UX and secure product design for SaaS and digital platforms.</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-bold text-neutral-200">Lead Web & Security Developer</p>
+                        <p class="text-neutral-400">Various Startups & Projects | 2018 – 2022</p>
+                        <ul class="list-disc list-inside text-neutral-400 ml-4">
+                            <li>Led development of secure, scalable web platforms using React, Next.js, Node.js, and Python.</li>
+                            <li>Integrated cloud solutions (Firebase, AWS) and implemented CI/CD pipelines for rapid deployment.</li>
+                            <li>Worked closely with designers to deliver modern, accessible, and user-focused interfaces.</li>
+                            <li>Provided technical mentorship and code reviews for junior developers.</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="mb-6">
+                    <h3><span class="icon">💻</span> Technical Skills</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🛡️</span> Cybersecurity Engineering
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🔍</span> Penetration Testing
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🤖</span> AI Prompt Engineering
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">⚛️</span> React & Next.js
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🎨</span> UI/UX Design
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🐍</span> Python & Node.js
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">☁️</span> Firebase & AWS
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🔒</span> Vulnerability Assessment
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🌐</span> Web Security & DevSecOps
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">💬</span> Bilingual (Arabic/English)
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🧑‍🏫</span> Security Training & Awareness
+                        </div>
+                        <div class="flex items-center gap-2 text-neutral-300">
+                            <span class="text-xl icon">🧠</span> LLMs & Generative AI
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3><span class="icon">🎓</span> Education</h3>
+                    <div>
+                        <p class="font-bold text-neutral-200">B.Sc. Computer Science (Cybersecurity)</p>
+                        <p class="text-neutral-400">Ain Shams University | 2018</p>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-bold text-neutral-200">Certifications</p>
+                        <p class="text-neutral-400">CompTIA Security+, Cisco CyberOps Associate, and more</p>
+                    </div>
+                </section>
+                <div class="flex justify-center mt-8 space-x-6">
+                    <a href="https://linkedin.com/in/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-8 h-8" />
+                    </a>
+                    <a href="https://github.com/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" class="w-8 h-8" />
+                    </a>
+                    <a href="mailto:amrikyy@gmail.com" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email" class="w-8 h-8" />
+                    </a>
+                </div>
+                <div class="flex justify-center mt-8">
+                    <div class="bg-white p-4 rounded-md">
+                        <img src="https://placehold.co/100x100/FFFFFF/000000?text=QR+Code" alt="QR Code" class="w-24 h-24" />
+                    </div>
+                </div>
+                <p class="text-xs text-neutral-500 mt-6 text-center">Note: This content is for Mohamed H Abdelaziz (Amrikyy). For more, contact amrikyy@gmail.com.</p>
             </div>
-
-            <section class="mb-6">
-                <h3><span class="icon">💼</span> Experience</h3>
-                <div>
-                    <p class="font-bold text-neutral-200">Cybersecurity Engineer & AI Solutions Architect</p>
-                    <p class="text-neutral-400">Freelance / Amrikyy.com | 2022 – Present</p>
-                    <ul class="list-disc list-inside text-neutral-400 ml-4">
-                        <li>Developed and secured web applications and AI-powered chatbots for clients in fintech, healthcare, and education.</li>
-                        <li>Specialized in prompt engineering for LLMs (Arabic/English), building custom AI tools and automations.</li>
-                        <li>Performed penetration testing, vulnerability assessments, and security audits for organizations and startups.</li>
-                        <li>Designed and delivered cybersecurity awareness and technical training for teams and individuals.</li>
-                        <li>Consulted on UI/UX and secure product design for SaaS and digital platforms.</li>
-                    </ul>
-                </div>
-                <div class="mt-4">
-                    <p class="font-bold text-neutral-200">Lead Web & Security Developer</p>
-                    <p class="text-neutral-400">Various Startups & Projects | 2018 – 2022</p>
-                    <ul class="list-disc list-inside text-neutral-400 ml-4">
-                        <li>Led development of secure, scalable web platforms using React, Next.js, Node.js, and Python.</li>
-                        <li>Integrated cloud solutions (Firebase, AWS) and implemented CI/CD pipelines for rapid deployment.</li>
-                        <li>Worked closely with designers to deliver modern, accessible, and user-focused interfaces.</li>
-                        <li>Provided technical mentorship and code reviews for junior developers.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="mb-6">
-                <h3><span class="icon">💻</span> Technical Skills</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🛡️</span> Cybersecurity Engineering
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🔍</span> Penetration Testing
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🤖</span> AI Prompt Engineering
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">⚛️</span> React & Next.js
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🎨</span> UI/UX Design
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🐍</span> Python & Node.js
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">☁️</span> Firebase & AWS
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🔒</span> Vulnerability Assessment
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🌐</span> Web Security & DevSecOps
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">💬</span> Bilingual (Arabic/English)
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🧑‍🏫</span> Security Training & Awareness
-                    </div>
-                    <div class="flex items-center gap-2 text-neutral-300">
-                        <span class="text-xl icon">🧠</span> LLMs & Generative AI
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h3><span class="icon">🎓</span> Education</h3>
-                <div>
-                    <p class="font-bold text-neutral-200">B.Sc. Computer Science (Cybersecurity)</p>
-                    <p class="text-neutral-400">Ain Shams University | 2018</p>
-                </div>
-                <div class="mt-4">
-                    <p class="font-bold text-neutral-200">Certifications</p>
-                    <p class="text-neutral-400">CompTIA Security+, Cisco CyberOps Associate, and more</p>
-                </div>
-            </section>
-
-            <div class="flex justify-center mt-8 space-x-6">
-                <a href="https://linkedin.com/in/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-8 h-8" />
-                </a>
-                <a href="https://github.com/amrikyy" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" class="w-8 h-8" />
-                </a>
-                <a href="mailto:amrikyy@gmail.com" target="_blank" class="text-neutral-400 hover:text-white transition-colors">
-                    <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email" class="w-8 h-8" />
-                </a>
-            </div>
-
-            <div class="flex justify-center mt-8">
-                <div class="bg-white p-4 rounded-md">
-                    <img src="https://placehold.co/100x100/FFFFFF/000000?text=QR+Code" alt="QR Code" class="w-24 h-24" />
-                </div>
-            </div>
-
-            <p class="text-xs text-neutral-500 mt-6 text-center">Note: This content is for Mohamed H Abdelaziz (Amrikyy). For more, contact amrikyy@gmail.com.</p>
         </div>
     </div>
 
