@@ -379,7 +379,7 @@ html[dir="ltr"] #lang-toggle-container {
 }
 
 .cv-social-links a:hover {
-  color: var(--neon-blue);
+  color: var(--neon-green); /* Changed hover color to neon green */
   transform: scale(1.1);
 }
 
@@ -396,9 +396,9 @@ html[dir="ltr"] #lang-toggle-container {
 .cv-section h3 {
   font-family: var(--font-orbitron);
   font-size: 1.5rem;
-  color: var(--neon-blue);
+  color: var(--neon-green); /* Changed color to neon green */
   margin-bottom: 15px;
-  text-shadow: 0 0 8px var(--neon-blue);
+  text-shadow: 0 0 8px var(--neon-green); /* Changed text-shadow to neon green */
 }
 
 .cv-section p {
@@ -430,12 +430,12 @@ html[dir="ltr"] #lang-toggle-container {
 }
 
 .skills-list li {
-  background-color: rgba(0, 212, 255, 0.1);
+  background-color: rgba(57, 255, 20, 0.1); /* Changed background to use neon green rgba */
   color: var(--text-primary);
   padding: 8px 15px;
   border-radius: 20px;
   font-size: 0.9rem;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(57, 255, 20, 0.3); /* Changed border to use neon green rgba */
 }
 
 .education-item, .project-item {
@@ -466,7 +466,7 @@ html[dir="ltr"] #lang-toggle-container {
 }
 
 .project-item a {
-  color: var(--neon-blue);
+  color: var(--neon-green); /* Changed color to neon green */
   text-decoration: none;
   margin-right: 15px;
   font-size: 0.95rem;
@@ -474,7 +474,7 @@ html[dir="ltr"] #lang-toggle-container {
 }
 
 .project-item a:hover {
-  color: var(--neon-green);
+  color: var(--text-primary); /* Changed hover color to text primary */
   text-decoration: underline;
 }
 
@@ -507,6 +507,7 @@ html[dir="ltr"] #lang-toggle-container {
 .cv-section ul li i, .education-item p i, .project-item p i, .skills-category h4 i {
     width: 20px; /* Fixed width for icons */
     text-align: center;
+    color: var(--neon-green); /* Ensured icons use neon green */
 }
 
 /* =========== Chatbot Styles =========== */
