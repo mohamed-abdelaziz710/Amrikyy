@@ -199,16 +199,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Simulate loading progress
   let progressInterval = setInterval(() => {
-    const currentWidth = parseInt(getComputedStyle(loader).width);
-    const parentWidth = parseInt(getComputedStyle(loader.parentElement).width);
-    const percent = Math.min(100, Math.round((currentWidth / parentWidth) * 100));
-    updateProgress(percent);
-
-    if (percent === 100) {
+    // Add a check to ensure loader is not null before calling getComputedStyle
+    if (loader) {
+      const currentWidth = parseInt(getComputedStyle(loader).width);
+      const parentWidth = parseInt(getComputedStyle(loader.parentElement).width);
+      const percent = Math.min(100, Math.round((currentWidth / parentWidth) * 100));
+      updateProgress(percent);
+      if (percent === 100) {
+        clearInterval(progressInterval);
+        // Assuming completeLoading is defined elsewhere
+        setTimeout(completeLoading, 500);
+      }
+    } else {
+      // If loader is null, clear the interval to prevent further errors
       clearInterval(progressInterval);
-      setTimeout(completeLoading, 500);
+      console.error("Element with ID 'loader' not found.");
     }
-  }, 30);
+  }, 100);
 
   // --- Translation Logic ---
     const htmlEl = document.documentElement;
