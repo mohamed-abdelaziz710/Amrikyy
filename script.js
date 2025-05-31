@@ -255,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage('ar');
 
   // --- Chatbot Logic ---
+  // Move all chatbot DOM element queries to the top, before any event listeners or usage
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
