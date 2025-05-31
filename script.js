@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Chatbot backend URL - ensure this server is running and configured for CORS
   // For local development, you might use a proxy or a local server.
   // For production, the server at this URL must explicitly allow requests from your website's domain.
-  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/';
+  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat';
 
   let loadingCompleted = false; // Flag to prevent multiple executions of completeLoading
   let currentLang = htmlTag.lang || 'ar'; // Default to Arabic if not set
