@@ -816,3 +816,6 @@ html[dir="ltr"] #chatbot-input {
     font-size: 0.95em;
   }
 }
+
+/* In index.html, the chatbot header should use data-translate="chatbotTitle".
+In script.js, add translation keys for chatbotTitle: { en: "Amrikyy", ar: "عمريكي" } */

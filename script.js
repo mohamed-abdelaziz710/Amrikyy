@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
       birthPlaceLabel: 'Born in:',
       birthPlaceValue: 'Syria',
       residencyLabel: 'Residency:',
-      residencyValue: '18 years in Kuwait, 7 years in Atlanta (IUS), 1 year in Cairo, Egypt'
+      residencyValue: '18 years in Kuwait, 7 years in Atlanta (IUS), 1 year in Cairo, Egypt',
+      chatbotTitle: "Amrikyy"
     },
     ar: {
       loaderMessage: 'يتم تهيئة تجربة TECH & CRYPTO...',
@@ -121,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
       birthPlaceLabel: 'مكان الميلاد:',
       birthPlaceValue: 'سوريا',
       residencyLabel: 'الإقامة:',
-      residencyValue: '18 سنة في الكويت، 7 سنوات في أتلانتا (IUS)، سنة واحدة في القاهرة'
+      residencyValue: '18 سنة في الكويت، 7 سنوات في أتلانتا (IUS)، سنة واحدة في القاهرة',
+      chatbotTitle: "عمريكي"
     }
   };
 
