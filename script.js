@@ -66,7 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
       chatbotSend: 'Send',
       chatbotToggleTitle: 'Open Chatbot',
       chatbotCloseTitle: 'Close Chatbot',
-      chatbotInputPlaceholder: 'Type your message here...'
+      chatbotInputPlaceholder: 'Type your message here...',
+      personalInfoTitle: 'Personal Information',
+      birthDateLabel: 'Birthdate:',
+      birthDateValue: 'July 10, 1999',
+      ageLabel: 'Age:',
+      ageValue: '26 years old',
+      birthPlaceLabel: 'Born in:',
+      birthPlaceValue: 'Syria',
+      residencyLabel: 'Residency:',
+      residencyValue: '18 years in Kuwait, 7 years in Atlanta (IUS), 1 year in Cairo, Egypt'
     },
     ar: {
       loaderMessage: 'يتم تهيئة تجربة TECH & CRYPTO...',
@@ -103,7 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
       chatbotSend: 'إرسال',
       chatbotToggleTitle: 'فتح المساعد',
       chatbotCloseTitle: 'إغلاق المساعد',
-      chatbotInputPlaceholder: 'اكتب رسالتك هنا...'
+      chatbotInputPlaceholder: 'اكتب رسالتك هنا...',
+      personalInfoTitle: 'المعلومات الشخصية',
+      birthDateLabel: 'تاريخ الميلاد:',
+      birthDateValue: '10 يوليو 1999',
+      ageLabel: 'العمر:',
+      ageValue: '26 سنة',
+      birthPlaceLabel: 'مكان الميلاد:',
+      birthPlaceValue: 'سوريا',
+      residencyLabel: 'الإقامة:',
+      residencyValue: '18 سنة في الكويت، 7 سنوات في أتلانتا (IUS)، سنة واحدة في القاهرة'
     }
   };
 
