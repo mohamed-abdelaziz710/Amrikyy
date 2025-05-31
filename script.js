@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Translation Logic ---
   const htmlEl = document.documentElement;
-    ar: {
-      pageTitle: "محمد H عبدالعزيز | CV الذكي - نسخة تقنية محسنة",
+    {
+      "محمد H عبدالعزيز | CV الذكي - نسخة تقنية محسنة",
       loaderMessage: "يتم تهيئة تجربة TECH & CRYPTO...",
       langToggle: "EN",
       cvName: "محمد H عبدالعزيز",

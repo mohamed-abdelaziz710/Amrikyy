@@ -115,20 +115,54 @@ body.loaded {
 
 .loader-logo {
   font-family: var(--font-orbitron);
-  font-size: 2.2rem; 
-  line-height: 1.2; 
+  font-size: 2.2rem;
+  line-height: 1.2;
   color: var(--neon-green);
-  text-shadow: 0 0 10px var(--neon-green), 0 0 25px var(--neon-green), 0 0 40px rgba(57, 255, 20, 0.7); 
+  text-shadow:
+    0 0 5px var(--neon-green),
+    0 0 10px var(--neon-green),
+    0 0 15px rgba(57, 255, 20, 0.8),
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     0 0 3px #000;
   margin-bottom: 1.5rem;
-  padding: 0 1rem; 
-  animation: pulseLogo 2s infinite alternate;
-  white-space: normal; 
-  max-width: 90vw; 
+  padding: 0 1rem;
+  animation: pulseLogoEnhanced 2.5s infinite alternate ease-in-out;
+  white-space: normal;
+  max-width: 90vw;
+  text-align: center;
 }
 
-@keyframes pulseLogo {
-  from { opacity: 0.7; transform: scale(0.98) perspective(500px) rotateY(1.5deg); text-shadow: 0 0 8px var(--neon-green), 0 0 15px var(--neon-green); }
-  to { opacity: 1; transform: scale(1.02) perspective(500px) rotateY(-1.5deg); text-shadow: 0 0 12px var(--neon-green), 0 0 30px var(--neon-green), 0 0 50px rgba(57, 255, 20, 0.5); }
+@keyframes pulseLogoEnhanced {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.97) perspective(600px) rotateY(1deg);
+    text-shadow:
+      0 0 4px var(--neon-green),
+      0 0 8px var(--neon-green),
+      0 0 12px rgba(57, 255, 20, 0.7),
+      -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+      -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
+      0 0 2px #000;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.03) perspective(600px) rotateY(-1deg);
+    text-shadow:
+      0 0 6px var(--neon-green),
+      0 0 12px var(--neon-green),
+      0 0 20px rgba(57, 255, 20, 0.9),
+      0 0 30px rgba(57, 255, 20, 0.6),
+      -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+      -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+      0 0 4px #000;
+  }
 }
 
 .loader-message {
