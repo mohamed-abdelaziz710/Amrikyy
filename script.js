@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/'; // Updated backend URL
+  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat'; // Updated to /chat endpoint
 
   chatbotToggleBtn.addEventListener('click', () => {
       chatbotContainer.classList.toggle('visible');
@@ -328,7 +328,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if(chatbotMessages.contains(thinkingElement)) { // Check if thinkingElement is still there
             chatbotMessages.removeChild(thinkingElement); // Remove thinking indicator if error occurred before response
           }
-          const errorText = htmlEl.lang === 'ar' ? `خطأ في الاتصال بالمساعد: ${error.message}` : `Error connecting to assistant: ${error.message}`;
+          let errorText;
+          if (error.message.includes('Failed to fetch')) {
+            errorText = htmlEl.lang === 'ar' ?
+              'تعذر الاتصال بالخادم. يرجى التأكد أن الخادم يعمل وأن الاتصال بالإنترنت متاح.' :
+              'Unable to connect to the assistant server. Please make sure the backend is running and your internet connection is active.';
+          } else {
+            errorText = htmlEl.lang === 'ar' ? `خطأ في الاتصال بالمساعد: ${error.message}` : `Error connecting to assistant: ${error.message}`;
+          }
           addMessageToChat(errorText, 'ai', true);
       } finally {
           chatbotInput.disabled = false;
