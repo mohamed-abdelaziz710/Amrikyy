@@ -1,6 +1,8 @@
 /* =========== المتغيرات الأساسية - Tech/Space/Crypto Theme =========== */
 :root {
   --neon-green: #39FF14;
+  --neon-blue: #00d4ff;
+  --neon-purple: #b600ff;
   --medium-gray: #888888; 
   --dark-bg-primary: #0A0A0A; 
   --dark-element-bg: #1C1C1C; 
@@ -817,5 +819,4 @@ html[dir="ltr"] #chatbot-input {
   }
 }
 
-/* In index.html, the chatbot header should use data-translate="chatbotTitle".
-In script.js, add translation keys for chatbotTitle: { en: "Amrikyy", ar: "عمريكي" } */
+/* Neon/Tech color guideline: Use only --neon-green, --neon-blue, --neon-purple, --dark-bg-primary, --dark-element-bg, --glass-bg, --glass-border, --glass-inner-glow, --text-primary, --text-on-neon, --white, --medium-gray for all backgrounds, borders, text, and effects. No hardcoded colors except for special effects. */
