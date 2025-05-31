@@ -311,13 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLoadingScreen();
     loadingInterval = setInterval(updateLoadingScreen, 3000);
 
-    // Skip button for accessibility
-    const skipBtn = document.getElementById('skip-button');
-    skipBtn.addEventListener('click', showPortfolioPage);
-    skipBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') showPortfolioPage();
-    });
-
     // Resume modal logic
     const launchResumeBtn = document.getElementById('launch-resume-btn');
     const resumeModal = document.getElementById('resume-modal');
