@@ -187,31 +187,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Loader & Progress Bar ---
-  const loader = document.getElementById('loader');
-  const progress = document.getElementById('progress');
+  // Use progressBar for progress logic, not loader (which is hidden)
+  // Remove loader logic and use progressBar for width updates
 
   function updateProgress(percent) {
-    if (loader) {
-      loader.style.width = `${percent}%`;
-      loader.setAttribute('aria-valuenow', percent);
+    if (progressBar) {
+      progressBar.style.width = `${percent}%`;
+      progressBar.setAttribute('aria-valuenow', percent);
     }
   }
 
   // Simulate loading progress
+  let progress = 0;
   let progressInterval = setInterval(() => {
-    console.log('Loader element:', loader); // Debug: check loader value
-    if (loader) {
-      const currentWidth = parseInt(getComputedStyle(loader).width);
-      const parentWidth = parseInt(getComputedStyle(loader.parentElement).width);
-      const percent = Math.min(100, Math.round((currentWidth / parentWidth) * 100));
-      updateProgress(percent);
-      if (percent === 100) {
+    if (progressBar) {
+      progress += 4 + Math.random() * 6; // Simulate progress
+      if (progress > 100) progress = 100;
+      updateProgress(progress);
+      if (progress === 100) {
         clearInterval(progressInterval);
         setTimeout(completeLoading, 500);
       }
     } else {
       clearInterval(progressInterval);
-      console.error("Element with ID 'loader' not found.");
+      console.error("Element with ID 'progressBar' not found.");
     }
   }, 100);
 
