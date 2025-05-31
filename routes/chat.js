@@ -1,3 +1,7 @@
+const express = require('express');
+const router = express.Router();
+const geminiService = require('../geminiService');
+
 router.post('/', async (req, res) => {
     try {
         const userMessage = req.body.prompt;
@@ -52,3 +56,5 @@ router.post('/', async (req, res) => {
         res.status(500).json({ response: "عفواً، حدث خطأ ما. يرجى المحاولة مرة أخرى." });
     }
 });
+
+module.exports = router;
