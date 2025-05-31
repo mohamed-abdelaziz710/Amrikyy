@@ -249,6 +249,48 @@ html[dir="ltr"] #lang-toggle-container {
     max-width: 480px;
     min-width: 320px;
     pointer-events: auto;
+    margin: 32px auto;
+    box-sizing: border-box;
+}
+
+.smart-cv-card {
+  background: rgba(10, 12, 24, 0.92);
+  border: 3px solid #39FF14;
+  border-radius: 22px;
+  box-shadow: 0 0 32px #39FF1480, 0 2px 16px #000a;
+  margin: 0 auto;
+  padding: 32px 24px 24px 24px;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.smart-cv-card:hover, .smart-cv-card:focus-within {
+  border-color: #00d4ff;
+  box-shadow: 0 0 48px #00d4ff99, 0 2px 24px #000a;
+}
+
+@media (max-width: 600px) {
+  .smart-cv-card-container {
+    max-width: 98vw;
+    min-width: unset;
+    padding: 0 2vw;
+    margin: 12px auto;
+  }
+  .smart-cv-card {
+    padding: 18px 4vw 16px 4vw;
+  }
+}
+
+.smart-cv-card-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 100vw;
+  max-width: 480px;
+  min-width: 320px;
+  pointer-events: auto;
 }
 
 .smart-cv-card {
