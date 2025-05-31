@@ -14,28 +14,33 @@
 </head>
 <body class="loading">
   <div id="loader">
-    <div class="loading-starfield" id="loadingStarfield"></div>
-    <div class="logo-container">
-      <span class="logo-text">AMRIKYY</span>
+    <div class="loading-3d-logo-container">
+      <svg class="loading-3d-hex" viewBox="0 0 120 120" width="140" height="140">
+        <defs>
+          <linearGradient id="neonHexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#39FF14"/>
+            <stop offset="100%" stop-color="#00d4ff"/>
+          </linearGradient>
+          <filter id="neonGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="6" result="glow"/>
+            <feMerge>
+              <feMergeNode in="glow"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <polygon points="60,10 110,35 110,85 60,110 10,85 10,35" fill="url(#neonHexGradient)" stroke="#39FF14" stroke-width="4" filter="url(#neonGlow)"/>
+        <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-size="2.1em" font-family="Orbitron, sans-serif" font-weight="900" letter-spacing="2" filter="url(#neonGlow)">AMRIKYY</text>
+      </svg>
+      <div class="loading-3d-shadow"></div>
     </div>
-    <div class="loading-text-container">
-      <span class="loading-text" id="loadingText"></span>
+    <div class="loading-3d-text-container">
+      <span class="loading-3d-text" id="loading3dText">جارٍ تحميل تجربة الذكاء السيبراني...</span>
     </div>
-    <div class="progress-bar-container">
-      <div class="progress-bar-fill" id="progressBarFill"></div>
+    <div class="loading-3d-progress-bar-container">
+      <div class="loading-3d-progress-bar-fill" id="loading3dProgressBar"></div>
     </div>
     <button class="skip-button" id="skipLoaderBtn">تخطي التحميل</button>
-
-    <div class="loader-card3d">
-      <img class="loader-avatar" src="avatar.jpg" alt="Amrikyy" onerror="this.onerror=null;this.src='https://i.ibb.co/pWwQnYg/avatar-amrikyy.png';">
-      <div class="loader-logo">AMRIKYY</div>
-      <div class="loader-bar"><div class="loader-bar-progress"></div></div>
-      <div class="loader-msg">
-        يتم تجهيز تجربة السيبر...
-        <span class="loader-dots"><span></span><span></span><span></span></span>
-      </div>
-      <button class="cta-btn" id="loaderToCvBtn" style="margin-top:1.2em;">اذهب إلى الـ CV الآن</button>
-    </div>
   </div>
 
   <div id="main-content">

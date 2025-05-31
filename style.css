@@ -613,3 +613,75 @@ body.loaded #main-content {
     bottom: 2px;
   }
 }
+
+/* --- 3D Neon Hexagon Loader Redesign --- */
+.loading-3d-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2em;
+  position: relative;
+  animation: float3dLogo 3.2s infinite alternate cubic-bezier(.44,1.7,.58,1);
+}
+.loading-3d-hex {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 0 32px #39FF14) drop-shadow(0 0 18px #00d4ff);
+  animation: rotate3dHex 7s linear infinite;
+}
+@keyframes rotate3dHex {
+  0% { transform: rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateY(360deg) rotateZ(360deg); }
+}
+@keyframes float3dLogo {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-18px) scale(1.04); }
+}
+.loading-3d-shadow {
+  width: 90px;
+  height: 18px;
+  background: radial-gradient(ellipse at center, #39FF1440 0%, #0000 80%);
+  filter: blur(2.5px);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%);
+  opacity: 0.7;
+  z-index: 0;
+}
+.loading-3d-text-container {
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+.loading-3d-text {
+  font-family: 'Orbitron', 'Cairo', sans-serif;
+  font-size: 1.25rem;
+  color: #39FF14;
+  text-shadow: 0 0 12px #39FF14, 0 0 4px #00d4ff;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  animation: pulseNeonText 2.2s infinite alternate;
+}
+@keyframes pulseNeonText {
+  0% { text-shadow: 0 0 12px #39FF14, 0 0 4px #00d4ff; }
+  100% { text-shadow: 0 0 28px #39FF14, 0 0 12px #00d4ff; }
+}
+.loading-3d-progress-bar-container {
+  width: 180px;
+  height: 7px;
+  background: #181c24;
+  border-radius: 7px;
+  margin: 0 auto 1.2em auto;
+  box-shadow: 0 0 10px #39FF14;
+  overflow: hidden;
+}
+.loading-3d-progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #39FF14, #00d4ff, #b600ff);
+  border-radius: 7px;
+  box-shadow: 0 0 18px #39FF14;
+  transition: width 0.18s linear;
+}
