@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat'; // Updated to /chat endpoint
+  const chatbotBackendUrl = 'https://your-actual-live-replit-backend-url.repl.co/api/chat'; // Updated to live Replit backend URL
 
   chatbotToggleBtn.addEventListener('click', () => {
       chatbotContainer.classList.toggle('visible');
