@@ -359,14 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
         await sendMessageToChatbot();
     });
 
-    // Hide loader and show main content immediately for development
-    const loader = document.getElementById('loader');
-    const mainContent = document.getElementById('main-content');
-    loader.style.display = 'none';
-    mainContent.style.display = 'flex';
-    document.body.classList.remove('loading');
-    document.body.classList.add('loaded');
-
     // Initialize Three.js after a short delay to allow loading screen to show
     setTimeout(initThreeJS, 500);
 });
