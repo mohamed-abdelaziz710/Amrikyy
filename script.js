@@ -165,13 +165,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Chatbot Toggle ---
   if (chatbotToggleBtn && chatbotContainer) {
     chatbotToggleBtn.addEventListener('click', () => {
-      // Toggle only the 'visible' class, let CSS handle the rest
       chatbotContainer.classList.toggle('visible');
+      // Always set display:flex when opening, let CSS handle closing
+      if (chatbotContainer.classList.contains('visible')) {
+        chatbotContainer.style.display = 'flex';
+        setTimeout(() => chatbotInput.focus(), 100);
+        if (chatbotMessages.children.length === 0) {
+          const currentLang = document.documentElement.lang || 'ar';
+          const greeting = currentLang === 'ar' ? "مرحباً! كيف يمكنني مساعدتك اليوم؟" : "Hello! How can I assist you today?";
+          addMessageToChat(greeting, 'ai');
+        }
+      } else {
+        chatbotContainer.style.display = '';
+      }
     });
   }
   if (chatbotCloseBtn && chatbotContainer) {
     chatbotCloseBtn.addEventListener('click', () => {
       chatbotContainer.classList.remove('visible');
+      chatbotContainer.style.display = '';
     });
   }
 
