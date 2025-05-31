@@ -560,7 +560,8 @@ html[dir="ltr"] .cv-download-btn i {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4), 0 0 0 0 var(--neon-green);
+    animation: chatbotNeonPulse 1.7s infinite alternate;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     z-index: 999;
 }
@@ -578,6 +579,20 @@ html[dir="rtl"] #chatbot-toggle-btn {
 }
 #chatbot-toggle-btn:hover i {
     transform: scale(1.1);
+}
+@keyframes chatbotNeonPulse {
+  0% {
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4), 0 0 0 0 var(--neon-green);
+    filter: brightness(1);
+  }
+  70% {
+    box-shadow: 0 8px 30px 8px var(--neon-green), 0 0 0 8px var(--neon-green);
+    filter: brightness(1.15);
+  }
+  100% {
+    box-shadow: 0 12px 40px 16px var(--neon-green), 0 0 0 16px var(--neon-green);
+    filter: brightness(1.25);
+  }
 }
 
 
