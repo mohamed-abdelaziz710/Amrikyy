@@ -184,10 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 30);
 
   // --- Translation Logic ---
-  const langToggleBtn = document.getElementById('langToggleBtn');
   const htmlEl = document.documentElement;
-
-  const translations = {
     ar: {
       pageTitle: "محمد H عبدالعزيز | CV الذكي - نسخة تقنية محسنة",
       loaderMessage: "يتم تهيئة تجربة TECH & CRYPTO...",
@@ -330,9 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage('ar');
 
   // --- Chatbot Logic ---
-  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-  const chatbotContainer = document.getElementById('chatbot-container');
-  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+  // chatbotToggleBtn, chatbotContainer, chatbotCloseBtn already declared above
   const chatbotMessages = document.getElementById('chatbot-messages');
   const chatbotInput = document.getElementById('chatbot-input');
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
