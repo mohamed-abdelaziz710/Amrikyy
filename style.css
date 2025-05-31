@@ -255,16 +255,19 @@ html[dir="ltr"] #lang-toggle-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Added padding for smaller screens */
+  padding: 0 10px;
 }
 
 .smart-cv-card {
   background: rgba(10, 12, 24, 0.92);
   border: 3px solid #39FF14;
   border-radius: 22px;
-  box-shadow: 0 0 32px #39FF1480, 0 2px 16px #000a;
+  /* Adjusted padding */
+  padding: 30px 25px;
+  /* Refined box-shadow */
+  box-shadow: 0 0 40px rgba(57, 255, 20, 0.6), 0 4px 20px rgba(0, 0, 0, 0.8);
   margin: 0 auto;
-  padding: 32px 24px 24px 24px;
-  box-sizing: border-box;
   transition: box-shadow 0.3s, border-color 0.3s;
   max-width: 480px;
   min-width: 0;
