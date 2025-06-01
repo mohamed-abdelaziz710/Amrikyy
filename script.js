@@ -593,7 +593,7 @@ function initFormSubmission() {
       
       try {
         // Prepare data for API
-        const apiPayload = prepareGeminiPayload(userData);
+        const apiPayload = userData; // FIX: use userData directly, since prepareGeminiPayload is not defined
         
         // In a real implementation, this would call the backend API
         // For demo purposes, we'll simulate the API call
