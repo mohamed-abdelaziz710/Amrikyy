@@ -251,7 +251,7 @@ function updateTranslations(lang) {
   
   translatableElements.forEach(element => {
     const key = element.getAttribute('data-translate');
-    if (translations && translations[key] && translations[key][lang]) {
+    if (typeof translations !== 'undefined' && translations && translations[key] && translations[key][lang]) {
       element.textContent = translations[key][lang];
     }
   });
@@ -593,14 +593,14 @@ function initFormSubmission() {
       
       try {
         // Prepare data for API
-        const apiPayload = userData; // FIX: use userData directly, since prepareGeminiPayload is not defined
+        const apiPayload = userData; // Use userData directly
         
         // In a real implementation, this would call the backend API
         // For demo purposes, we'll simulate the API call
         cardData = await simulateApiCall(apiPayload);
         
         // Generate and display the ID card
-        generateIdCard(cardData);
+        generateIdCard({ ...cardData, avatar: userData.avatar });
         
         // Hide generator section and show result section
         document.getElementById('idGeneratorSection').classList.add('hidden');
@@ -628,7 +628,7 @@ function initFormSubmission() {
       
       // Reset avatar preview
       if (document.getElementById('avatarPreview')) {
-        document.getElementById('avatarPreview').style.backgroundImage = 'url("assets/default-avatar.png")';
+        document.getElementById('avatarPreview').style.backgroundImage = 'url("avatar.jpg")';
       }
       
       // Hide result section and show generator section
@@ -686,26 +686,27 @@ function generateIdCard(data) {
   if (!digitalIdCard) return;
   
   // Example: Using data to generate the ID card HTML
-  const avatarSrc = data.avatar || 'assets/default-avatar.png';
-  
+  const avatarSrc = data.avatar || 'avatar.jpg'; // Use avatar.jpg as fallback
+  const userName = data.full_name || 'User'; // Use form name or fallback
+
   digitalIdCard.innerHTML = `
-    <div class="card" style="background-color: ${data.color_hex};">
+    <div class="card" style="background-color: ${data.color_hex || '#00d4ff'};">
       <div class="card-header">
         <div class="card-header-display">
           <div class="card-avatar-container">
             <div class="avatar-ring"></div>
             <div class="avatar-ring"></div>
-            <img class="card-avatar-display" src="${avatarSrc}" alt="${data.user_data.name} Avatar">
+            <img class="card-avatar-display" src="${avatarSrc}" alt="${userName} Avatar">
           </div>
-          <h2 class="card-nickname-display" data-text="${data.nickname}">${data.nickname}</h2>
-          <p class="card-title-display">${data.title}</p>
+          <h2 class="card-nickname-display" data-text="${data.nickname || ''}">${data.nickname || ''}</h2>
+          <p class="card-title-display">${data.title || ''}</p>
         </div>
       </div>
       
       <div class="card-body">
         <div class="card-details-container">
-          <p class="card-analysis-display">${data.analysis}</p>
-          <p class="card-ai-message-display">${data.ai_message}</p>
+          <p class="card-analysis-display">${data.analysis || ''}</p>
+          <p class="card-ai-message-display">${data.ai_message || ''}</p>
         </div>
         
         <div class="card-qr-link-display">
@@ -715,7 +716,7 @@ function generateIdCard(data) {
             <div class="qr-corner qr-corner-bl"></div>
             <div class="qr-corner qr-corner-br"></div>
             <div class="qr-scanner-line"></div>
-            <img class="card-qr-code" src="${data.qr_code}" alt="QR Code">
+            <img class="card-qr-code" src="${data.qr_data || ''}" alt="QR Code">
           </div>
           <a href="#" class="card-link-display">View & Share Your Card</a>
         </div>
@@ -723,7 +724,7 @@ function generateIdCard(data) {
     </div>
 
     <!-- Logo watermark -->
-    <img class="logo-watermark" src="assets/amrikyy-logo.png" alt="Amrikyy Logo">
+    <img class="logo-watermark" src="amrikyy_neon_logo.webp" alt="Amrikyy Logo">
   `;
 }
 
