@@ -3,69 +3,6 @@
  * Main functionality for the ID card generation and interaction
  */
 
-// Add the new imaginative questions to the creative section
-const imaginativeQuestions = [
-  {
-    id: 'digitalFootprintColor',
-    type: 'text',
-    required: true,
-    label: {
-      ar: 'لو كان لبصمتك الرقمية لون، ما هو ولماذا؟',
-      en: 'If your digital footprint had a color, what would it be and why?'
-    },
-    placeholder: {
-      ar: 'مثال: أزرق نيون لأنه يعكس...',
-      en: 'E.g., Neon blue because it reflects...'
-    },
-    icon: 'fa-palette',
-    validation: (value) => value.length >= 5,
-    errorMessage: {
-      ar: 'يرجى إدخال وصف للون بصمتك الرقمية',
-      en: 'Please describe your digital footprint color'
-    }
-  },
-  {
-    id: 'digitalArtifact',
-    type: 'textarea',
-    required: true,
-    label: {
-      ar: 'ما نوع "القطعة الرقمية" التي ستتركها للمستكشفين الافتراضيين في المستقبل؟',
-      en: 'What kind of "digital artifact" would you leave behind for future virtual explorers?'
-    },
-    placeholder: {
-      ar: 'صف القطعة الرقمية التي ستتركها...',
-      en: 'Describe the digital artifact you would leave...'
-    },
-    icon: 'fa-landmark',
-    maxLength: 200,
-    validation: (value) => value.length >= 10,
-    errorMessage: {
-      ar: 'يرجى وصف القطعة الرقمية التي ستتركها',
-      en: 'Please describe your digital artifact'
-    }
-  },
-  {
-    id: 'digitalSanctuary',
-    type: 'textarea',
-    required: true,
-    label: {
-      ar: 'صف "ملاذك الرقمي" المثالي',
-      en: 'Describe your ideal "digital sanctuary"'
-    },
-    placeholder: {
-      ar: 'كيف يبدو ملاذك الرقمي المثالي...',
-      en: 'How does your ideal digital sanctuary look like...'
-    },
-    icon: 'fa-home',
-    maxLength: 200,
-    validation: (value) => value.length >= 10,
-    errorMessage: {
-      ar: 'يرجى وصف ملاذك الرقمي المثالي',
-      en: 'Please describe your ideal digital sanctuary'
-    }
-  }
-];
-
 // DOM Elements
 let currentStep = 1;
 let userData = {};
@@ -650,11 +587,6 @@ function initFormSubmission() {
       if (userData.avatarImage) {
         userData.avatar = userData.avatarImage;
       }
-      
-      // Add the imaginative questions data
-      userData.digitalFootprintColor = formData.get('digitalFootprintColor') || '';
-      userData.digitalArtifact = formData.get('digitalArtifact') || '';
-      userData.digitalSanctuary = formData.get('digitalSanctuary') || '';
       
       // Show loading state
       showLoadingOverlay('Generating your digital ID...');
