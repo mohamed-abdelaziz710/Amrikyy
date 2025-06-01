@@ -2,7 +2,7 @@
 :root {
   --neon-green: #39FF14;
   --neon-blue: #00d4ff;
-  --neon-purple: #b600ff;
+  --neon-purple: #b600ff; /* لون جديد لبطاقة الهوية الرقمية */
   --medium-gray: #888888;
   --dark-bg-primary: #0A0A0A;
   --dark-element-bg: #1C1C1C;
@@ -19,6 +19,7 @@
 
   --font-orbitron: 'Orbitron', sans-serif; /* خط للعناوين والشعارات */
   --font-cairo: 'Cairo', sans-serif; /* خط للنصوص الأساسية */
+  --font-tajawal: 'Tajawal', sans-serif; /* خط جديد لبطاقة الهوية الرقمية */
 
   --transition-speed: 0.5s; /* سرعة الانتقال العامة */
   --transition-easing: ease-in-out; /* نوع الانتقال العام */
@@ -735,18 +736,24 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
     background: linear-gradient(90deg, var(--neon-green) 60%, var(--neon-green) 100%) !important;
     color: var(--text-on-neon) !important;
     box-shadow: 0 0 12px var(--neon-green) !important;
-    /* ...existing code... */
+    padding: 0.6rem 1.2rem; /* مساحات داخلية للزر */
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-orbitron);
+    font-size: 1rem;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 #chatbot-send-btn:hover {
     background: linear-gradient(90deg, #2de20f 60%, #39FF14 100%) !important;
     box-shadow: 0 0 16px var(--neon-green) !important;
-    /* ...existing code... */
+    transform: translateY(-1px); /* تأثير رفع خفيف */
 }
 #chatbot-send-btn:active {
     background: var(--neon-green) !important;
     box-shadow: 0 0 18px var(--neon-green) !important;
     color: #fff !important;
-    /* ...existing code... */
+    transform: translateY(0); /* إعادة الزر لمكانه الأصلي */
 }
 
 @media (max-width: 600px) {
@@ -775,4 +782,116 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
   color: var(--neon-green);
   text-shadow: 0 0 6px var(--neon-green), 0 0 2px #000;
 }
-/* ...existing code... */
+
+/* =========== أنماط بطاقة الهوية الرقمية AI الجديدة =========== */
+/* تم دمجها هنا لضمان التوافق مع المتغيرات الموجودة */
+
+/* الأنماط الأساسية للبطاقة الرقمية */
+.neon-glow {
+    transition: text-shadow 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.neon-glow-blue {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.4);
+}
+.neon-glow-purple {
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.4);
+}
+.card-shadow-blue {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.3);
+}
+.card-shadow-purple {
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), 0 0 30px rgba(168, 85, 247, 0.3);
+}
+.pulse {
+    animation: pulse-animation 2s infinite;
+}
+@keyframes pulse-animation {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 10px 20px rgba(59, 130, 246, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+.fade-in {
+    animation: fadeInAnimation 1s ease-in forwards;
+    opacity: 0;
+}
+@keyframes fadeInAnimation {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.question-slide {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background-color: var(--dark-element-bg); /* استخدام متغير موجود */
+}
+.hidden-slide {
+    opacity: 0;
+    transform: translateX(-100%);
+    position: absolute;
+    pointer-events: none;
+}
+.option-card {
+    transition: all 0.2s ease-in-out;
+    border: 2px solid var(--medium-gray); /* استخدام متغير موجود */
+}
+.option-card:hover, .option-card.selected {
+    transform: translateY(-5px);
+    border-color: var(--neon-blue); /* استخدام متغير موجود */
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+.loader {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid var(--medium-gray); /* استخدام متغير موجود */
+    border-top-color: var(--neon-blue); /* استخدام متغير موجود */
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.loader-text {
+    animation: flicker 1.5s infinite alternate;
+}
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px var(--neon-green), 0 0 80px var(--neon-green), 0 0 90px var(--neon-green), 0 0 100px var(--neon-green), 0 0 150px var(--neon-green); }
+    20%, 24%, 55% { text-shadow: none; }
+}
+
+/* أنماط قسم البودكاست الجديد */
+.podcast-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--dark-element-bg);
+    border: 1px solid rgba(0, 212, 255, 0.3); /* حدود بلون النيون الأزرق */
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.podcast-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+.podcast-option img {
+    border-radius: 8px; /* زوايا دائرية للصورة */
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+.podcast-option p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+.podcast-option a {
+    margin-top: 10px;
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.podcast-option a:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}

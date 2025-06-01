@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
 
   // Chatbot backend URL - ensure this server is running and configured for CORS
-  // For local development, you might use a proxy or a local server.
-  // For production, the server at this URL must explicitly allow requests from your website's domain.
   const chatbotBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/chat';
+  // AI ID Card backend URL - This is the new endpoint you created
+  const aiCardBackendUrl = 'https://0e45fe78-86ad-4c8f-b665-f561edd3e592-00-ezbtmwl50c4e.riker.replit.dev:5000/generate-id-card';
+
 
   let loadingCompleted = false; // Flag to prevent multiple executions of completeLoading
   let currentLang = htmlTag.lang || 'ar'; // Default to Arabic if not set
@@ -42,8 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Start progress bar animation immediately on DOM load ---
   if (progressBar) {
-    // Using requestAnimationFrame ensures the style change is applied after the element is painted,
-    // allowing the CSS transition on 'width' to take effect smoothly.
     requestAnimationFrame(() => {
         progressBar.style.width = '100%';
     });
@@ -52,30 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Set a timeout to complete loading sequence ---
-  // This acts as a fallback or a minimum display time for the loader.
-  // The 2.5s of progressBar transition + 0.5s buffer = 3s total.
   const loadingTimeout = setTimeout(completeLoading, 3000);
 
   // --- Dynamically Calculate Age ---
   function calculateAge(birthDateString) { // Expects "YYYY-MM-DD" format
     try {
         const birthDate = new Date(birthDateString);
-        // Check if the birthDate is a valid date
         if (isNaN(birthDate.getTime())) {
             console.error("Invalid birthDateString provided for age calculation:", birthDateString);
-            return null; // Return null or a default/error string
+            return null;
         }
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
         const monthDifference = today.getMonth() - birthDate.getMonth();
-        // Adjust age if current month/day is before birth month/day
         if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
         return age;
     } catch (e) {
         console.error("Error calculating age:", e);
-        return null; // Return null in case of any error
+        return null;
     }
   }
 
@@ -84,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // English translations
     en: {
       loaderMessage: 'Initializing TECH & CRYPTO experience...',
-      langToggle: 'AR', // Text for the language toggle button when English is active
+      langToggle: 'AR',
       cvName: 'Mohamed Abdelaziz',
       cvRole: 'Cybersecurity Engineering Student | Junior Web Developer & AI Enthusiast',
       summaryTitle: 'Professional Summary',
@@ -145,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
       projectPersonalDesc: 'Developed landing pages, advanced login systems, and AI chatbots.',
       personalInfoTitle: 'Personal Information',
       birthDateLabel: 'Birthdate:',
-      birthDateValue: 'July 10, 1999', // Static display, age is calculated
+      birthDateValue: 'July 10, 1999',
       ageLabel: 'Age:',
-      ageValue: '{age} years old', // Placeholder for dynamic age
+      ageValue: '{age} years old',
       birthPlaceLabel: 'Born in:',
       birthPlaceValue: 'Syria',
       residencyLabel: 'Residency:',
@@ -163,11 +158,14 @@ document.addEventListener('DOMContentLoaded', () => {
       linkedinTitle: "LinkedIn",
       githubTitle: "GitHub",
       downloadCV: 'Download CV',
+      podcastTitle: "🎧 Podcast", // New translation for podcast section title
+      podcastDescription: "Listen to my latest podcast episodes about technology, cryptocurrencies, and more!", // New translation for podcast description
+      listenNow: "Listen Now" // New translation for listen now link
     },
     // Arabic translations
     ar: {
       loaderMessage: 'يتم تهيئة تجربة TECH & CRYPTO...',
-      langToggle: 'EN', // Text for the language toggle button when Arabic is active
+      langToggle: 'EN',
       cvName: 'محمد عبدالعزيز',
       cvRole: 'طالب هندسة أمن سيبراني | مطور ويب ناشئ ومتحمس للذكاء الاصطناعي',
       summaryTitle: 'الملخص المهني',
@@ -246,6 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
       linkedinTitle: "لينكدإن",
       githubTitle: "جيت هاب",
       downloadCV: 'تحميل السيرة الذاتية',
+      podcastTitle: "🎧 بودكاست", // ترجمة جديدة لعنوان قسم البودكاست
+      podcastDescription: "استمع إلى أحدث حلقات البودكاست الخاصة بي حول التكنولوجيا، العملات الرقمية، والمزيد!", // ترجمة جديدة لوصف البودكاست
+      listenNow: "استمع الآن" // ترجمة جديدة لرابط الاستماع
     }
   };
 
@@ -482,5 +483,358 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
      if (!chatbotSendBtn) console.error("Chatbot send button not found for click listener.");
   }
+
+
+  // =========== AI Digital ID Card Functionality ===========
+  // This class encapsulates the logic for the AI ID card feature.
+  class AmrikyyAICard {
+    constructor(containerId = 'ai-card-app-container') {
+        this.container = document.getElementById(containerId);
+        if (!this.container) {
+            console.error(`Container with ID '${containerId}' for AI Card not found.`);
+            return;
+        }
+
+        this.state = {
+            currentQuestionIndex: 0,
+            answers: {},
+            generatedCardData: null
+        };
+
+        this.questions = [
+            {
+                key: 'full_name',
+                text: 'ما هو اسمك الكامل؟',
+                type: 'text',
+                placeholder: 'أدخل اسمك الكامل'
+            },
+            {
+                key: 'email',
+                text: 'ما هو بريدك الإلكتروني؟',
+                type: 'email',
+                placeholder: 'أدخل بريدك الإلكتروني'
+            },
+            {
+                key: 'phone_number',
+                text: 'ما هو رقم هاتفك (اختياري)؟',
+                type: 'tel',
+                placeholder: 'أدخل رقم هاتفك'
+            },
+            {
+                key: 'interests',
+                text: 'ما هي اهتماماتك الرئيسية؟',
+                type: 'select',
+                options: ['الذكاء الاصطناعي', 'التصميم الجرافيكي', 'ريادة الأعمال', 'تطوير الألعاب', 'الفنون والموسيقى', 'الرياضة واللياقة']
+            },
+            {
+                key: 'personality_word',
+                text: 'صِف نفسك بكلمة واحدة.',
+                type: 'text',
+                placeholder: 'مثال: مغامر، مبدع، تحليلي'
+            },
+            {
+                key: 'learning_goal',
+                text: 'ماذا تود أن تتعلمه في 2025؟',
+                type: 'text',
+                placeholder: 'مثال: مهارة تقنية جديدة، لغة، آلة موسيقية'
+            },
+            {
+                key: 'mood',
+                text: 'صف مزاجك اليوم؟',
+                type: 'options_card', // نوع جديد لخيارات البطاقات
+                isEmoji: true,
+                options: ['😎 متفائل', '🤓 فضولي', '🚀 طموح', '🤔 متأمل', '😂 مرح', '💡 مبدع']
+            }
+        ];
+
+        // Cache DOM elements
+        this.heroSection = this.container.querySelector('#hero-section');
+        this.quizSection = this.container.querySelector('#quiz-section');
+        this.loadingSection = this.container.querySelector('#loading-section');
+        this.resultSection = this.container.querySelector('#result-section');
+        this.questionsContainer = this.container.querySelector('#questions-container');
+        this.progressBar = this.container.querySelector('#progress-bar');
+        this.cardContainer = this.container.querySelector('#card-container');
+        this.copyLinkFeedback = this.container.querySelector('#copy-link-feedback');
+        this.nextQuestionBtn = this.container.querySelector('#next-question-btn'); // زر التالي
+
+        // Attach event listeners
+        this.container.querySelector('#start-btn').addEventListener('click', () => this.startQuiz());
+        this.nextQuestionBtn.addEventListener('click', () => this.nextQuestion()); // مستمع لزر التالي
+        this.container.querySelector('#download-btn').addEventListener('click', () => this.handleDownload());
+        this.container.querySelector('#share-twitter-btn').addEventListener('click', () => this.handleShareTwitter());
+        this.container.querySelector('#copy-link-btn').addEventListener('click', () => this.handleCopyLink());
+        this.container.querySelector('#restart-btn').addEventListener('click', () => this.handleRestart());
+
+        // Initial render of questions (will be hidden until quiz starts)
+        this.renderQuestions();
+    }
+
+    renderQuestions() {
+        this.questionsContainer.innerHTML = '';
+        const q = this.questions[this.state.currentQuestionIndex];
+        const slide = document.createElement('div');
+        slide.id = `question-${this.state.currentQuestionIndex}`;
+        slide.className = `question-slide w-full`;
+
+        let questionContent = '';
+
+        if (q.type === 'text' || q.type === 'email' || q.type === 'tel') {
+            questionContent = `
+                <div class="mb-6">
+                    <label for="${q.key}" class="block text-gray-300 text-sm font-bold mb-2">${q.text}</label>
+                    <input type="${q.type}" id="${q.key}" name="${q.key}" placeholder="${q.placeholder}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700">
+                </div>
+            `;
+            this.nextQuestionBtn.classList.remove('hidden'); // Show Next button for text/select inputs
+        } else if (q.type === 'select') {
+            let optionsHTML = q.options.map(option => `
+                <option value="${option}">${option}</option>
+            `).join('');
+            questionContent = `
+                <div class="mb-6">
+                    <label for="${q.key}" class="block text-gray-300 text-sm font-bold mb-2">${q.text}</label>
+                    <select id="${q.key}" name="${q.key}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700">
+                        <option value="" disabled selected>اختر...</option>
+                        ${optionsHTML}
+                    </select>
+                </div>
+            `;
+            this.nextQuestionBtn.classList.remove('hidden'); // Show Next button for text/select inputs
+        } else if (q.type === 'options_card') {
+            let optionsHTML = q.options.map(option => `
+                <div class="option-card p-4 rounded-lg cursor-pointer bg-gray-800 text-center" data-question-key="${q.key}" data-answer="${option}">
+                    <span class="${q.isEmoji ? 'text-4xl' : 'text-lg font-semibold'}">${option}</span>
+                </div>
+            `).join('');
+            questionContent = `
+                <div class="grid grid-cols-2 gap-4">
+                    ${optionsHTML}
+                </div>
+            `;
+            this.nextQuestionBtn.classList.add('hidden'); // Hide Next button for card options (auto-advances)
+        }
+
+        slide.innerHTML = `<h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">${q.text}</h2>${questionContent}`;
+        this.questionsContainer.appendChild(slide);
+        this.addInputListeners();
+    }
+
+    addInputListeners() {
+        const q = this.questions[this.state.currentQuestionIndex];
+        if (q.type === 'text' || q.type === 'email' || q.type === 'tel' || q.type === 'select') {
+            const inputElement = this.questionsContainer.querySelector(`[name="${q.key}"]`);
+            if (inputElement) {
+                inputElement.addEventListener('change', (event) => {
+                    this.state.answers[q.key] = event.target.value;
+                });
+                inputElement.addEventListener('blur', (event) => {
+                    this.state.answers[q.key] = event.target.value;
+                });
+            }
+        } else if (q.type === 'options_card') {
+            this.questionsContainer.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const key = card.dataset.questionKey;
+                    const answer = card.dataset.answer;
+                    this.state.answers[key] = answer;
+                    
+                    this.questionsContainer.querySelectorAll(`[data-question-key="${key}"]`).forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+
+                    setTimeout(() => this.nextQuestion(), 300); // Auto-advance for card options
+                });
+            });
+        }
+    }
+    
+    nextQuestion() {
+        // Save current answer before advancing for text/select inputs
+        const currentQ = this.questions[this.state.currentQuestionIndex];
+        if ((currentQ.type === 'text' || currentQ.type === 'email' || currentQ.type === 'tel' || currentQ.type === 'select') && this.questionsContainer.querySelector(`[name="${currentQ.key}"]`)) {
+            this.state.answers[currentQ.key] = this.questionsContainer.querySelector(`[name="${currentQ.key}"]`).value;
+        }
+
+        if (this.state.currentQuestionIndex < this.questions.length - 1) {
+            const currentSlide = document.getElementById(`question-${this.state.currentQuestionIndex}`);
+            currentSlide.classList.add('hidden-slide');
+            
+            this.state.currentQuestionIndex++;
+            
+            const nextSlide = document.getElementById(`question-${this.state.currentQuestionIndex}`);
+            nextSlide.classList.remove('hidden-slide');
+
+            const progressPercentage = ((this.state.currentQuestionIndex + 1) / this.questions.length) * 100;
+            this.progressBar.style.width = `${progressPercentage}%`;
+            this.renderQuestions(); // Re-render the new question
+        } else {
+            this.startGeneration();
+        }
+    }
+
+    startQuiz() {
+        // Hide main content and show AI card app container
+        document.getElementById('main-content').classList.add('hidden');
+        this.container.classList.remove('hidden');
+
+        this.heroSection.classList.remove('hidden'); // Show hero section first
+        this.quizSection.classList.add('hidden');
+        this.loadingSection.classList.add('hidden');
+        this.resultSection.classList.add('hidden');
+
+        this.state.currentQuestionIndex = 0; // Reset quiz state
+        this.state.answers = {};
+        this.state.generatedCardData = null;
+        this.progressBar.style.width = '0%';
+        this.renderQuestions(); // Render the first question
+    }
+
+    async startGeneration() {
+        this.quizSection.classList.add('hidden');
+        this.loadingSection.classList.remove('hidden');
+
+        try {
+            // Send user data to your Replit backend
+            const response = await fetch(aiCardBackendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state.answers)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.text();
+                console.error(`Backend error: ${response.status} - ${errorData}`);
+                this.state.generatedCardData = this.generateMockCardData(this.state.answers); // Fallback
+            } else {
+                const result = await response.json();
+                this.state.generatedCardData = result;
+                // Ensure color_name is either 'blue' or 'purple' for CSS classes
+                if (this.state.generatedCardData && this.state.generatedCardData.color_name && this.state.generatedCardData.color_name !== 'blue' && this.state.generatedCardData.color_name !== 'purple') {
+                    this.state.generatedCardData.color_name = 'blue'; // Fallback
+                }
+            }
+        } catch (error) {
+            console.error("Error sending data to backend:", error);
+            this.state.generatedCardData = this.generateMockCardData(this.state.answers); // Fallback
+        }
+
+        this.renderCard();
+        this.loadingSection.classList.add('hidden');
+        this.resultSection.classList.remove('hidden');
+    }
+
+    // Fallback or initial mock data generation (if API fails)
+    generateMockCardData(answers) {
+        const firstName = answers.full_name ? answers.full_name.split(' ')[0] : 'المستكشف';
+        const defaultMoodEmoji = answers.mood ? answers.mood.split(' ')[0] : '😎'; // Get just the emoji
+        const defaultColor = defaultMoodEmoji === '🤓' || defaultMoodEmoji === '🤔' || defaultMoodEmoji === '💡' ? {name: 'purple', hex: '#A855F7'} : {name: 'blue', hex: '#3B82F6'};
+
+        return {
+            nickname: `الرائد ${firstName}`,
+            analysis: 'شخصية فريدة تجمع بين الطموح وحب الاستكشاف الرقمي.',
+            ai_message: 'استمر في شغفك، فالمستقبل يحتاج لأمثالك!',
+            color_name: defaultColor.name,
+            color_hex: defaultColor.hex,
+            avatar_description: `أفاتار يعكس مزاج ${defaultMoodEmoji}`
+        };
+    }
+    
+    renderCard() {
+        const data = this.state.generatedCardData;
+        // Extract just the emoji from the mood string if it contains text
+        const avatarEmoji = data.avatar_description ? data.avatar_description.split(' ')[0] : '✨';
+        const cardHTML = `
+            <div id="digital-card" class="bg-gray-800 rounded-2xl p-6 md:p-8 relative overflow-hidden border-2 border-gray-700 card-shadow-${data.color_name}">
+                <div class="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-${data.color_name}-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-${data.color_name}-500/20 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 text-center">
+                    <img src="https://placehold.co/100x100/1F2937/FFFFFF?text=${encodeURIComponent(avatarEmoji)}" alt="Avatar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-600 shadow-lg">
+                    <h2 class="text-3xl font-extrabold neon-glow neon-glow-${data.color_name}">${data.nickname}</h2>
+                    <p class="text-gray-300 mt-4 text-lg">${data.analysis}</p>
+                    
+                    <div class="my-6 h-px bg-gray-600"></div>
+
+                    <div class="bg-gray-900/50 p-4 rounded-lg">
+                       <h4 class="text-sm font-bold text-gray-400 mb-2">رسالة الـ AI لك</h4>
+                       <p class="text-white italic">"${data.ai_message}"</p>
+                    </div>
+                    
+                    <div class="mt-6 flex justify-between items-center bg-gray-900/50 p-3 rounded-lg">
+                       <div class="text-right">
+                           <p class="text-xs text-gray-400">هويتك الرقمية الفريدة</p>
+                           <p class="text-sm font-semibold text-white">Amrikyy.me/AI</p>
+                       </div>
+                       <canvas id="qr-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        `;
+        this.cardContainer.innerHTML = cardHTML;
+        new QRious({
+            element: document.getElementById('qr-canvas'),
+            value: data.qr_link || `https://amrikyy.me/id/${Math.random().toString(36).substring(2, 9)}`,
+            background: 'transparent',
+            foreground: data.color_hex,
+            size: 80,
+            level: 'H'
+        });
+    }
+    
+    handleDownload() {
+        alert('لتحميل البطاقة، يرجى أخذ لقطة شاشة. نعمل على تطوير ميزة التحميل المباشر!');
+    }
+    
+    handleShareTwitter() {
+        const data = this.state.generatedCardData;
+        const text = `واو! اكتشفت هويتي الرقمية على @Amrikyy! أنا "${data.nickname}". تحدّى أصدقائك يكتشفوا هويتهم! #هوية_رقمية_AI`;
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(data.qr_link || 'https://amrikyy.me')}`;
+        window.open(url, '_blank');
+    }
+
+    handleCopyLink() {
+        const data = this.state.generatedCardData;
+        const linkToCopy = data.qr_link || `https://amrikyy.me/id/${Math.random().toString(36).substring(2, 9)}`;
+        const dummy = document.createElement('textarea');
+        document.body.appendChild(dummy);
+        dummy.value = linkToCopy;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        this.copyLinkFeedback.textContent = 'تم نسخ الرابط بنجاح!';
+        setTimeout(() => { this.copyLinkFeedback.textContent = ''; }, 2000);
+    }
+
+    handleRestart() {
+        this.state.currentQuestionIndex = 0;
+        this.state.answers = {};
+        this.state.generatedCardData = null;
+        this.resultSection.classList.add('hidden');
+        this.heroSection.classList.remove('hidden');
+        this.quizSection.classList.add('hidden'); // تأكد من إخفاء قسم الاختبار أيضًا
+        this.container.classList.add('hidden'); // إخفاء حاوية تطبيق البطاقة بالكامل
+        document.getElementById('main-content').classList.remove('hidden'); // إظهار المحتوى الرئيسي
+        this.progressBar.style.width = '0%';
+        this.renderQuestions(); // إعادة عرض السؤال الأول
+    }
+  }
+  
+  // Initialize the AmrikyyAICard instance when the DOM is fully loaded
+  let amrikyyAICardInstance;
+  document.addEventListener('DOMContentLoaded', () => {
+      amrikyyAICardInstance = new AmrikyyAICard();
+  });
+
+  // Expose a global function for the chatbot to call
+  window.startAmrikyyAICardQuiz = () => {
+      if (amrikyyAICardInstance) {
+          amrikyyAICardInstance.startQuiz();
+      } else {
+          console.error("AmrikyyAICard instance not initialized yet. Retrying in 100ms...");
+          setTimeout(window.startAmrikyyAICardQuiz, 100);
+      }
+  };
 
 }); // End of DOMContentLoaded
