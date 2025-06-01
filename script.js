@@ -886,15 +886,3 @@ function hideLoadingOverlay() {
     loadingOverlay.classList.add('hidden');
   }
 }
-
-// Export functions for external use
-export {
-  initLoading,
-  generateParticles,
-  initNavigation,
-  initFormSteps,
-  initChatbot,
-  initImageUpload,
-  initFormSubmission,
-  initShareFunctionality
-};
