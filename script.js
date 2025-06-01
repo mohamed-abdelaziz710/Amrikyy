@@ -998,7 +998,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.generatedCardData = null;
         this.showSection(this.introSection); // Go back to intro screen
         if (this.mainContent) this.mainContent.classList.remove('hidden'); // Show CV section again
-        if (this.aiCardSection) this.aiCardSection.classList.add('hidden'); // Hide AI card app container
+        // لا تُخفي قسم ai-id-card-section أبداً، فقط أعده إلى شاشة البداية
         
         document.querySelectorAll('.interest-tag').forEach(tag => tag.classList.remove('selected'));
         document.querySelectorAll('.emoji-option').forEach(emoji => emoji.classList.remove('selected'));
