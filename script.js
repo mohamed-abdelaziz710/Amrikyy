@@ -99,6 +99,44 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize share functionality
   initShareFunctionality();
+  
+  // Hero section CTA buttons
+  const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
+  const downloadCvHeroBtn = document.getElementById('downloadCvHeroBtn');
+  const aiToolBtn = document.getElementById('aiToolBtn');
+  const cvBtn = document.getElementById('cvBtn');
+
+  // Scroll to AI Tool section from hero
+  if (aiToolHeroBtn) {
+    aiToolHeroBtn.addEventListener('click', () => {
+      const idGeneratorSection = document.getElementById('idGeneratorSection');
+      if (idGeneratorSection) {
+        idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Scroll to AI Tool section from header
+  if (aiToolBtn) {
+    aiToolBtn.addEventListener('click', () => {
+      const idGeneratorSection = document.getElementById('idGeneratorSection');
+      if (idGeneratorSection) {
+        idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Download CV from hero or header
+  if (downloadCvHeroBtn) {
+    downloadCvHeroBtn.addEventListener('click', () => {
+      window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
+    });
+  }
+  if (cvBtn) {
+    cvBtn.addEventListener('click', () => {
+      window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
+    });
+  }
 });
 
 /**
@@ -708,44 +746,6 @@ async function simulateApiCall(payload) {
         expiry_date: "2026-06-01T00:00:00Z",
         security_features: ["Biometric Verification", "Quantum Encryption"],
         qr_data: "https://amrikyy.com/verify/AX-2025-78943",
-        qr_code: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAABapJREFUeF7tnVty4zAMBJP7H9o5QvKxm7WdKoukQAzRmv+RGDQeQKQU5/X9/f3z+vCfFQKvD5CMJvkl8gHEbJQPIGZAfgh9ADGb5APIB4gXAq+X1yC/s/wMWV6jfGb5z5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzywfQJbXKJ9ZPoAsr1E+s3wAWV6jfGb5ALK8RvnM8gFkeY3ymeUDyPIa5TPLB5DlNcpnlg8gy2uUzyz/H5+XpEDHGHh1AAAAAElFTkSuQmCC",
-        created_at: new Date().toISOString(),
-        user_data: {
-          name: payload.full_name,
-          email: payload.email,
-          interests: payload.interests.split(',').map(i => i.trim())
-        }
-      });
-    }, 2000);
-  });
-}
-
-/**
- * Generate ID card HTML
- * @param {Object} data - Card data
- */
-function generateIdCard(data) {
-  const digitalIdCard = document.getElementById('digitalIdCard');
-  if (!digitalIdCard) return;
-  
-  // Get user avatar or use default
-  const avatarSrc = userData.avatarImage || 'assets/default-avatar.png';
-  
-  // Generate HTML for the ID card
-  digitalIdCard.innerHTML = `
-    <!-- Floating particles for dynamic effect -->
-    <div class="particles">
-      <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
-      <div class="particle" style="top: 80%; left: 40%; animation-delay: 2s;"></div>
-      <div class="particle" style="top: 40%; left: 30%; animation-delay: 4s;"></div>
-      <div class="particle" style="top: 60%; left: 70%; animation-delay: 1s;"></div>
-      <div class="particle" style="top: 30%; left: 85%; animation-delay: 3s;"></div>
-      <div class="particle" style="top: 70%; left: 20%; animation-delay: 5s;"></div>
-      <div class="particle" style="top: 15%; left: 60%; animation-delay: 2.5s;"></div>
-      <div class="particle" style="top: 90%; left: 50%; animation-delay: 1.5s;"></div>
-    </div>
-
-    <div class="generated-card-display">
       <div class="card-header-display">
         <div class="card-avatar-container">
           <div class="avatar-ring"></div>
