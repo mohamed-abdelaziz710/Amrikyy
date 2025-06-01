@@ -160,7 +160,40 @@ document.addEventListener('DOMContentLoaded', () => {
       downloadCV: 'Download CV',
       podcastTitle: "🎧 Podcast", // New translation for podcast section title
       podcastDescription: "Listen to my latest podcast episodes about technology, cryptocurrencies, and more!", // New translation for podcast description
-      listenNow: "Listen Now" // New translation for listen now link
+      listenNow: "Listen Now", // New translation for listen now link
+      // AI ID Card Translations
+      aiIdCardTitle: "AI Digital ID Card",
+      aiIdCardIntro: "Discover your unique AI-generated digital identity!",
+      startAiIdCardBtn: "Discover Your Identity Now ✨",
+      fullNameLabel: "Full Name:",
+      fullNamePlaceholder: "Enter your full name",
+      emailLabel: "Email:",
+      emailPlaceholder: "Enter your email",
+      phoneLabel: "Phone (optional):",
+      phonePlaceholder: "Enter your phone number",
+      interestsLabel: "Your Interests (select up to 3):",
+      techInterest: "Technology",
+      cryptoInterest: "Cryptocurrency",
+      entrepreneurshipInterest: "Entrepreneurship",
+      aiInterest: "Artificial Intelligence",
+      cybersecurityInterest: "Cybersecurity",
+      digitalArtInterest: "Digital Art",
+      musicInterest: "Music",
+      travelInterest: "Travel",
+      gamingInterest: "Gaming",
+      personalityWordLabel: "One word to describe yourself:",
+      personalityWordPlaceholder: "Example: Creative, Ambitious, Calm",
+      learningGoalLabel: "What do you want to learn in 2025?",
+      learningGoalPlaceholder: "Example: Programming, new language, investing",
+      moodLabel: "Your mood today?",
+      prevBtn: "Previous",
+      nextBtn: "Next",
+      generateCardBtn: "Generate My Card!",
+      loadingMessage: "Generating your unique digital identity...",
+      viewCardLink: "View My Card",
+      downloadCardBtn: '<i class="fas fa-download"></i> Download Card',
+      shareCardBtn: '<i class="fas fa-share-alt"></i> Share',
+      resetCardBtn: '<i class="fas fa-redo-alt"></i> Create Another'
     },
     // Arabic translations
     ar: {
@@ -246,7 +279,40 @@ document.addEventListener('DOMContentLoaded', () => {
       downloadCV: 'تحميل السيرة الذاتية',
       podcastTitle: "🎧 بودكاست", // ترجمة جديدة لعنوان قسم البودكاست
       podcastDescription: "استمع إلى أحدث حلقات البودكاست الخاصة بي حول التكنولوجيا، العملات الرقمية، والمزيد!", // ترجمة جديدة لوصف البودكاست
-      listenNow: "استمع الآن" // ترجمة جديدة لرابط الاستماع
+      listenNow: "استمع الآن", // ترجمة جديدة لرابط الاستماع
+      // AI ID Card Translations
+      aiIdCardTitle: "بطاقة الهوية الرقمية AI",
+      aiIdCardIntro: "اكتشف هويتك الرقمية الفريدة التي تم إنشاؤها بواسطة الذكاء الاصطناعي!",
+      startAiIdCardBtn: "اكتشف هويتك الآن ✨",
+      fullNameLabel: "الاسم الكامل:",
+      fullNamePlaceholder: "أدخل اسمك الكامل",
+      emailLabel: "البريد الإلكتروني:",
+      emailPlaceholder: "أدخل بريدك الإلكتروني",
+      phoneLabel: "رقم الهاتف (اختياري):",
+      phonePlaceholder: "أدخل رقم هاتفك",
+      interestsLabel: "اهتماماتك (اختر ما يصل إلى 3):",
+      techInterest: "التكنولوجيا",
+      cryptoInterest: "العملات الرقمية",
+      entrepreneurshipInterest: "ريادة الأعمال",
+      aiInterest: "الذكاء الاصطناعي",
+      cybersecurityInterest: "الأمن السيبراني",
+      digitalArtInterest: "الفن الرقمي",
+      musicInterest: "الموسيقى",
+      travelInterest: "السفر",
+      gamingInterest: "الألعاب",
+      personalityWordLabel: "كلمة تصف شخصيتك:",
+      personalityWordPlaceholder: "مثال: مبدع، طموح، هادئ",
+      learningGoalLabel: "ماذا تريد أن تتعلمه في 2025؟",
+      learningGoalPlaceholder: "مثال: برمجة، لغة جديدة، استثمار",
+      moodLabel: "مزاجك اليوم؟",
+      prevBtn: "السابق",
+      nextBtn: "التالي",
+      generateCardBtn: "أنشئ بطاقتي!",
+      loadingMessage: "يتم إنشاء هويتك الرقمية الفريدة...",
+      viewCardLink: "عرض بطاقتي",
+      downloadCardBtn: '<i class="fas fa-download"></i> تحميل البطاقة',
+      shareCardBtn: '<i class="fas fa-share-alt"></i> مشاركة',
+      resetCardBtn: '<i class="fas fa-redo-alt"></i> إنشاء واحدة أخرى'
     }
   };
 
@@ -486,355 +552,388 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // =========== AI Digital ID Card Functionality ===========
-  // This class encapsulates the logic for the AI ID card feature.
   class AmrikyyAICard {
-    constructor(containerId = 'ai-card-app-container') {
-        this.container = document.getElementById(containerId);
-        if (!this.container) {
-            console.error(`Container with ID '${containerId}' for AI Card not found.`);
-            return;
-        }
+    constructor() {
+        this.aiCardSection = document.getElementById('ai-id-card-section');
+        this.introSection = document.getElementById('ai-id-card-intro');
+        this.quizSection = document.getElementById('ai-id-card-quiz');
+        this.loadingSection = document.getElementById('ai-id-card-loading');
+        this.resultSection = document.getElementById('ai-id-card-result');
+        this.mainContent = document.getElementById('main-content'); // CV section container
 
-        this.state = {
-            currentQuestionIndex: 0,
-            answers: {},
-            generatedCardData: null
-        };
+        this.startBtn = document.getElementById('startAiIdCardBtn');
+        this.quizQuestionEl = document.getElementById('quizQuestion');
+        this.currentQuestionNumEl = document.getElementById('currentQuestionNum');
+        this.totalQuestionsNumEl = document.getElementById('totalQuestionsNum');
+        this.prevQuizBtn = document.getElementById('prevQuizBtn');
+        this.nextQuizBtn = document.getElementById('nextQuizBtn');
+        this.generateCardBtn = document.getElementById('generateCardBtn');
 
-        this.questions = [
-            {
-                key: 'full_name',
-                text: 'ما هو اسمك الكامل؟',
-                type: 'text',
-                placeholder: 'أدخل اسمك الكامل'
-            },
-            {
-                key: 'email',
-                text: 'ما هو بريدك الإلكتروني؟',
-                type: 'email',
-                placeholder: 'أدخل بريدك الإلكتروني'
-            },
-            {
-                key: 'phone_number',
-                text: 'ما هو رقم هاتفك (اختياري)؟',
-                type: 'tel',
-                placeholder: 'أدخل رقم هاتفك'
-            },
-            {
-                key: 'interests',
-                text: 'ما هي اهتماماتك الرئيسية؟',
-                type: 'select',
-                options: ['الذكاء الاصطناعي', 'التصميم الجرافيكي', 'ريادة الأعمال', 'تطوير الألعاب', 'الفنون والموسيقى', 'الرياضة واللياقة']
-            },
-            {
-                key: 'personality_word',
-                text: 'صِف نفسك بكلمة واحدة.',
-                type: 'text',
-                placeholder: 'مثال: مغامر، مبدع، تحليلي'
-            },
-            {
-                key: 'learning_goal',
-                text: 'ماذا تود أن تتعلمه في 2025؟',
-                type: 'text',
-                placeholder: 'مثال: مهارة تقنية جديدة، لغة، آلة موسيقية'
-            },
-            {
-                key: 'mood',
-                text: 'صف مزاجك اليوم؟',
-                type: 'options_card', // نوع جديد لخيارات البطاقات
-                isEmoji: true,
-                options: ['😎 متفائل', '🤓 فضولي', '🚀 طموح', '🤔 متأمل', '😂 مرح', '💡 مبدع']
-            }
+        this.cardAvatar = document.getElementById('cardAvatar');
+        this.cardNickname = document.getElementById('cardNickname');
+        this.cardAnalysis = document.getElementById('cardAnalysis');
+        this.cardAiMessage = document.getElementById('cardAiMessage');
+        this.cardQrCode = document.getElementById('cardQrCode');
+        this.cardLink = document.getElementById('cardLink');
+
+        this.downloadCardBtn = document.getElementById('downloadCardBtn');
+        this.shareCardBtn = document.getElementById('shareCardBtn');
+        this.resetCardBtn = document.getElementById('resetCardBtn');
+
+        this.quizSteps = [
+            { id: 'quizStep1', question: 'ما هو اسمك الكامل؟', inputId: 'fullNameInput', type: 'text', key: 'full_name' },
+            { id: 'quizStep2', question: 'ما هو بريدك الإلكتروني؟', inputId: 'emailInput', type: 'email', key: 'email' },
+            { id: 'quizStep3', question: 'ما هو رقم هاتفك (اختياري)؟', inputId: 'phoneInput', type: 'tel', key: 'phone_number' },
+            { id: 'quizStep4', question: 'ما هي اهتماماتك الرئيسية؟ (اختر ما يصل إلى 3)', type: 'interests', key: 'interests' },
+            { id: 'quizStep5', question: 'صِف نفسك بكلمة واحدة.', inputId: 'personalityWordInput', type: 'text', key: 'personality_word' },
+            { id: 'quizStep6', question: 'ماذا تود أن تتعلمه في 2025؟', inputId: 'learningGoalInput', type: 'text', key: 'learning_goal' },
+            { id: 'quizStep7', question: 'صف مزاجك اليوم؟', type: 'mood', key: 'mood' }
         ];
 
-        // Cache DOM elements
-        this.heroSection = this.container.querySelector('#hero-section');
-        this.quizSection = this.container.querySelector('#quiz-section');
-        this.loadingSection = this.container.querySelector('#loading-section');
-        this.resultSection = this.container.querySelector('#result-section');
-        this.questionsContainer = this.container.querySelector('#questions-container');
-        this.progressBar = this.container.querySelector('#progress-bar');
-        this.cardContainer = this.container.querySelector('#card-container');
-        this.copyLinkFeedback = this.container.querySelector('#copy-link-feedback');
-        this.nextQuestionBtn = this.container.querySelector('#next-question-btn'); // زر التالي
+        this.currentStep = 0;
+        this.answers = {};
+        this.selectedInterests = [];
+        this.maxInterests = 3;
 
-        // Attach event listeners
-        this.container.querySelector('#start-btn').addEventListener('click', () => this.startQuiz());
-        this.nextQuestionBtn.addEventListener('click', () => this.nextQuestion()); // مستمع لزر التالي
-        this.container.querySelector('#download-btn').addEventListener('click', () => this.handleDownload());
-        this.container.querySelector('#share-twitter-btn').addEventListener('click', () => this.handleShareTwitter());
-        this.container.querySelector('#copy-link-btn').addEventListener('click', () => this.handleCopyLink());
-        this.container.querySelector('#restart-btn').addEventListener('click', () => this.handleRestart());
-
-        // Initial render of questions (will be hidden until quiz starts)
-        this.renderQuestions();
+        this.initListeners();
+        this.showSection(this.introSection); // Start with intro section
+        this.totalQuestionsNumEl.textContent = this.quizSteps.length;
     }
 
-    renderQuestions() {
-        this.questionsContainer.innerHTML = '';
-        const q = this.questions[this.state.currentQuestionIndex];
-        const slide = document.createElement('div');
-        slide.id = `question-${this.state.currentQuestionIndex}`;
-        slide.className = `question-slide w-full`;
+    initListeners() {
+        this.startBtn.addEventListener('click', () => this.startQuiz());
+        this.nextQuizBtn.addEventListener('click', () => this.handleNext());
+        this.prevQuizBtn.addEventListener('click', () => this.handlePrev());
+        this.generateCardBtn.addEventListener('click', () => this.generateCard());
+        this.resetCardBtn.addEventListener('click', () => this.resetQuiz());
 
-        let questionContent = '';
+        // Attach listeners for interests and mood options
+        document.querySelectorAll('.interest-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => this.toggleInterest(e.target));
+        });
+        document.querySelectorAll('.emoji-option').forEach(emoji => {
+            emoji.addEventListener('click', (e) => this.selectMood(e.target));
+        });
 
-        if (q.type === 'text' || q.type === 'email' || q.type === 'tel') {
-            questionContent = `
-                <div class="mb-6">
-                    <label for="${q.key}" class="block text-gray-300 text-sm font-bold mb-2">${q.text}</label>
-                    <input type="${q.type}" id="${q.key}" name="${q.key}" placeholder="${q.placeholder}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700">
-                </div>
-            `;
-            this.nextQuestionBtn.classList.remove('hidden'); // Show Next button for text/select inputs
-        } else if (q.type === 'select') {
-            let optionsHTML = q.options.map(option => `
-                <option value="${option}">${option}</option>
-            `).join('');
-            questionContent = `
-                <div class="mb-6">
-                    <label for="${q.key}" class="block text-gray-300 text-sm font-bold mb-2">${q.text}</label>
-                    <select id="${q.key}" name="${q.key}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700">
-                        <option value="" disabled selected>اختر...</option>
-                        ${optionsHTML}
-                    </select>
-                </div>
-            `;
-            this.nextQuestionBtn.classList.remove('hidden'); // Show Next button for text/select inputs
-        } else if (q.type === 'options_card') {
-            let optionsHTML = q.options.map(option => `
-                <div class="option-card p-4 rounded-lg cursor-pointer bg-gray-800 text-center" data-question-key="${q.key}" data-answer="${option}">
-                    <span class="${q.isEmoji ? 'text-4xl' : 'text-lg font-semibold'}">${option}</span>
-                </div>
-            `).join('');
-            questionContent = `
-                <div class="grid grid-cols-2 gap-4">
-                    ${optionsHTML}
-                </div>
-            `;
-            this.nextQuestionBtn.classList.add('hidden'); // Hide Next button for card options (auto-advances)
-        }
-
-        slide.innerHTML = `<h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">${q.text}</h2>${questionContent}`;
-        this.questionsContainer.appendChild(slide);
-        this.addInputListeners();
+        this.downloadCardBtn.addEventListener('click', () => this.handleDownload());
+        this.shareCardBtn.addEventListener('click', () => this.handleShare());
     }
 
-    addInputListeners() {
-        const q = this.questions[this.state.currentQuestionIndex];
-        if (q.type === 'text' || q.type === 'email' || q.type === 'tel' || q.type === 'select') {
-            const inputElement = this.questionsContainer.querySelector(`[name="${q.key}"]`);
-            if (inputElement) {
-                inputElement.addEventListener('change', (event) => {
-                    this.state.answers[q.key] = event.target.value;
-                });
-                inputElement.addEventListener('blur', (event) => {
-                    this.state.answers[q.key] = event.target.value;
-                });
-            }
-        } else if (q.type === 'options_card') {
-            this.questionsContainer.querySelectorAll('.option-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const key = card.dataset.questionKey;
-                    const answer = card.dataset.answer;
-                    this.state.answers[key] = answer;
-                    
-                    this.questionsContainer.querySelectorAll(`[data-question-key="${key}"]`).forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-
-                    setTimeout(() => this.nextQuestion(), 300); // Auto-advance for card options
-                });
-            });
-        }
-    }
-    
-    nextQuestion() {
-        // Save current answer before advancing for text/select inputs
-        const currentQ = this.questions[this.state.currentQuestionIndex];
-        if ((currentQ.type === 'text' || currentQ.type === 'email' || currentQ.type === 'tel' || currentQ.type === 'select') && this.questionsContainer.querySelector(`[name="${currentQ.key}"]`)) {
-            this.state.answers[currentQ.key] = this.questionsContainer.querySelector(`[name="${currentQ.key}"]`).value;
-        }
-
-        if (this.state.currentQuestionIndex < this.questions.length - 1) {
-            const currentSlide = document.getElementById(`question-${this.state.currentQuestionIndex}`);
-            currentSlide.classList.add('hidden-slide');
-            
-            this.state.currentQuestionIndex++;
-            
-            const nextSlide = document.getElementById(`question-${this.state.currentQuestionIndex}`);
-            nextSlide.classList.remove('hidden-slide');
-
-            const progressPercentage = ((this.state.currentQuestionIndex + 1) / this.questions.length) * 100;
-            this.progressBar.style.width = `${progressPercentage}%`;
-            this.renderQuestions(); // Re-render the new question
-        } else {
-            this.startGeneration();
-        }
-    }
-
-    startQuiz() {
-        // Hide main content and show AI card app container
-        document.getElementById('main-content').classList.add('hidden');
-        this.container.classList.remove('hidden');
-
-        this.heroSection.classList.remove('hidden'); // Show hero section first
+    showSection(sectionToShow) {
+        // Hide all main sections first
+        this.introSection.classList.add('hidden');
         this.quizSection.classList.add('hidden');
         this.loadingSection.classList.add('hidden');
         this.resultSection.classList.add('hidden');
-
-        this.state.currentQuestionIndex = 0; // Reset quiz state
-        this.state.answers = {};
-        this.state.generatedCardData = null;
-        this.progressBar.style.width = '0%';
-        this.renderQuestions(); // Render the first question
+        
+        // Show the requested section
+        sectionToShow.classList.remove('hidden');
     }
 
-    async startGeneration() {
-        this.quizSection.classList.add('hidden');
-        this.loadingSection.classList.remove('hidden');
+    startQuiz() {
+        this.mainContent.classList.add('hidden'); // Hide CV section
+        this.aiCardSection.classList.remove('hidden'); // Show AI card app container
+        this.showSection(this.quizSection);
+        this.currentStep = 0;
+        this.answers = {};
+        this.selectedInterests = [];
+        this.renderQuizStep();
+    }
+
+    renderQuizStep() {
+        // Hide all quiz steps
+        document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+
+        const stepData = this.quizSteps[this.currentStep];
+        const currentStepEl = document.getElementById(stepData.id);
+        if (currentStepEl) {
+            currentStepEl.classList.remove('hidden');
+            this.quizQuestionEl.textContent = stepData.question;
+            this.currentQuestionNumEl.textContent = this.currentStep + 1;
+
+            // Handle input values
+            if (stepData.inputId) {
+                const inputEl = document.getElementById(stepData.inputId);
+                if (inputEl) {
+                    inputEl.value = this.answers[stepData.key] || '';
+                }
+            }
+
+            // Handle interests
+            if (stepData.type === 'interests') {
+                document.querySelectorAll('.interest-tag').forEach(tag => {
+                    if (this.selectedInterests.includes(tag.dataset.interest)) {
+                        tag.classList.add('selected');
+                    } else {
+                        tag.classList.remove('selected');
+                    }
+                });
+            }
+
+            // Handle mood
+            if (stepData.type === 'mood') {
+                document.querySelectorAll('.emoji-option').forEach(emoji => {
+                    if (this.answers[stepData.key] === emoji.dataset.mood) {
+                        emoji.classList.add('selected');
+                    } else {
+                        emoji.classList.remove('selected');
+                    }
+                });
+            }
+        }
+
+        this.updateNavigationButtons();
+    }
+
+    updateNavigationButtons() {
+        this.prevQuizBtn.classList.toggle('hidden', this.currentStep === 0);
+        this.nextQuizBtn.classList.toggle('hidden', this.currentStep === this.quizSteps.length - 1);
+        this.generateCardBtn.classList.toggle('hidden', this.currentStep !== this.quizSteps.length - 1);
+
+        // Update progress bar
+        const progressPercentage = ((this.currentStep + 1) / this.quizSteps.length) * 100;
+        document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+    }
+
+    handleNext() {
+        const stepData = this.quizSteps[this.currentStep];
+        // Save current answer before moving
+        if (stepData.inputId) {
+            this.answers[stepData.key] = document.getElementById(stepData.inputId).value.trim();
+        } else if (stepData.type === 'interests') {
+            this.answers[stepData.key] = this.selectedInterests;
+        } else if (stepData.type === 'mood') {
+            // Mood is already saved by selectMood function
+        }
+
+        // Basic validation (can be enhanced)
+        if (stepData.key !== 'phone_number' && !this.answers[stepData.key] && stepData.type !== 'interests' && stepData.type !== 'mood') {
+            alert('الرجاء إدخال قيمة لهذا الحقل.'); // Use custom modal in production
+            return;
+        }
+        if (stepData.type === 'interests' && this.selectedInterests.length === 0) {
+            alert('الرجاء اختيار اهتمام واحد على الأقل.'); // Use custom modal
+            return;
+        }
+        if (stepData.type === 'mood' && !this.answers[stepData.key]) {
+            alert('الرجاء اختيار مزاجك اليوم.'); // Use custom modal
+            return;
+        }
+
+
+        if (this.currentStep < this.quizSteps.length - 1) {
+            this.currentStep++;
+            this.renderQuizStep();
+        }
+    }
+
+    handlePrev() {
+        if (this.currentStep > 0) {
+            this.currentStep--;
+            this.renderQuizStep();
+        }
+    }
+
+    toggleInterest(tagElement) {
+        const interest = tagElement.dataset.interest;
+        const index = this.selectedInterests.indexOf(interest);
+
+        if (index > -1) {
+            this.selectedInterests.splice(index, 1);
+            tagElement.classList.remove('selected');
+        } else {
+            if (this.selectedInterests.length < this.maxInterests) {
+                this.selectedInterests.push(interest);
+                tagElement.classList.add('selected');
+            } else {
+                alert(`يمكنك اختيار ما يصل إلى ${this.maxInterests} اهتمامات فقط.`); // Use custom modal
+            }
+        }
+        this.answers.interests = this.selectedInterests; // Update answers object
+    }
+
+    selectMood(emojiElement) {
+        const mood = emojiElement.dataset.mood;
+        document.querySelectorAll('.emoji-option').forEach(el => el.classList.remove('selected'));
+        emojiElement.classList.add('selected');
+        this.answers.mood = mood;
+        // Auto-advance for mood selection
+        setTimeout(() => this.handleNext(), 300);
+    }
+
+    async generateCard() {
+        // Final save of current answer if it's the last step
+        const stepData = this.quizSteps[this.currentStep];
+        if (stepData.inputId) {
+            this.answers[stepData.key] = document.getElementById(stepData.inputId).value.trim();
+        } else if (stepData.type === 'interests') {
+            this.answers[stepData.key] = this.selectedInterests;
+        } else if (stepData.type === 'mood') {
+            // Mood is already saved
+        }
+
+        // Basic final validation
+        for (const step of this.quizSteps) {
+            if (step.key !== 'phone_number') { // Phone is optional
+                if (step.type === 'text' || step.type === 'email') {
+                    if (!this.answers[step.key]) {
+                        alert(`الرجاء إدخال ${translations[currentLang][`${step.key}Label`] || step.question}`);
+                        this.currentStep = this.quizSteps.findIndex(q => q.key === step.key);
+                        this.renderQuizStep();
+                        return;
+                    }
+                } else if (step.type === 'interests' && this.answers.interests.length === 0) {
+                    alert(translations[currentLang].interestsLabel);
+                    this.currentStep = this.quizSteps.findIndex(q => q.key === step.key);
+                    this.renderQuizStep();
+                    return;
+                } else if (step.type === 'mood' && !this.answers.mood) {
+                    alert(translations[currentLang].moodLabel);
+                    this.currentStep = this.quizSteps.findIndex(q => q.key === step.key);
+                    this.renderQuizStep();
+                    return;
+                }
+            }
+        }
+
+        this.showSection(this.loadingSection);
 
         try {
-            // Send user data to your Replit backend
             const response = await fetch(aiCardBackendUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state.answers)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.answers)
             });
 
             if (!response.ok) {
                 const errorData = await response.text();
                 console.error(`Backend error: ${response.status} - ${errorData}`);
-                this.state.generatedCardData = this.generateMockCardData(this.state.answers); // Fallback
+                // Fallback to mock data on error
+                this.generatedCardData = this.generateMockCardData(this.answers);
             } else {
-                const result = await response.json();
-                this.state.generatedCardData = result;
+                this.generatedCardData = await response.json();
                 // Ensure color_name is either 'blue' or 'purple' for CSS classes
-                if (this.state.generatedCardData && this.state.generatedCardData.color_name && this.state.generatedCardData.color_name !== 'blue' && this.state.generatedCardData.color_name !== 'purple') {
-                    this.state.generatedCardData.color_name = 'blue'; // Fallback
+                if (this.generatedCardData && this.generatedCardData.color_name && this.generatedCardData.color_name !== 'blue' && this.generatedCardData.color_name !== 'purple') {
+                    this.generatedCardData.color_name = 'blue'; // Fallback
                 }
             }
         } catch (error) {
             console.error("Error sending data to backend:", error);
-            this.state.generatedCardData = this.generateMockCardData(this.state.answers); // Fallback
+            // Fallback to mock data on network error
+            this.generatedCardData = this.generateMockCardData(this.answers);
         }
 
-        this.renderCard();
-        this.loadingSection.classList.add('hidden');
-        this.resultSection.classList.remove('hidden');
+        this.renderGeneratedCard();
+        this.showSection(this.resultSection);
     }
 
-    // Fallback or initial mock data generation (if API fails)
     generateMockCardData(answers) {
         const firstName = answers.full_name ? answers.full_name.split(' ')[0] : 'المستكشف';
         const defaultMoodEmoji = answers.mood ? answers.mood.split(' ')[0] : '😎'; // Get just the emoji
-        const defaultColor = defaultMoodEmoji === '🤓' || defaultMoodEmoji === '🤔' || defaultMoodEmoji === '💡' ? {name: 'purple', hex: '#A855F7'} : {name: 'blue', hex: '#3B82F6'};
+        const defaultColor = (defaultMoodEmoji === '🤓' || defaultMoodEmoji === '🤔' || defaultMoodEmoji === '💡') ? {name: 'purple', hex: '#b600ff'} : {name: 'blue', hex: '#00d4ff'};
 
         return {
             nickname: `الرائد ${firstName}`,
-            analysis: 'شخصية فريدة تجمع بين الطموح وحب الاستكشاف الرقمي.',
-            ai_message: 'استمر في شغفك، فالمستقبل يحتاج لأمثالك!',
+            analysis: 'شخصية فريدة تجمع بين الطموح وحب الاستكشاف الرقمي، دائمًا ما تبحث عن الجديد والمثير في عالم التكنولوجيا.',
+            ai_message: 'استمر في شغفك، فالمستقبل يحتاج لأمثالك! اجعل كل يوم فرصة للتعلم والنمو.',
             color_name: defaultColor.name,
             color_hex: defaultColor.hex,
-            avatar_description: `أفاتار يعكس مزاج ${defaultMoodEmoji}`
+            avatar_description: defaultMoodEmoji, // Just the emoji for placeholder
+            qr_link: 'https://amrikyy.me/ai-id-card-demo' // Demo link for mock data
         };
     }
-    
-    renderCard() {
-        const data = this.state.generatedCardData;
-        // Extract just the emoji from the mood string if it contains text
-        const avatarEmoji = data.avatar_description ? data.avatar_description.split(' ')[0] : '✨';
-        const cardHTML = `
-            <div id="digital-card" class="bg-gray-800 rounded-2xl p-6 md:p-8 relative overflow-hidden border-2 border-gray-700 card-shadow-${data.color_name}">
-                <div class="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-${data.color_name}-500/20 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-${data.color_name}-500/20 rounded-full blur-3xl"></div>
-                
-                <div class="relative z-10 text-center">
-                    <img src="https://placehold.co/100x100/1F2937/FFFFFF?text=${encodeURIComponent(avatarEmoji)}" alt="Avatar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-600 shadow-lg">
-                    <h2 class="text-3xl font-extrabold neon-glow neon-glow-${data.color_name}">${data.nickname}</h2>
-                    <p class="text-gray-300 mt-4 text-lg">${data.analysis}</p>
-                    
-                    <div class="my-6 h-px bg-gray-600"></div>
 
-                    <div class="bg-gray-900/50 p-4 rounded-lg">
-                       <h4 class="text-sm font-bold text-gray-400 mb-2">رسالة الـ AI لك</h4>
-                       <p class="text-white italic">"${data.ai_message}"</p>
-                    </div>
-                    
-                    <div class="mt-6 flex justify-between items-center bg-gray-900/50 p-3 rounded-lg">
-                       <div class="text-right">
-                           <p class="text-xs text-gray-400">هويتك الرقمية الفريدة</p>
-                           <p class="text-sm font-semibold text-white">Amrikyy.me/AI</p>
-                       </div>
-                       <canvas id="qr-canvas"></canvas>
-                    </div>
-                </div>
-            </div>
-        `;
-        this.cardContainer.innerHTML = cardHTML;
+    renderGeneratedCard() {
+        const data = this.generatedCardData;
+        if (!data) return;
+
+        this.cardAvatar.src = `https://placehold.co/100x100/${data.color_hex.substring(1)}/000?text=${encodeURIComponent(data.avatar_description || 'AI')}`;
+        this.cardNickname.textContent = data.nickname;
+        this.cardAnalysis.textContent = data.analysis;
+        this.cardAiMessage.textContent = data.ai_message;
+
+        // Update card display style based on generated color
+        const cardDisplay = this.resultSection.querySelector('.generated-card-display');
+        if (cardDisplay) {
+            // Remove previous color classes
+            cardDisplay.classList.remove('border-blue-500', 'border-purple-500', 'border-green-500', 'border-pink-500');
+            cardDisplay.style.borderColor = data.color_hex; // Apply dynamic border color
+            cardDisplay.style.boxShadow = `0 0 15px ${data.color_hex}`; // Apply dynamic shadow
+            cardDisplay.querySelector('h3').style.color = data.color_hex; // Nickname color
+            cardDisplay.querySelector('h3').style.textShadow = `0 0 10px ${data.color_hex}`; // Nickname shadow
+            cardDisplay.querySelector('.card-avatar-display').style.borderColor = data.color_hex; // Avatar border
+            cardDisplay.querySelector('.card-avatar-display').style.boxShadow = `0 0 15px ${data.color_hex}`; // Avatar shadow
+            cardDisplay.querySelector('.card-link-display').style.color = data.color_hex; // Link color
+            
+            // Update the conic gradient for the border animation
+            const beforePseudo = cardDisplay.querySelector('style') || document.createElement('style');
+            if (!cardDisplay.querySelector('style')) {
+                cardDisplay.appendChild(beforePseudo);
+            }
+            beforePseudo.textContent = `
+                .generated-card-display::before {
+                    background: conic-gradient(from 0deg at 50% 50%, ${data.color_hex} 0%, transparent 25%, transparent 75%, ${data.color_hex} 100%);
+                }
+            `;
+        }
+
+
+        // Generate QR Code
         new QRious({
-            element: document.getElementById('qr-canvas'),
-            value: data.qr_link || `https://amrikyy.me/id/${Math.random().toString(36).substring(2, 9)}`,
+            element: this.cardQrCode,
+            value: data.qr_link || window.location.href, // Fallback to current page
+            size: 80,
             background: 'transparent',
             foreground: data.color_hex,
-            size: 80,
             level: 'H'
         });
+        this.cardLink.href = data.qr_link || window.location.href;
     }
-    
+
     handleDownload() {
         alert('لتحميل البطاقة، يرجى أخذ لقطة شاشة. نعمل على تطوير ميزة التحميل المباشر!');
     }
-    
-    handleShareTwitter() {
-        const data = this.state.generatedCardData;
-        const text = `واو! اكتشفت هويتي الرقمية على @Amrikyy! أنا "${data.nickname}". تحدّى أصدقائك يكتشفوا هويتهم! #هوية_رقمية_AI`;
-        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(data.qr_link || 'https://amrikyy.me')}`;
-        window.open(url, '_blank');
+
+    handleShare() {
+        const data = this.generatedCardData;
+        const shareText = `واو! اكتشفت هويتي الرقمية الفريدة على Amrikyy! أنا "${data.nickname}". تحدّى أصدقاءك يكتشفوا هويتهم! #هوية_رقمية_AI #Amrikyy`;
+        const shareUrl = data.qr_link || window.location.href;
+
+        if (navigator.share) {
+            navigator.share({
+                title: 'هويتي الرقمية AI من Amrikyy',
+                text: shareText,
+                url: shareUrl,
+            }).catch((error) => console.error('Error sharing:', error));
+        } else {
+            // Fallback for browsers that do not support Web Share API
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+            window.open(twitterUrl, '_blank');
+            // You can also provide a copy to clipboard option here
+            // alert('Web Share API is not supported in this browser. You can share on Twitter or copy the link.');
+        }
     }
 
-    handleCopyLink() {
-        const data = this.state.generatedCardData;
-        const linkToCopy = data.qr_link || `https://amrikyy.me/id/${Math.random().toString(36).substring(2, 9)}`;
-        const dummy = document.createElement('textarea');
-        document.body.appendChild(dummy);
-        dummy.value = linkToCopy;
-        dummy.select();
-        document.execCommand('copy');
-        document.body.removeChild(dummy);
-        this.copyLinkFeedback.textContent = 'تم نسخ الرابط بنجاح!';
-        setTimeout(() => { this.copyLinkFeedback.textContent = ''; }, 2000);
-    }
-
-    handleRestart() {
-        this.state.currentQuestionIndex = 0;
-        this.state.answers = {};
-        this.state.generatedCardData = null;
-        this.resultSection.classList.add('hidden');
-        this.heroSection.classList.remove('hidden');
-        this.quizSection.classList.add('hidden'); // تأكد من إخفاء قسم الاختبار أيضًا
-        this.container.classList.add('hidden'); // إخفاء حاوية تطبيق البطاقة بالكامل
-        document.getElementById('main-content').classList.remove('hidden'); // إظهار المحتوى الرئيسي
-        this.progressBar.style.width = '0%';
-        this.renderQuestions(); // إعادة عرض السؤال الأول
+    resetQuiz() {
+        this.currentStep = 0;
+        this.answers = {};
+        this.selectedInterests = [];
+        this.generatedCardData = null;
+        this.showSection(this.introSection); // Go back to intro screen
+        this.mainContent.classList.remove('hidden'); // Show CV section again
+        this.aiCardSection.classList.add('hidden'); // Hide AI card app container
+        document.querySelectorAll('.interest-tag').forEach(tag => tag.classList.remove('selected'));
+        document.querySelectorAll('.emoji-option').forEach(emoji => emoji.classList.remove('selected'));
+        document.getElementById('progressBar').style.width = '0%'; // Reset progress bar
     }
   }
-  
-  // Initialize the AmrikyyAICard instance when the DOM is fully loaded
-  let amrikyyAICardInstance;
-  document.addEventListener('DOMContentLoaded', () => {
-      amrikyyAICardInstance = new AmrikyyAICard();
-  });
 
-  // Expose a global function for the chatbot to call
+  // Initialize the AmrikyyAICard instance
+  const amrikyyAICardInstance = new AmrikyyAICard();
+
+  // Expose a global function for the chatbot to call (if needed)
   window.startAmrikyyAICardQuiz = () => {
-      if (amrikyyAICardInstance) {
-          amrikyyAICardInstance.startQuiz();
-      } else {
-          console.error("AmrikyyAICard instance not initialized yet. Retrying in 100ms...");
-          setTimeout(window.startAmrikyyAICardQuiz, 100);
-      }
+      amrikyyAICardInstance.startQuiz();
   };
 
 }); // End of DOMContentLoaded

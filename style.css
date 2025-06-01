@@ -247,7 +247,8 @@ html[dir="ltr"] #lang-toggle-container { /* تعديل للغة الإنجليز
   margin: 40px auto; /* توسيط البطاقة مع هوامش علوية وسفلية */
   padding: 0 20px; /* مساحات داخلية للحاوية نفسها (للاستجابة) */
   display: flex;
-  justify-content: center; /* توسيط البطاقة داخل الحاوية إذا كانت الحاوية أوسع */
+  flex-direction: column; /* لترتيب أقسام الـ CV و AI ID Card عمودياً */
+  align-items: center; /* توسيط المحتوى */
 }
 
 .smart-cv-card {
@@ -260,6 +261,7 @@ html[dir="ltr"] #lang-toggle-container { /* تعديل للغة الإنجليز
   flex-direction: column; /* ترتيب العناصر بشكل عمودي */
   gap: 25px; /* مسافة بين الأقسام الرئيسية داخل البطاقة */
   width: 100%; /* البطاقة تأخذ عرض الحاوية بالكامل */
+  max-width: 600px; /* لضمان عدم تجاوز العرض في الشاشات الكبيرة */
 }
 
 /* Fix for any blue border or shadow at the bottom of the CV card */
@@ -783,81 +785,6 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
   text-shadow: 0 0 6px var(--neon-green), 0 0 2px #000;
 }
 
-/* =========== أنماط بطاقة الهوية الرقمية AI الجديدة =========== */
-/* تم دمجها هنا لضمان التوافق مع المتغيرات الموجودة */
-
-/* الأنماط الأساسية للبطاقة الرقمية */
-.neon-glow {
-    transition: text-shadow 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-.neon-glow-blue {
-    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.4);
-}
-.neon-glow-purple {
-    text-shadow: 0 0 5px rgba(168, 85, 247, 0.5), 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.4);
-}
-.card-shadow-blue {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.3);
-}
-.card-shadow-purple {
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), 0 0 30px rgba(168, 85, 247, 0.3);
-}
-.pulse {
-    animation: pulse-animation 2s infinite;
-}
-@keyframes pulse-animation {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-    70% { transform: scale(1.05); box-shadow: 0 0 10px 20px rgba(59, 130, 246, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-}
-.fade-in {
-    animation: fadeInAnimation 1s ease-in forwards;
-    opacity: 0;
-}
-@keyframes fadeInAnimation {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.question-slide {
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    background-color: var(--dark-element-bg); /* استخدام متغير موجود */
-}
-.hidden-slide {
-    opacity: 0;
-    transform: translateX(-100%);
-    position: absolute;
-    pointer-events: none;
-}
-.option-card {
-    transition: all 0.2s ease-in-out;
-    border: 2px solid var(--medium-gray); /* استخدام متغير موجود */
-}
-.option-card:hover, .option-card.selected {
-    transform: translateY(-5px);
-    border-color: var(--neon-blue); /* استخدام متغير موجود */
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-.loader {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 5px solid var(--medium-gray); /* استخدام متغير موجود */
-    border-top-color: var(--neon-blue); /* استخدام متغير موجود */
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-.loader-text {
-    animation: flicker 1.5s infinite alternate;
-}
-@keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px var(--neon-green), 0 0 80px var(--neon-green), 0 0 90px var(--neon-green), 0 0 100px var(--neon-green), 0 0 150px var(--neon-green); }
-    20%, 24%, 55% { text-shadow: none; }
-}
-
 /* أنماط قسم البودكاست الجديد */
 .podcast-option {
     display: flex;
@@ -894,4 +821,443 @@ html[dir="rtl"] #chatbot-input { /* تعديل لـ RTL */
 .podcast-option a:hover {
     color: var(--text-primary);
     text-decoration: underline;
+}
+
+/* =========== أنماط بطاقة الهوية الرقمية AI الجديدة (المضافة حديثاً) =========== */
+#ai-id-card-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    font-family: var(--font-tajawal); /* استخدام خط Tajawal */
+    color: var(--text-primary);
+}
+
+.section-title {
+    font-family: var(--font-orbitron);
+    font-size: 2.2rem;
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--neon-purple), 0 0 20px rgba(182, 0, 255, 0.7);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Intro Section */
+.ai-id-card-intro {
+    background: var(--dark-element-bg);
+    border: 1px solid rgba(182, 0, 255, 0.3); /* حدود بنفسجية */
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 28px 6px rgba(182, 0, 255, 0.6);
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.ai-id-card-intro p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.ai-id-card-start-btn {
+    background-color: var(--neon-purple);
+    color: var(--text-on-neon);
+    border: none;
+    padding: 12px 30px;
+    font-family: var(--font-orbitron);
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(182, 0, 255, 0.6);
+}
+.ai-id-card-start-btn:hover {
+    background-color: #a000e0; /* لون بنفسجي أغمق قليلاً */
+    box-shadow: 0 0 15px var(--neon-purple), 0 0 25px rgba(182, 0, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Quiz Section */
+.ai-id-card-quiz {
+    background: var(--dark-element-bg);
+    border: 1px solid rgba(0, 212, 255, 0.3); /* حدود زرقاء */
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 28px 6px rgba(0, 212, 255, 0.6);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.quiz-question {
+    font-family: var(--font-orbitron);
+    font-size: 1.6rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 8px var(--neon-blue);
+    margin-bottom: 10px;
+}
+
+.progress-indicator {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+}
+
+.quiz-body {
+    position: relative;
+    min-height: 150px; /* لضمان عدم انهيار الارتفاع عند تبديل الخطوات */
+}
+
+.quiz-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quiz-step.hidden {
+    opacity: 0;
+    transform: translateX(100%);
+    pointer-events: none;
+}
+
+.quiz-step label {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.quiz-step input[type="text"],
+.quiz-step input[type="email"],
+.quiz-step input[type="tel"] {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--neon-green);
+    background-color: #181818;
+    color: var(--text-primary);
+    font-family: var(--font-cairo);
+    font-size: 1rem;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.13);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.quiz-step input:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+}
+
+.interests-grid, .mood-emojis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.interest-tag, .emoji-option {
+    background-color: rgba(0, 212, 255, 0.1); /* أزرق نيون شفاف */
+    color: var(--text-primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.interest-tag:hover, .emoji-option:hover {
+    background-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+.interest-tag.selected, .emoji-option.selected {
+    background-color: var(--neon-blue);
+    color: var(--text-on-neon);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue);
+    transform: translateY(-2px);
+}
+
+.emoji-option {
+    font-size: 2rem; /* حجم أكبر للرموز التعبيرية */
+    padding: 10px 18px;
+    border-radius: 50%; /* لجعلها دائرية */
+}
+
+.quiz-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.quiz-nav-btn {
+    background-color: var(--neon-green);
+    color: var(--text-on-neon);
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--font-orbitron);
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+}
+.quiz-nav-btn:hover {
+    background-color: #2de20f;
+    box-shadow: 0 0 12px var(--neon-green);
+    transform: translateY(-1px);
+}
+.quiz-nav-btn.prev-btn {
+    background-color: var(--dark-element-bg);
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+}
+.quiz-nav-btn.prev-btn:hover {
+    background-color: rgba(57, 255, 20, 0.1);
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
+}
+.quiz-nav-btn.generate-btn {
+    background-color: var(--neon-purple);
+    box-shadow: 0 0 12px var(--neon-purple);
+}
+.quiz-nav-btn.generate-btn:hover {
+    background-color: #a000e0;
+    box-shadow: 0 0 16px var(--neon-purple);
+}
+
+/* Loading Section */
+.ai-id-card-loading {
+    background: var(--dark-element-bg);
+    border: 1px solid rgba(182, 0, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 28px 6px rgba(182, 0, 255, 0.6);
+    padding: 50px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loading-spinner {
+    border: 5px solid var(--medium-gray);
+    border-top: 5px solid var(--neon-purple);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.ai-id-card-loading p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* Result Section */
+.ai-id-card-result {
+    background: var(--dark-element-bg);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 28px 6px rgba(0, 212, 255, 0.6);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.generated-card-display {
+    width: 100%;
+    background: #101010; /* خلفية داكنة للبطاقة المعروضة */
+    border: 2px solid var(--neon-blue);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+.generated-card-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg at 50% 50%, var(--neon-blue) 0%, transparent 25%, transparent 75%, var(--neon-blue) 100%);
+    animation: rotateBorder 10s linear infinite;
+    z-index: 0;
+    opacity: 0.2;
+}
+@keyframes rotateBorder {
+    to { transform: rotate(360deg); }
+}
+
+.card-header-display {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 15px;
+}
+
+.card-avatar-display {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--neon-purple);
+    box-shadow: 0 0 15px var(--neon-purple);
+    margin-bottom: 10px;
+}
+
+.card-nickname-display {
+    font-family: var(--font-orbitron);
+    font-size: 1.8rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.card-body-display {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-analysis-display, .card-ai-message-display {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.card-qr-link-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    background-color: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.card-qr-code {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    background-color: var(--white); /* خلفية بيضاء لـ QR Code */
+    padding: 5px;
+}
+
+.card-link-display {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.card-link-display:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.action-btn {
+    background-color: var(--neon-green);
+    color: var(--text-on-neon);
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--font-orbitron);
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.action-btn:hover {
+    background-color: #2de20f;
+    box-shadow: 0 0 12px var(--neon-green);
+    transform: translateY(-1px);
+}
+
+.action-btn.share-btn {
+    background-color: var(--neon-blue);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+}
+.action-btn.share-btn:hover {
+    background-color: #00b0d0;
+    box-shadow: 0 0 12px var(--neon-blue);
+}
+
+.action-btn.reset-btn {
+    background-color: var(--neon-purple);
+    box-shadow: 0 0 8px rgba(182, 0, 255, 0.4);
+}
+.action-btn.reset-btn:hover {
+    background-color: #a000e0;
+    box-shadow: 0 0 12px var(--neon-purple);
+}
+
+/* Responsive adjustments for AI ID Card */
+@media (max-width: 600px) {
+    #ai-id-card-section {
+        padding: 0 10px;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    .ai-id-card-intro, .ai-id-card-quiz, .ai-id-card-loading, .ai-id-card-result {
+        padding: 20px;
+    }
+    .quiz-question {
+        font-size: 1.4rem;
+    }
+    .interest-tag, .emoji-option {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    .emoji-option {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+    }
+    .quiz-nav-btn, .action-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+    .card-nickname-display {
+        font-size: 1.5rem;
+    }
 }
