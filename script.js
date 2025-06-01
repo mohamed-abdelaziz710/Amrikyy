@@ -3,9 +3,6 @@
  * Main functionality for the ID card generation and interaction
  */
 
-// Import quiz questions and functionality
-import { quizQuestions, generateDynamicQuizFlow, prepareGeminiPayload } from './quiz-questions.js';
-
 // Add the new imaginative questions to the creative section
 const imaginativeQuestions = [
   {
@@ -68,9 +65,6 @@ const imaginativeQuestions = [
     }
   }
 ];
-
-// Add the imaginative questions to the creative section
-quizQuestions.creative.push(...imaginativeQuestions);
 
 // DOM Elements
 let currentStep = 1;
@@ -746,17 +740,37 @@ async function simulateApiCall(payload) {
         expiry_date: "2026-06-01T00:00:00Z",
         security_features: ["Biometric Verification", "Quantum Encryption"],
         qr_data: "https://amrikyy.com/verify/AX-2025-78943",
-      <div class="card-header-display">
-        <div class="card-avatar-container">
-          <div class="avatar-ring"></div>
-          <div class="avatar-ring"></div>
-          <img class="card-avatar-display" src="${avatarSrc}" alt="${data.user_data.name} Avatar">
+      });
+    }, 1000);
+  });
+}
+
+/**
+ * Generate ID card HTML
+ * @param {Object} data - Card data
+ */
+function generateIdCard(data) {
+  const digitalIdCard = document.getElementById('digitalIdCard');
+  if (!digitalIdCard) return;
+  
+  // Example: Using data to generate the ID card HTML
+  const avatarSrc = data.avatar || 'assets/default-avatar.png';
+  
+  digitalIdCard.innerHTML = `
+    <div class="card" style="background-color: ${data.color_hex};">
+      <div class="card-header">
+        <div class="card-header-display">
+          <div class="card-avatar-container">
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring"></div>
+            <img class="card-avatar-display" src="${avatarSrc}" alt="${data.user_data.name} Avatar">
+          </div>
+          <h2 class="card-nickname-display" data-text="${data.nickname}">${data.nickname}</h2>
+          <p class="card-title-display">${data.title}</p>
         </div>
-        <h2 class="card-nickname-display" data-text="${data.nickname}">${data.nickname}</h2>
-        <p class="card-title-display">${data.title}</p>
       </div>
       
-      <div class="card-body-display">
+      <div class="card-body">
         <div class="card-details-container">
           <p class="card-analysis-display">${data.analysis}</p>
           <p class="card-ai-message-display">${data.ai_message}</p>
