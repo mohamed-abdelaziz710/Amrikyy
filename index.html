@@ -189,7 +189,7 @@
 
   <script src="script.js"></script>
   <script>
-    // ====== Enhanced 3D Space-Bitcoin-Tech Micro Animations Background (Interactive) ======
+    // ====== Enhanced 3D Space-Bitcoin-Tech Micro Animations Background (Realistic & Immersive) ======
     (function() {
       const canvas = document.createElement('canvas');
       canvas.id = 'space-bg-canvas';
@@ -200,18 +200,18 @@
       canvas.style.height = '100vh';
       canvas.style.zIndex = '-2';
       canvas.style.pointerEvents = 'auto';
-      canvas.style.opacity = '0.7';
+      canvas.style.opacity = '0.8';
       const animationsContainer = document.getElementById('page-background-animations');
       if (animationsContainer) {
         animationsContainer.appendChild(canvas);
       } else {
         console.error("Element with ID 'page-background-animations' not found. Canvas background will not be rendered.");
-        return; // Exit if container not found
+        return;
       }
       const ctx = canvas.getContext('2d');
       if (!ctx) {
         console.error("2D context not supported or canvas already in use.");
-        return; // Exit if context cannot be obtained
+        return;
       }
       let w, h, dpr;
 
@@ -223,24 +223,82 @@
         canvas.height = h * dpr;
         canvas.style.width = w + 'px';
         canvas.style.height = h + 'px';
-        ctx.setTransform(1,0,0,1,0,0); // Reset transformations
+        ctx.setTransform(1,0,0,1,0,0);
         ctx.scale(dpr, dpr);
       }
       window.addEventListener('resize', resize);
-      resize(); // Initial call
+      resize();
 
+      // --- Starfield Layer ---
+      const starfield = [];
+      const numStars = 180;
+      for(let i=0;i<numStars;i++){
+        starfield.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          z: 0.2+Math.random()*0.8,
+          tw: Math.random()*2*Math.PI,
+          spd: 0.08+Math.random()*0.12
+        });
+      }
+      function drawStarfield() {
+        for(const s of starfield) {
+          let twinkle = 0.7+0.3*Math.sin(Date.now()/600 + s.tw);
+          ctx.save();
+          ctx.globalAlpha = 0.5*twinkle;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, 0.7 + 1.2*s.z*twinkle, 0, 2*Math.PI);
+          ctx.fillStyle = '#fff';
+          ctx.shadowColor = '#39FF14';
+          ctx.shadowBlur = 6*s.z;
+          ctx.fill();
+          ctx.restore();
+          // Parallax movement
+          s.x += s.spd*s.z*0.2;
+          if(s.x > w) s.x = 0;
+        }
+      }
+
+      // --- Layered Nebula with Noise ---
       function drawNebula() {
+        // Main nebula
         const grad = ctx.createRadialGradient(w/2, h*0.6, w*0.1, w/2, h*0.6, w*0.7);
-        grad.addColorStop(0, 'rgba(57,255,20,0.18)');
-        grad.addColorStop(0.3, 'rgba(0,212,255,0.13)');
-        grad.addColorStop(0.6, 'rgba(255,0,255,0.10)');
+        grad.addColorStop(0, 'rgba(57,255,20,0.22)');
+        grad.addColorStop(0.25, 'rgba(0,212,255,0.13)');
+        grad.addColorStop(0.5, 'rgba(255,0,255,0.10)');
         grad.addColorStop(1, 'rgba(0,0,0,0.0)');
         ctx.save();
-        ctx.globalAlpha = 0.7;
+        ctx.globalAlpha = 0.8;
         ctx.globalCompositeOperation = 'lighter';
         ctx.fillStyle = grad;
         ctx.fillRect(0,0,w,h);
-        ctx.restore(); // Restore globalAlpha and globalCompositeOperation
+        ctx.restore();
+        // Add a faint galactic swirl
+        ctx.save();
+        ctx.globalAlpha = 0.13;
+        ctx.translate(w/2, h*0.6);
+        for(let i=0;i<7;i++){
+          ctx.rotate(Math.PI/3.5);
+          ctx.beginPath();
+          ctx.ellipse(0,0,w*0.32,h*0.09,0,0,2*Math.PI);
+          ctx.strokeStyle = 'rgba(57,255,20,0.18)';
+          ctx.lineWidth = 2.5;
+          ctx.shadowColor = '#39FF14';
+          ctx.shadowBlur = 18;
+          ctx.stroke();
+        }
+        ctx.restore();
+        // Add subtle noise
+        for(let i=0;i<120;i++){
+          let nx = Math.random()*w, ny = Math.random()*h;
+          ctx.save();
+          ctx.globalAlpha = 0.04+Math.random()*0.04;
+          ctx.beginPath();
+          ctx.arc(nx, ny, 0.7+Math.random()*1.2, 0, 2*Math.PI);
+          ctx.fillStyle = Math.random()>0.5?'#39FF14':'#00d4ff';
+          ctx.fill();
+          ctx.restore();
+        }
       }
 
       const particleIcons = [
@@ -353,10 +411,10 @@
         return null;
       }
 
-      // Drawing functions (kept concise for brevity, assuming they are correct from original)
-      function drawBitcoin(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.18+0.08*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.beginPath();ctx.arc(0,0,s,0,2*Math.PI);ctx.fillStyle='#222';ctx.shadowColor='#f7931a';ctx.shadowBlur=g?18:0;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#f7931a';ctx.stroke();ctx.font=`${s*1.1}px Orbitron,Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f7931a';ctx.shadowColor='#fff';ctx.shadowBlur=g?12:0;ctx.fillText('₿',0,1);ctx.restore()}
+      // --- Enhanced Drawing Functions ---
+      function drawBitcoin(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.18+0.08*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.beginPath();ctx.arc(0,0,s,0,2*Math.PI);ctx.fillStyle='#222';ctx.shadowColor='#f7931a';ctx.shadowBlur=g?28:10;ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='#f7931a';ctx.stroke();ctx.font=`${s*1.1}px Orbitron,Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f7931a';ctx.shadowColor='#fff';ctx.shadowBlur=g?18:6;ctx.fillText('₿',0,1);ctx.restore()}
+      function drawPlanet(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.13+0.06*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.beginPath();ctx.arc(0,0,s,0,2*Math.PI);ctx.fillStyle='#39FF14';ctx.shadowColor='#00d4ff';ctx.shadowBlur=g?28:12;ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='#fff';ctx.stroke();ctx.beginPath();ctx.ellipse(0,0,s*1.2,s*0.5,Math.PI/4,0,2*Math.PI);ctx.strokeStyle='#00d4ff88';ctx.lineWidth=1.5;ctx.stroke();ctx.restore()}
       function drawChip(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.15+0.07*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.fillStyle='#00d4ff';ctx.shadowColor='#00d4ff';ctx.shadowBlur=g?12:0;ctx.fillRect(-s/2,-s/2,s,s);ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.strokeRect(-s/2,-s/2,s,s);ctx.restore()}
-      function drawPlanet(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.13+0.06*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.beginPath();ctx.arc(0,0,s,0,2*Math.PI);ctx.fillStyle='#39FF14';ctx.shadowColor='#00d4ff';ctx.shadowBlur=g?18:10;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#fff';ctx.stroke();ctx.beginPath();ctx.ellipse(0,0,s*1.2,s*0.5,Math.PI/4,0,2*Math.PI);ctx.strokeStyle='#00d4ff88';ctx.lineWidth=1.2;ctx.stroke();ctx.restore()}
       function drawSatellite(x,y,s,a,c,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.12+0.05*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.fillStyle=c;ctx.shadowColor=c;ctx.shadowBlur=g?8:0;ctx.fillRect(-s/2,-s/4,s,s/2);ctx.fillStyle='#fff';ctx.fillRect(-s/8,-s/8,s/4,s/4);ctx.restore()}
       function drawStar(x,y,s,g){ctx.save();ctx.globalAlpha=0.7+Math.random()*0.3;ctx.beginPath();ctx.arc(x,y,s,0,2*Math.PI);ctx.fillStyle='#fff';ctx.shadowColor='#39FF14';ctx.shadowBlur=g?6+Math.random()*4:4;ctx.fill();ctx.restore()}
       function drawRing(x,y,s,a,c,g){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.beginPath();ctx.ellipse(0,0,s,s*0.35,Math.PI/3,0,2*Math.PI);ctx.strokeStyle=c;ctx.lineWidth=2;ctx.shadowColor=c;ctx.shadowBlur=g?12:0;ctx.globalAlpha=0.7;ctx.stroke();ctx.restore()}
@@ -401,11 +459,9 @@
 
       let lastTimestamp = 0;
       function render(timestamp) {
-        // const deltaTime = timestamp - lastTimestamp; // For frame-rate independent animation if needed
-        // lastTimestamp = timestamp;
-
         ctx.clearRect(0,0,w,h);
         drawNebula();
+        drawStarfield();
 
         let particleBeingHovered = null; // Track which particle is actually being hovered for the tooltip
 
