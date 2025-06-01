@@ -41,18 +41,6 @@
     </div>
   </div>
 
-  <!-- AI ID Card HERO SECTION (now at the top, always visible) -->
-<section id="ai-id-card-section" class="ai-id-card-container ai-id-card-hero neon-glow" style="margin-top:32px; margin-bottom:32px;">
-  <button id="ai-id-card-close-btn" title="إغلاق" aria-label="إغلاق القسم" style="position:absolute;top:18px;left:18px;background:rgba(0,0,0,0.4);border:none;border-radius:50%;width:36px;height:36px;z-index:10;color:#fff;font-size:1.2rem;box-shadow:0 0 8px #b600ff;cursor:pointer;transition:background 0.2s;">
-    <i class="fas fa-times"></i>
-  </button>
-  <h2 data-translate="aiIdCardTitle" class="section-title neon-glow-text" style="margin-bottom:10px;">بطاقة الهوية الرقمية AI</h2>
-  <div class="ai-id-card-intro" data-translate="aiIdCardIntro" style="background:rgba(16,16,32,0.95);border:2px solid #00d4ff;box-shadow:0 0 32px 8px #00d4ff66,0 0 12px 2px #b600ff99 inset;border-radius:18px;padding:28px 18px 22px 18px;max-width:480px;margin:0 auto 18px auto;">
-    <p style="font-size:1.18rem;color:var(--neon-purple);font-family:var(--font-orbitron);text-shadow:0 0 8px #b600ff;">اكتشف هويتك الرقمية الفريدة التي تم إنشاؤها بواسطة الذكاء الاصطناعي!</p>
-    <button id="startAiIdCardBtn" class="ai-id-card-start-btn neon-glow-btn" data-translate="startAiIdCardBtn" style="margin-top:18px;">اكتشف هويتك الآن ✨</button>
-  </div>
-</section>
-
   <div id="main-content">
     <section id="cv-section" class="smart-cv-card-container">
       <div id="lang-toggle-container">
@@ -195,27 +183,124 @@
       </div>
     </section>
 
-    <div id="page-background-animations"></div>
-
-    <button id="chatbot-toggle-btn" aria-label="Open Chatbot" data-translate-title="chatbotToggleTitle">
-        <i class="fas fa-coins"></i> </button>
-    <div id="chatbot-container">
-        <div class="chatbot-header">
-          <h4 data-translate="chatbotTitle">Amrikyy</h4>
-          <button class="chatbot-close-btn" id="chatbot-close-btn" title="Close" data-translate-title="chatbotCloseTitle"><i class="fas fa-times"></i></button>
+    <section id="ai-id-card-section" class="ai-id-card-container hidden">
+        <h2 data-translate="aiIdCardTitle" class="section-title">بطاقة الهوية الرقمية AI</h2>
+        <div class="ai-id-card-intro" data-translate="aiIdCardIntro">
+            <p>اكتشف هويتك الرقمية الفريدة التي تم إنشاؤها بواسطة الذكاء الاصطناعي!</p>
+            <button id="startAiIdCardBtn" class="ai-id-card-start-btn" data-translate="startAiIdCardBtn">اكتشف هويتك الآن ✨</button>
         </div>
-        <div id="chatbot-messages">
+
+        <div id="ai-id-card-quiz" class="ai-id-card-quiz hidden">
+            <div class="quiz-header">
+                <h3 id="quizQuestion" class="quiz-question"></h3>
+                <div class="progress-indicator">
+                    <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum"></span>
+                </div>
             </div>
-        <div class="chatbot-input-area">
-            <input type="text" id="chatbot-input" placeholder="اكتب رسالتك هنا..." data-translate-placeholder="chatbotInputPlaceholder">
-            <button id="chatbot-send-btn" data-translate="chatbotSend">إرسال</button>
+            <div class="quiz-body">
+                <div class="quiz-step" id="quizStep1">
+                    <label for="fullNameInput" data-translate="fullNameLabel">الاسم الكامل:</label>
+                    <input type="text" id="fullNameInput" placeholder="أدخل اسمك الكامل" data-translate-placeholder="fullNamePlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep2">
+                    <label for="emailInput" data-translate="emailLabel">البريد الإلكتروني:</label>
+                    <input type="email" id="emailInput" placeholder="أدخل بريدك الإلكتروني" data-translate-placeholder="emailPlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep3">
+                    <label for="phoneInput" data-translate="phoneLabel">رقم الهاتف (اختياري):</label>
+                    <input type="tel" id="phoneInput" placeholder="أدخل رقم هاتفك" data-translate-placeholder="phonePlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep4">
+                    <label data-translate="interestsLabel">اهتماماتك (اختر ما يصل إلى 3):</label>
+                    <div class="interests-grid">
+                        <button class="interest-tag" data-interest="التكنولوجيا" data-translate="techInterest">التكنولوجيا</button>
+                        <button class="interest-tag" data-interest="العملات الرقمية" data-translate="cryptoInterest">العملات الرقمية</button>
+                        <button class="interest-tag" data-interest="ريادة الأعمال" data-translate="entrepreneurshipInterest">ريادة الأعمال</button>
+                        <button class="interest-tag" data-interest="الذكاء الاصطناعي" data-translate="aiInterest">الذكاء الاصطناعي</button>
+                        <button class="interest-tag" data-interest="الأمن السيبراني" data-translate="cybersecurityInterest">الأمن السيبراني</button>
+                        <button class="interest-tag" data-interest="الفن الرقمي" data-translate="digitalArtInterest">الفن الرقمي</button>
+                        <button class="interest-tag" data-interest="الموسيقى" data-translate="musicInterest">الموسيقى</button>
+                        <button class="interest-tag" data-interest="السفر" data-translate="travelInterest">السفر</button>
+                        <button class="interest-tag" data-interest="الألعاب" data-translate="gamingInterest">الألعاب</button>
+                    </div>
+                </div>
+                <div class="quiz-step hidden" id="quizStep5">
+                    <label for="personalityWordInput" data-translate="personalityWordLabel">كلمة تصف شخصيتك:</label>
+                    <input type="text" id="personalityWordInput" placeholder="مثال: مبدع، طموح، هادئ" data-translate-placeholder="personalityWordPlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep6">
+                    <label for="learningGoalInput" data-translate="learningGoalLabel">ماذا تريد أن تتعلمه في 2025؟</label>
+                    <input type="text" id="learningGoalInput" placeholder="مثال: برمجة، لغة جديدة، استثمار" data-translate-placeholder="learningGoalPlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep7">
+                    <label data-translate="moodLabel">مزاجك اليوم؟</label>
+                    <div class="mood-emojis">
+                        <span class="emoji-option" data-mood="😎">😎</span>
+                        <span class="emoji-option" data-mood="🤓">🤓</span>
+                        <span class="emoji-option" data-mood="🚀">🚀</span>
+                        <span class="emoji-option" data-mood="🤔">🤔</span>
+                        <span class="emoji-option" data-mood="💡">💡</span>
+                        <span class="emoji-option" data-mood="🥳">🥳</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-navigation">
+                <button id="prevQuizBtn" class="quiz-nav-btn prev-btn hidden" data-translate="prevBtn">السابق</button>
+                <button id="nextQuizBtn" class="quiz-nav-btn next-btn" data-translate="nextBtn">التالي</button>
+                <button id="generateCardBtn" class="quiz-nav-btn generate-btn hidden" data-translate="generateCardBtn">أنشئ بطاقتي!</button>
+            </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-    <script src="script.js"></script>
-    
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
-  </html>
+        <div id="ai-id-card-loading" class="ai-id-card-loading hidden">
+            <div class="loading-spinner"></div>
+            <p data-translate="loadingMessage">يتم إنشاء هويتك الرقمية الفريدة...</p>
+        </div>
+
+        <div id="ai-id-card-result" class="ai-id-card-result hidden">
+            <div class="generated-card-display">
+                <div class="card-header-display">
+                    <img id="cardAvatar" src="https://placehold.co/100x100/39FF14/000?text=AI" alt="AI Avatar" class="card-avatar-display">
+                    <h3 id="cardNickname" class="card-nickname-display"></h3>
+                </div>
+                <div class="card-body-display">
+                    <p id="cardAnalysis" class="card-analysis-display"></p>
+                    <p id="cardAiMessage" class="card-ai-message-display"></p>
+                    <div class="card-qr-link-display">
+                        <img id="cardQrCode" src="https://placehold.co/100x100/000/fff?text=QR" alt="QR Code" class="card-qr-code">
+                        <a id="cardLink" href="#" target="_blank" class="card-link-display" data-translate="viewCardLink">عرض بطاقتي</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button id="downloadCardBtn" class="action-btn download-btn" data-translate="downloadCardBtn"><i class="fas fa-download"></i> تحميل البطاقة</button>
+                <button id="shareCardBtn" class="action-btn share-btn" data-translate="shareCardBtn"><i class="fas fa-share-alt"></i> مشاركة</button>
+                <button id="resetCardBtn" class="action-btn reset-btn" data-translate="resetCardBtn"><i class="fas fa-redo-alt"></i> إنشاء واحدة أخرى</button>
+            </div>
+        </div>
+    </section>
+  </div>
+
+  <div id="page-background-animations"></div>
+
+  <button id="chatbot-toggle-btn" aria-label="Open Chatbot" data-translate-title="chatbotToggleTitle">
+      <i class="fas fa-coins"></i> </button>
+  <div id="chatbot-container">
+      <div class="chatbot-header">
+        <h4 data-translate="chatbotTitle">Amrikyy</h4>
+        <button class="chatbot-close-btn" id="chatbot-close-btn" title="Close" data-translate-title="chatbotCloseTitle"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="chatbot-messages">
+          </div>
+      <div class="chatbot-input-area">
+          <input type="text" id="chatbot-input" placeholder="اكتب رسالتك هنا..." data-translate-placeholder="chatbotInputPlaceholder">
+          <button id="chatbot-send-btn" data-translate="chatbotSend">إرسال</button>
+      </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <script src="script.js"></script>
+  
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+</html>

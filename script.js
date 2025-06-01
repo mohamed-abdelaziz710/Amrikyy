@@ -1,4 +1,4 @@
-// Wait for the DOM to be fully loaded before running scripts
+// Ensure all scripts run after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
   // --- Define all variables at the top for clarity and easy access ---
   const body = document.body;
@@ -444,7 +444,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Show typing indicator in chat
   function showTypingIndicator() {
-    if (!chatbotMessages) return null;
+    if (!chatbotMessages) {
+        console.error("Cannot show typing indicator: chatbotMessages element not found.");
+        return null;
+    }
     const typingIndicatorElement = document.createElement('div');
     typingIndicatorElement.className = 'chat-message ai-message typing-indicator';
     typingIndicatorElement.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
@@ -455,7 +458,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add a message to the chat interface
   function addMessageToChat(message, sender, isError = false) {
-    if (!chatbotMessages) return;
+    if (!chatbotMessages) {
+        console.error("Cannot add message: chatbotMessages element not found.");
+        return;
+    }
     const messageElement = document.createElement('div');
     messageElement.classList.add('chat-message');
     if (isError) {
@@ -524,8 +530,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Provide user-friendly error messages based on error type
       if (error.message.toLowerCase().includes('failed to fetch')) {
         errorText = errorLang === 'ar' ?
-          'تعذر الاتصال بالخادم. يرجى التأكد أن الخادم يعمل وأن الاتصال بالإنترنت متاح.' :
-          'Unable to connect to the assistant server. Please ensure the backend is running and your internet connection is active.';
+          'تعذر الاتصال بالخادم. يرجى التأكد أن الخادم يعمل وأن الاتصال بالإنترنت متاح. (خطأ في الاتصال بالشبكة)' :
+          'Unable to connect to the assistant server. Please ensure the backend is running and your internet connection is active. (Network connection error)';
       } else if (error.message.includes('Network response was not ok')) {
          errorText = errorLang === 'ar' ? `خطأ من الخادم: ${error.message.replace('Network response was not ok: ', '')}` : `Server error: ${error.message.replace('Network response was not ok: ', '')}`;
       } else {
@@ -559,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.quizSection = document.getElementById('ai-id-card-quiz');
         this.loadingSection = document.getElementById('ai-id-card-loading');
         this.resultSection = document.getElementById('ai-id-card-result');
-        this.mainContent = document.getElementById('main-content'); // CV section container
+        this.mainContent = document.getElementById('cv-section'); // CV section container
 
         this.startBtn = document.getElementById('startAiIdCardBtn');
         this.quizQuestionEl = document.getElementById('quizQuestion');
@@ -597,15 +603,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.initListeners();
         this.showSection(this.introSection); // Start with intro section
-        this.totalQuestionsNumEl.textContent = this.quizSteps.length;
+        if (this.totalQuestionsNumEl) {
+            this.totalQuestionsNumEl.textContent = this.quizSteps.length;
+        } else {
+            console.error("totalQuestionsNum element not found.");
+        }
     }
 
     initListeners() {
-        this.startBtn.addEventListener('click', () => this.startQuiz());
-        this.nextQuizBtn.addEventListener('click', () => this.handleNext());
-        this.prevQuizBtn.addEventListener('click', () => this.handlePrev());
-        this.generateCardBtn.addEventListener('click', () => this.generateCard());
-        this.resetCardBtn.addEventListener('click', () => this.resetQuiz());
+        if (this.startBtn) this.startBtn.addEventListener('click', () => this.startQuiz());
+        else console.error("startAiIdCardBtn not found.");
+
+        if (this.nextQuizBtn) this.nextQuizBtn.addEventListener('click', () => this.handleNext());
+        else console.error("nextQuizBtn not found.");
+
+        if (this.prevQuizBtn) this.prevQuizBtn.addEventListener('click', () => this.handlePrev());
+        else console.error("prevQuizBtn not found.");
+
+        if (this.generateCardBtn) this.generateCardBtn.addEventListener('click', () => this.generateCard());
+        else console.error("generateCardBtn not found.");
+
+        if (this.resetCardBtn) this.resetCardBtn.addEventListener('click', () => this.resetQuiz());
+        else console.error("resetCardBtn not found.");
 
         // Attach listeners for interests and mood options
         document.querySelectorAll('.interest-tag').forEach(tag => {
@@ -615,24 +634,28 @@ document.addEventListener('DOMContentLoaded', () => {
             emoji.addEventListener('click', (e) => this.selectMood(e.target));
         });
 
-        this.downloadCardBtn.addEventListener('click', () => this.handleDownload());
-        this.shareCardBtn.addEventListener('click', () => this.handleShare());
+        if (this.downloadCardBtn) this.downloadCardBtn.addEventListener('click', () => this.handleDownload());
+        else console.error("downloadCardBtn not found.");
+
+        if (this.shareCardBtn) this.shareCardBtn.addEventListener('click', () => this.handleShare());
+        else console.error("shareCardBtn not found.");
     }
 
     showSection(sectionToShow) {
         // Hide all main sections first
-        this.introSection.classList.add('hidden');
-        this.quizSection.classList.add('hidden');
-        this.loadingSection.classList.add('hidden');
-        this.resultSection.classList.add('hidden');
+        if (this.introSection) this.introSection.classList.add('hidden');
+        if (this.quizSection) this.quizSection.classList.add('hidden');
+        if (this.loadingSection) this.loadingSection.classList.add('hidden');
+        if (this.resultSection) this.resultSection.classList.add('hidden');
         
         // Show the requested section
-        sectionToShow.classList.remove('hidden');
+        if (sectionToShow) sectionToShow.classList.remove('hidden');
+        else console.error("Attempted to show a null section.");
     }
 
     startQuiz() {
-        this.mainContent.classList.add('hidden'); // Hide CV section
-        this.aiCardSection.classList.remove('hidden'); // Show AI card app container
+        if (this.mainContent) this.mainContent.classList.add('hidden'); // Hide CV section
+        if (this.aiCardSection) this.aiCardSection.classList.remove('hidden'); // Show AI card app container
         this.showSection(this.quizSection);
         this.currentStep = 0;
         this.answers = {};
@@ -648,14 +671,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentStepEl = document.getElementById(stepData.id);
         if (currentStepEl) {
             currentStepEl.classList.remove('hidden');
-            this.quizQuestionEl.textContent = stepData.question;
-            this.currentQuestionNumEl.textContent = this.currentStep + 1;
+            if (this.quizQuestionEl) this.quizQuestionEl.textContent = stepData.question;
+            if (this.currentQuestionNumEl) this.currentQuestionNumEl.textContent = this.currentStep + 1;
 
             // Handle input values
             if (stepData.inputId) {
                 const inputEl = document.getElementById(stepData.inputId);
                 if (inputEl) {
                     inputEl.value = this.answers[stepData.key] || '';
+                } else {
+                    console.error(`Input element with ID '${stepData.inputId}' not found for step '${stepData.id}'.`);
                 }
             }
 
@@ -680,26 +705,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
+        } else {
+            console.error(`Quiz step element with ID '${stepData.id}' not found.`);
         }
 
         this.updateNavigationButtons();
     }
 
     updateNavigationButtons() {
-        this.prevQuizBtn.classList.toggle('hidden', this.currentStep === 0);
-        this.nextQuizBtn.classList.toggle('hidden', this.currentStep === this.quizSteps.length - 1);
-        this.generateCardBtn.classList.toggle('hidden', this.currentStep !== this.quizSteps.length - 1);
+        if (this.prevQuizBtn) this.prevQuizBtn.classList.toggle('hidden', this.currentStep === 0);
+        if (this.nextQuizBtn) this.nextQuizBtn.classList.toggle('hidden', this.currentStep === this.quizSteps.length - 1);
+        if (this.generateCardBtn) this.generateCardBtn.classList.toggle('hidden', this.currentStep !== this.quizSteps.length - 1);
 
         // Update progress bar
-        const progressPercentage = ((this.currentStep + 1) / this.quizSteps.length) * 100;
-        document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+        if (progressBar) {
+            const progressPercentage = ((this.currentStep + 1) / this.quizSteps.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
     }
 
     handleNext() {
         const stepData = this.quizSteps[this.currentStep];
         // Save current answer before moving
         if (stepData.inputId) {
-            this.answers[stepData.key] = document.getElementById(stepData.inputId).value.trim();
+            const inputEl = document.getElementById(stepData.inputId);
+            if (inputEl) {
+                this.answers[stepData.key] = inputEl.value.trim();
+            }
         } else if (stepData.type === 'interests') {
             this.answers[stepData.key] = this.selectedInterests;
         } else if (stepData.type === 'mood') {
@@ -707,17 +739,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Basic validation (can be enhanced)
-        if (stepData.key !== 'phone_number' && !this.answers[stepData.key] && stepData.type !== 'interests' && stepData.type !== 'mood') {
-            alert('الرجاء إدخال قيمة لهذا الحقل.'); // Use custom modal in production
-            return;
-        }
-        if (stepData.type === 'interests' && this.selectedInterests.length === 0) {
-            alert('الرجاء اختيار اهتمام واحد على الأقل.'); // Use custom modal
-            return;
-        }
-        if (stepData.type === 'mood' && !this.answers[stepData.key]) {
-            alert('الرجاء اختيار مزاجك اليوم.'); // Use custom modal
-            return;
+        if (stepData.key !== 'phone_number') { // Phone is optional
+            if (stepData.type === 'text' || stepData.type === 'email') {
+                if (!this.answers[stepData.key]) {
+                    alert('الرجاء إدخال قيمة لهذا الحقل.'); // Use custom modal in production
+                    return;
+                }
+            } else if (stepData.type === 'interests' && this.selectedInterests.length === 0) {
+                alert('الرجاء اختيار اهتمام واحد على الأقل.'); // Use custom modal
+                return;
+            } else if (stepData.type === 'mood' && !this.answers[stepData.key]) {
+                alert('الرجاء اختيار مزاجك اليوم.'); // Use custom modal
+                return;
+            }
         }
 
 
@@ -765,7 +799,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Final save of current answer if it's the last step
         const stepData = this.quizSteps[this.currentStep];
         if (stepData.inputId) {
-            this.answers[stepData.key] = document.getElementById(stepData.inputId).value.trim();
+            const inputEl = document.getElementById(stepData.inputId);
+            if (inputEl) {
+                this.answers[stepData.key] = inputEl.value.trim();
+            }
         } else if (stepData.type === 'interests') {
             this.answers[stepData.key] = this.selectedInterests;
         } else if (stepData.type === 'mood') {
@@ -810,6 +847,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(`Backend error: ${response.status} - ${errorData}`);
                 // Fallback to mock data on error
                 this.generatedCardData = this.generateMockCardData(this.answers);
+                alert(`حدث خطأ أثناء إنشاء البطاقة: ${errorData}. سيتم عرض بطاقة تجريبية.`); // Use custom modal
             } else {
                 this.generatedCardData = await response.json();
                 // Ensure color_name is either 'blue' or 'purple' for CSS classes
@@ -821,6 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Error sending data to backend:", error);
             // Fallback to mock data on network error
             this.generatedCardData = this.generateMockCardData(this.answers);
+            alert(`تعذر الاتصال بخادم الذكاء الاصطناعي. سيتم عرض بطاقة تجريبية. (خطأ في الاتصال بالشبكة: ${error.message})`); // Use custom modal
         }
 
         this.renderGeneratedCard();
@@ -845,49 +884,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderGeneratedCard() {
         const data = this.generatedCardData;
-        if (!data) return;
+        if (!data) {
+            console.error("No generated card data to render.");
+            return;
+        }
 
-        this.cardAvatar.src = `https://placehold.co/100x100/${data.color_hex.substring(1)}/000?text=${encodeURIComponent(data.avatar_description || 'AI')}`;
-        this.cardNickname.textContent = data.nickname;
-        this.cardAnalysis.textContent = data.analysis;
-        this.cardAiMessage.textContent = data.ai_message;
+        if (this.cardAvatar) this.cardAvatar.src = `https://placehold.co/100x100/${data.color_hex.substring(1)}/000?text=${encodeURIComponent(data.avatar_description || 'AI')}`;
+        if (this.cardNickname) this.cardNickname.textContent = data.nickname;
+        if (this.cardAnalysis) this.cardAnalysis.textContent = data.analysis;
+        if (this.cardAiMessage) this.cardAiMessage.textContent = data.ai_message;
 
         // Update card display style based on generated color
-        const cardDisplay = this.resultSection.querySelector('.generated-card-display');
+        const cardDisplay = this.resultSection ? this.resultSection.querySelector('.generated-card-display') : null;
         if (cardDisplay) {
             // Remove previous color classes
             cardDisplay.classList.remove('border-blue-500', 'border-purple-500', 'border-green-500', 'border-pink-500');
             cardDisplay.style.borderColor = data.color_hex; // Apply dynamic border color
             cardDisplay.style.boxShadow = `0 0 15px ${data.color_hex}`; // Apply dynamic shadow
-            cardDisplay.querySelector('h3').style.color = data.color_hex; // Nickname color
-            cardDisplay.querySelector('h3').style.textShadow = `0 0 10px ${data.color_hex}`; // Nickname shadow
-            cardDisplay.querySelector('.card-avatar-display').style.borderColor = data.color_hex; // Avatar border
-            cardDisplay.querySelector('.card-avatar-display').style.boxShadow = `0 0 15px ${data.color_hex}`; // Avatar shadow
-            cardDisplay.querySelector('.card-link-display').style.color = data.color_hex; // Link color
+            
+            const nicknameEl = cardDisplay.querySelector('h3');
+            if (nicknameEl) {
+                nicknameEl.style.color = data.color_hex; // Nickname color
+                nicknameEl.style.textShadow = `0 0 10px ${data.color_hex}`; // Nickname shadow
+            } else {
+                console.warn("Nickname element (h3) not found in generated card display.");
+            }
+
+            const avatarDisplayEl = cardDisplay.querySelector('.card-avatar-display');
+            if (avatarDisplayEl) {
+                avatarDisplayEl.style.borderColor = data.color_hex; // Avatar border
+                avatarDisplayEl.style.boxShadow = `0 0 15px ${data.color_hex}`; // Avatar shadow
+            } else {
+                console.warn("Avatar display element not found in generated card display.");
+            }
+
+            const cardLinkDisplayEl = cardDisplay.querySelector('.card-link-display');
+            if (cardLinkDisplayEl) {
+                cardLinkDisplayEl.style.color = data.color_hex; // Link color
+            } else {
+                console.warn("Card link display element not found in generated card display.");
+            }
             
             // Update the conic gradient for the border animation
-            const beforePseudo = cardDisplay.querySelector('style') || document.createElement('style');
-            if (!cardDisplay.querySelector('style')) {
-                cardDisplay.appendChild(beforePseudo);
+            let beforePseudoStyle = cardDisplay.querySelector('style#card-border-style');
+            if (!beforePseudoStyle) {
+                beforePseudoStyle = document.createElement('style');
+                beforePseudoStyle.id = 'card-border-style';
+                cardDisplay.appendChild(beforePseudoStyle);
             }
-            beforePseudo.textContent = `
+            beforePseudoStyle.textContent = `
                 .generated-card-display::before {
                     background: conic-gradient(from 0deg at 50% 50%, ${data.color_hex} 0%, transparent 25%, transparent 75%, ${data.color_hex} 100%);
                 }
             `;
+        } else {
+            console.error("Generated card display element not found in result section.");
         }
 
 
         // Generate QR Code
-        new QRious({
-            element: this.cardQrCode,
-            value: data.qr_link || window.location.href, // Fallback to current page
-            size: 80,
-            background: 'transparent',
-            foreground: data.color_hex,
-            level: 'H'
-        });
-        this.cardLink.href = data.qr_link || window.location.href;
+        if (this.cardQrCode) {
+            new QRious({
+                element: this.cardQrCode,
+                value: data.qr_link || window.location.href, // Fallback to current page
+                size: 80,
+                background: 'transparent',
+                foreground: data.color_hex,
+                level: 'H'
+            });
+        } else {
+            console.error("cardQrCode element not found.");
+        }
+        
+        if (this.cardLink) {
+            this.cardLink.href = data.qr_link || window.location.href;
+        } else {
+            console.error("cardLink element not found.");
+        }
     }
 
     handleDownload() {
@@ -896,6 +969,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     handleShare() {
         const data = this.generatedCardData;
+        if (!data) {
+            alert("لا توجد بيانات بطاقة للمشاركة.");
+            return;
+        }
+
         const shareText = `واو! اكتشفت هويتي الرقمية الفريدة على Amrikyy! أنا "${data.nickname}". تحدّى أصدقاءك يكتشفوا هويتهم! #هوية_رقمية_AI #Amrikyy`;
         const shareUrl = data.qr_link || window.location.href;
 
@@ -909,8 +987,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Fallback for browsers that do not support Web Share API
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
             window.open(twitterUrl, '_blank');
-            // You can also provide a copy to clipboard option here
-            // alert('Web Share API is not supported in this browser. You can share on Twitter or copy the link.');
+            alert('Web Share API غير مدعوم في متصفحك. يمكنك مشاركة الرابط على تويتر أو نسخه يدوياً.');
         }
     }
 
@@ -920,11 +997,15 @@ document.addEventListener('DOMContentLoaded', () => {
         this.selectedInterests = [];
         this.generatedCardData = null;
         this.showSection(this.introSection); // Go back to intro screen
-        this.mainContent.classList.remove('hidden'); // Show CV section again
-        this.aiCardSection.classList.add('hidden'); // Hide AI card app container
+        if (this.mainContent) this.mainContent.classList.remove('hidden'); // Show CV section again
+        if (this.aiCardSection) this.aiCardSection.classList.add('hidden'); // Hide AI card app container
+        
         document.querySelectorAll('.interest-tag').forEach(tag => tag.classList.remove('selected'));
         document.querySelectorAll('.emoji-option').forEach(emoji => emoji.classList.remove('selected'));
-        document.getElementById('progressBar').style.width = '0%'; // Reset progress bar
+        
+        if (progressBar) {
+            progressBar.style.width = '0%'; // Reset progress bar
+        }
     }
   }
 
@@ -935,5 +1016,312 @@ document.addEventListener('DOMContentLoaded', () => {
   window.startAmrikyyAICardQuiz = () => {
       amrikyyAICardInstance.startQuiz();
   };
+
+  // ====== Enhanced 3D Space-Bitcoin-Tech Micro Animations Background (Realistic & Immersive) ======
+  // Moved this entire section inside DOMContentLoaded to ensure elements are available
+  const animationsContainer = document.getElementById('page-background-animations');
+  if (!animationsContainer) {
+    console.error("Element with ID 'page-background-animations' not found. Canvas background will not be rendered.");
+    return; // Exit if container not found
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'space-bg-canvas';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.zIndex = '-2';
+  canvas.style.pointerEvents = 'auto'; // Allow mouse events on canvas
+  canvas.style.opacity = '0.8';
+  animationsContainer.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error("2D context not supported or canvas already in use.");
+    return; // Exit if context not available
+  }
+  let w, h, dpr;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.scale(dpr, dpr);
+  }
+  window.addEventListener('resize', resize);
+  resize(); // Initial resize call
+
+  // --- Starfield Layer ---
+  const starfield = [];
+  const numStars = 180;
+  for(let i=0;i<numStars;i++){
+    starfield.push({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      z: 0.2+Math.random()*0.8,
+      tw: Math.random()*2*Math.PI,
+      spd: 0.08+Math.random()*0.12
+    });
+  }
+  function drawStarfield() {
+    for(const s of starfield) {
+      let twinkle = 0.7+0.3*Math.sin(Date.now()/600 + s.tw);
+      ctx.save();
+      ctx.globalAlpha = 0.5*twinkle;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 0.7 + 1.2*s.z*twinkle, 0, 2*Math.PI);
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = '#39FF14';
+      ctx.shadowBlur = 6*s.z;
+      ctx.fill();
+      ctx.restore();
+      // Parallax movement
+      s.x += s.spd*s.z*0.2;
+      if(s.x > w) s.x = 0;
+    }
+  }
+
+  // --- Layered Nebula with Noise ---
+  function drawNebula() {
+    // Main nebula
+    const grad = ctx.createRadialGradient(w/2, h*0.6, w*0.1, w/2, h*0.6, w*0.7);
+    grad.addColorStop(0, 'rgba(57,255,20,0.22)');
+    grad.addColorStop(0.25, 'rgba(0,212,255,0.13)');
+    grad.addColorStop(0.5, 'rgba(255,0,255,0.10)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.0)');
+    ctx.save();
+    ctx.globalAlpha = 0.8;
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,w,h);
+    ctx.restore();
+    // Add a faint galactic swirl
+    ctx.save();
+    ctx.globalAlpha = 0.13;
+    ctx.translate(w/2, h*0.6);
+    for(let i=0;i<7;i++){
+      ctx.rotate(Math.PI/3.5);
+      ctx.beginPath();
+      ctx.ellipse(0,0,w*0.32,h*0.09,0,0,2*Math.PI);
+      ctx.strokeStyle = 'rgba(57,255,20,0.18)';
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = '#39FF14';
+      ctx.shadowBlur = 18;
+      ctx.stroke();
+    }
+    ctx.restore();
+    // Add subtle noise
+    for(let i=0;i<120;i++){
+      let nx = Math.random()*w, ny = Math.random()*h;
+      ctx.save();
+      ctx.globalAlpha = 0.04+Math.random()*0.04;
+      ctx.beginPath();
+      ctx.arc(nx, ny, 0.7+Math.random()*1.2, 0, 2*Math.PI);
+      ctx.fillStyle = Math.random()>0.5?'#39FF14':'#00d4ff';
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  const particleIcons = [
+    {type:'bitcoin', color:'#f7931a', size:22, z:1.1, label:'Bitcoin'},
+    {type:'chip', color:'#00d4ff', size:18, z:0.9, label:'Tech Chip'},
+    {type:'star', color:'#fff', size:2, z:0.7, label: null}, // No label for simple stars
+    {type:'planet', color:'#39FF14', size:16, z:1.2, label:'Neon Planet'},
+    {type:'ring', color:'#fff', size:24, z:1.05, label: null},
+    {type:'satellite', color:'#00fff7', size:10, z:1.15, label:'Satellite'},
+    {type:'sparkle', color:'#fff', size:1.5, z:0.8, label: null},
+  ];
+  const particles = []; // Renamed from objects to particles for clarity
+  const numParticles = 38; // Number of particles
+  for(let i=0; i < numParticles; i++) {
+    const icon = particleIcons[Math.floor(Math.random()*particleIcons.length)];
+    particles.push({
+      ...icon,
+      x: Math.random()*w,
+      y: Math.random()*h,
+      z: icon.z + (Math.random()-0.5)*0.2,
+      angle: Math.random()*Math.PI*2,
+      speed: 0.08+Math.random()*0.18,
+      orbit: Math.random()>0.7 ? (0.5+Math.random()*1.2) : 0,
+      orbitCenter: [Math.random()*w, Math.random()*h],
+      orbitSpeed: 0.0007+Math.random()*0.0015,
+      trail: Math.random()>0.8,
+      color2: Math.random()>0.5 ? '#39FF14' : '#00d4ff',
+      pulseT: 0, // Initialize pulse timer
+    });
+  }
+
+  const shootingStars = [];
+  const maxShootingStars = 3;
+  function spawnShootingStar() {
+    if (shootingStars.length >= maxShootingStars) return;
+    const startY = Math.random()*h*0.7;
+    shootingStars.push({
+      x: -60, y: startY, len: 120+Math.random()*60, speed: 7+Math.random()*4, alpha: 1, t: 0
+    });
+  }
+  setInterval(spawnShootingStar, 1800);
+
+  let mouse = {x: w/2, y: h/2, active: false};
+  let parallax = {x: 0, y: 0};
+  let hoveredParticle = null; // Renamed from hoverObj
+  let tooltipAlpha = 0;
+  let burstSparkles = [];
+
+  function onPointerMove(e) {
+    let px, py;
+    if(e.touches && e.touches.length) {
+      px = e.touches[0].clientX; py = e.touches[0].clientY;
+    } else {
+      px = e.clientX; py = e.clientY;
+    }
+    mouse.x = px; mouse.y = py; mouse.active = true;
+    parallax.x = (px-w/2)/w*60;
+    parallax.y = (py-h/2)/h*60;
+
+    // Check for hovered particle on move
+    hoveredParticle = getParticleAt(mouse.x, mouse.y);
+    if(hoveredParticle) hoveredParticle.pulseT = 0; // Reset pulse animation on new hover
+  }
+  canvas.addEventListener('mousemove', onPointerMove);
+  canvas.addEventListener('touchmove', onPointerMove, {passive: true}); // Passive for performance
+
+  function onPointerLeave() {
+    mouse.active = false;
+    parallax.x = 0; parallax.y = 0;
+    hoveredParticle = null; // Clear hovered particle
+  }
+  canvas.addEventListener('mouseleave', onPointerLeave);
+  canvas.addEventListener('touchend', onPointerLeave); // Also clear on touchend
+
+  function burstAt(x, y) {
+    const numBurstSparkles = 18;
+    for(let i=0; i < numBurstSparkles; i++) {
+      const angle = (i / numBurstSparkles) * 2 * Math.PI;
+      burstSparkles.push({
+        x, y,
+        vx: Math.cos(angle)*2.5 + (Math.random()-0.5)*1.2, // Spread out sparkles
+        vy: Math.sin(angle)*2.5 + (Math.random()-0.5)*1.2,
+        alpha: 1,
+        size: 2+Math.random()*2,
+        t: 0
+      });
+    }
+  }
+  canvas.addEventListener('click', e => { burstAt(e.clientX, e.clientY); });
+  canvas.addEventListener('touchstart', e => {
+    if(e.touches && e.touches.length) burstAt(e.touches[0].clientX, e.touches[0].clientY);
+     e.preventDefault(); // Prevent default touch actions like scrolling when tapping canvas
+  }, {passive: false});
+
+
+  function getParticleAt(mx, my) {
+    for(const p of particles) {
+      if(!p.label) continue; // Only interact with particles that have labels
+      let t = Date.now()/1200*p.z+p.x; // Time factor for subtle movement
+      let particleX = p.x + Math.sin(t)*18*p.z + parallax.x*p.z;
+      let particleY = p.y + Math.cos(t*0.9)*12*p.z + parallax.y*p.z;
+      if(p.orbit) {
+        let orbitA = Date.now()*p.orbitSpeed + p.angle;
+        particleX = p.orbitCenter[0] + Math.cos(orbitA)*60*p.orbit + parallax.x*p.z;
+        particleY = p.orbitCenter[1] + Math.sin(orbitA)*30*p.orbit + parallax.y*p.z;
+      }
+      const hoverRadius = p.size * 1.5; // Increased hover area
+      if(Math.hypot(mx-particleX, my-particleY) < hoverRadius) return p;
+    }
+    return null;
+  }
+
+  // --- Enhanced Drawing Functions ---
+  function drawBitcoin(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.18+0.08*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.beginPath();ctx.arc(0,0,s,0,2*Math.PI);ctx.fillStyle='#222';ctx.shadowColor='#f7931a';ctx.shadowBlur=g?28:10;ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='#f7931a';ctx.stroke();ctx.font=`${s*1.1}px Orbitron,Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f7931a';ctx.shadowColor='#fff';ctx.shadowBlur=g?18:6;ctx.fillText('₿',0,1);ctx.restore()}
+  function drawPlanet(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.13+0.06*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.beginPath();ctx.arc(0,0,s,0,2*Math.PI);ctx.fillStyle='#39FF14';ctx.shadowColor='#00d4ff';ctx.shadowBlur=g?28:12;ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='#fff';ctx.stroke();ctx.beginPath();ctx.ellipse(0,0,s*1.2,s*0.5,Math.PI/4,0,2*Math.PI);ctx.strokeStyle='#00d4ff88';ctx.lineWidth=1.5;ctx.stroke();ctx.restore()}
+  function drawChip(x,y,s,a,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.15+0.07*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.fillStyle='#00d4ff';ctx.shadowColor='#00d4ff';ctx.shadowBlur=g?12:0;ctx.fillRect(-s/2,-s/2,s,s);ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.strokeRect(-s/2,-s/2,s,s);ctx.restore()}
+  function drawSatellite(x,y,s,a,c,g,p){ctx.save();ctx.translate(x,y);ctx.rotate(a);let sc=p?1.12+0.05*Math.sin(Date.now()/120):1;ctx.scale(sc,sc);ctx.fillStyle=c;ctx.shadowColor=c;ctx.shadowBlur=g?8:0;ctx.fillRect(-s/2,-s/4,s,s/2);ctx.fillStyle='#fff';ctx.fillRect(-s/8,-s/8,s/4,s/4);ctx.restore()}
+  function drawStar(x,y,s,g){ctx.save();ctx.globalAlpha=0.7+Math.random()*0.3;ctx.beginPath();ctx.arc(x,y,s,0,2*Math.PI);ctx.fillStyle='#fff';ctx.shadowColor='#39FF14';ctx.shadowBlur=g?6+Math.random()*4:4;ctx.fill();ctx.restore()}
+  function drawRing(x,y,s,a,c,g){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.beginPath();ctx.ellipse(0,0,s,s*0.35,Math.PI/3,0,2*Math.PI);ctx.strokeStyle=c;ctx.lineWidth=2;ctx.shadowColor=c;ctx.shadowBlur=g?12:0;ctx.globalAlpha=0.7;ctx.stroke();ctx.restore()}
+  function drawSparkle(x,y,s,g){ctx.save();ctx.globalAlpha=0.6+Math.random()*0.4;ctx.beginPath();ctx.arc(x,y,s,0,2*Math.PI);ctx.fillStyle='#fff';ctx.shadowColor='#fff';ctx.shadowBlur=g?8+Math.random()*4:4;ctx.fill();ctx.restore()}
+  function drawTrail(x,y,l,a,c){ctx.save();ctx.globalAlpha=0.18;ctx.strokeStyle=c;ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-Math.cos(a)*l,y-Math.sin(a)*l);ctx.stroke();ctx.restore()}
+  function drawShootingStar(s){ctx.save();ctx.globalAlpha=s.alpha;ctx.strokeStyle='#fff';ctx.shadowColor='#39FF14';ctx.shadowBlur=16;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.len,s.y+s.len*0.2);ctx.stroke();ctx.restore()}
+
+  function drawBurstSparkles() {
+    for(let i=burstSparkles.length-1;i>=0;i--) {
+      const s=burstSparkles[i];
+      ctx.save(); ctx.globalAlpha=s.alpha; ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,2*Math.PI); ctx.fillStyle='#fff'; ctx.shadowColor='#39FF14'; ctx.shadowBlur=12; ctx.fill(); ctx.restore();
+      s.x += s.vx; s.y += s.vy; s.alpha -= 0.03; s.size *= 0.97;
+      if(s.alpha <= 0.01 || s.size <= 0.5) burstSparkles.splice(i,1);
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0,0,w,h); // Clear canvas
+
+    drawNebula();
+    drawStarfield();
+
+    // Draw particles
+    for(const p of particles) {
+      let t = Date.now()/1200*p.z+p.x; // Time factor for subtle movement
+      let particleX = p.x + Math.sin(t)*18*p.z + parallax.x*p.z;
+      let particleY = p.y + Math.cos(t*0.9)*12*p.z + parallax.y*p.z;
+
+      if(p.orbit) {
+        let orbitA = Date.now()*p.orbitSpeed + p.angle;
+        particleX = p.orbitCenter[0] + Math.cos(orbitA)*60*p.orbit + parallax.x*p.z;
+        particleY = p.orbitCenter[1] + Math.sin(orbitA)*30*p.orbit + parallax.y*p.z;
+      }
+
+      // Pulse effect for hovered particle
+      let isHovered = hoveredParticle === p;
+      if (isHovered) {
+        p.pulseT += 0.05; // Increment pulse timer
+      } else {
+        p.pulseT = Math.max(0, p.pulseT - 0.1); // Decay pulse when not hovered
+      }
+      let pulseFactor = 1 + 0.1 * Math.sin(p.pulseT * 5); // Simple sine wave pulse
+
+      if(p.trail && p.type !== 'star' && p.type !== 'sparkle') { // Only draw trails for non-star/sparkle particles
+        drawTrail(particleX, particleY, p.size*2, p.angle, p.color2);
+      }
+
+      switch(p.type) {
+        case 'bitcoin': drawBitcoin(particleX, particleY, p.size, p.angle, isHovered, pulseFactor); break;
+        case 'chip': drawChip(particleX, particleY, p.size, p.angle, isHovered, pulseFactor); break;
+        case 'planet': drawPlanet(particleX, particleY, p.size, p.angle, isHovered, pulseFactor); break;
+        case 'satellite': drawSatellite(particleX, particleY, p.size, p.angle, p.color, isHovered, pulseFactor); break;
+        case 'star': drawStar(particleX, particleY, p.size, isHovered); break;
+        case 'ring': drawRing(particleX, particleY, p.size, p.angle, p.color, isHovered); break;
+        case 'sparkle': drawSparkle(particleX, particleY, p.size, isHovered); break;
+      }
+
+      p.x += p.speed * p.z * 0.5; // Move particles
+      p.angle += 0.005; // Rotate particles
+      if(p.x > w + 50) p.x = -50; // Loop particles
+    }
+
+    // Draw shooting stars
+    for(let i=shootingStars.length-1; i>=0; i--) {
+      const s = shootingStars[i];
+      drawShootingStar(s);
+      s.x += s.speed;
+      s.y += s.speed * 0.2; // Slight downward angle
+      s.alpha -= 0.01;
+      if(s.alpha <= 0 || s.x > w + s.len) shootingStars.splice(i, 1);
+    }
+
+    drawBurstSparkles(); // Draw click burst sparkles
+
+    requestAnimationFrame(animate); // Loop animation
+  }
+
+  // Start the animation loop
+  animate();
 
 }); // End of DOMContentLoaded
