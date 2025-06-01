@@ -22,7 +22,8 @@
 }
 </script>
 </head>
-<body class="loading"> <div id="loader-container">
+<body class="loading">
+  <div id="loader-container">
     <div class="loader-content">
       <img class="loader-avatar" src="avatar.jpg" alt="Mohamed H Abdelaziz Personal Photo" style="width:90px;height:90px;border-radius:50%;box-shadow:0 0 24px #39FF14,0 2px 8px #000a;margin-bottom:1.2em;object-fit:cover;" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=M+A&background=39FF14&color=fff&size=90';">
       <div class="loader-logo">MOHAMED H ABDELAZIZ</div>
@@ -155,6 +156,13 @@
               <span data-translate="projectPersonalDesc">تطوير صفحات هبوط، أنظمة تسجيل دخول متقدمة، وبوتات دردشة AI.</span>
             </div>
           </div>
+          <div class="cv-section">
+            <h3>🎧 بودكاست</h3>
+            <div class="podcast-option">
+              <img src="podcast neon.png" alt="شعار بودكاست نيون" style="width: 100px; height: auto; margin-bottom: 10px;">
+              <p data-translate="podcastDescription">استمع إلى أحدث حلقات البودكاست الخاصة بي حول التكنولوجيا، العملات الرقمية، والمزيد!</p>
+              </div>
+          </div>
           <div class="cv-section personal-info-section">
             <h4 data-translate="personalInfoTitle">المعلومات الشخصية</h4>
             <ul class="personal-info-list">
@@ -167,6 +175,102 @@
             </div>
         </div>
       </div>
+    </section>
+
+    <section id="ai-id-card-section" class="ai-id-card-container hidden">
+        <h2 data-translate="aiIdCardTitle" class="section-title">بطاقة الهوية الرقمية AI</h2>
+        <div class="ai-id-card-intro" data-translate="aiIdCardIntro">
+            <p>اكتشف هويتك الرقمية الفريدة التي تم إنشاؤها بواسطة الذكاء الاصطناعي!</p>
+            <button id="startAiIdCardBtn" class="ai-id-card-start-btn" data-translate="startAiIdCardBtn">اكتشف هويتك الآن ✨</button>
+        </div>
+
+        <div id="ai-id-card-quiz" class="ai-id-card-quiz hidden">
+            <div class="quiz-header">
+                <h3 id="quizQuestion" class="quiz-question"></h3>
+                <div class="progress-indicator">
+                    <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum"></span>
+                </div>
+            </div>
+            <div class="quiz-body">
+                <div class="quiz-step" id="quizStep1">
+                    <label for="fullNameInput" data-translate="fullNameLabel">الاسم الكامل:</label>
+                    <input type="text" id="fullNameInput" placeholder="أدخل اسمك الكامل" data-translate-placeholder="fullNamePlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep2">
+                    <label for="emailInput" data-translate="emailLabel">البريد الإلكتروني:</label>
+                    <input type="email" id="emailInput" placeholder="أدخل بريدك الإلكتروني" data-translate-placeholder="emailPlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep3">
+                    <label for="phoneInput" data-translate="phoneLabel">رقم الهاتف (اختياري):</label>
+                    <input type="tel" id="phoneInput" placeholder="أدخل رقم هاتفك" data-translate-placeholder="phonePlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep4">
+                    <label data-translate="interestsLabel">اهتماماتك (اختر ما يصل إلى 3):</label>
+                    <div class="interests-grid">
+                        <button class="interest-tag" data-interest="التكنولوجيا" data-translate="techInterest">التكنولوجيا</button>
+                        <button class="interest-tag" data-interest="العملات الرقمية" data-translate="cryptoInterest">العملات الرقمية</button>
+                        <button class="interest-tag" data-interest="ريادة الأعمال" data-translate="entrepreneurshipInterest">ريادة الأعمال</button>
+                        <button class="interest-tag" data-interest="الذكاء الاصطناعي" data-translate="aiInterest">الذكاء الاصطناعي</button>
+                        <button class="interest-tag" data-interest="الأمن السيبراني" data-translate="cybersecurityInterest">الأمن السيبراني</button>
+                        <button class="interest-tag" data-interest="الفن الرقمي" data-translate="digitalArtInterest">الفن الرقمي</button>
+                        <button class="interest-tag" data-interest="الموسيقى" data-translate="musicInterest">الموسيقى</button>
+                        <button class="interest-tag" data-interest="السفر" data-translate="travelInterest">السفر</button>
+                        <button class="interest-tag" data-interest="الألعاب" data-translate="gamingInterest">الألعاب</button>
+                    </div>
+                </div>
+                <div class="quiz-step hidden" id="quizStep5">
+                    <label for="personalityWordInput" data-translate="personalityWordLabel">كلمة تصف شخصيتك:</label>
+                    <input type="text" id="personalityWordInput" placeholder="مثال: مبدع، طموح، هادئ" data-translate-placeholder="personalityWordPlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep6">
+                    <label for="learningGoalInput" data-translate="learningGoalLabel">ماذا تريد أن تتعلمه في 2025؟</label>
+                    <input type="text" id="learningGoalInput" placeholder="مثال: برمجة، لغة جديدة، استثمار" data-translate-placeholder="learningGoalPlaceholder">
+                </div>
+                <div class="quiz-step hidden" id="quizStep7">
+                    <label data-translate="moodLabel">مزاجك اليوم؟</label>
+                    <div class="mood-emojis">
+                        <span class="emoji-option" data-mood="😎">😎</span>
+                        <span class="emoji-option" data-mood="🤓">🤓</span>
+                        <span class="emoji-option" data-mood="🚀">🚀</span>
+                        <span class="emoji-option" data-mood="🤔">🤔</span>
+                        <span class="emoji-option" data-mood="💡">💡</span>
+                        <span class="emoji-option" data-mood="🥳">🥳</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-navigation">
+                <button id="prevQuizBtn" class="quiz-nav-btn prev-btn hidden" data-translate="prevBtn">السابق</button>
+                <button id="nextQuizBtn" class="quiz-nav-btn next-btn" data-translate="nextBtn">التالي</button>
+                <button id="generateCardBtn" class="quiz-nav-btn generate-btn hidden" data-translate="generateCardBtn">أنشئ بطاقتي!</button>
+            </div>
+        </div>
+
+        <div id="ai-id-card-loading" class="ai-id-card-loading hidden">
+            <div class="loading-spinner"></div>
+            <p data-translate="loadingMessage">يتم إنشاء هويتك الرقمية الفريدة...</p>
+        </div>
+
+        <div id="ai-id-card-result" class="ai-id-card-result hidden">
+            <div class="generated-card-display">
+                <div class="card-header-display">
+                    <img id="cardAvatar" src="https://placehold.co/100x100/39FF14/000?text=AI" alt="AI Avatar" class="card-avatar-display">
+                    <h3 id="cardNickname" class="card-nickname-display"></h3>
+                </div>
+                <div class="card-body-display">
+                    <p id="cardAnalysis" class="card-analysis-display"></p>
+                    <p id="cardAiMessage" class="card-ai-message-display"></p>
+                    <div class="card-qr-link-display">
+                        <img id="cardQrCode" src="https://placehold.co/100x100/000/fff?text=QR" alt="QR Code" class="card-qr-code">
+                        <a id="cardLink" href="#" target="_blank" class="card-link-display" data-translate="viewCardLink">عرض بطاقتي</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button id="downloadCardBtn" class="action-btn download-btn" data-translate="downloadCardBtn"><i class="fas fa-download"></i> تحميل البطاقة</button>
+                <button id="shareCardBtn" class="action-btn share-btn" data-translate="shareCardBtn"><i class="fas fa-share-alt"></i> مشاركة</button>
+                <button id="resetCardBtn" class="action-btn reset-btn" data-translate="resetCardBtn"><i class="fas fa-redo-alt"></i> إنشاء واحدة أخرى</button>
+            </div>
+        </div>
     </section>
   </div>
 
