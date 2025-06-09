@@ -602,9 +602,9 @@ function initFormSubmission() {
         // In a real implementation, this would call the backend API
         // For demo purposes, we'll simulate the API call
         cardData = await simulateApiCall(apiPayload);
-        
+
         // Generate and display the ID card
-        generateIdCard({ ...cardData, avatar: userData.avatar });
+        generateIdCard({ ...cardData, ...userData });
         
         // Hide generator section and show result section
         document.getElementById('idGeneratorSection').classList.add('hidden');
@@ -805,17 +805,26 @@ function initShareFunctionality() {
   
   // Copy link functionality
   if (copyLinkBtn && shareLink) {
-    copyLinkBtn.addEventListener('click', () => {
-      shareLink.select();
-      document.execCommand('copy');
-      
-      // Show copied message
-      const originalText = copyLinkBtn.textContent;
-      copyLinkBtn.textContent = 'Copied!';
-      
-      setTimeout(() => {
-        copyLinkBtn.textContent = originalText;
-      }, 2000);
+    copyLinkBtn.addEventListener('click', async () => {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(shareLink.value);
+        } else {
+          // Fallback for older browsers
+          shareLink.select();
+          document.execCommand('copy');
+        }
+
+        // Show copied message
+        const originalText = copyLinkBtn.textContent;
+        copyLinkBtn.textContent = 'Copied!';
+
+        setTimeout(() => {
+          copyLinkBtn.textContent = originalText;
+        }, 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
     });
   }
   
