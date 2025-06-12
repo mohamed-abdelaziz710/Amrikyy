@@ -65,6 +65,22 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 3. Start the local server with `npm start`.
 4. Open `http://localhost:3000` in your browser.
 
+### Syncing AI Tool Data
+
+1. Create a `.env` file with your credentials. Example:
+
+   ```dotenv
+   DATA_PROVIDER=notion
+   NOTION_API_KEY=secret_key
+   NOTION_DATABASE_ID=your_database_id
+   ```
+
+   For Firebase, set `DATA_PROVIDER=firebase` and provide `FIREBASE_SERVICE_ACCOUNT_JSON` and `FIREBASE_DATABASE_URL`.
+
+2. Run `npm run sync-tools` to fetch tool records and update `aiTools.json`.
+
+The server exposes these records at `/api/tools`.
+
 ---
 
 ## ✨ Credits
