@@ -1718,59 +1718,112 @@ html[dir="rtl"] .next-btn:hover {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+    white-space: nowrap;
+    border-width: 0;
+  }
 
-/* AI Tools Section */
-.tools-section {
-  background-color: var(--dark-bg-primary);
-}
+  <<<<<<< codex/add-star-based-rating-widget-to-tool-cards
+  /* Rating Widget */
+  .rating-widget {
+    margin-top: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.tools-search {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+  .rating-stars .star {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    margin: 0 0.25rem;
+    transition: color 0.2s;
+  }
 
-#toolSearch {
-  width: 100%;
-  max-width: 400px;
-  padding: 0.8rem 1rem;
-  border-radius: var(--border-radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(0, 0, 0, 0.4);
-  color: var(--text-primary);
-}
+  .rating-stars .star.active {
+    color: #FFD700;
+  }
 
-.tools-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
+  .rating-comment {
+    width: 100%;
+    max-width: 300px;
+    min-height: 60px;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-md);
+    border: none;
+    resize: vertical;
+  }
 
-.tool-card {
-  background-color: var(--dark-element-bg);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 10px;
-  padding: 1rem;
-  width: 260px;
-  box-shadow: var(--shadow-md);
-  text-align: center;
-}
+  .rating-submit {
+    padding: 0.4rem 1rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-family: var(--font-orbitron);
+    background-color: var(--neon-blue);
+    color: #fff;
+    border: none;
+    transition: background-color 0.2s;
+  }
 
-.tool-card h3 {
-  color: var(--neon-blue);
-  margin-bottom: 0.5rem;
-}
+  .rating-submit:hover {
+    background-color: var(--neon-green);
+  }
 
-.tool-card p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin-bottom: 0.8rem;
-}
+  .rating-average {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  =======
+  /* AI Tools Section */
+  .tools-section {
+    background-color: var(--dark-bg-primary);
+  }
 
-.tool-card a {
-  color: var(--neon-green);
-  text-decoration: none;
-}
+  .tools-search {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  #toolSearch {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--text-primary);
+  }
+
+  .tools-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .tool-card {
+    background-color: var(--dark-element-bg);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 260px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+
+  .tool-card h3 {
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .tool-card a {
+    color: var(--neon-green);
+    text-decoration: none;
+  >>>>>>> main
+  }
