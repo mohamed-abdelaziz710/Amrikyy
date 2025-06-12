@@ -7,6 +7,7 @@
 let currentStep = 1;
 let userData = {};
 let cardData = null;
+let aiTools = [];
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,8 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize share functionality
   initShareFunctionality();
 
+ codex/add-star-based-rating-widget-to-tool-cards
   // Initialize rating widgets
   initRatingWidgets();
+=======
+  initAITools();
+ main
   
   // Hero section CTA buttons
   const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
@@ -723,7 +728,7 @@ function generateIdCard(data) {
             <div class="qr-corner qr-corner-bl"></div>
             <div class="qr-corner qr-corner-br"></div>
             <div class="qr-scanner-line"></div>
-            <img class="card-qr-code" src="${data.qr_data || ''}" alt="QR Code">
+            <div class="card-qr-code" id="cardQrCode"></div>
           </div>
           <a href="#" class="card-link-display">View & Share Your Card</a>
         </div>
@@ -733,6 +738,18 @@ function generateIdCard(data) {
     <!-- Logo watermark -->
     <img class="logo-watermark" src="amrikyy_neon_logo.webp" alt="Amrikyy Logo">
   `;
+
+  // Generate QR code using qrcodejs if available
+  const qrTarget = document.getElementById('cardQrCode');
+  if (qrTarget && typeof QRCode !== 'undefined') {
+    qrTarget.innerHTML = '';
+    new QRCode(qrTarget, {
+      text: data.qr_data || '',
+      width: 120,
+      height: 120,
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  }
 }
 
 /**
@@ -905,6 +922,7 @@ function hideLoadingOverlay() {
 }
 
 /**
+ codex/add-star-based-rating-widget-to-tool-cards
  * Initialize rating widgets and handle persistence
  */
 function initRatingWidgets() {
@@ -974,5 +992,52 @@ function initRatingWidgets() {
         averageDisplay.textContent = '0';
       }
     }
+=======
+ * Load AI tools from JSON and initialize search filtering
+ */
+function initAITools() {
+  const searchInput = document.getElementById('toolSearch');
+  const cardsContainer = document.getElementById('toolCards');
+
+  if (!searchInput || !cardsContainer) return;
+
+  fetch('aiTools.json')
+    .then(res => res.json())
+    .then(data => {
+      aiTools = data;
+      renderToolCards(aiTools);
+    })
+    .catch(err => console.error('Error loading aiTools.json', err));
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const filtered = aiTools.filter(tool =>
+      tool.name.toLowerCase().includes(query) ||
+      tool.description.toLowerCase().includes(query) ||
+      (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+    renderToolCards(filtered);
+  });
+}
+
+/**
+ * Render AI tool cards
+ * @param {Array} tools - array of tool objects
+ */
+function renderToolCards(tools) {
+  const cardsContainer = document.getElementById('toolCards');
+  if (!cardsContainer) return;
+
+  cardsContainer.innerHTML = '';
+  tools.forEach(tool => {
+    const card = document.createElement('div');
+    card.className = 'tool-card';
+    card.innerHTML = `
+      <h3>${tool.name}</h3>
+      <p>${tool.description}</p>
+      <a href="${tool.link}" target="_blank">Visit</a>
+    `;
+    cardsContainer.appendChild(card);
+ main
   });
 }
