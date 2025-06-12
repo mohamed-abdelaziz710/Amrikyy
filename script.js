@@ -720,7 +720,7 @@ function generateIdCard(data) {
             <div class="qr-corner qr-corner-bl"></div>
             <div class="qr-corner qr-corner-br"></div>
             <div class="qr-scanner-line"></div>
-            <img class="card-qr-code" src="${data.qr_data || ''}" alt="QR Code">
+            <div class="card-qr-code" id="cardQrCode"></div>
           </div>
           <a href="#" class="card-link-display">View & Share Your Card</a>
         </div>
@@ -730,6 +730,18 @@ function generateIdCard(data) {
     <!-- Logo watermark -->
     <img class="logo-watermark" src="amrikyy_neon_logo.webp" alt="Amrikyy Logo">
   `;
+
+  // Generate QR code using qrcodejs if available
+  const qrTarget = document.getElementById('cardQrCode');
+  if (qrTarget && typeof QRCode !== 'undefined') {
+    qrTarget.innerHTML = '';
+    new QRCode(qrTarget, {
+      text: data.qr_data || '',
+      width: 120,
+      height: 120,
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  }
 }
 
 /**
