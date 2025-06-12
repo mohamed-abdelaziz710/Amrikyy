@@ -1,2 +1,7 @@
 node_modules/
 .env
+ codex/use-qrcodejs-for-dynamic-qr-code-generation
+
+.vscode/
+=======
+ main
