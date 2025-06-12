@@ -58,6 +58,19 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 4. **Connect chatbot**: In `script.js`, set your backend endpoint for the chatbot.
 5. **Switch language**: Use the toggle button for Arabic/English.
 
+## Adding New Translations
+
+1. Open `translations.js`.
+2. Add a new key to the `translations` object using the following format:
+   ```javascript
+   newKey: {
+     ar: 'Arabic text',
+     en: 'English text'
+   }
+   ```
+3. Ensure that both `ar` and `en` values are provided.
+4. Reference the key in your HTML using the `data-translate` attribute.
+
 ## 🖥️ Local Development
 
 1. Install Node.js (v18 or higher recommended).
