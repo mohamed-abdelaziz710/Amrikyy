@@ -1721,3 +1721,55 @@ html[dir="rtl"] .next-btn:hover {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* Rating Widget */
+.rating-widget {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-stars .star {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+  margin: 0 0.25rem;
+  transition: color 0.2s;
+}
+
+.rating-stars .star.active {
+  color: #FFD700;
+}
+
+.rating-comment {
+  width: 100%;
+  max-width: 300px;
+  min-height: 60px;
+  padding: 0.5rem;
+  border-radius: var(--border-radius-md);
+  border: none;
+  resize: vertical;
+}
+
+.rating-submit {
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-family: var(--font-orbitron);
+  background-color: var(--neon-blue);
+  color: #fff;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.rating-submit:hover {
+  background-color: var(--neon-green);
+}
+
+.rating-average {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
