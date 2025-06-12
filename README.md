@@ -96,6 +96,16 @@ The server exposes these records at `/api/tools`.
 
 ---
 
+## 🌐 Deployment on Vercel
+
+1. Create a project on Vercel and grab your **Org ID** and **Project ID**.
+2. Add `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` as repository
+   secrets on GitHub.
+3. Push to the `main` branch and GitHub Actions will deploy the site using the
+   provided `vercel.json` configuration.
+
+---
+
 ## ✨ Credits
 
 Created by **Mohamed H Abdelaziz (Amrikyy)**
