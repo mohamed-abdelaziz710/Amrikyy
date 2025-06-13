@@ -4,9 +4,17 @@
   "description": "Digital ID Card Generator and portfolio site",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "sync-tools": "node scripts/syncTools.js"
   },
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+    "dependencies": {
+      "express": "^4.18.2",
+  <<<<<<< codex/use-qrcodejs-for-dynamic-qr-code-generation
+      "qrcode": "^1.5.4"
+  =======
+      "dotenv": "^16.4.5",
+      "@notionhq/client": "^2.2.1",
+      "firebase-admin": "^12.0.0"
+  >>>>>>> main
+    }
 }

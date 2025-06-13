@@ -84,6 +84,19 @@
       </div>
     </section>
 
+    <!-- AI Tools Section -->
+    <section class="tools-section" id="toolsSection">
+      <div class="section-header">
+        <h2 class="section-title">Explore AI Tools</h2>
+        <p class="section-subtitle">Search the curated list of AI applications</p>
+      </div>
+      <div class="tools-search">
+        <input type="text" id="toolSearch" placeholder="Search AI tools...">
+      </div>
+      <div class="tools-cards" id="toolCards"></div>
+    </section>
+
+
     <!-- ID Card Generator Section -->
     <section class="id-generator-section" id="idGeneratorSection">
       <div class="section-header">
@@ -275,6 +288,20 @@
             <i class="fas fa-redo-alt"></i> <span data-translate="resetBtn">إنشاء بطاقة جديدة</span>
           </button>
         </div>
+
+        <!-- Rating Widget -->
+        <div class="rating-widget" data-tool-id="digital-id">
+          <div class="rating-stars">
+            <i class="fa-regular fa-star star" data-value="1"></i>
+            <i class="fa-regular fa-star star" data-value="2"></i>
+            <i class="fa-regular fa-star star" data-value="3"></i>
+            <i class="fa-regular fa-star star" data-value="4"></i>
+            <i class="fa-regular fa-star star" data-value="5"></i>
+          </div>
+          <textarea class="rating-comment" placeholder="Leave a comment (optional)"></textarea>
+          <button class="rating-submit">Submit</button>
+          <div class="rating-average">Average rating: <span>0</span></div>
+        </div>
       </div>
     </section>
 
@@ -353,6 +380,7 @@
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="translations.js"></script>
   <script src="script.js"></script>
 </body>

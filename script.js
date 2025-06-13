@@ -7,6 +7,7 @@
 let currentStep = 1;
 let userData = {};
 let cardData = null;
+let aiTools = [];
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,8 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize share functionality
   initShareFunctionality();
 
+ codex/implement-light-theme-with-toggle
   // Initialize theme and toggle button
   initTheme();
+
+ codex/add-star-based-rating-widget-to-tool-cards
+  // Initialize rating widgets
+  initRatingWidgets();
+
+  initAITools();
+ main
+ main
   
   // Hero section CTA buttons
   const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
@@ -723,7 +733,7 @@ function generateIdCard(data) {
             <div class="qr-corner qr-corner-bl"></div>
             <div class="qr-corner qr-corner-br"></div>
             <div class="qr-scanner-line"></div>
-            <img class="card-qr-code" src="${data.qr_data || ''}" alt="QR Code">
+            <div class="card-qr-code" id="cardQrCode"></div>
           </div>
           <a href="#" class="card-link-display">View & Share Your Card</a>
         </div>
@@ -733,6 +743,18 @@ function generateIdCard(data) {
     <!-- Logo watermark -->
     <img class="logo-watermark" src="amrikyy_neon_logo.webp" alt="Amrikyy Logo">
   `;
+
+  // Generate QR code using qrcodejs if available
+  const qrTarget = document.getElementById('cardQrCode');
+  if (qrTarget && typeof QRCode !== 'undefined') {
+    qrTarget.innerHTML = '';
+    new QRCode(qrTarget, {
+      text: data.qr_data || '',
+      width: 120,
+      height: 120,
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  }
 }
 
 /**
@@ -905,6 +927,7 @@ function hideLoadingOverlay() {
 }
 
 /**
+ codex/implement-light-theme-with-toggle
  * Initialize theme based on saved preference and set up toggle
  */
 function initTheme() {
@@ -948,4 +971,124 @@ function updateToggleIcon(btn) {
   } else {
     btn.innerHTML = '<i class="fas fa-sun"></i>';
   }
+=======
+ codex/add-star-based-rating-widget-to-tool-cards
+ * Initialize rating widgets and handle persistence
+ */
+function initRatingWidgets() {
+  const widgets = document.querySelectorAll('.rating-widget');
+  if (!widgets.length) return;
+
+  let ratingsStore = {};
+  try {
+    ratingsStore = JSON.parse(localStorage.getItem('toolRatings')) || {};
+  } catch (e) {
+    ratingsStore = {};
+  }
+
+  widgets.forEach(widget => {
+    const toolId = widget.getAttribute('data-tool-id');
+    const stars = widget.querySelectorAll('.star');
+    const commentInput = widget.querySelector('.rating-comment');
+    const submitBtn = widget.querySelector('.rating-submit');
+    const averageDisplay = widget.querySelector('.rating-average span');
+    let selected = 0;
+
+    updateAverage();
+
+    stars.forEach(star => {
+      const value = parseInt(star.dataset.value, 10);
+      star.addEventListener('mouseenter', () => highlight(value));
+      star.addEventListener('mouseleave', () => highlight(selected));
+      star.addEventListener('click', () => {
+        selected = value;
+        highlight(selected);
+      });
+    });
+
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        if (!selected) return alert('Please select a rating first');
+        const comment = commentInput ? commentInput.value.trim() : '';
+        if (!ratingsStore[toolId]) ratingsStore[toolId] = { ratings: [] };
+        ratingsStore[toolId].ratings.push({ stars: selected, comment });
+        localStorage.setItem('toolRatings', JSON.stringify(ratingsStore));
+        if (commentInput) commentInput.value = '';
+        selected = 0;
+        highlight(selected);
+        updateAverage();
+      });
+    }
+
+    function highlight(rating) {
+      stars.forEach(s => {
+        const val = parseInt(s.dataset.value, 10);
+        if (val <= rating) {
+          s.classList.add('fa-solid', 'active');
+          s.classList.remove('fa-regular');
+        } else {
+          s.classList.remove('fa-solid', 'active');
+          s.classList.add('fa-regular');
+        }
+      });
+    }
+
+    function updateAverage() {
+      if (ratingsStore[toolId] && ratingsStore[toolId].ratings.length) {
+        const arr = ratingsStore[toolId].ratings;
+        const avg = arr.reduce((a, r) => a + r.stars, 0) / arr.length;
+        averageDisplay.textContent = avg.toFixed(1);
+      } else {
+        averageDisplay.textContent = '0';
+      }
+    }
+=======
+ * Load AI tools from JSON and initialize search filtering
+ */
+function initAITools() {
+  const searchInput = document.getElementById('toolSearch');
+  const cardsContainer = document.getElementById('toolCards');
+
+  if (!searchInput || !cardsContainer) return;
+
+  fetch('aiTools.json')
+    .then(res => res.json())
+    .then(data => {
+      aiTools = data;
+      renderToolCards(aiTools);
+    })
+    .catch(err => console.error('Error loading aiTools.json', err));
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const filtered = aiTools.filter(tool =>
+      tool.name.toLowerCase().includes(query) ||
+      tool.description.toLowerCase().includes(query) ||
+      (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+    renderToolCards(filtered);
+  });
+}
+
+/**
+ * Render AI tool cards
+ * @param {Array} tools - array of tool objects
+ */
+function renderToolCards(tools) {
+  const cardsContainer = document.getElementById('toolCards');
+  if (!cardsContainer) return;
+
+  cardsContainer.innerHTML = '';
+  tools.forEach(tool => {
+    const card = document.createElement('div');
+    card.className = 'tool-card';
+    card.innerHTML = `
+      <h3>${tool.name}</h3>
+      <p>${tool.description}</p>
+      <a href="${tool.link}" target="_blank">Visit</a>
+    `;
+    cardsContainer.appendChild(card);
+ main
+  });
+ main
 }
