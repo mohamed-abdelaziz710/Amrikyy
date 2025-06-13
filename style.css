@@ -1424,6 +1424,12 @@ html[dir="rtl"] .input-container select {
   color: var(--text-primary);
   box-shadow: var(--shadow-md);
   position: relative;
+  transition: box-shadow var(--transition-speed) var(--transition-easing);
+}
+
+/* Hover glow for generated cards */
+.digital-id-card .card:hover {
+  box-shadow: var(--shadow-md), var(--shadow-neon-blue), var(--shadow-neon-green);
 }
 
 .card-header,
