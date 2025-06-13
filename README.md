@@ -22,8 +22,8 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 - **Interactivity:**
   - Language toggle (Arabic/English) with full translation support
   - 3D tilt and hover effects
-  - Downloadable CV
-- **AI Chatbot (Amrikyy):**
+  - Downloadable CV (see `Mohamed_H_Abdelaziz_CV.pdf` in the project root)
+  - **AI Chatbot (Amrikyy):**
   - Custom neon-themed chat window
   - Toggleable bubble with smooth open/close
   - Connects to a Replit backend for AI responses
@@ -47,6 +47,7 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 - `style.css` – All styles: neon/glow, loader, CV card, chatbot, responsive
 - `script.js` – Loader logic, translation, chatbot toggle, backend integration
 - `avatar.jpg` – User profile photo
+- `Mohamed_H_Abdelaziz_CV.pdf` – Downloadable CV located in the project root
 
 ---
 
