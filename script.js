@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize share functionality
   initShareFunctionality();
+
+  // Initialize AOS animations if library is loaded
+  if (typeof AOS !== 'undefined') {
+    AOS.init();
+  }
   
   // Hero section CTA buttons
   const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
