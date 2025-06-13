@@ -32,11 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize share functionality
   initShareFunctionality();
 
+ codex/implement-light-theme-with-toggle
+  // Initialize theme and toggle button
+  initTheme();
+
  codex/add-star-based-rating-widget-to-tool-cards
   // Initialize rating widgets
   initRatingWidgets();
-=======
+
   initAITools();
+ main
  main
   
   // Hero section CTA buttons
@@ -922,6 +927,51 @@ function hideLoadingOverlay() {
 }
 
 /**
+ codex/implement-light-theme-with-toggle
+ * Initialize theme based on saved preference and set up toggle
+ */
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  }
+
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  if (toggleBtn) {
+    updateToggleIcon(toggleBtn);
+    toggleBtn.addEventListener('click', toggleTheme);
+  }
+}
+
+/**
+ * Toggle between light and dark themes with smooth transitions
+ */
+function toggleTheme() {
+  document.body.classList.add('theme-transition');
+  const isLight = document.body.classList.toggle('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  if (toggleBtn) {
+    updateToggleIcon(toggleBtn);
+  }
+
+  setTimeout(() => {
+    document.body.classList.remove('theme-transition');
+  }, 500);
+}
+
+/**
+ * Update toggle button icon based on current theme
+ * @param {HTMLElement} btn
+ */
+function updateToggleIcon(btn) {
+  if (document.body.classList.contains('light-theme')) {
+    btn.innerHTML = '<i class="fas fa-moon"></i>';
+  } else {
+    btn.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+=======
  codex/add-star-based-rating-widget-to-tool-cards
  * Initialize rating widgets and handle persistence
  */
@@ -1040,4 +1090,5 @@ function renderToolCards(tools) {
     cardsContainer.appendChild(card);
  main
   });
+ main
 }
