@@ -17,6 +17,9 @@
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -50,7 +53,7 @@
   <!-- Main Application -->
   <div id="app" class="hidden">
     <!-- Header -->
-    <header class="app-header">
+    <header class="app-header" data-aos="fade-down">
       <div class="header-content">
         <div class="logo">
           <img src="amrikyy_neon_logo.webp" alt="Amrikyy Neon Logo" style="width:48px;height:48px;filter:drop-shadow(0 0 8px #00d4ff);">
@@ -66,7 +69,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" data-aos="fade-up">
       <div class="space-background">
         <div class="stars"></div>
         <div class="grid-overlay"></div>
@@ -98,7 +101,7 @@
 
 
     <!-- ID Card Generator Section -->
-    <section class="id-generator-section" id="idGeneratorSection">
+    <section class="id-generator-section" id="idGeneratorSection" data-aos="fade-up">
       <div class="section-header">
         <h2 class="section-title" data-translate="generatorTitle">إنشاء بطاقة الهوية الرقمية</h2>
         <p class="section-subtitle" data-translate="generatorSubtitle">أجب عن الأسئلة التالية لإنشاء بطاقة هوية رقمية فريدة تعكس شخصيتك</p>
@@ -106,7 +109,7 @@
       
       <div class="generator-container">
         <form id="idCardForm" class="id-card-form">
-          <div class="form-step active" data-step="1">
+          <div class="form-step active" data-step="1" data-aos="fade-up">
             <div class="step-header">
               <span class="step-number">1</span>
               <h3 class="step-title" data-translate="step1Title">المعلومات الأساسية</h3>
@@ -144,7 +147,7 @@
             </div>
           </div>
           
-          <div class="form-step" data-step="2">
+          <div class="form-step" data-step="2" data-aos="fade-up">
             <div class="step-header">
               <span class="step-number">2</span>
               <h3 class="step-title" data-translate="step2Title">الشخصية والاهتمامات</h3>
@@ -183,7 +186,7 @@
             </div>
           </div>
           
-          <div class="form-step" data-step="3">
+          <div class="form-step" data-step="3" data-aos="fade-up">
             <div class="step-header">
               <span class="step-number">3</span>
               <h3 class="step-title" data-translate="step3Title">التفضيلات البصرية</h3>
@@ -265,7 +268,7 @@
     </section>
 
     <!-- Result Section (Initially Hidden) -->
-    <section class="result-section hidden" id="resultSection">
+    <section class="result-section hidden" id="resultSection" data-aos="fade-up">
       <div class="section-header">
         <h2 class="section-title" data-translate="resultTitle">بطاقة الهوية الرقمية الخاصة بك</h2>
         <p class="section-subtitle" data-translate="resultSubtitle">تم إنشاء بطاقة الهوية الرقمية الخاصة بك بنجاح</p>
@@ -273,11 +276,11 @@
       
       <div class="result-container">
         <!-- Digital ID Card Result -->
-        <div class="digital-id-card" id="digitalIdCard">
+        <div class="digital-id-card" id="digitalIdCard" data-aos="zoom-in">
           <!-- Card content will be dynamically generated -->
         </div>
         
-        <div class="result-actions">
+        <div class="result-actions" data-aos="fade-up">
           <button class="action-btn download-btn" id="downloadBtn">
             <i class="fas fa-download"></i> <span data-translate="downloadBtn">تحميل البطاقة</span>
           </button>
@@ -306,7 +309,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="app-footer">
+    <footer class="app-footer" data-aos="fade-up">
       <div class="footer-content">
         <div class="footer-logo">
           <img src="amrikyy_neon_logo.webp" alt="Amrikyy Neon Logo">
@@ -344,7 +347,7 @@
     </footer>
 
     <!-- Share Modal -->
-    <div class="modal" id="shareModal">
+    <div class="modal" id="shareModal" data-aos="zoom-in">
       <div class="modal-content">
         <div class="modal-header">
           <h3 data-translate="shareModalTitle">مشاركة البطاقة</h3>
@@ -380,7 +383,11 @@
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ codex/add-aos-library-and-animations
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+=======
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+ main
   <script src="translations.js"></script>
   <script src="script.js"></script>
 </body>

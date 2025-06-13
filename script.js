@@ -32,6 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize share functionality
   initShareFunctionality();
 
+ codex/add-aos-library-and-animations
+  // Initialize AOS animations if library is loaded
+  if (typeof AOS !== 'undefined') {
+    AOS.init();
+  }
+
  codex/implement-light-theme-with-toggle
   // Initialize theme and toggle button
   initTheme();
@@ -41,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRatingWidgets();
 
   initAITools();
+ main
  main
  main
   
