@@ -1,13 +1,47 @@
-// Simple placeholder Gemini service used during local development
-// In a real deployment, this would call the Gemini 1.5 API.
+// Gemini service used to generate responses via the Gemini 1.5 API
+// Requires the following environment variables:
+//   GEMINI_API_KEY      - your API key
+//   GEMINI_API_ENDPOINT - full endpoint URL (e.g. https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent)
+
+/**
+ * Call the Gemini 1.5 API and return the raw JSON response
+ * @param {Array<{role: string, content: string}>} messages Conversation messages
+ */
 async function generateResponse(messages) {
-  const userMessage = messages.find(m => m.role === 'user');
-  const text = userMessage ? userMessage.content : 'Hello';
-  return {
-    candidates: [
-      { content: { parts: [ { text: `Echo: ${text}` } ] } }
-    ]
+  const apiKey = process.env.GEMINI_API_KEY;
+  const endpoint = process.env.GEMINI_API_ENDPOINT;
+
+  if (!apiKey || !endpoint) {
+    throw new Error('Gemini API not configured');
+  }
+
+  const url = `${endpoint}?key=${apiKey}`;
+
+  const body = {
+    contents: messages.map(m => ({
+      role: m.role,
+      parts: [{ text: m.content }]
+    }))
   };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    let errText;
+    try {
+      const errPayload = await response.json();
+      errText = errPayload.error?.message || response.statusText;
+    } catch (_) {
+      errText = response.statusText;
+    }
+    throw new Error(`Gemini API error: ${errText}`);
+  }
+
+  return response.json();
 }
 
 module.exports = { generateResponse };
