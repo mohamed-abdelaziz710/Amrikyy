@@ -22,10 +22,16 @@ router.post('/', async (req, res) => {
         const systemPrompt = `أنت "Amrikyy"، مساعد ذكي متخصص في التقنية والعملات الرقمية وتجربة المستخدم. أجب دائماً بأسلوب ودود، حديث، واحترافي، ووضح الإجابات بلغة سهلة مع لمسة من الحماس التقني. إذا كان السؤال متعلقاً بالسيرة الذاتية أو المهارات أو المشاريع، قدّم إجابة مختصرة وواضحة. إذا كان السؤال عن التقنية أو الذكاء الاصطناعي أو العملات الرقمية، أضف لمسة من الشرح المبسط والأمثلة العملية.`;
 
         // Pass both system prompt and user message to Gemini
-        const geminiResponsePayload = await geminiService.generateResponse([
-            { role: "system", content: systemPrompt },
-            { role: "user", content: userMessage }
-        ]);
+        let geminiResponsePayload;
+        try {
+            geminiResponsePayload = await geminiService.generateResponse([
+                { role: "system", content: systemPrompt },
+                { role: "user", content: userMessage }
+            ]);
+        } catch (serviceError) {
+            console.error('Gemini service error:', serviceError);
+            return res.status(502).json({ response: "عفواً، الخدمة غير متاحة حالياً. حاول مرة أخرى لاحقاً." });
+        }
 
         let botResponseText = "";
         if (
