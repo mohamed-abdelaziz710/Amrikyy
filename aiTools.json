@@ -1,0 +1,30 @@
+ codex/store-tool-data-in-aitools.json-and-implement-search
+[
+  {
+    "name": "ChatGPT",
+    "description": "Large language model chatbot by OpenAI.",
+    "link": "https://chat.openai.com/",
+    "tags": ["llm", "chat", "openai"]
+  },
+  {
+    "name": "Midjourney",
+    "description": "AI-powered image generation platform.",
+    "link": "https://www.midjourney.com/",
+    "tags": ["images", "generation"]
+  },
+  {
+    "name": "TensorFlow",
+    "description": "Open-source machine learning framework from Google.",
+    "link": "https://tensorflow.org/",
+    "tags": ["machine learning", "framework"]
+  },
+  {
+    "name": "Bard",
+    "description": "Google's experimental generative AI for text and search.",
+    "link": "https://bard.google.com/",
+    "tags": ["language", "google"]
+  }
+]
+=======
+[]
+ main

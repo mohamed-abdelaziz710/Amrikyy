@@ -22,8 +22,8 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 - **Interactivity:**
   - Language toggle (Arabic/English) with full translation support
   - 3D tilt and hover effects
-  - Downloadable CV
-- **AI Chatbot (Amrikyy):**
+  - Downloadable CV (see `Mohamed_H_Abdelaziz_CV.pdf` in the project root)
+  - **AI Chatbot (Amrikyy):**
   - Custom neon-themed chat window
   - Toggleable bubble with smooth open/close
   - Connects to a Replit backend for AI responses
@@ -47,6 +47,7 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 - `style.css` – All styles: neon/glow, loader, CV card, chatbot, responsive
 - `script.js` – Loader logic, translation, chatbot toggle, backend integration
 - `avatar.jpg` – User profile photo
+- `Mohamed_H_Abdelaziz_CV.pdf` – Downloadable CV located in the project root
 
 ---
 
@@ -58,12 +59,51 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 4. **Connect chatbot**: In `script.js`, set your backend endpoint for the chatbot.
 5. **Switch language**: Use the toggle button for Arabic/English.
 
+## Adding New Translations
+
+1. Open `translations.js`.
+2. Add a new key to the `translations` object using the following format:
+   ```javascript
+   newKey: {
+     ar: 'Arabic text',
+     en: 'English text'
+   }
+   ```
+3. Ensure that both `ar` and `en` values are provided.
+4. Reference the key in your HTML using the `data-translate` attribute.
+
 ## 🖥️ Local Development
 
 1. Install Node.js (v18 or higher recommended).
 2. Run `npm install` to install Express and other dependencies.
 3. Start the local server with `npm start`.
 4. Open `http://localhost:3000` in your browser.
+
+### Syncing AI Tool Data
+
+1. Create a `.env` file with your credentials. Example:
+
+   ```dotenv
+   DATA_PROVIDER=notion
+   NOTION_API_KEY=secret_key
+   NOTION_DATABASE_ID=your_database_id
+   ```
+
+   For Firebase, set `DATA_PROVIDER=firebase` and provide `FIREBASE_SERVICE_ACCOUNT_JSON` and `FIREBASE_DATABASE_URL`.
+
+2. Run `npm run sync-tools` to fetch tool records and update `aiTools.json`.
+
+The server exposes these records at `/api/tools`.
+
+---
+
+## 🌐 Deployment on Vercel
+
+1. Create a project on Vercel and grab your **Org ID** and **Project ID**.
+2. Add `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` as repository
+   secrets on GitHub.
+3. Push to the `main` branch and GitHub Actions will deploy the site using the
+   provided `vercel.json` configuration.
 
 ---
 
