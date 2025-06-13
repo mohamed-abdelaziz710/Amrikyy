@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize share functionality
   initShareFunctionality();
+
+  // Initialize theme and toggle button
+  initTheme();
   
   // Hero section CTA buttons
   const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
@@ -895,8 +898,54 @@ function showLoadingOverlay(message = 'Loading...') {
  */
 function hideLoadingOverlay() {
   const loadingOverlay = document.getElementById('loadingOverlay');
-  
+
   if (loadingOverlay) {
     loadingOverlay.classList.add('hidden');
+  }
+}
+
+/**
+ * Initialize theme based on saved preference and set up toggle
+ */
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  }
+
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  if (toggleBtn) {
+    updateToggleIcon(toggleBtn);
+    toggleBtn.addEventListener('click', toggleTheme);
+  }
+}
+
+/**
+ * Toggle between light and dark themes with smooth transitions
+ */
+function toggleTheme() {
+  document.body.classList.add('theme-transition');
+  const isLight = document.body.classList.toggle('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  if (toggleBtn) {
+    updateToggleIcon(toggleBtn);
+  }
+
+  setTimeout(() => {
+    document.body.classList.remove('theme-transition');
+  }, 500);
+}
+
+/**
+ * Update toggle button icon based on current theme
+ * @param {HTMLElement} btn
+ */
+function updateToggleIcon(btn) {
+  if (document.body.classList.contains('light-theme')) {
+    btn.innerHTML = '<i class="fas fa-moon"></i>';
+  } else {
+    btn.innerHTML = '<i class="fas fa-sun"></i>';
   }
 }
