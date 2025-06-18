@@ -32,24 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize share functionality
   initShareFunctionality();
 
- codex/add-aos-library-and-animations
   // Initialize AOS animations if library is loaded
   if (typeof AOS !== 'undefined') {
     AOS.init();
   }
 
- codex/implement-light-theme-with-toggle
   // Initialize theme and toggle button
   initTheme();
 
- codex/add-star-based-rating-widget-to-tool-cards
   // Initialize rating widgets
   initRatingWidgets();
 
   initAITools();
- main
- main
- main
   
   // Hero section CTA buttons
   const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
@@ -934,7 +928,6 @@ function hideLoadingOverlay() {
 }
 
 /**
- codex/implement-light-theme-with-toggle
  * Initialize theme based on saved preference and set up toggle
  */
 function initTheme() {
@@ -978,10 +971,9 @@ function updateToggleIcon(btn) {
   } else {
     btn.innerHTML = '<i class="fas fa-sun"></i>';
   }
-=======
- codex/add-star-based-rating-widget-to-tool-cards
- * Initialize rating widgets and handle persistence
- */
+}
+
+/* Initialize rating widgets and handle persistence */
 function initRatingWidgets() {
   const widgets = document.querySelectorAll('.rating-widget');
   if (!widgets.length) return;
@@ -1049,9 +1041,10 @@ function initRatingWidgets() {
         averageDisplay.textContent = '0';
       }
     }
-=======
- * Load AI tools from JSON and initialize search filtering
- */
+  });
+}
+
+/* Load AI tools from JSON and initialize search filtering */
 function initAITools() {
   const searchInput = document.getElementById('toolSearch');
   const cardsContainer = document.getElementById('toolCards');
@@ -1095,7 +1088,5 @@ function renderToolCards(tools) {
       <a href="${tool.link}" target="_blank">Visit</a>
     `;
     cardsContainer.appendChild(card);
- main
   });
- main
 }
