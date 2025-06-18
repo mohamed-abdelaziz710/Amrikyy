@@ -9,8 +9,11 @@ let userData = {};
 let cardData = null;
 let aiTools = [];
 
-// Initialize the application when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize the application when DOM is loaded or immediately if the DOM is
+// already parsed. This ensures the loader and other components always
+// initialize, even when the script is placed at the end of the document and the
+// DOMContentLoaded event has already fired.
+function initApp() {
   // Initialize loading screen
   initLoading();
   
@@ -82,7 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
       window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
     });
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  // DOM was already ready when this script loaded
+  initApp();
+}
 
 
 /**
