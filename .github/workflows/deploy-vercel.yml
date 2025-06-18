@@ -1,3 +1,5 @@
+# This workflow is disabled and will not trigger deployments to Vercel.
+# To re-enable, change the branch name in 'on.push.branches' to 'main' or another active branch.
 name: Deploy to Vercel
 
 on:
