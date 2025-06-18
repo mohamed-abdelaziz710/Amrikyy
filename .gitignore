@@ -1,7 +1,10 @@
 node_modules/
 .env
+ codex/resolve-conflict-markers-and-fix-files
+
  codex/fix-syntax-errors-and-code-structure
 
 
+ main
  main
 .vscode/

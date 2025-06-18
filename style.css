@@ -1729,62 +1729,74 @@
     animation: cardAppear 0.8s ease-out forwards;
   }
 
-    /* Accessibility */
-    :focus {
-      outline: 2px solid var(--neon-blue);
-      outline-offset: 2px;
+      /* Accessibility */
+      :focus {
+        outline: 2px solid var(--neon-blue);
+        outline-offset: 2px;
+      }
+
+      .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+    <<<<<<< codex/resolve-conflict-markers-and-fix-files
+    /* Rating Widget */
+    .rating-widget {
+      margin-top: 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
     }
-
-    .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  <<<<<<< codex/fix-syntax-errors-and-code-structure
-  =======
-    <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
     =======
-     codex/integrate-rating-widget-styles-with-ai-tools
-      /* Rating Widget */
-      .rating-widget {
-        margin-top: 2rem;
+      <<<<<<< codex/fix-syntax-errors-and-code-structure
+      =======
+        <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
+        =======
+         codex/integrate-rating-widget-styles-with-ai-tools
+          /* Rating Widget */
+          .rating-widget {
+            margin-top: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+          }
+        =======
+        >>>>>>> main
+      >>>>>>> main
+        /* Rating Widget */
+        .rating-widget {
+          margin-top: 2rem;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
       }
-    =======
+      <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
+      =======
+       main
+      >>>>>>> main
     >>>>>>> main
-  >>>>>>> main
-    /* Rating Widget */
-    .rating-widget {
-      margin-top: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
-  =======
-   main
-  >>>>>>> main
 
-  .rating-stars .star {
-    font-size: 1.5rem;
-    color: #ccc;
-    cursor: pointer;
-    margin: 0 0.25rem;
-    transition: color 0.2s;
-  }
+    .rating-stars .star {
+      font-size: 1.5rem;
+      color: #ccc;
+      cursor: pointer;
+      margin: 0 0.25rem;
+      transition: color 0.2s;
+    }
 
   .rating-stars .star.active {
     color: #FFD700;
@@ -1808,38 +1820,50 @@
     background-color: var(--neon-blue);
     color: #fff;
     border: none;
-    transition: background-color 0.2s;
-  }
+      transition: background-color 0.2s;
+    }
 
-  .rating-submit:hover {
-    background-color: var(--neon-green);
-  }
+    .rating-submit:hover {
+      background-color: var(--neon-green);
+    }
 
-  .rating-average {
-   codex/integrate-rating-widget-styles-with-ai-tools
+    <<<<<<< codex/resolve-conflict-markers-and-fix-files
+    .rating-average {
       font-size: 0.9rem;
       color: var(--text-secondary);
-  <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
     }
+    =======
+    .rating-average {
+     codex/integrate-rating-widget-styles-with-ai-tools
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
+      }
 
-  /* AI Tools Section */
+    /* AI Tools Section */
+      .tools-section {
+    =======
+    }
+    /* AI Tools Section */
     .tools-section {
-  =======
-  }
-  /* AI Tools Section */
-  .tools-section {
-  >>>>>>> main
+    >>>>>>> main
+        background-color: var(--dark-bg-primary);
+      }
+    =======
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+   codex/fix-syntax-errors-and-code-structure
+
+    }
+     main
+
+   main
+    /* AI Tools Section */
+    .tools-section {
       background-color: var(--dark-bg-primary);
     }
-  =======
-    font-size: 0.9rem;
-    color: var(--text-secondary);
- codex/fix-syntax-errors-and-code-structure
+  >>>>>>> main
 
-  }
-   main
-
- main
   /* AI Tools Section */
   .tools-section {
     background-color: var(--dark-bg-primary);
@@ -1874,19 +1898,14 @@
     padding: 1rem;
     width: 260px;
     box-shadow: var(--shadow-md);
-    text-align: center;
+      text-align: center;
   }
 
+  <<<<<<< codex/resolve-conflict-markers-and-fix-files
   .tool-card h3 {
     color: var(--neon-blue);
     margin-bottom: 0.5rem;
   }
-
-   codex/integrate-rating-widget-styles-with-ai-tools
-    .tool-card a {
-      color: var(--neon-green);
-      text-decoration: none;
-    }
 
   .tool-card p {
     color: var(--text-secondary);
@@ -1896,10 +1915,28 @@
 
   .tool-card a {
     color: var(--neon-green);
-      text-decoration: none;
-  <<<<<<< codex/fix-syntax-errors-and-code-structure
-    }
-  =======
+    text-decoration: none;
   }
-   main
+  =======
+     codex/integrate-rating-widget-styles-with-ai-tools
+      .tool-card a {
+        color: var(--neon-green);
+        text-decoration: none;
+      }
+
+    .tool-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tool-card a {
+      color: var(--neon-green);
+        text-decoration: none;
+    <<<<<<< codex/fix-syntax-errors-and-code-structure
+      }
+    =======
+    }
+     main
+    >>>>>>> main
   >>>>>>> main
