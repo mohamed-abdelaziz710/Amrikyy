@@ -5,6 +5,21 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+ maj3f7-codex/install-jest-and-add-test-script
+    "sync-tools": "node scripts/syncTools.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "jest": "^30.0.0",
+    "supertest": "^7.1.1"
+=======
  codex/install-jest-and-add-test-script
     "sync-tools": "node scripts/syncTools.js",
     "test": "jest"
@@ -22,6 +37,7 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "supertest": "^6.3.3"
+ main
   }
 }
 
