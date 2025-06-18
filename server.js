@@ -1,26 +1,27 @@
 require('dotenv').config();
   const express = require('express');
   const path = require('path');
-  <<<<<<< codex/use-qrcodejs-for-dynamic-qr-code-generation
-  const QRCode = require('qrcode');
+  <<<<<<< codex/resolve-conflict-markers-and-fix-files
   =======
-  const { fetchAITools } = require('./dataLayer');
+  const QRCode = require('qrcode');
   >>>>>>> main
+  const { fetchAITools } = require('./dataLayer');
 
-const chatRouter = require('./routes/chat');
+  const chatRouter = require('./routes/chat');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+  const app = express();
+  const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+  app.use(express.json());
 
-// Serve static files (HTML, CSS, JS, images)
+  // Serve static files (HTML, CSS, JS, images)
   app.use(express.static(__dirname));
 
   // API routes
   app.use('/api/chat', chatRouter);
 
-  <<<<<<< codex/use-qrcodejs-for-dynamic-qr-code-generation
+  <<<<<<< codex/resolve-conflict-markers-and-fix-files
+  =======
   // Optional QR code generation endpoint
   app.get('/api/qr', async (req, res) => {
     try {
@@ -33,7 +34,10 @@ app.use(express.json());
     } catch (err) {
       console.error('QR generation error:', err);
       res.status(500).json({ error: 'QR generation failed' });
-  =======
+    }
+  });
+
+  >>>>>>> main
   // Fetch AI tools from external source
   app.get('/api/tools', async (req, res) => {
     try {
@@ -42,13 +46,12 @@ app.use(express.json());
     } catch (err) {
       console.error('Failed to fetch tools:', err);
       res.status(500).json({ error: 'Unable to fetch tools' });
-  >>>>>>> main
     }
   });
 
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  if (require.main === module) {
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
   });
 } else {
   module.exports = app;

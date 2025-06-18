@@ -1,7 +1,10 @@
 node_modules/
 .env
- codex/use-qrcodejs-for-dynamic-qr-code-generation
+ codex/resolve-conflict-markers-and-fix-files
 
-.vscode/
-=======
+ codex/fix-syntax-errors-and-code-structure
+
+
  main
+ main
+.vscode/
