@@ -718,6 +718,40 @@
     margin: 0 auto;
   }
 
+  /* About Section */
+  .about-section {
+    background-color: var(--dark-bg-secondary);
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .about-content .contact-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .about-content .contact-links a {
+    color: var(--neon-green);
+    text-decoration: none;
+  }
+
+  .about-content .contact-links a:hover {
+    text-decoration: underline;
+  }
+
   /* ID Generator Section */
   .id-generator-section {
     background-color: var(--dark-bg-secondary);
