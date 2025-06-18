@@ -39,14 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize theme and toggle button
     initTheme();
-  <<<<<<< codex/fix-syntax-errors-and-code-structure
+  // Initialize rating widgets
+  initRatingWidgets();
 
-  =======
-  >>>>>>> main
-    // Initialize rating widgets
-    initRatingWidgets();
-
-    initAITools();
+  // Initialize AI tools list
+  initAITools();
 
     // Hero section CTA buttons
     const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
@@ -974,14 +971,9 @@ function toggleTheme() {
     } else {
       btn.innerHTML = '<i class="fas fa-sun"></i>';
     }
-  <<<<<<< codex/fix-syntax-errors-and-code-structure
   }
   /**
    * Initialize rating widgets and handle persistence
-  =======
-
-  /* Initialize rating widgets and handle persistence */
-  >>>>>>> main
    */
   function initRatingWidgets() {
     const widgets = document.querySelectorAll('.rating-widget');
@@ -1050,15 +1042,10 @@ function toggleTheme() {
           averageDisplay.textContent = '0';
         }
       }
-  <<<<<<< codex/fix-syntax-errors-and-code-structure
     });
   }
   /**
    * Load AI tools from JSON and initialize search filtering
-  =======
-
-  /* Load AI tools from JSON and initialize search filtering */
-  >>>>>>> main
    */
   function initAITools() {
     const searchInput = document.getElementById('toolSearch');
