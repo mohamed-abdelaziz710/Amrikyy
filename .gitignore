@@ -1,3 +1,7 @@
 node_modules/
 .env
+ codex/fix-syntax-errors-and-code-structure
+
+
+ main
 .vscode/
