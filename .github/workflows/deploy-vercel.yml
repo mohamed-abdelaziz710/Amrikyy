@@ -16,6 +16,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          # Ensure that VERCEL_PROJECT_ID is set in your repository secrets at https://github.com/<owner>/<repo>/settings/secrets/actions
           working-directory: .
           vercel-args: '--prod'
 
