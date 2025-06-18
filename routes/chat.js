@@ -18,6 +18,11 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ error: 'No prompt provided' });
         }
 
+        const MAX_PROMPT_BYTES = 1024; // 1KB
+        if (Buffer.byteLength(userMessage, 'utf8') > MAX_PROMPT_BYTES) {
+            return res.status(413).json({ error: 'Prompt too large' });
+        }
+
         // --- System prompt/persona ---
         const systemPrompt = `أنت "Amrikyy"، مساعد ذكي متخصص في التقنية والعملات الرقمية وتجربة المستخدم. أجب دائماً بأسلوب ودود، حديث، واحترافي، ووضح الإجابات بلغة سهلة مع لمسة من الحماس التقني. إذا كان السؤال متعلقاً بالسيرة الذاتية أو المهارات أو المشاريع، قدّم إجابة مختصرة وواضحة. إذا كان السؤال عن التقنية أو الذكاء الاصطناعي أو العملات الرقمية، أضف لمسة من الشرح المبسط والأمثلة العملية.`;
 

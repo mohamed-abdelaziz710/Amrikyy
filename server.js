@@ -24,6 +24,12 @@ app.get('/api/qr', async (req, res) => {
     if (!data) {
       return res.status(400).json({ error: 'Missing data parameter' });
     }
+
+    const MAX_QR_BYTES = 2 * 1024; // 2KB
+    if (Buffer.byteLength(data, 'utf8') > MAX_QR_BYTES) {
+      return res.status(413).json({ error: 'Data parameter too large' });
+    }
+
     const qrDataUrl = await QRCode.toDataURL(data);
     res.json({ dataUrl: qrDataUrl });
   } catch (err) {
