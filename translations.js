@@ -174,6 +174,34 @@ const translations = {
   copyBtn: {
     ar: 'نسخ',
     en: 'Copy'
+  },
+  ratingCommentPlaceholder: {
+    ar: 'اترك تعليقًا (اختياري)',
+    en: 'Leave a comment (optional)'
+  },
+  ratingSubmit: {
+    ar: 'إرسال',
+    en: 'Submit'
+  },
+  ratingAverage: {
+    ar: 'متوسط التقييم:',
+    en: 'Average rating:'
+  },
+  chatbotTooltip: {
+    ar: 'تحدث مع مساعد أَمْرِكِيّ',
+    en: 'Chat with Amrikyy AI'
+  },
+  chatbotTitle: {
+    ar: 'مساعد أَمْرِكِيّ الذكي',
+    en: 'Amrikyy AI Assistant'
+  },
+  chatbotWelcome: {
+    ar: '👋 مرحبًا! أنا مساعد أَمْرِكِيّ الذكي. كيف يمكنني مساعدتك؟',
+    en: "👋 Hello! I'm your Amrikyy AI assistant. How can I help you today?"
+  },
+  chatbotInputPlaceholder: {
+    ar: 'اكتب رسالتك...',
+    en: 'Type your message...'
   }
 };
 

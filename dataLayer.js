@@ -6,13 +6,18 @@ const admin = require('firebase-admin');
 let notionClient;
 let firebaseDb;
 
-if (process.env.DATA_PROVIDER === 'notion') {
+const provider = process.env.DATA_PROVIDER;
+if (!provider) {
+  console.warn('DATA_PROVIDER not set. Tool sync disabled.');
+}
+
+if (provider === 'notion') {
   if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
     console.warn('Notion configuration missing.');
   } else {
     notionClient = new Client({ auth: process.env.NOTION_API_KEY });
   }
-} else if (process.env.DATA_PROVIDER === 'firebase') {
+} else if (provider === 'firebase') {
   if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON && process.env.FIREBASE_DATABASE_URL) {
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
     admin.initializeApp({
@@ -23,6 +28,8 @@ if (process.env.DATA_PROVIDER === 'notion') {
   } else {
     console.warn('Firebase configuration missing.');
   }
+} else if (provider) {
+  console.warn(`Unsupported DATA_PROVIDER: ${provider}`);
 }
 
 async function fetchAITools() {
