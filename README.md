@@ -8,6 +8,18 @@
 
 Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz (Amrikyy). This version features a modern neon/tech aesthetic, a smart animated loader, up-to-date personal and professional information, and interactive features including a bilingual interface and a custom AI chatbot named **Amrikyy**.
 
+## 📚 Bio
+
+**Name:** Mohamed H Abdelaziz (Amrikyy)
+
+**Background:** Cybersecurity enthusiast and full-stack developer passionate about digital identity and crypto technology.
+
+**Education:** Graduated from El Shaheen High School in Kuwait.
+
+**Experience:** Created multiple web projects and digital ID solutions, including this portfolio and the Amrikyy chatbot.
+
+**Contact:** [Twitter](https://twitter.com/amrikyy) | [LinkedIn](https://linkedin.com/in/amrikyy) | [GitHub](https://github.com/amrikyy)
+
 ---
 
 ## 🎨 Design & Features
