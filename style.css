@@ -922,6 +922,21 @@
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
   }
 
+  /* Generic avatar image styling so avatars look consistent */
+  .avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 32px var(--neon-green), 0 2px 12px rgba(0, 0, 0, 0.6);
+    object-fit: cover;
+    display: block;
+  }
+
+  .avatar-img.large {
+    width: 140px;
+    height: 140px;
+  }
+
   .avatar-preview div {
     width: 100%;
     height: 100%;
