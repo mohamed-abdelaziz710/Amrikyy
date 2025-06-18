@@ -23,6 +23,13 @@ describe('POST /api/chat', () => {
     expect(res.body.response).toBe('hi');
   });
 
+  it('rejects prompts over 1KB', async () => {
+    const longPrompt = 'a'.repeat(1025);
+    const res = await request(app).post('/api/chat').send({ prompt: longPrompt });
+    expect(res.statusCode).toBe(413);
+    expect(gemini.generateResponse).not.toHaveBeenCalled();
+  });
+
   it('handles service errors gracefully', async () => {
     gemini.generateResponse.mockRejectedValue(new Error('fail'));
     const res = await request(app).post('/api/chat').send({ prompt: 'hi' });

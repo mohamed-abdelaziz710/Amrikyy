@@ -12,4 +12,10 @@ describe('GET /api/qr', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('dataUrl');
   });
+
+  it('returns 413 when data parameter exceeds limit', async () => {
+    const largeData = 'a'.repeat(2049);
+    const res = await request(app).get('/api/qr').query({ data: largeData });
+    expect(res.statusCode).toBe(413);
+  });
 });
