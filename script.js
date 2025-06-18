@@ -13,17 +13,26 @@
     // Initialize loading screen
     initLoading();
 
-    // Initialize navigation
-      initNavigation();
+      // Initialize navigation
+        initNavigation();
 
-  <<<<<<< codex/remove-conflict-markers-and-fix-syntax
+    <<<<<<< codex/remove-conflict-markers-and-fix-syntax
+        // Initialize theme and toggle button
+        initTheme();
+
+        // Initialize rating widgets
+        initRatingWidgets();
+
+        initAITools();
+
+  <<<<<<< codex/merge-rating-widget-css-and-fix-script.js
       // Initialize theme and toggle button
       initTheme();
+    // Initialize rating widgets
+    initRatingWidgets();
 
-      // Initialize rating widgets
-      initRatingWidgets();
-
-      initAITools();
+    // Initialize AI tools list
+    initAITools();
 
       // Hero section CTA buttons
       const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
@@ -37,171 +46,424 @@
         const idGeneratorSection = document.getElementById('idGeneratorSection');
         if (idGeneratorSection) {
           idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Scroll to AI Tool section from header
+    if (aiToolBtn) {
+      aiToolBtn.addEventListener('click', () => {
+        const idGeneratorSection = document.getElementById('idGeneratorSection');
+        if (idGeneratorSection) {
+          idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Download CV from hero or header
+    if (downloadCvHeroBtn) {
+      downloadCvHeroBtn.addEventListener('click', () => {
+        window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
+      });
+    }
+    if (cvBtn) {
+      cvBtn.addEventListener('click', () => {
+        window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
+      });
+    }
+  });
+
+  /**
+   * Initialize loading screen animation and progress
+   */
+  function initLoading() {
+    const loader = document.getElementById('loader-container');
+    const app = document.getElementById('app');
+    const progressBar = document.getElementById('progressBar');
+    const progressPercentage = document.getElementById('progressPercentage');
+    const statusMessage = document.getElementById('statusMessage');
+
+    // Generate particles for loader
+    generateParticles('loader-particles', 30);
+
+    // Generate particles for hero section
+    generateParticles('hero-particles', 20);
+
+    const statusMessages = {
+      ar: [
+        'جاري تحميل الموارد...',
+        'تهيئة الواجهة...',
+        'تحميل البيانات...',
+        'إعداد التجربة التفاعلية...',
+        'اكتمال التحميل...'
+      ],
+      en: [
+        'Loading resources...',
+        'Initializing interface...',
+        'Loading data...',
+        'Setting up interactive experience...',
+        'Loading complete...'
+      ]
+    };
+
+    const currentLang = document.documentElement.lang || 'ar';
+    const messages = statusMessages[currentLang] || statusMessages.ar;
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      if (progress >= 100) {
+        clearInterval(interval);
+
+        // Hide loader and show app after a short delay
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          setTimeout(() => {
+            loader.classList.add('hidden');
+            app.classList.remove('hidden');
+          }, 500);
+        }, 500);
+
+        return;
+      }
+
+      progress += Math.random() * 10;
+      progress = Math.min(progress, 100);
+
+      progressBar.style.width = `${progress}%`;
+      progressPercentage.textContent = `${Math.round(progress)}%`;
+
+      // Update status message based on progress
+      const messageIndex = Math.min(Math.floor(progress / 25), messages.length - 1);
+      statusMessage.textContent = messages[messageIndex];
+
+    }, 300);
+  }
+
+  /**
+   * Generate random particles for visual effects
+   * @param {string} containerId - ID of the container element
+   * @param {number} count - Number of particles to generate
+   */
+  function generateParticles(containerId, count) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Clear existing particles
+    container.innerHTML = '';
+
+    // Create new random particles
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+
+      // Random positioning
+      const top = Math.random() * 100;
+      const left = Math.random() * 100;
+      const delay = Math.random() * 5;
+      const duration = 10 + Math.random() * 20;
+
+      particle.style.top = `${top}%`;
+      particle.style.left = `${left}%`;
+      particle.style.animationDelay = `${delay}s`;
+      particle.style.animationDuration = `${duration}s`;
+
+      container.appendChild(particle);
+    }
+  }
+
+  /**
+   * Initialize navigation functionality
+   */
+  function initNavigation() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const langToggle = document.getElementById('langToggle');
+    const createIdBtn = document.getElementById('createIdBtn');
+    const learnMoreBtn = document.getElementById('learnMoreBtn');
+
+    // Toggle mobile navigation
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+
+        // Animate hamburger icon
+        const lines = navToggle.querySelectorAll('.line');
+        navToggle.classList.toggle('active');
+
+        if (navToggle.classList.contains('active')) {
+          lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+          lines[1].style.opacity = '0';
+          lines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+          lines[0].style.transform = 'none';
+          lines[1].style.opacity = '1';
+          lines[2].style.transform = 'none';
+        }
+      });
+    }
+
+    // Language toggle
+    if (langToggle) {
+      langToggle.addEventListener('click', () => {
+        const currentLang = document.documentElement.lang;
+        const newLang = currentLang === 'ar' ? 'en' : 'ar';
+
+        document.documentElement.lang = newLang;
+        document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+
+        langToggle.textContent = newLang === 'ar' ? 'EN' : 'AR';
+
+        // Update all translatable elements
+        updateTranslations(newLang);
+      });
+    }
+
+    // Create ID button
+    if (createIdBtn) {
+      createIdBtn.addEventListener('click', () => {
+        const idGeneratorSection = document.getElementById('idGeneratorSection');
+        if (idGeneratorSection) {
+          idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Learn more button
+    if (learnMoreBtn) {
+      learnMoreBtn.addEventListener('click', () => {
+        // Implement learn more functionality
+        // For example, show a modal or scroll to about section
+      });
+    }
+
+    // Set current year in footer
+    const currentYearElement = document.getElementById('currentYear');
+    if (currentYearElement) {
+      currentYearElement.textContent = new Date().getFullYear();
+    }
+  }
+
+  /**
+   * Update translations based on selected language
+   * @param {string} lang - Selected language code
+   */
+  function updateTranslations(lang) {
+    // This function would use the translations from translations.js
+    // For now, we'll just implement a placeholder
+    const translatableElements = document.querySelectorAll('[data-translate]');
+
+    translatableElements.forEach(element => {
+      const key = element.getAttribute('data-translate');
+      if (typeof translations !== 'undefined' && translations && translations[key] && translations[key][lang]) {
+        element.textContent = translations[key][lang];
+      }
+    });
+  }
+
+  /**
+   * Initialize form steps navigation
+   */
+  function initFormSteps() {
+    const formSteps = document.querySelectorAll('.form-step');
+    const nextButtons = document.querySelectorAll('.next-btn');
+    const backButtons = document.querySelectorAll('.back-btn');
+
+    // Next button functionality
+    nextButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const currentStepElement = button.closest('.form-step');
+        const currentStepNumber = parseInt(currentStepElement.getAttribute('data-step'));
+        const nextStepNumber = parseInt(button.getAttribute('data-next'));
+
+        // Validate current step
+        if (validateStep(currentStepNumber)) {
+          // Hide current step
+          currentStepElement.classList.remove('active');
+
+          // Show next step
+          const nextStepElement = document.querySelector(`.form-step[data-step="${nextStepNumber}"]`);
+          if (nextStepElement) {
+            nextStepElement.classList.add('active');
+            currentStep = nextStepNumber;
   =======
-      // Initialize form steps
-      initFormSteps();
-
-      // Initialize chatbot
-      initChatbot();
-
-      // Initialize image upload
-      initImageUpload();
-
-      // Initialize form submission
-      initFormSubmission();
-
-      // Initialize share functionality
-        initShareFunctionality();
-
-        // Initialize AOS animations if library is loaded
-        if (typeof AOS !== 'undefined') {
-          AOS.init();
-          }
-
-      <<<<<<< codex/resolve-conflict-markers-and-fix-files
-        // Initialize theme and toggle button
-        initTheme();
-
-        // Initialize rating widgets
-        initRatingWidgets();
-
-        initAITools();
-
         // Hero section CTA buttons
         const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
-      =======
+      const downloadCvHeroBtn = document.getElementById('downloadCvHeroBtn');
+      const aiToolBtn = document.getElementById('aiToolBtn');
+      const cvBtn = document.getElementById('cvBtn');
+
+      // Scroll to AI Tool section from hero
+      if (aiToolHeroBtn) {
+        aiToolHeroBtn.addEventListener('click', () => {
+          const idGeneratorSection = document.getElementById('idGeneratorSection');
+          if (idGeneratorSection) {
+            idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+    =======
+        // Initialize form steps
+        initFormSteps();
+
+        // Initialize chatbot
+        initChatbot();
+
+        // Initialize image upload
+        initImageUpload();
+
+        // Initialize form submission
+        initFormSubmission();
+
+        // Initialize share functionality
+          initShareFunctionality();
+
+          // Initialize AOS animations if library is loaded
+          if (typeof AOS !== 'undefined') {
+            AOS.init();
+            }
+
+        <<<<<<< codex/resolve-conflict-markers-and-fix-files
           // Initialize theme and toggle button
           initTheme();
-        <<<<<<< codex/fix-syntax-errors-and-code-structure
 
-        =======
-        >>>>>>> main
           // Initialize rating widgets
           initRatingWidgets();
 
-    <<<<<<< codex/split-script.js-into-smaller-modules
-    =======
           initAITools();
 
           // Hero section CTA buttons
           const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
-      >>>>>>> main
-        const downloadCvHeroBtn = document.getElementById('downloadCvHeroBtn');
-        const aiToolBtn = document.getElementById('aiToolBtn');
-        const cvBtn = document.getElementById('cvBtn');
+        =======
+            // Initialize theme and toggle button
+            initTheme();
+          <<<<<<< codex/fix-syntax-errors-and-code-structure
 
-        // Scroll to AI Tool section from hero
-        if (aiToolHeroBtn) {
-          aiToolHeroBtn.addEventListener('click', () => {
-            const idGeneratorSection = document.getElementById('idGeneratorSection');
-            if (idGeneratorSection) {
-              idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
-            }
-          });
+          =======
+          >>>>>>> main
+            // Initialize rating widgets
+            initRatingWidgets();
+
+      <<<<<<< codex/split-script.js-into-smaller-modules
+      =======
+            initAITools();
+
+            // Hero section CTA buttons
+            const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
+        >>>>>>> main
+          const downloadCvHeroBtn = document.getElementById('downloadCvHeroBtn');
+          const aiToolBtn = document.getElementById('aiToolBtn');
+          const cvBtn = document.getElementById('cvBtn');
+
+          // Scroll to AI Tool section from hero
+          if (aiToolHeroBtn) {
+            aiToolHeroBtn.addEventListener('click', () => {
+              const idGeneratorSection = document.getElementById('idGeneratorSection');
+              if (idGeneratorSection) {
+                idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            });
+    >>>>>>> main
   >>>>>>> main
-        }
-
-        // Scroll to AI Tool section from header
-        if (aiToolBtn) {
-          aiToolBtn.addEventListener('click', () => {
-            const idGeneratorSection = document.getElementById('idGeneratorSection');
-            if (idGeneratorSection) {
-              idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
-            }
-          });
-        }
-
-        // Download CV from hero or header
-        if (downloadCvHeroBtn) {
-          downloadCvHeroBtn.addEventListener('click', () => {
-            window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
-          });
-        }
-        if (cvBtn) {
-          cvBtn.addEventListener('click', () => {
-            window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
-          });
-        }
-      });
-
-      /**
-       * Initialize loading screen animation and progress
-       */
-      function initLoading() {
-        const loader = document.getElementById('loader-container');
-        const app = document.getElementById('app');
-        const progressBar = document.getElementById('progressBar');
-        const progressPercentage = document.getElementById('progressPercentage');
-        const statusMessage = document.getElementById('statusMessage');
-
-        // Generate particles for loader
-        generateParticles('loader-particles', 30);
-
-        // Generate particles for hero section
-        generateParticles('hero-particles', 20);
-
-        const statusMessages = {
-          ar: [
-            'جاري تحميل الموارد...',
-            'تهيئة الواجهة...',
-            'تحميل البيانات...',
-            'إعداد التجربة التفاعلية...',
-            'اكتمال التحميل...'
-          ],
-          en: [
-            'Loading resources...',
-            'Initializing interface...',
-            'Loading data...',
-            'Setting up interactive experience...',
-            'Loading complete...'
-          ]
-        };
-
-        const currentLang = document.documentElement.lang || 'ar';
-        const messages = statusMessages[currentLang] || statusMessages.ar;
-
-        let progress = 0;
-        const interval = setInterval(() => {
-          if (progress >= 100) {
-            clearInterval(interval);
-
-            // Hide loader and show app after a short delay
-            setTimeout(() => {
-              loader.style.opacity = '0';
-              setTimeout(() => {
-                loader.classList.add('hidden');
-                app.classList.remove('hidden');
-              }, 500);
-            }, 500);
-
-            return;
           }
 
-          progress += Math.random() * 10;
-          progress = Math.min(progress, 100);
+          // Scroll to AI Tool section from header
+          if (aiToolBtn) {
+            aiToolBtn.addEventListener('click', () => {
+              const idGeneratorSection = document.getElementById('idGeneratorSection');
+              if (idGeneratorSection) {
+                idGeneratorSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            });
+          }
 
-          progressBar.style.width = `${progress}%`;
-          progressPercentage.textContent = `${Math.round(progress)}%`;
+          // Download CV from hero or header
+          if (downloadCvHeroBtn) {
+            downloadCvHeroBtn.addEventListener('click', () => {
+              window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
+            });
+          }
+          if (cvBtn) {
+            cvBtn.addEventListener('click', () => {
+              window.open('Mohamed_H_Abdelaziz_CV.pdf', '_blank');
+            });
+          }
+        });
 
-          // Update status message based on progress
-          const messageIndex = Math.min(Math.floor(progress / 25), messages.length - 1);
-          statusMessage.textContent = messages[messageIndex];
+        /**
+         * Initialize loading screen animation and progress
+         */
+        function initLoading() {
+          const loader = document.getElementById('loader-container');
+          const app = document.getElementById('app');
+          const progressBar = document.getElementById('progressBar');
+          const progressPercentage = document.getElementById('progressPercentage');
+          const statusMessage = document.getElementById('statusMessage');
 
-        }, 300);
-      }
-    >>>>>>> main
+          // Generate particles for loader
+          generateParticles('loader-particles', 30);
 
-      /**
-       * Generate random particles for visual effects
-       * @param {string} containerId - ID of the container element
-       * @param {number} count - Number of particles to generate
-       */
-      function generateParticles(containerId, count) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+          // Generate particles for hero section
+          generateParticles('hero-particles', 20);
 
-        // Clear existing particles
-        container.innerHTML = '';
+          const statusMessages = {
+            ar: [
+              'جاري تحميل الموارد...',
+              'تهيئة الواجهة...',
+              'تحميل البيانات...',
+              'إعداد التجربة التفاعلية...',
+              'اكتمال التحميل...'
+            ],
+            en: [
+              'Loading resources...',
+              'Initializing interface...',
+              'Loading data...',
+              'Setting up interactive experience...',
+              'Loading complete...'
+            ]
+          };
+
+          const currentLang = document.documentElement.lang || 'ar';
+          const messages = statusMessages[currentLang] || statusMessages.ar;
+
+          let progress = 0;
+          const interval = setInterval(() => {
+            if (progress >= 100) {
+              clearInterval(interval);
+
+              // Hide loader and show app after a short delay
+              setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                  loader.classList.add('hidden');
+                  app.classList.remove('hidden');
+                }, 500);
+              }, 500);
+
+              return;
+            }
+
+            progress += Math.random() * 10;
+            progress = Math.min(progress, 100);
+
+            progressBar.style.width = `${progress}%`;
+            progressPercentage.textContent = `${Math.round(progress)}%`;
+
+            // Update status message based on progress
+            const messageIndex = Math.min(Math.floor(progress / 25), messages.length - 1);
+            statusMessage.textContent = messages[messageIndex];
+
+          }, 300);
+        }
+      >>>>>>> main
+
+        /**
+         * Generate random particles for visual effects
+         * @param {string} containerId - ID of the container element
+         * @param {number} count - Number of particles to generate
+         */
+        function generateParticles(containerId, count) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+
+          // Clear existing particles
+          container.innerHTML = '';
 
         // Create new random particles
         for (let i = 0; i < count; i++) {
@@ -814,9 +1076,10 @@
     <<<<<<< codex/split-script.js-into-smaller-modules
       if (loadingOverlay) {
         loadingOverlay.classList.add('hidden');
+        }
       }
+  <<<<<<< codex/merge-rating-widget-css-and-fix-script.js
     }
-  <<<<<<< codex/remove-conflict-markers-and-fix-syntax
     /**
      * Initialize rating widgets and handle persistence
      */
@@ -831,34 +1094,50 @@
         ratingsStore = {};
       }
   =======
-    =======
-        // Share button functionality
-        if (shareBtn && shareModal) {
-          shareBtn.addEventListener('click', () => {
-            // Set share link
-            if (shareLink) {
-              shareLink.value = window.location.href;
-            }
+    <<<<<<< codex/remove-conflict-markers-and-fix-syntax
+      /**
+       * Initialize rating widgets and handle persistence
+       */
+      function initRatingWidgets() {
+        const widgets = document.querySelectorAll('.rating-widget');
+        if (!widgets.length) return;
 
-            // Show modal
-            shareModal.classList.add('active');
-          });
+        let ratingsStore = {};
+        try {
+          ratingsStore = JSON.parse(localStorage.getItem('toolRatings')) || {};
+        } catch (e) {
+          ratingsStore = {};
         }
+    =======
+      =======
+          // Share button functionality
+          if (shareBtn && shareModal) {
+            shareBtn.addEventListener('click', () => {
+              // Set share link
+              if (shareLink) {
+                shareLink.value = window.location.href;
+              }
+
+              // Show modal
+              shareModal.classList.add('active');
+            });
+          }
+    >>>>>>> main
   >>>>>>> main
 
-        // Close modal functionality
-        if (closeShareModal && shareModal) {
-          closeShareModal.addEventListener('click', () => {
-            shareModal.classList.remove('active');
-          });
+          // Close modal functionality
+          if (closeShareModal && shareModal) {
+            closeShareModal.addEventListener('click', () => {
+              shareModal.classList.remove('active');
+            });
 
-          // Close modal when clicking outside
-        shareModal.addEventListener('click', (e) => {
-          if (e.target === shareModal) {
-            shareModal.classList.remove('active');
-          }
-        });
-      }
+            // Close modal when clicking outside
+          shareModal.addEventListener('click', (e) => {
+            if (e.target === shareModal) {
+              shareModal.classList.remove('active');
+            }
+          });
+        }
 
       // Share options functionality
       if (shareOptions) {
@@ -974,78 +1253,10 @@
           loadingMessage.textContent = message;
         }
 
-        // Show overlay
-        loadingOverlay.classList.remove('hidden');
-      }
-    }
-
-    /**
-     * Hide loading overlay
-     */
-    function hideLoadingOverlay() {
-      const loadingOverlay = document.getElementById('loadingOverlay');
-
-      if (loadingOverlay) {
-        loadingOverlay.classList.add('hidden');
-      }
-    }
-
-    /**
-     * Initialize theme based on saved preference and set up toggle
-     */
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-      }
-
-      const toggleBtn = document.getElementById('themeToggleBtn');
-      if (toggleBtn) {
-        updateToggleIcon(toggleBtn);
-        toggleBtn.addEventListener('click', toggleTheme);
-      }
-    }
-
-    /**
-     * Toggle between light and dark themes with smooth transitions
-     */
-    function toggleTheme() {
-      document.body.classList.add('theme-transition');
-      const isLight = document.body.classList.toggle('light-theme');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-
-      const toggleBtn = document.getElementById('themeToggleBtn');
-      if (toggleBtn) {
-          updateToggleIcon(toggleBtn);
+          // Show overlay
+          loadingOverlay.classList.remove('hidden');
         }
-
-        setTimeout(() => {
-          document.body.classList.remove('theme-transition');
-        }, 500);
-      }
-    <<<<<<< codex/resolve-conflict-markers-and-fix-files
-    }
-
-    /* Initialize rating widgets and handle persistence */
-    function initRatingWidgets() {
-      const widgets = document.querySelectorAll('.rating-widget');
-      if (!widgets.length) return;
-      =======
-      >>>>>>> main
-
-        /**
-         * Update toggle button icon based on current theme
-         * @param {HTMLElement} btn
-         */
-        function updateToggleIcon(btn) {
-          if (document.body.classList.contains('light-theme')) {
-            btn.innerHTML = '<i class="fas fa-moon"></i>';
-          } else {
-            btn.innerHTML = '<i class="fas fa-sun"></i>';
-          }
-        <<<<<<< codex/fix-syntax-errors-and-code-structure
-        }
-  <<<<<<< codex/remove-conflict-markers-and-fix-syntax
+  <<<<<<< codex/merge-rating-widget-css-and-fix-script.js
       });
     }
     /**
@@ -1076,147 +1287,236 @@
       });
     }
   =======
-        /**
-         * Initialize rating widgets and handle persistence
-        =======
-
-        /* Initialize rating widgets and handle persistence */
-        >>>>>>> main
-         */
-        function initRatingWidgets() {
-          const widgets = document.querySelectorAll('.rating-widget');
-          if (!widgets.length) return;
-  >>>>>>> main
-
-          let ratingsStore = {};
-          try {
-            ratingsStore = JSON.parse(localStorage.getItem('toolRatings')) || {};
-          } catch (e) {
-            ratingsStore = {};
-          }
-
-          widgets.forEach(widget => {
-            const toolId = widget.getAttribute('data-tool-id');
-            const stars = widget.querySelectorAll('.star');
-            const commentInput = widget.querySelector('.rating-comment');
-            const submitBtn = widget.querySelector('.rating-submit');
-            const averageDisplay = widget.querySelector('.rating-average span');
-            let selected = 0;
-
-            updateAverage();
-
-            stars.forEach(star => {
-              const value = parseInt(star.dataset.value, 10);
-              star.addEventListener('mouseenter', () => highlight(value));
-              star.addEventListener('mouseleave', () => highlight(selected));
-              star.addEventListener('click', () => {
-                selected = value;
-                highlight(selected);
-              });
-            });
-
-            if (submitBtn) {
-              submitBtn.addEventListener('click', () => {
-                if (!selected) return alert('Please select a rating first');
-                const comment = commentInput ? commentInput.value.trim() : '';
-                if (!ratingsStore[toolId]) ratingsStore[toolId] = { ratings: [] };
-                ratingsStore[toolId].ratings.push({ stars: selected, comment });
-                localStorage.setItem('toolRatings', JSON.stringify(ratingsStore));
-                if (commentInput) commentInput.value = '';
-                selected = 0;
-                highlight(selected);
-                updateAverage();
-              });
-            }
-
-            function highlight(rating) {
-              stars.forEach(s => {
-                const val = parseInt(s.dataset.value, 10);
-                if (val <= rating) {
-                  s.classList.add('fa-solid', 'active');
-                  s.classList.remove('fa-regular');
-                } else {
-                  s.classList.remove('fa-solid', 'active');
-                  s.classList.add('fa-regular');
-                }
-              });
-            }
-
-            function updateAverage() {
-              if (ratingsStore[toolId] && ratingsStore[toolId].ratings.length) {
-                const arr = ratingsStore[toolId].ratings;
-                const avg = arr.reduce((a, r) => a + r.stars, 0) / arr.length;
-                averageDisplay.textContent = avg.toFixed(1);
-              } else {
-                averageDisplay.textContent = '0';
-              }
-            }
-      <<<<<<< codex/resolve-conflict-markers-and-fix-files
-          }
-        });
       }
 
-      /* Load AI tools from JSON and initialize search filtering */
+      /**
+       * Hide loading overlay
+       */
+      function hideLoadingOverlay() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        if (loadingOverlay) {
+          loadingOverlay.classList.add('hidden');
+        }
+      }
+
+      /**
+       * Initialize theme based on saved preference and set up toggle
+       */
+      function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+          document.body.classList.add('light-theme');
+        }
+
+        const toggleBtn = document.getElementById('themeToggleBtn');
+        if (toggleBtn) {
+          updateToggleIcon(toggleBtn);
+          toggleBtn.addEventListener('click', toggleTheme);
+        }
+      }
+
+      /**
+       * Toggle between light and dark themes with smooth transitions
+       */
+      function toggleTheme() {
+        document.body.classList.add('theme-transition');
+        const isLight = document.body.classList.toggle('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+        const toggleBtn = document.getElementById('themeToggleBtn');
+        if (toggleBtn) {
+            updateToggleIcon(toggleBtn);
+          }
+
+          setTimeout(() => {
+            document.body.classList.remove('theme-transition');
+          }, 500);
+        }
+      <<<<<<< codex/resolve-conflict-markers-and-fix-files
+      }
+
+      /* Initialize rating widgets and handle persistence */
+      function initRatingWidgets() {
+        const widgets = document.querySelectorAll('.rating-widget');
+        if (!widgets.length) return;
+        =======
+        >>>>>>> main
+
+          /**
+           * Update toggle button icon based on current theme
+           * @param {HTMLElement} btn
+           */
+          function updateToggleIcon(btn) {
+            if (document.body.classList.contains('light-theme')) {
+              btn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+              btn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+          <<<<<<< codex/fix-syntax-errors-and-code-structure
+          }
+    <<<<<<< codex/remove-conflict-markers-and-fix-syntax
+        });
+      }
+      /**
+       * Load AI tools from JSON and initialize search filtering
+       */
       function initAITools() {
         const searchInput = document.getElementById('toolSearch');
         const cardsContainer = document.getElementById('toolCards');
-      =======
-        <<<<<<< codex/fix-syntax-errors-and-code-structure
+
+        if (!searchInput || !cardsContainer) return;
+
+        fetch('aiTools.json')
+          .then(res => res.json())
+          .then(data => {
+            aiTools = data;
+            renderToolCards(aiTools);
+          })
+          .catch(err => console.error('Error loading aiTools.json', err));
+
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.trim().toLowerCase();
+          const filtered = aiTools.filter(tool =>
+            tool.name.toLowerCase().includes(query) ||
+            tool.description.toLowerCase().includes(query) ||
+            (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
+          );
+          renderToolCards(filtered);
+        });
+      }
+    =======
+          /**
+           * Initialize rating widgets and handle persistence
+          =======
+
+          /* Initialize rating widgets and handle persistence */
+          >>>>>>> main
+           */
+          function initRatingWidgets() {
+            const widgets = document.querySelectorAll('.rating-widget');
+            if (!widgets.length) return;
+    >>>>>>> main
+  >>>>>>> main
+
+            let ratingsStore = {};
+            try {
+              ratingsStore = JSON.parse(localStorage.getItem('toolRatings')) || {};
+            } catch (e) {
+              ratingsStore = {};
+            }
+
+            widgets.forEach(widget => {
+              const toolId = widget.getAttribute('data-tool-id');
+              const stars = widget.querySelectorAll('.star');
+              const commentInput = widget.querySelector('.rating-comment');
+              const submitBtn = widget.querySelector('.rating-submit');
+              const averageDisplay = widget.querySelector('.rating-average span');
+              let selected = 0;
+
+              updateAverage();
+
+              stars.forEach(star => {
+                const value = parseInt(star.dataset.value, 10);
+                star.addEventListener('mouseenter', () => highlight(value));
+                star.addEventListener('mouseleave', () => highlight(selected));
+                star.addEventListener('click', () => {
+                  selected = value;
+                  highlight(selected);
+                });
+              });
+
+              if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                  if (!selected) return alert('Please select a rating first');
+                  const comment = commentInput ? commentInput.value.trim() : '';
+                  if (!ratingsStore[toolId]) ratingsStore[toolId] = { ratings: [] };
+                  ratingsStore[toolId].ratings.push({ stars: selected, comment });
+                  localStorage.setItem('toolRatings', JSON.stringify(ratingsStore));
+                  if (commentInput) commentInput.value = '';
+                  selected = 0;
+                  highlight(selected);
+                  updateAverage();
+                });
+              }
+
+              function highlight(rating) {
+                stars.forEach(s => {
+                  const val = parseInt(s.dataset.value, 10);
+                  if (val <= rating) {
+                    s.classList.add('fa-solid', 'active');
+                    s.classList.remove('fa-regular');
+                  } else {
+                    s.classList.remove('fa-solid', 'active');
+                    s.classList.add('fa-regular');
+                  }
+                });
+              }
+
+              function updateAverage() {
+                if (ratingsStore[toolId] && ratingsStore[toolId].ratings.length) {
+                  const arr = ratingsStore[toolId].ratings;
+                  const avg = arr.reduce((a, r) => a + r.stars, 0) / arr.length;
+                  averageDisplay.textContent = avg.toFixed(1);
+                } else {
+                  averageDisplay.textContent = '0';
+                }
+              }
+        <<<<<<< codex/resolve-conflict-markers-and-fix-files
+            }
           });
         }
-        /**
-         * Load AI tools from JSON and initialize search filtering
-        =======
 
         /* Load AI tools from JSON and initialize search filtering */
-        >>>>>>> main
-         */
         function initAITools() {
           const searchInput = document.getElementById('toolSearch');
           const cardsContainer = document.getElementById('toolCards');
-      >>>>>>> main
+        =======
+          <<<<<<< codex/fix-syntax-errors-and-code-structure
+            });
+          }
+          /**
+           * Load AI tools from JSON and initialize search filtering
+          =======
 
-          if (!searchInput || !cardsContainer) return;
+          /* Load AI tools from JSON and initialize search filtering */
+          >>>>>>> main
+           */
+          function initAITools() {
+            const searchInput = document.getElementById('toolSearch');
+            const cardsContainer = document.getElementById('toolCards');
+        >>>>>>> main
 
-          fetch('aiTools.json')
-            .then(res => res.json())
-            .then(data => {
-              aiTools = data;
-              renderToolCards(aiTools);
-            })
-            .catch(err => console.error('Error loading aiTools.json', err));
+            if (!searchInput || !cardsContainer) return;
 
-          searchInput.addEventListener('input', () => {
-            const query = searchInput.value.trim().toLowerCase();
-            const filtered = aiTools.filter(tool =>
-              tool.name.toLowerCase().includes(query) ||
-              tool.description.toLowerCase().includes(query) ||
-              (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
-            );
-            renderToolCards(filtered);
-          });
-        }
+            fetch('aiTools.json')
+              .then(res => res.json())
+              .then(data => {
+                aiTools = data;
+                renderToolCards(aiTools);
+              })
+              .catch(err => console.error('Error loading aiTools.json', err));
 
-        /**
-         * Render AI tool cards
-         * @param {Array} tools - array of tool objects
-         */
-        function renderToolCards(tools) {
-          const cardsContainer = document.getElementById('toolCards');
-          if (!cardsContainer) return;
+            searchInput.addEventListener('input', () => {
+              const query = searchInput.value.trim().toLowerCase();
+              const filtered = aiTools.filter(tool =>
+                tool.name.toLowerCase().includes(query) ||
+                tool.description.toLowerCase().includes(query) ||
+                (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
+              );
+              renderToolCards(filtered);
+            });
+          }
 
-      <<<<<<< codex/resolve-conflict-markers-and-fix-files
-        cardsContainer.innerHTML = '';
-        tools.forEach(tool => {
-          const card = document.createElement('div');
-          card.className = 'tool-card';
-          card.innerHTML = `
-            <h3>${tool.name}</h3>
-            <p>${tool.description}</p>
-            <a href="${tool.link}" target="_blank">Visit</a>
-          `;
-          cardsContainer.appendChild(card);
-      =======
+          /**
+           * Render AI tool cards
+           * @param {Array} tools - array of tool objects
+           */
+          function renderToolCards(tools) {
+            const cardsContainer = document.getElementById('toolCards');
+            if (!cardsContainer) return;
+
+        <<<<<<< codex/resolve-conflict-markers-and-fix-files
           cardsContainer.innerHTML = '';
           tools.forEach(tool => {
             const card = document.createElement('div');
@@ -1224,6 +1524,17 @@
             card.innerHTML = `
               <h3>${tool.name}</h3>
               <p>${tool.description}</p>
+              <a href="${tool.link}" target="_blank">Visit</a>
+            `;
+            cardsContainer.appendChild(card);
+        =======
+            cardsContainer.innerHTML = '';
+            tools.forEach(tool => {
+              const card = document.createElement('div');
+              card.className = 'tool-card';
+              card.innerHTML = `
+                <h3>${tool.name}</h3>
+                <p>${tool.description}</p>
               <a href="${tool.link}" target="_blank">Visit</a>
             `;
             cardsContainer.appendChild(card);
