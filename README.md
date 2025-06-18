@@ -21,6 +21,21 @@ Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz
 **Contact:** [Twitter](https://twitter.com/amrikyy) | [LinkedIn](https://linkedin.com/in/amrikyy) | [GitHub](https://github.com/amrikyy)
 
 ---
+## About Mohamed H. Abdelaziz
+
+Mohamed H. Abdelaziz ("Amrikyy") is a 26-year-old Egyptian-American cybersecurity engineer and AI developer based in Cairo. He studies Cybersecurity Engineering at Kennesaw State University (class of 2026) after earning a diploma from Chattahoochee Technical College and graduating from El Shaheen High School in Kuwait. His experience includes internships at OpenAI, Intel and L'Oréal, and he is an active member of the BlackRock Talent Community. Mohamed founded **AMRIKYY AI Solutions** and has worked on projects such as Codex AI and Digital Persona.
+
+**Skills:** Python, Java, Firebase, Excel, Amadeus
+
+**Languages:** Arabic, English
+
+**Certifications:** Cisco Cybersecurity
+
+**Links:** [LinkedIn](https://www.linkedin.com/in/mohamed-abdelaziz-815797347) | [Instagram](https://www.instagram.com/amrikyy) | [Facebook](https://www.facebook.com/share/17qHw2N9PG) | [Portfolio](https://moeabdelaziz007.github.io/amrikyy/)
+
+**Email:** [amrikyy@gmail.com](mailto:amrikyy@gmail.com) | [Mabdela1@students.kennesaw.edu](mailto:Mabdela1@students.kennesaw.edu)
+
+**Phone:** +1 770 616 0211 | +20 109 422 8044
 
 ## 🎨 Design & Features
 

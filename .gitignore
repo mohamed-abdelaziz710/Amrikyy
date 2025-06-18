@@ -1,14 +1,3 @@
 node_modules/
 .env
- codex/remove-conflict-markers-and-fix-syntax
-
-=======
- codex/resolve-conflict-markers-and-fix-files
-
- codex/fix-syntax-errors-and-code-structure
-
-
- main
- main
- main
 .vscode/
