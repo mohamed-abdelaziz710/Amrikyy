@@ -848,6 +848,3 @@ function hideLoadingOverlay() {
   }
 }
 
-/**
- * Initialize theme based on saved preference and set up toggle
- */
