@@ -35,18 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize AOS animations if library is loaded
   if (typeof AOS !== 'undefined') {
     AOS.init();
-  }
+    }
 
-  // Initialize theme and toggle button
-  initTheme();
+    // Initialize theme and toggle button
+    initTheme();
+  <<<<<<< codex/fix-syntax-errors-and-code-structure
 
-  // Initialize rating widgets
-  initRatingWidgets();
+  =======
+  >>>>>>> main
+    // Initialize rating widgets
+    initRatingWidgets();
 
-  initAITools();
-  
-  // Hero section CTA buttons
-  const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
+    initAITools();
+
+    // Hero section CTA buttons
+    const aiToolHeroBtn = document.getElementById('aiToolHeroBtn');
   const downloadCvHeroBtn = document.getElementById('downloadCvHeroBtn');
   const aiToolBtn = document.getElementById('aiToolBtn');
   const cvBtn = document.getElementById('cvBtn');
@@ -953,142 +956,152 @@ function toggleTheme() {
 
   const toggleBtn = document.getElementById('themeToggleBtn');
   if (toggleBtn) {
-    updateToggleIcon(toggleBtn);
-  }
-
-  setTimeout(() => {
-    document.body.classList.remove('theme-transition');
-  }, 500);
-}
-
-/**
- * Update toggle button icon based on current theme
- * @param {HTMLElement} btn
- */
-function updateToggleIcon(btn) {
-  if (document.body.classList.contains('light-theme')) {
-    btn.innerHTML = '<i class="fas fa-moon"></i>';
-  } else {
-    btn.innerHTML = '<i class="fas fa-sun"></i>';
-  }
-}
-/**
- * Initialize rating widgets and handle persistence
- */
-function initRatingWidgets() {
-  const widgets = document.querySelectorAll('.rating-widget');
-  if (!widgets.length) return;
-
-  let ratingsStore = {};
-  try {
-    ratingsStore = JSON.parse(localStorage.getItem('toolRatings')) || {};
-  } catch (e) {
-    ratingsStore = {};
-  }
-
-  widgets.forEach(widget => {
-    const toolId = widget.getAttribute('data-tool-id');
-    const stars = widget.querySelectorAll('.star');
-    const commentInput = widget.querySelector('.rating-comment');
-    const submitBtn = widget.querySelector('.rating-submit');
-    const averageDisplay = widget.querySelector('.rating-average span');
-    let selected = 0;
-
-    updateAverage();
-
-    stars.forEach(star => {
-      const value = parseInt(star.dataset.value, 10);
-      star.addEventListener('mouseenter', () => highlight(value));
-      star.addEventListener('mouseleave', () => highlight(selected));
-      star.addEventListener('click', () => {
-        selected = value;
-        highlight(selected);
-      });
-    });
-
-    if (submitBtn) {
-      submitBtn.addEventListener('click', () => {
-        if (!selected) return alert('Please select a rating first');
-        const comment = commentInput ? commentInput.value.trim() : '';
-        if (!ratingsStore[toolId]) ratingsStore[toolId] = { ratings: [] };
-        ratingsStore[toolId].ratings.push({ stars: selected, comment });
-        localStorage.setItem('toolRatings', JSON.stringify(ratingsStore));
-        if (commentInput) commentInput.value = '';
-        selected = 0;
-        highlight(selected);
-        updateAverage();
-      });
+      updateToggleIcon(toggleBtn);
     }
 
-    function highlight(rating) {
-      stars.forEach(s => {
-        const val = parseInt(s.dataset.value, 10);
-        if (val <= rating) {
-          s.classList.add('fa-solid', 'active');
-          s.classList.remove('fa-regular');
-        } else {
-          s.classList.remove('fa-solid', 'active');
-          s.classList.add('fa-regular');
-        }
-      });
+    setTimeout(() => {
+      document.body.classList.remove('theme-transition');
+    }, 500);
+  }
+
+  /**
+   * Update toggle button icon based on current theme
+   * @param {HTMLElement} btn
+   */
+  function updateToggleIcon(btn) {
+    if (document.body.classList.contains('light-theme')) {
+      btn.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+      btn.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+  <<<<<<< codex/fix-syntax-errors-and-code-structure
+  }
+  /**
+   * Initialize rating widgets and handle persistence
+  =======
+
+  /* Initialize rating widgets and handle persistence */
+  >>>>>>> main
+   */
+  function initRatingWidgets() {
+    const widgets = document.querySelectorAll('.rating-widget');
+    if (!widgets.length) return;
+
+    let ratingsStore = {};
+    try {
+      ratingsStore = JSON.parse(localStorage.getItem('toolRatings')) || {};
+    } catch (e) {
+      ratingsStore = {};
     }
 
-    function updateAverage() {
-      if (ratingsStore[toolId] && ratingsStore[toolId].ratings.length) {
-        const arr = ratingsStore[toolId].ratings;
-        const avg = arr.reduce((a, r) => a + r.stars, 0) / arr.length;
-        averageDisplay.textContent = avg.toFixed(1);
-      } else {
-        averageDisplay.textContent = '0';
+    widgets.forEach(widget => {
+      const toolId = widget.getAttribute('data-tool-id');
+      const stars = widget.querySelectorAll('.star');
+      const commentInput = widget.querySelector('.rating-comment');
+      const submitBtn = widget.querySelector('.rating-submit');
+      const averageDisplay = widget.querySelector('.rating-average span');
+      let selected = 0;
+
+      updateAverage();
+
+      stars.forEach(star => {
+        const value = parseInt(star.dataset.value, 10);
+        star.addEventListener('mouseenter', () => highlight(value));
+        star.addEventListener('mouseleave', () => highlight(selected));
+        star.addEventListener('click', () => {
+          selected = value;
+          highlight(selected);
+        });
+      });
+
+      if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+          if (!selected) return alert('Please select a rating first');
+          const comment = commentInput ? commentInput.value.trim() : '';
+          if (!ratingsStore[toolId]) ratingsStore[toolId] = { ratings: [] };
+          ratingsStore[toolId].ratings.push({ stars: selected, comment });
+          localStorage.setItem('toolRatings', JSON.stringify(ratingsStore));
+          if (commentInput) commentInput.value = '';
+          selected = 0;
+          highlight(selected);
+          updateAverage();
+        });
       }
-    }
-  });
-}
-/**
- * Load AI tools from JSON and initialize search filtering
- */
-function initAITools() {
-  const searchInput = document.getElementById('toolSearch');
-  const cardsContainer = document.getElementById('toolCards');
 
-  if (!searchInput || !cardsContainer) return;
+      function highlight(rating) {
+        stars.forEach(s => {
+          const val = parseInt(s.dataset.value, 10);
+          if (val <= rating) {
+            s.classList.add('fa-solid', 'active');
+            s.classList.remove('fa-regular');
+          } else {
+            s.classList.remove('fa-solid', 'active');
+            s.classList.add('fa-regular');
+          }
+        });
+      }
 
-  fetch('aiTools.json')
-    .then(res => res.json())
-    .then(data => {
-      aiTools = data;
-      renderToolCards(aiTools);
-    })
-    .catch(err => console.error('Error loading aiTools.json', err));
+      function updateAverage() {
+        if (ratingsStore[toolId] && ratingsStore[toolId].ratings.length) {
+          const arr = ratingsStore[toolId].ratings;
+          const avg = arr.reduce((a, r) => a + r.stars, 0) / arr.length;
+          averageDisplay.textContent = avg.toFixed(1);
+        } else {
+          averageDisplay.textContent = '0';
+        }
+      }
+  <<<<<<< codex/fix-syntax-errors-and-code-structure
+    });
+  }
+  /**
+   * Load AI tools from JSON and initialize search filtering
+  =======
 
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.trim().toLowerCase();
-    const filtered = aiTools.filter(tool =>
-      tool.name.toLowerCase().includes(query) ||
-      tool.description.toLowerCase().includes(query) ||
-      (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
-    );
-    renderToolCards(filtered);
-  });
-}
+  /* Load AI tools from JSON and initialize search filtering */
+  >>>>>>> main
+   */
+  function initAITools() {
+    const searchInput = document.getElementById('toolSearch');
+    const cardsContainer = document.getElementById('toolCards');
 
-/**
- * Render AI tool cards
- * @param {Array} tools - array of tool objects
- */
-function renderToolCards(tools) {
-  const cardsContainer = document.getElementById('toolCards');
-  if (!cardsContainer) return;
+    if (!searchInput || !cardsContainer) return;
 
-  cardsContainer.innerHTML = '';
-  tools.forEach(tool => {
-    const card = document.createElement('div');
-    card.className = 'tool-card';
-    card.innerHTML = `
-      <h3>${tool.name}</h3>
-      <p>${tool.description}</p>
-      <a href="${tool.link}" target="_blank">Visit</a>
-    `;
-    cardsContainer.appendChild(card);
+    fetch('aiTools.json')
+      .then(res => res.json())
+      .then(data => {
+        aiTools = data;
+        renderToolCards(aiTools);
+      })
+      .catch(err => console.error('Error loading aiTools.json', err));
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      const filtered = aiTools.filter(tool =>
+        tool.name.toLowerCase().includes(query) ||
+        tool.description.toLowerCase().includes(query) ||
+        (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(query)))
+      );
+      renderToolCards(filtered);
+    });
+  }
+
+  /**
+   * Render AI tool cards
+   * @param {Array} tools - array of tool objects
+   */
+  function renderToolCards(tools) {
+    const cardsContainer = document.getElementById('toolCards');
+    if (!cardsContainer) return;
+
+    cardsContainer.innerHTML = '';
+    tools.forEach(tool => {
+      const card = document.createElement('div');
+      card.className = 'tool-card';
+      card.innerHTML = `
+        <h3>${tool.name}</h3>
+        <p>${tool.description}</p>
+        <a href="${tool.link}" target="_blank">Visit</a>
+      `;
+      cardsContainer.appendChild(card);
   });
 }
