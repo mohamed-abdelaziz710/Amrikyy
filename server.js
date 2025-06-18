@@ -12,10 +12,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Serve static files (HTML, CSS, JS, images)
-  app.use(express.static(__dirname));
+app.use(express.static(__dirname));
 
-  // API routes
-  app.use('/api/chat', chatRouter);
+// API routes
+app.use('/api/chat', chatRouter);
 
 // Optional QR code generation endpoint
 app.get('/api/qr', async (req, res) => {
