@@ -3,7 +3,7 @@ name: Deploy to Vercel
 on:
   push:
     branches:
-      - main
+      - do-not-deploy-vercel
 
 jobs:
   deploy:
