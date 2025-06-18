@@ -1743,19 +1743,37 @@ html[dir="rtl"] .next-btn:hover {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-/* Rating Widget */
-.rating-widget {
-  margin-top: 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  white-space: nowrap;
+  border-width: 0;
 }
+
+  <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
+  =======
+   codex/integrate-rating-widget-styles-with-ai-tools
+    /* Rating Widget */
+    .rating-widget {
+      margin-top: 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  =======
+  >>>>>>> main
+  /* Rating Widget */
+  .rating-widget {
+    margin-top: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
+  =======
+   main
+  >>>>>>> main
 
   .rating-stars .star {
     font-size: 1.5rem;
@@ -1795,11 +1813,28 @@ html[dir="rtl"] .next-btn:hover {
   }
 
   .rating-average {
+   codex/integrate-rating-widget-styles-with-ai-tools
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+  <<<<<<< codex/keep-standard-ignore-entries-and-remove-conflict-artefacts
+    }
+
+  /* AI Tools Section */
+    .tools-section {
+  =======
+  }
+  /* AI Tools Section */
+  .tools-section {
+  >>>>>>> main
+      background-color: var(--dark-bg-primary);
+    }
+  =======
     font-size: 0.9rem;
     color: var(--text-secondary);
   }
+   main
 
-/* AI Tools Section */
+  /* AI Tools Section */
   .tools-section {
     background-color: var(--dark-bg-primary);
   }
@@ -1841,6 +1876,12 @@ html[dir="rtl"] .next-btn:hover {
     margin-bottom: 0.5rem;
   }
 
+   codex/integrate-rating-widget-styles-with-ai-tools
+    .tool-card a {
+      color: var(--neon-green);
+      text-decoration: none;
+    }
+
   .tool-card p {
     color: var(--text-secondary);
     font-size: 0.9rem;
@@ -1850,4 +1891,5 @@ html[dir="rtl"] .next-btn:hover {
   .tool-card a {
     color: var(--neon-green);
     text-decoration: none;
-  }
+}
+ main
