@@ -9,6 +9,10 @@ async function setConversationContext(userId, context) {
     conversationContext.set(userId, context);
 }
 
+function getConversationContext(userId) {
+    return conversationContext.get(userId);
+}
+
 router.post('/', async (req, res) => {
     try {
         const userMessage = req.body.prompt;
@@ -26,13 +30,22 @@ router.post('/', async (req, res) => {
         // --- System prompt/persona ---
         const systemPrompt = `أنت "Amrikyy"، مساعد ذكي متخصص في التقنية والعملات الرقمية وتجربة المستخدم. أجب دائماً بأسلوب ودود، حديث، واحترافي، ووضح الإجابات بلغة سهلة مع لمسة من الحماس التقني. إذا كان السؤال متعلقاً بالسيرة الذاتية أو المهارات أو المشاريع، قدّم إجابة مختصرة وواضحة. إذا كان السؤال عن التقنية أو الذكاء الاصطناعي أو العملات الرقمية، أضف لمسة من الشرح المبسط والأمثلة العملية.`;
 
-        // Pass both system prompt and user message to Gemini
+        const context = getConversationContext(userId);
+
+        const messages = [{ role: "system", content: systemPrompt }];
+        if (context && context.awaitingDataFor) {
+            messages.push({
+                role: "system",
+                content: `المستخدم يرد الآن على طلبك السابق بخصوص "${context.awaitingDataFor}".`
+            });
+            conversationContext.delete(userId);
+        }
+        messages.push({ role: "user", content: userMessage });
+
+        // Pass system prompt, context, and user message to Gemini
         let geminiResponsePayload;
         try {
-            geminiResponsePayload = await geminiService.generateResponse([
-                { role: "system", content: systemPrompt },
-                { role: "user", content: userMessage }
-            ]);
+            geminiResponsePayload = await geminiService.generateResponse(messages);
         } catch (serviceError) {
             console.error('Gemini service error:', serviceError);
             return res.status(502).json({ response: "عفواً، الخدمة غير متاحة حالياً. حاول مرة أخرى لاحقاً." });
