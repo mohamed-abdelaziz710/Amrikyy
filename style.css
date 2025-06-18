@@ -405,6 +405,33 @@
     text-align: center;
   }
 
+  /* Loading Overlay */
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+  }
+
+  .loading-overlay.hidden { display: none !important; }
+
+  .loading-spinner {
+    border: 4px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
   /* Header */
   .app-header {
     position: fixed;
