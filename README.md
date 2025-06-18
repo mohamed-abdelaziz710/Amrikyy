@@ -1,195 +1,156 @@
-# Amrikyy | Cyber Intelligence Platform & Portfolio V2
+# Amrikyy | Cyber Intelligence Portfolio (2025 Neon Edition)
 
 **Live Demo:** [https://amrikyy.github.io/portfolio](https://amrikyy.github.io/portfolio)
 
-<!-- DEBUG LOG: README loaded successfully on 2025-05-29 -->
+---
 
-## 🚀 Ignition Point: The Vision
+## 🚀 Overview: The New Amrikyy Experience
 
-<!-- NOTE: This section introduces the project vision and user experience philosophy. -->
+Welcome to the all-new, premium digital CV and portfolio for Mohamed H Abdelaziz (Amrikyy). This version features a modern neon/tech aesthetic, a smart animated loader, up-to-date personal and professional information, and interactive features including a bilingual interface and a custom AI chatbot named **Amrikyy**.
 
-Welcome to the digital realm of Amrikyy – a cutting-edge, immersive portfolio experience designed not just to showcase skills, but to captivate and engage. This platform serves as a dynamic testament to Mohamed H Abdelaziz (Amrikyy)'s expertise as a Cybersecurity Specialist and Full-Stack Developer, presented through a "GenZ Cyber Neon" lens that is both futuristic and deeply engaging.
+## 📚 Bio
 
-<!-- DEBUG LOG: Vision section rendered. -->
+**Name:** Mohamed H Abdelaziz (Amrikyy)
 
-The journey begins with a mesmerizing loading sequence, transitions into an impactful hero landing, unveils a "smart" and interactive CV card, and offers continuous engagement via a custom-designed AI assistant.
+**Background:** Cybersecurity enthusiast and full-stack developer passionate about digital identity and crypto technology.
 
-## 🎨 Design Philosophy & Aesthetics: "GenZ Cyber Neon"
+**Education:** Graduated from El Shaheen High School in Kuwait.
 
-<!-- NOTE: This section details the design principles and visual style. -->
+**Experience:** Created multiple web projects and digital ID solutions, including this portfolio and the Amrikyy chatbot.
 
-The core design philosophy revolves around a **"GenZ Cyber Neon"** aesthetic. This translates to:
+**Contact:** [Twitter](https://twitter.com/amrikyy) | [LinkedIn](https://linkedin.com/in/amrikyy) | [GitHub](https://github.com/amrikyy)
 
-* **Futuristic & Energetic:** Sharp lines, glowing accents, and dynamic animations create a sense of advanced technology and forward momentum.
-* **Immersive Digital Atmosphere:** Dark backgrounds establish depth, making neon elements radiate with intensity, mimicking a sophisticated cybernetic environment.
-* **Polished Interactivity:** Smooth transitions, responsive effects (like 3D tilts), and micro-interactions enhance user engagement and provide a premium feel.
-* **Clarity & Focus:** Despite the rich visuals, information hierarchy is maintained for clear communication of Amrikyy's profile and skills.
+---
+## About Mohamed H. Abdelaziz
 
-<!-- DEBUG LOG: Design philosophy section rendered. -->
+Mohamed H. Abdelaziz ("Amrikyy") is a 26-year-old Egyptian-American cybersecurity engineer and AI developer based in Cairo. He studies Cybersecurity Engineering at Kennesaw State University (class of 2026) after earning a diploma from Chattahoochee Technical College and graduating from El Shaheen High School in Kuwait. His experience includes internships at OpenAI, Intel and L'Oréal, and he is an active member of the BlackRock Talent Community. Mohamed founded **AMRIKYY AI Solutions** and has worked on projects such as Codex AI and Digital Persona.
 
-### 🌈 Color Palette: Code of Light
+**Skills:** Python, Java, Firebase, Excel, Amadeus
 
-<!-- NOTE: Color palette is central to the cyber-neon theme. -->
+**Languages:** Arabic, English
 
-* **Primary Accent** – Neon Green (`#39FF14`)
-* **Secondary Accents** – Neon Blue (`#00d4ff`) & Neon Purple (`#b600ff`)
-* **Base** – Deep Darks (`--dark-bg-primary: #0A0A0A`, etc.)
-* **Supporting** – White (`#FFFFFF`) & Grays (`#808080`, `#E0E0E0`)
-* **Glassmorphism** – (`--glass: rgba(30, 20, 50, 0.8)`)
+**Certifications:** Cisco Cybersecurity
 
-<!-- DEBUG LOG: Color palette section rendered. -->
+**Links:** [LinkedIn](https://www.linkedin.com/in/mohamed-abdelaziz-815797347) | [Instagram](https://www.instagram.com/amrikyy) | [Facebook](https://www.facebook.com/share/17qHw2N9PG) | [Portfolio](https://moeabdelaziz007.github.io/amrikyy/)
 
-### ✒️ Typography: The Digital Scribe
+**Email:** [amrikyy@gmail.com](mailto:amrikyy@gmail.com) | [Mabdela1@students.kennesaw.edu](mailto:Mabdela1@students.kennesaw.edu)
 
-<!-- NOTE: Typography choices reinforce the digital and cybernetic theme. -->
+**Phone:** +1 770 616 0211 | +20 109 422 8044
 
-Font choices are critical in establishing the cyber-tech identity:
+## 🎨 Design & Features
 
-* **Headings & Logos - 'Orbitron' (Weights: 600, 900):** A distinctly geometric, wide sans-serif that embodies futuristic and cybernetic aesthetics. Its sharp angles and clear forms make it perfect for impactful titles and branding.
-* **Body & Content - 'Cairo' (Weights: 700, 900):** A modern, clean, and highly legible sans-serif that offers excellent support for both Arabic (primary content language) and Latin scripts. Its clarity complements the stylized nature of Orbitron, ensuring readability for detailed information.
-
-<!-- DEBUG LOG: Typography section rendered. -->
-
-### ✨ Iconography: Symbols of Cyber Space
-
-<!-- NOTE: Iconography choices support usability and thematic consistency. -->
-
-* **Font Awesome 6:** Leveraged for clear, universally understood icons within the CV card (e.g., contact methods, section headers, skill/project badges).
-* **Custom SVG "Data Shard":** A unique, angular design for the AI Chatbot toggle, moving away from generic icons to something that feels bespoke, intelligent, and thematically integrated.
-
-<!-- DEBUG LOG: Iconography section rendered. -->
-
-## 💡 Key Features & Sections Deconstructed
-
-<!-- NOTE: This section breaks down the key features and layout of the portfolio. -->
-
-The website is a single-page application (SPA) experience, flowing through distinct, animated sections:
-
-### 1. Immersive Loading Experience (`#loader`)
-
-<!-- NOTE: Details the loading animation and its components. -->
-
-* **Visuals:** A 3D floating card featuring the "AMRIKYY" text logo and avatar, set against a darker, themed background.
-* **Animation:** The card exhibits a `floatCard` animation with subtle 3D rotations. A unique `rotateEnergyField` pseudo-element provides a dynamic aura.
-* **Feedback:** An animated multi-color neon progress bar (`--neon-green`, `--neon-blue`, `--neon-purple`) and bouncing dots accompanying the loading message.
-* **Transition:** Smooth fade-out to reveal the main hero section.
-
-<!-- DEBUG LOG: Loading experience section rendered. -->
-
-### 2. Dynamic Hero Section (`.hero-section`)
-
-<!-- NOTE: Describes the hero section's content and animations. -->
-
-* **"AMRIKYY" Visual Logo:** A prominent, custom-styled "AMRIKYY" logotype using 'Orbitron', featuring strong neon green glows and an animated underline.
-* **Engaging Introduction:** Arabic headline "أهلاً بك في Amrikyy" with a highlighted "Amrikyy" and a compelling subtitle setting the stage.
-* **Call to Action (CTA):** A clear, neon green outlined button "شاهد CV الذكي" (`.cta-btn`) prompting users to explore further.
-* **Animated Background:** A full-screen canvas-based particle system (`#particle-canvas-main`) provides a subtle, dynamic backdrop, enhancing the cybernetic atmosphere. Particles are themed neon green and white.
-
-<!-- DEBUG LOG: Hero section rendered. -->
-
-### 3. Interactive CV Card (`#cv-card-page`)
-
-<!-- NOTE: Focuses on the CV card's design and interactive features. -->
-
-Designed to be "smart, small, and eye-catching":
-
-* **Compact & Focused:** `max-width: 460px` ensures a digestible, card-like presentation.
-* **3D Interactivity:** Features a mouse-driven 3D tilt effect, making the card respond to user interaction, enhancing depth and engagement. The `box-shadow` dynamically adjusts with the tilt.
-* **Aesthetics:** Utilizes the `--glass` background for a modern, layered feel, bordered with `--neon-green`. A faint animated grid pattern (`::before`) adds a subtle tech texture.
-* **Structure:**
-  * **Header (`.cv-header`):** Contains Amrikyy's avatar (with hover effect), name, title, and contact/social media links (using Font Awesome icons). Includes a "Download CV" button.
-  * **Body (`.cv-body`):**
-    * **Sections (`.cv-section`):** Professional Summary, Skills, Certifications, Key Projects. Each section is a distinct visual block with an 'Orbitron' title (often accompanied by a Font Awesome icon) and themed hover states.
-    * **Skills List (`.skills-list`):** Presented as "cyber-chip" like badges with neon green text/borders and interactive hover effects. Each skill is prepended with a relevant Font Awesome icon.
-    * **Certifications & Projects:** Listed items also feature icons and refined hover states for better engagement.
-  * **Content Language:** Primarily in Arabic, as per the latest design.
-
-<!-- DEBUG LOG: CV card section rendered. -->
-
-### 4. AI Chatbot Assistant (`#chatbot-toggle`, `#chatbot-window`)
-
-<!-- NOTE: Outlines the AI chatbot feature and its interface. -->
-
-* **Unique Toggle:** The "Data Shard" SVG icon serves as the chatbot launcher, with custom neon pulse and hover animations. A small "AI" text label appears on hover.
-* **Themed Interface:** The chat window (header, messages, input) adheres to the dark, neon green, and glassmorphism theme.
-* **Core Functionality:**
-  * Toggling window visibility.
-  * Displaying user and AI messages with distinct styling and avatars.
-  * Input field and send button.
-  * Typing indicator.
-  * **Note:** Frontend logic is implemented. Full AI capabilities require connecting the provided `REPLIT_BACKEND_URL` placeholder in `script.js` to a live backend service.
-
-<!-- DEBUG LOG: Chatbot assistant section rendered. -->
-
-## 🛠️ Technical Stack (MVP Focus)
-
-<!-- NOTE: Details the technologies used in building the portfolio. -->
-
-This portfolio is built with a focus on modern, lightweight technologies, ensuring a fast and performant experience without reliance on heavy frameworks for its core structure:
-
-* **HTML5:** Semantic markup for content structure and accessibility.
-* **CSS3:**
-  * Custom Properties (Variables) for robust theming and maintainability.
-  * Flexbox and CSS Grid for responsive layouts.
-  * Advanced animations and transitions (`@keyframes`, `transition`).
-  * Pseudo-elements (`::before`, `::after`) for intricate UI details and effects.
-  * Filters (`drop-shadow`, `blur`) for glows and glassmorphism.
-  * `clamp()` for fluid typography and spacing.
-  * Mobile-first responsive design principles with `@media` queries.
-* **JavaScript (Vanilla):**
-  * DOM manipulation for dynamic content and UI updates (loader, chatbot, CV card visibility).
-  * Event handling for user interactions (button clicks, mouse movements for 3D tilt).
-  * `setTimeout` / `setInterval` for timed animations and sequences.
-  * Canvas API for the main page's interactive particle background.
-  * Web Animations API (implicitly, via `element.animate()` if used - though current version relies more on CSS + class toggles).
-* **Google Fonts:** For 'Orbitron' and 'Cairo'.
-* **Font Awesome 6 (CDN):** For scalable vector icons.
-
-<!-- DEBUG LOG: Technical stack section rendered. -->
-
-## 📁 File Structure
-
-<!-- NOTE: Explains the organization of files in the project. -->
-
-The project is organized into three core files for simplicity and ease of deployment, especially for MVP/static hosting:
-
-* `index.html`: Contains all the HTML structure for the loader, hero, CV card, and chatbot.
-* `style.css`: Includes all CSS rules for styling every component of the website.
-* `script.js`: Houses all client-side JavaScript for interactivity, animations, and chatbot frontend logic.
-* `avatar.jpg` (or `https://i.ibb.co/pWwQnYg/avatar-amrikyy.png`): User's profile picture. *User must provide this or ensure the path is correct.*
-* `your-cv-filename.pdf`: Placeholder for the downloadable CV. *User must provide this and update the link in `index.html`.*
-
-<!-- DEBUG LOG: File structure section rendered. -->
-
-## 🚀 Setup & Usage
-
-<!-- NOTE: Provides instructions for setting up and using the portfolio files. -->
-
-1. **Download Files:** Ensure `index.html`, `style.css`, and `script.js` are in the same project directory.
-2. **Add Assets:**
-    * Place your profile picture (e.g., `avatar.jpg`) in the same directory or update the `src` path in `index.html`.
-    * Place your CV PDF (e.g., `your-cv-filename.pdf`) in the directory and update the `href` for the "Download CV" button in `index.html`.
-3. **Open `index.html`:** Launch the `index.html` file in any modern web browser.
-4. **Chatbot Backend (Crucial):** For full AI chatbot functionality, open `script.js` and replace the placeholder `'YOUR_REPLIT_BACKEND_URL_HERE'` with your actual Replit (or other) backend API endpoint.
-
-<!-- DEBUG LOG: Setup and usage section rendered. -->
-
-## ⚙️ Customization Notes
-
-<!-- NOTE: This section guides users on how to customize the portfolio. -->
-
-* **Theming:** Easily modify the site's look and feel by adjusting the CSS variables defined at the top of `style.css` in the `:root` selector.
-* **Content:** All text content (summaries, skills, project details, etc.) can be edited directly within the `index.html` file.
-* **Animations:** Animation durations, timings, and keyframes are defined in `style.css` and can be fine-tuned.
-* **JavaScript Logic:** Behavior for the loader, 3D tilt, and chatbot can be modified within `script.js`. Sections are commented for clarity.
-
-<!-- DEBUG LOG: Customization notes section rendered. -->
-
-## ✍️ Author
-
-**Mohamed H Abdelaziz (Amrikyy)**
-*Cybersecurity Specialist & Full-Stack Developer*
+- **Neon/Tech Aesthetic:** Futuristic, glassy, and glowing UI with dark backgrounds and neon green/blue accents.
+- **Animated Loader:** Custom "Amrikyy Cyber Neon Loader" with neon logo, animated progress bar, and user photo.
+- **Personalized CV Card:**
+  - Name, role, and social/contact links
+  - **Personal Information**: Birthdate, age, birthplace, and residency history
+  - Education (including El Shaheen High School, Kuwait)
+  - Skills, projects, and more
+- **Interactivity:**
+  - Language toggle (Arabic/English) with full translation support
+  - 3D tilt and hover effects
+  - Downloadable CV (see `Mohamed_H_Abdelaziz_CV.pdf` in the project root)
+  - **AI Chatbot (Amrikyy):**
+  - Custom neon-themed chat window
+  - Toggleable bubble with smooth open/close
+  - Connects to a Replit backend for AI responses
+  - Fully branded as "Amrikyy"
 
 ---
 
-<!-- DEBUG LOG: README rendering completed. -->
+## 🛠️ Tech Stack
+
+- **HTML5** (index.html)
+- **CSS3** (style.css, with variables, glassmorphism, neon effects, and responsive design)
+- **JavaScript** (script.js: loader, translation, chatbot logic, interactivity)
+- **Font Awesome 6** (icons)
+- **Google Fonts:** Orbitron (headings), Cairo (body)
+
+---
+
+## 📁 File Structure
+
+- `index.html` – Main structure: loader, CV card, chatbot, all content
+- `style.css` – All styles: neon/glow, loader, CV card, chatbot, responsive
+- `script.js` – Loader logic, translation, chatbot toggle, backend integration
+- `avatar.jpg` – User profile photo
+- `Mohamed_H_Abdelaziz_CV.pdf` – Downloadable CV located in the project root
+
+---
+
+## 🚦 Usage & Customization
+
+1. **Open `index.html`** in your browser.
+2. **Edit content** (personal info, skills, etc.) in `index.html` as needed.
+3. **Change colors or effects** in `style.css` (see `:root` for variables).
+4. **Connect chatbot**: In `script.js`, set your backend endpoint for the chatbot.
+5. **Switch language**: Use the toggle button for Arabic/English.
+
+## Adding New Translations
+
+1. Open `translations.js`.
+2. Add a new key to the `translations` object using the following format:
+   ```javascript
+   newKey: {
+     ar: 'Arabic text',
+     en: 'English text'
+   }
+   ```
+3. Ensure that both `ar` and `en` values are provided.
+4. Reference the key in your HTML using the `data-translate` attribute.
+
+## 🖥️ Local Development
+
+1. Install Node.js (v18 or higher recommended).
+2. Run `npm install` to install Express and other dependencies.
+3. Start the local server with `npm start`.
+4. Open `http://localhost:3000` in your browser.
+
+### Syncing AI Tool Data
+
+1. Create a `.env` file with your credentials. Example:
+
+   ```dotenv
+   DATA_PROVIDER=notion
+   NOTION_API_KEY=secret_key
+   NOTION_DATABASE_ID=your_database_id
+   ```
+
+   For Firebase, set `DATA_PROVIDER=firebase` and provide `FIREBASE_SERVICE_ACCOUNT_JSON` and `FIREBASE_DATABASE_URL`.
+
+2. Run `npm run sync-tools` to fetch tool records and update `aiTools.json`.
+
+The server exposes these records at `/api/tools`.
+
+---
+
+### Chatbot Configuration
+
+The chatbot requires the following environment variables:
+
+```dotenv
+GEMINI_API_KEY=your_api_key
+GEMINI_API_ENDPOINT=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent
+```
+
+If these variables are missing, chatbot requests will fail to initialize.
+
+---
+
+## 🌐 Deployment on Vercel
+
+1. Create a project on Vercel and grab your **Org ID** and **Project ID**.
+2. Add `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` as repository
+   secrets on GitHub.
+3. Push to the `main` branch and GitHub Actions will deploy the site using the
+   provided `vercel.json` configuration.
+
+---
+
+## ✨ Credits
+
+Created by **Mohamed H Abdelaziz (Amrikyy)**
+
+---
+
+*This version reflects all 2025 updates, including the new loader, personal info section, education, translation fixes, and the rebranded Amrikyy chatbot.*

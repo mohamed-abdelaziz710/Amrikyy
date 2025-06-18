@@ -1,145 +1,414 @@
-<!-- DEBUG LOG: index.html loaded successfully on 2025-05-29 -->
-<!-- NOTE: This file contains the main structure for loader, hero, CV card, and chatbot. -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Amrikyy | Landing & CV - Special Edition</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amrikyy - Digital ID Card Generator</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="theme-color" content="#0A0A0A">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="loading">
-  <div id="loader">
-    <div class="loader-card3d">
-      <img class="loader-avatar" src="avatar.jpg" alt="Amrikyy" onerror="this.onerror=null;this.src='https://i.ibb.co/pWwQnYg/avatar-amrikyy.png';">
-      <div class="loader-logo">AMRIKYY</div>
-      <div class="loader-bar"><div class="loader-bar-progress"></div></div>
-      <div class="loader-msg">
-        يتم تجهيز تجربة السيبر...
-        <span class="loader-dots"><span></span><span></span><span></span></span>
+<body>
+  <!-- Loading Screen -->
+  <div id="loader-container">
+    <div class="space-background">
+      <div class="stars"></div>
+      <div class="grid-overlay"></div>
+      <div class="particles" id="loader-particles"></div>
+    </div>
+    
+    <div class="loader-content">
+      <img class="loader-avatar avatar-img large" src="avatar.jpg" alt="Mohamed H Abdelaziz" style="margin:1.5em auto 0.7em;">
+      <div class="logo-text" style="font-size:2.1em;font-family:'Orbitron',sans-serif;letter-spacing:2px;color:#39FF14;text-shadow:0 0 12px #00d4ff,0 2px 8px #000a;">MOHAMED H ABDELAZIZ</div>
+      <div class="logo-container" style="margin-bottom:0.5em;">
+        <img class="rocket" src="amrikyy_neon_logo.webp" alt="Amrikyy Neon Logo" style="width:80px;height:80px;filter:drop-shadow(0 0 16px #00d4ff);">
       </div>
-      <button class="cta-btn" id="loaderToCvBtn" style="margin-top:1.2em;">اذهب إلى الـ CV الآن</button>
+      <p class="loader-message" data-translate="loaderMessage">تهيئة تجربة TECH & CRYPTO...</p>
+      
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-percentage" id="progressPercentage">0%</div>
+      </div>
+      
+      <div class="status-message" id="statusMessage">جاري تحميل الموارد...</div>
     </div>
   </div>
 
-  <div id="main-content">
-    <section class="hero-section">
-      <div class="hero-content">
-        <div class="amrikyy-visual-logo">AMRIKYY</div>
-        <h1 class="tagline">أهلاً بك في منصة <span class="highlight">الذكاء السيبراني</span></h1>
-        <p class="subtitle">مشاريع، مهارات، وأفكار جريئة — مصممة للتميز في عالم التقنية والأمن.</p>
-        <button class="cta-btn" id="scrollToCvBtn">اكتشف الـ CV الذكي</button>
+  <!-- Main Application -->
+  <div id="app" class="hidden">
+    <!-- Header -->
+    <header class="app-header" data-aos="fade-down">
+      <div class="header-content">
+        <div class="logo">
+          <img src="amrikyy_neon_logo.webp" alt="Amrikyy Neon Logo" style="width:48px;height:48px;filter:drop-shadow(0 0 8px #00d4ff);">
+          <span class="logo-text">AMRIKYY</span>
+        </div>
+        <div class="header-buttons">
+          <button class="header-btn" id="cvBtn">My CV</button>
+          <button class="header-btn" id="aiToolBtn">AI Tool</button>
+          <button class="header-btn coming-soon" id="comingSoonBtn" disabled>Coming Soon</button>
+          <button class="header-btn" id="themeToggleBtn"><i class="fas fa-sun"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" data-aos="fade-up">
+      <div class="space-background">
+        <div class="stars"></div>
+        <div class="grid-overlay"></div>
+        <div class="particles" id="hero-particles"></div>
+      </div>
+      <div class="hero-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2em;min-height:420px;">
+        <img class="avatar-img" src="avatar.jpg" alt="Mohamed H Abdelaziz">
+        <div class="logo-text" style="font-size:2.1em;font-family:'Orbitron',sans-serif;letter-spacing:2px;color:#39FF14;text-shadow:0 0 12px #00d4ff,0 2px 8px #000a;">MOHAMED H ABDELAZIZ</div>
+        <img src="amrikyy_neon_logo.webp" alt="Amrikyy Neon Logo" style="width:80px;height:80px;filter:drop-shadow(0 0 16px #00d4ff);">
+        <div class="hero-tagline" style="font-size:1.1em;color:#fff;text-shadow:0 0 8px #00d4ff;">AI & Tech Innovator | Digital Identity Pioneer</div>
+        <div class="hero-cta" style="margin-top:1.2em;display:flex;gap:1em;">
+          <button class="primary-btn pulse-btn" id="aiToolHeroBtn"><i class="fas fa-robot"></i> جرب أداة الذكاء الاصطناعي</button>
+          <button class="secondary-btn" id="downloadCvHeroBtn"><i class="fas fa-file-alt"></i> تحميل السيرة الذاتية</button>
+        </div>
       </div>
     </section>
 
-    <section id="cv-card-page" class="cv-card">
-      <div class="cv-header">
-        <img class="cv-avatar" src="avatar.jpg" alt="Amrikyy" onerror="this.onerror=null;this.src='https://i.ibb.co/pWwQnYg/avatar-amrikyy.png';"/>
-        <div class="cv-header-info">
-          <h2>محمد عبدالعزيز (Amrikyy)</h2>
-          <p>مهندس أمن سيبراني | مطور ويب وذكاء صناعي</p>
-          <div class="cv-links">
-            <a href="mailto:amrikyy@gmail.com" title="Email"><i class="fas fa-envelope"></i> <span>amrikyy@gmail.com</span></a>
-            <a href="https://linkedin.com/in/amrikyy" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i> <span>LinkedIn</span></a>
-            <a href="https://github.com/amrikyy" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i> <span>GitHub</span></a>
+    <!-- About Section -->
+    <section class="about-section" id="aboutSection" data-aos="fade-up">
+      <div class="section-header">
+        <h2 class="section-title">About Mohamed H. Abdelaziz</h2>
+        <p class="section-subtitle">Who is behind Amrikyy?</p>
+      </div>
+      <div class="about-content">
+        <p>Mohamed H. Abdelaziz (<strong>Amrikyy</strong>) is an AI and cyber intelligence enthusiast focused on digital identity solutions. He studied at <strong>El Shaheen High School in Kuwait</strong> and has built projects spanning web development and machine learning.</p>
+        <ul class="contact-links">
+          <li><a href="Mohamed_H_Abdelaziz_CV.pdf" target="_blank">Download CV</a></li>
+          <li><a href="https://amrikyy.github.io/portfolio" target="_blank">Portfolio</a></li>
+          <li><a href="https://github.com/amrikyy" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/amrikyy" target="_blank">LinkedIn</a></li>
+          <li><a href="https://twitter.com/amrikyy" target="_blank">Twitter</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section class="tools-section" id="toolsSection">
+      <div class="section-header">
+        <h2 class="section-title">Explore AI Tools</h2>
+        <p class="section-subtitle">Search the curated list of AI applications</p>
+      </div>
+      <div class="tools-search">
+        <input type="text" id="toolSearch" placeholder="Search AI tools...">
+      </div>
+      <div class="tools-cards" id="toolCards"></div>
+    </section>
+
+
+    <!-- ID Card Generator Section -->
+    <section class="id-generator-section" id="idGeneratorSection" data-aos="fade-up">
+      <div class="section-header">
+        <h2 class="section-title" data-translate="generatorTitle">إنشاء بطاقة الهوية الرقمية</h2>
+        <p class="section-subtitle" data-translate="generatorSubtitle">أجب عن الأسئلة التالية لإنشاء بطاقة هوية رقمية فريدة تعكس شخصيتك</p>
+      </div>
+      
+      <div class="generator-container">
+        <form id="idCardForm" class="id-card-form">
+          <div class="form-step active" data-step="1" data-aos="fade-up">
+            <div class="step-header">
+              <span class="step-number">1</span>
+              <h3 class="step-title" data-translate="step1Title">المعلومات الأساسية</h3>
+            </div>
+            
+            <div class="form-group">
+              <label for="fullName" data-translate="fullNameLabel">الاسم الكامل</label>
+              <div class="input-container">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fullName" name="full_name" required>
+                <span class="focus-border"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" data-translate="emailLabel">البريد الإلكتروني</label>
+              <div class="input-container">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email">
+                <span class="focus-border"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="phoneNumber" data-translate="phoneLabel">رقم الهاتف</label>
+              <div class="input-container">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="phoneNumber" name="phone_number">
+                <span class="focus-border"></span>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="next-btn" data-next="2" data-translate="nextBtn">التالي <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          
+          <div class="form-step" data-step="2" data-aos="fade-up">
+            <div class="step-header">
+              <span class="step-number">2</span>
+              <h3 class="step-title" data-translate="step2Title">الشخصية والاهتمامات</h3>
+            </div>
+            
+            <div class="form-group">
+              <label for="interests" data-translate="interestsLabel">اهتماماتك (افصل بينها بفواصل)</label>
+              <div class="input-container">
+                <i class="fas fa-star"></i>
+                <input type="text" id="interests" name="interests" placeholder="تقنية, ذكاء اصطناعي, تصميم...">
+                <span class="focus-border"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="personalityWord" data-translate="personalityLabel">كلمة تصف شخصيتك</label>
+              <div class="input-container">
+                <i class="fas fa-user-tag"></i>
+                <input type="text" id="personalityWord" name="personality_word">
+                <span class="focus-border"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="learningGoal" data-translate="goalLabel">هدفك التعليمي</label>
+              <div class="input-container">
+                <i class="fas fa-bullseye"></i>
+                <input type="text" id="learningGoal" name="learning_goal">
+                <span class="focus-border"></span>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="back-btn" data-back="1" data-translate="backBtn"><i class="fas fa-arrow-left"></i> السابق</button>
+              <button type="button" class="next-btn" data-next="3" data-translate="nextBtn">التالي <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          
+          <div class="form-step" data-step="3" data-aos="fade-up">
+            <div class="step-header">
+              <span class="step-number">3</span>
+              <h3 class="step-title" data-translate="step3Title">التفضيلات البصرية</h3>
+            </div>
+            
+            <div class="form-group">
+              <label data-translate="moodLabel">مزاجك اليوم</label>
+              <div class="mood-selector">
+                <div class="mood-option" data-mood="energetic">
+                  <i class="fas fa-bolt"></i>
+                  <span data-translate="moodEnergetic">نشيط</span>
+                </div>
+                <div class="mood-option" data-mood="creative">
+                  <i class="fas fa-lightbulb"></i>
+                  <span data-translate="moodCreative">مبدع</span>
+                </div>
+                <div class="mood-option" data-mood="focused">
+                  <i class="fas fa-crosshairs"></i>
+                  <span data-translate="moodFocused">مركّز</span>
+                </div>
+                <div class="mood-option" data-mood="relaxed">
+                  <i class="fas fa-coffee"></i>
+                  <span data-translate="moodRelaxed">مسترخي</span>
+                </div>
+                <input type="hidden" id="mood" name="mood" value="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label data-translate="avatarLabel">صورة الملف الشخصي</label>
+              <div class="avatar-upload">
+                <div class="avatar-preview">
+                  <div id="avatarPreview" style="background-image: url('avatar.jpg')"></div>
+                </div>
+                <div class="avatar-edit">
+                  <input type="file" id="avatarUpload" accept="image/*">
+                  <label for="avatarUpload" data-translate="uploadAvatarBtn">تحميل صورة</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="back-btn" data-back="2" data-translate="backBtn"><i class="fas fa-arrow-left"></i> السابق</button>
+              <button type="submit" class="submit-btn" data-translate="generateBtn">
+                <i class="fas fa-magic"></i> إنشاء البطاقة
+              </button>
+            </div>
+          </div>
+        </form>
+        
+        <div class="form-sidebar">
+          <div class="sidebar-content">
+            <h3 data-translate="sidebarTitle">لماذا بطاقة الهوية الرقمية؟</h3>
+            <ul class="feature-list">
+              <li>
+                <i class="fas fa-shield-alt"></i>
+                <span data-translate="feature1">هوية رقمية آمنة ومشفرة</span>
+              </li>
+              <li>
+                <i class="fas fa-share-alt"></i>
+                <span data-translate="feature2">سهلة المشاركة على منصات التواصل</span>
+              </li>
+              <li>
+                <i class="fas fa-fingerprint"></i>
+                <span data-translate="feature3">تعكس شخصيتك الفريدة</span>
+              </li>
+              <li>
+                <i class="fas fa-qrcode"></i>
+                <span data-translate="feature4">رمز QR للتحقق الفوري</span>
+              </li>
+              <li>
+                <i class="fas fa-mobile-alt"></i>
+                <span data-translate="feature5">متوافقة مع جميع الأجهزة</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="cv-body">
-        <div class="cv-section">
-          <h3>الملخص المهني</h3>
-          <p>شغوف بالأمن السيبراني، هندسة البرومبت، وتجربة المستخدم. خبرة في بناء حلول رقمية ذكية وتصميم واجهات تدهش، مع تركيز على أحدث التقنيات وأفضل ممارسات الأمان.</p>
+    </section>
+
+    <!-- Result Section (Initially Hidden) -->
+    <section class="result-section hidden" id="resultSection" data-aos="fade-up">
+      <div class="section-header">
+        <h2 class="section-title" data-translate="resultTitle">بطاقة الهوية الرقمية الخاصة بك</h2>
+        <p class="section-subtitle" data-translate="resultSubtitle">تم إنشاء بطاقة الهوية الرقمية الخاصة بك بنجاح</p>
+      </div>
+      
+      <div class="result-container">
+        <!-- Digital ID Card Result -->
+        <div class="digital-id-card" id="digitalIdCard" data-aos="zoom-in">
+          <!-- Card content will be dynamically generated -->
         </div>
-        <div class="cv-section">
-          <h3>المهارات الرئيسية</h3>
-          <ul class="skills-list">
-            <li>هندسة الأمن السيبراني</li>
-            <li>React & Next.js</li>
-            <li>Tailwind CSS</li>
-            <li>Figma & UI/UX</li>
-            <li>تحليل الثغرات</li>
-            <li>Python & Node.js</li>
-            <li>Firebase & AWS</li>
-            <li>هندسة البرومبت (AI)</li>
-            <li>تداول العملات الرقمية</li>
-          </ul>
+        
+        <div class="result-actions" data-aos="fade-up">
+          <button class="action-btn download-btn" id="downloadBtn">
+            <i class="fas fa-download"></i> <span data-translate="downloadBtn">تحميل البطاقة</span>
+          </button>
+          <button class="action-btn share-btn" id="shareBtn">
+            <i class="fas fa-share-alt"></i> <span data-translate="shareBtn">مشاركة</span>
+          </button>
+          <button class="action-btn reset-btn" id="resetBtn">
+            <i class="fas fa-redo-alt"></i> <span data-translate="resetBtn">إنشاء بطاقة جديدة</span>
+          </button>
         </div>
-        <div class="cv-section">
-          <h3>الشهادات</h3>
-          <ul>
-            <li>CompTIA Security+</li>
-            <li>Cisco Certified CyberOps Associate</li>
-            <li>شهادات أخرى ذات صلة</li>
-          </ul>
-        </div>
-        <div class="cv-section">
-          <h3>مشاريع رئيسية</h3>
-          <ul>
-            <li>لوحة تحكم متقدمة للأمن السيبراني (React, Python)</li>
-            <li>تطبيق روبوت دردشة ذكي بتقنيات AI</li>
-            <li>تصميم واجهة مستخدم لـ charity:water (مفهوم)</li>
-          </ul>
+
+        <!-- Rating Widget -->
+        <div class="rating-widget" data-tool-id="digital-id">
+          <div class="rating-stars">
+            <i class="fa-regular fa-star star" data-value="1"></i>
+            <i class="fa-regular fa-star star" data-value="2"></i>
+            <i class="fa-regular fa-star star" data-value="3"></i>
+            <i class="fa-regular fa-star star" data-value="4"></i>
+            <i class="fa-regular fa-star star" data-value="5"></i>
+          </div>
+          <textarea class="rating-comment" data-translate-placeholder="ratingCommentPlaceholder" placeholder="Leave a comment (optional)"></textarea>
+          <button class="rating-submit" data-translate="ratingSubmit">Submit</button>
+          <div class="rating-average" data-translate="ratingAverage">Average rating: <span>0</span></div>
         </div>
       </div>
     </section>
-  </div>
 
-  <div id="chatbot-toggle" aria-label="افتح مساعد أمريكي الذكي">
-      <svg id="dataShardIcon" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-              <linearGradient id="shardGradient" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stop-color="var(--neon-green)" stop-opacity="0.7"/>
-                  <stop offset="100%" stop-color="var(--neon-green)" stop-opacity="0.3"/>
-              </linearGradient>
-              <filter id="shardGlowEffect" x="-70%" y="-70%" width="240%" height="240%"> <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                  <feMerge>
-                      <feMergeNode in="coloredBlur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-              </filter>
-          </defs>
-          <path class="data-shard-main" d="M30 3 L57 22 L44 67 L16 67 L3 22 Z" 
-                fill="url(#shardGradient)" stroke="var(--neon-green)" stroke-width="1.5" filter="url(#shardGlowEffect)"/>
-          <path class="data-shard-facet" d="M30 3 L30 42 L16 67 M30 3 L30 42 L44 67 M3 22 L30 42 L57 22" 
-                stroke="var(--neon-green)" stroke-width="0.7" stroke-opacity="0.6"/>
-          <circle class="data-shard-core" cx="30" cy="40" r="3" fill="var(--white)" opacity="0.8"/>
-      </svg>
-      <span class="toggle-text">AI</span>
-  </div>
-
-  <div id="chatbot-window">
-    <div class="chatbot-header">
-      <span class="chatbot-title">Amrikyy AI</span>
-      <button id="chatbot-close" aria-label="إغلاق">
-        <svg width="18" height="18" viewBox="0 0 20 20">
-          <line x1="4" y1="4" x2="16" y2="16" stroke="var(--medium-gray-light)" stroke-width="2.5"/>
-          <line x1="16" y1="4" x2="4" y2="16" stroke="var(--medium-gray-light)" stroke-width="2.5"/>
-        </svg>
-      </button>
-    </div>
-    <div class="chatbot-body">
-        <div id="chatbot-messages">
-            <div class="chatbot-message ai">
-                <span class="avatar">
-                    <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="var(--neon-green)" opacity="0.1"/><circle cx="12" cy="12" r="7" fill="var(--neon-green)" opacity="0.4"/></svg>
-                </span>
-                <div class="text">مرحباً! أنا Amrikyy AI، كيف يمكنني خدمتك اليوم؟</div>
-            </div>
+    <!-- Footer -->
+    <footer class="app-footer" data-aos="fade-up">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="amrikyy_neon_logo.webp" alt="Amrikyy Neon Logo">
+          <span class="footer-logo-text">AMRIKYY</span>
         </div>
-        <div id="typing-indicator"><span></span><span></span><span></span></div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4 data-translate="footerLinksTitle">روابط سريعة</h4>
+            <ul>
+              <li><a href="#" data-translate="footerHome">الرئيسية</a></li>
+              <li><a href="#" data-translate="footerAbout">عن المشروع</a></li>
+              <li><a href="#" data-translate="footerContact">اتصل بنا</a></li>
+              <li><a href="#" data-translate="footerPrivacy">سياسة الخصوصية</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4 data-translate="footerSocialTitle">تواصل معنا</h4>
+            <div class="social-links">
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright" data-translate="footerCopyright">
+          &copy; <span id="currentYear">2025</span> Amrikyy. جميع الحقوق محفوظة.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal" data-aos="zoom-in">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 data-translate="shareModalTitle">مشاركة البطاقة</h3>
+          <button class="close-modal" id="closeShareModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p data-translate="shareModalText">شارك بطاقة الهوية الرقمية الخاصة بك على:</p>
+          <div class="share-options">
+            <button class="share-option" data-platform="twitter">
+              <i class="fab fa-twitter"></i> Twitter
+            </button>
+            <button class="share-option" data-platform="facebook">
+              <i class="fab fa-facebook"></i> Facebook
+            </button>
+            <button class="share-option" data-platform="linkedin">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </button>
+            <button class="share-option" data-platform="whatsapp">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+          </div>
+          <div class="share-link-container">
+            <label for="shareLink" data-translate="shareLinkLabel">أو انسخ الرابط:</label>
+            <div class="copy-link-input">
+              <input type="text" id="shareLink" readonly>
+              <button id="copyLinkBtn" data-translate="copyBtn">نسخ</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <form id="chatbot-form" autocomplete="off">
-      <input id="chatbot-input" type="text" placeholder="اكتب سؤالك هنا..." autocomplete="off" />
-      <button type="submit" aria-label="إرسال">
-        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z"/></svg>
-      </button>
-    </form>
   </div>
 
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="translations.js"></script>
+  <script src="public/js/loader.js"></script>
+  <script src="public/js/theme.js"></script>
+  <script src="public/js/rating.js"></script>
+  <script src="public/js/ai-tools.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
