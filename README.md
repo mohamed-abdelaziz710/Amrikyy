@@ -124,6 +124,19 @@ The server exposes these records at `/api/tools`.
 
 ---
 
+### Chatbot Configuration
+
+The chatbot requires the following environment variables:
+
+```dotenv
+GEMINI_API_KEY=your_api_key
+GEMINI_API_ENDPOINT=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent
+```
+
+If these variables are missing, chatbot requests will fail to initialize.
+
+---
+
 ## 🌐 Deployment on Vercel
 
 1. Create a project on Vercel and grab your **Org ID** and **Project ID**.

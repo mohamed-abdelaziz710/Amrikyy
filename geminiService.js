@@ -11,8 +11,11 @@ async function generateResponse(messages) {
   const apiKey = process.env.GEMINI_API_KEY;
   const endpoint = process.env.GEMINI_API_ENDPOINT;
 
-  if (!apiKey || !endpoint) {
-    throw new Error('Gemini API not configured');
+  if (!apiKey) {
+    throw new Error('Missing GEMINI_API_KEY environment variable');
+  }
+  if (!endpoint) {
+    throw new Error('Missing GEMINI_API_ENDPOINT environment variable');
   }
 
   const url = `${endpoint}?key=${apiKey}`;
